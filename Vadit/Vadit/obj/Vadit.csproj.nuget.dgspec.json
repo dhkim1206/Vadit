@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kdh12\\source\\repos\\Vadit\\Vadit\\Vadit.csproj": {}
+    "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kdh12\\source\\repos\\Vadit\\Vadit\\Vadit.csproj": {
+    "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kdh12\\source\\repos\\Vadit\\Vadit\\Vadit.csproj",
+        "projectUniqueName": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
         "projectName": "Vadit",
-        "projectPath": "C:\\Users\\kdh12\\source\\repos\\Vadit\\Vadit\\Vadit.csproj",
+        "projectPath": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
         "packagesPath": "C:\\Users\\kdh12\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kdh12\\source\\repos\\Vadit\\Vadit\\obj\\",
+        "outputPath": "C:\\Vadit\\Vadit\\Vadit\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kdh12\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -11,28 +11,29 @@ using System.Windows.Forms;
 
 namespace Vadit
 {
-    public class VdtManager : IDisposable
+    public class VdtManager
     {
-        private VideoCapture _cap = null; //카메라 설정 할 변수 선언
-        private Mat _frame = null; // 프레임 받을 변수 선언
-        private Dictionary<string, Image<Bgr, byte>> IMGDict; // string키 값과 이미지 형태의 Value를 저장
-        private Net _poseNet = null;
-        private List<Point> _points;
-        private PictureBox _pictureBox; //
+        private VideoCapture _cap = null; // 카메라 설정을 위한 변수 선언
+        private Mat _frame = null; // 프레임을 저장하기 위한 변수 선언
+        private Dictionary<string, Image<Bgr, byte>> IMGDict; // 이미지를 저장하는 Dictionary 선언 (Key: string, Value: Image<Bgr, byte>)
+        private Net _poseNet = null; // OpenPose 딥러닝 모델을 로드하는 변수 선언
+        private List<Point> _points; // 각 랜드마크를 저장하는 리스트 선언
+        private PictureBox _pictureBox; // 이미지를 출력하기 위한 PictureBox
 
-        BackgroundWorker _backgroundWorker;
+
+        BackgroundWorker _backgroundWorker; // 비동기 작업을 수행하기 위한 BackgroundWorker
+
 
         public VdtManager()
         {
-            IMGDict = new Dictionary<string, Image<Bgr, byte>>(); // 객체 생성
-            _cap = new VideoCapture(0); // 카메라 설정
-            _poseNet = ReadPoseNet();
-            _points = new List<Point>(); // 각 랜드마크 저장할 리스트 저장
-            _pictureBox = new PictureBox(); // 
-
-
+            IMGDict = new Dictionary<string, Image<Bgr, byte>>(); // 이미지를 저장하기 위한 Dictionary 객체 생성
+            _cap = new VideoCapture(0); // 카메라를 열고 설정하기 위한 VideoCapture 객체 생성 (0은 기본 카메라를 나타냄)
+            _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
+            _points = new List<Point>(); // 랜드마크 좌표를 저장하기 위한 List 초기화
+            _pictureBox = new PictureBox(); // 이미지를 출력하기 위한 PictureBox 객체 생성
         }
 
+        // Caffe 형식의 OpenPose 딥러닝 모델을 로드하여 반환
         private Net ReadPoseNet()
         {
             string prototxt = @"C:\openpose-master\models\pose\body_25\pose_deploy.prototxt";
@@ -40,60 +41,64 @@ namespace Vadit
             return DnnInvoke.ReadNetFromCaffe(prototxt, modelPath);
         }
 
-        // 프레임 받아오고 스켈레톤 탐지 및 그리기 호출
-        public void CaptureFrameAndDetectSkeleton(BackgroundWorker backgroundWorker)
+        // 프레임 캡처하고 스켈레톤을 탐지하고 그리기 위한 메서드 (비동기 작업을 위해 BackgroundWorker를 매개변수로 받음)
+        public void ProcessFrameAndDrawSkeleton()
         {
-
             if (_cap.IsOpened)
             {
                 _frame = new Mat();
-                _cap.Read(_frame);
+                _cap.Read(_frame); // 카메라에서 프레임 캡처
 
                 if (!_frame.IsEmpty)
                 {
-                    var img = _frame.ToImage<Bgr, byte>();
+                    var img = _frame.ToImage<Bgr, byte>(); // 프레임을 Image<Bgr, byte> 형식으로 변환
                     if (IMGDict.ContainsKey("input"))
                     {
                         IMGDict["input"]?.Dispose();
-                        IMGDict.Remove("input");
+                        IMGDict.Remove("input"); // 기존 "input" 키에 저장된 이미지 제거
                     }
-                    IMGDict.Add("input", img);
+                    IMGDict.Add("input", img); // 현재 캡처한 이미지를 "input" 키로 Dictionary에 추가
 
-                    // Detect and draw skeleton
-                    DetectAndDrawSkeleton(img);
+                    // 스켈레톤을 탐지하고 그리기 위한 메서드 호출
+                    DetectAndDrawSkeleton(img, backgroundWorker);
+
                 }
             }
         }
-
-        // 디셔너리에서 사진 불러오기
+        /*
+        // 디렉토리에서 사진 불러오기 위한 메서드
         public void LoadImage(string filePath)
         {
             try
             {
-                var img = new Image<Bgr, byte>(filePath);
+                var img = new Image<Bgr, byte>(filePath); // 파일에서 이미지 로드
                 if (IMGDict.ContainsKey("input"))
                 {
                     IMGDict["input"]?.Dispose();
-                    IMGDict.Remove("input");
+                    IMGDict.Remove("input"); // 기존 "input" 키에 저장된 이미지 제거
                 }
-                IMGDict.Add("input", img);
+                IMGDict.Add("input", img); // 로드한 이미지를 "input" 키로 Dictionary에 추가
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+        */
 
+        // "input" 키에 저장된 이미지를 반환하는 메서드
         public Image<Bgr, byte> GetImage()
         {
             if (IMGDict.ContainsKey("input"))
             {
-                return IMGDict["input"]?.Clone();
+                return IMGDict["input"]?.Clone(); // "input" 키에 저장된 이미지를 복사하여 반환
             }
             return null;
         }
 
-        private void DetectAndDrawSkeleton(Image<Bgr, byte> img){
+        // 스켈레톤 탐지하고 그리기 위한 메서드
+        private void DetectAndDrawSkeleton(Image<Bgr, byte> img, BackgroundWorker backgroundWorker)
+        {
             try
             {
                 if (!IMGDict.ContainsKey("input"))
@@ -102,31 +107,34 @@ namespace Vadit
                 }
 
                 // 이미지 처리를 위한 초기 설정
-                int inWidth = 368;  // 이미지 사이즈 설정
+                int inWidth = 368; // 이미지 사이즈 설정
                 int inHeight = 368;
-                float threshold = 0.1f;  // 쓰레쉬 홀드 값
-                int nPoints = 25;  // 추출할 포인트 수
+                float threshold = 0.1f; // 임계값 설정
+                int nPoints = 25; // 추출할 포인트 수
 
-                var BODY_PARTS = new Dictionary<string, int>() {
+                // 몸체 부위를 나타내는 상수들의 딕셔너리
+                var BODY_PARTS = new Dictionary<string, int>()
+                {
                     { "Nose", 0 },
                     { "Neck", 1 },
                     { "RShoulder", 2 },
-                    {"LShoulder",5},
+                    { "LShoulder", 5 },
                 };
 
-
-                int[,] point_pairs = new int[,] {
+                // 연결할 포인트 쌍을 나타내는 배열
+                int[,] point_pairs = new int[,]
+                {
                     { 1, 0 }, { 1, 2 }, { 1, 5 },
                     { 15, 17 }, { 16, 18 }, { 0, 16 },
                     { 0, 15 }
                 };
 
-                var net = ReadPoseNet();
+                var net = ReadPoseNet(); // OpenPose 딥러닝 모델 로드
                 var imgHeight = img.Height; // 이미지 높이
                 var imgWidth = img.Width; // 이미지 너비
 
                 // 이미지를 Blob 형식으로 변환
-                var blob = DnnInvoke.BlobFromImage(img, 1.0 / 255.0, new Size(inWidth, inHeight), new MCvScalar(0, 0, 0)); // 이미지로부터 Blob 생성
+                var blob = DnnInvoke.BlobFromImage(img, 1.0 / 255.0, new Size(inWidth, inHeight), new MCvScalar(0, 0, 0));
                 net.SetInput(blob);
                 net.SetPreferableBackend(Emgu.CV.Dnn.Backend.OpenCV);
 
@@ -198,7 +206,10 @@ namespace Vadit
                     }
                 }
                 Debug.Write("CameraCapture~");
+
+                //
                 _pictureBox.Image = img.ToBitmap(); // 이미지 출력
+                backgroundWorker.ReportProgress(img);
             }
             catch (Exception ex)
             {
@@ -212,6 +223,5 @@ namespace Vadit
             _cap?.Dispose();
             _poseNet?.Dispose();
         }
-
     }
 }

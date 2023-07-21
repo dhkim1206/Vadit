@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             pictureBox1 = new PictureBox();
-            button1 = new Button();
             textBox1 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -39,35 +38,24 @@
             pictureBox1.BackColor = SystemColors.GradientInactiveCaption;
             pictureBox1.Location = new Point(12, 12);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(701, 351);
+            pictureBox1.Size = new Size(602, 351);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(719, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(136, 351);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // textBox1
             // 
             textBox1.Location = new Point(12, 379);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(843, 59);
+            textBox1.Size = new Size(602, 59);
             textBox1.TabIndex = 2;
             // 
             // FormCamera
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(867, 450);
+            ClientSize = new Size(639, 450);
             Controls.Add(textBox1);
-            Controls.Add(button1);
             Controls.Add(pictureBox1);
             Name = "FormCamera";
             Text = "FormCamera";
@@ -79,7 +67,6 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private Button button1;
         private TextBox textBox1;
     }
 }
