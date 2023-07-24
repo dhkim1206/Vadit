@@ -108,9 +108,9 @@
             // mainPanel
             // 
             mainPanel.Dock = DockStyle.Fill;
-            mainPanel.Location = new Point(0, 0);
+            mainPanel.Location = new Point(146, 0);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(948, 519);
+            mainPanel.Size = new Size(802, 519);
             mainPanel.TabIndex = 4;
             // 
             // FormMain
@@ -118,8 +118,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 519);
-            Controls.Add(categoryPanel);
             Controls.Add(mainPanel);
+            Controls.Add(categoryPanel);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";

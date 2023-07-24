@@ -8,11 +8,8 @@ namespace Vadit
     public partial class FormMain : Form
     {
         AppBase.FormManager _formManager;
-        public FormCamera _formCamera;
 
         public VdtManager _vdtManager;
-        PictureBox _pictureBox;
-
 
         public FormMain()
         {
@@ -20,16 +17,17 @@ namespace Vadit
             InitializeComponent();
 
             _formManager = new AppBase.FormManager(mainPanel);
+
         }
 
         private void btn_poseForm_Click(object sender, EventArgs e)
         {
             _formManager.ChangeForm(typeof(FormCamera));
+
         }
 
         private void btn_ProgramExplain_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btn_statisticsForm_Click(object sender, EventArgs e)
@@ -45,7 +43,6 @@ namespace Vadit
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             _vdtManager.Dispose();
-            _formCamera.Dispose();
         }
     }
 }

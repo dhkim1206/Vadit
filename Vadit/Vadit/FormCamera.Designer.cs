@@ -30,6 +30,7 @@
         {
             pictureBox1 = new PictureBox();
             textBox1 = new TextBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -47,18 +48,29 @@
             textBox1.Location = new Point(12, 379);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(602, 59);
+            textBox1.Size = new Size(602, 37);
             textBox1.TabIndex = 2;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(113, 426);
+            label1.Name = "label1";
+            label1.Size = new Size(39, 15);
+            label1.TabIndex = 3;
+            label1.Text = "label1";
             // 
             // FormCamera
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(639, 450);
+            Controls.Add(label1);
             Controls.Add(textBox1);
             Controls.Add(pictureBox1);
             Name = "FormCamera";
             Text = "FormCamera";
+            FormClosing += FormCamera_FormClosing;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -68,5 +80,6 @@
 
         private PictureBox pictureBox1;
         private TextBox textBox1;
+        private Label label1;
     }
 }

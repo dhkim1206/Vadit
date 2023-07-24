@@ -7,12 +7,24 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Vadit
 {
+
+    public class AnalyzeData
+    {
+        public Bitmap AnalyzedImage;
+        public string Result;
+
+    }
+
     public class VdtManager
     {
+        BackgroundWorker _backgroundWorker;
+
         private VideoCapture _cap = null; // 카메라 설정을 위한 변수 선언
         private Mat _frame = null; // 프레임을 저장하기 위한 변수 선언
         private Dictionary<string, Image<Bgr, byte>> IMGDict; // 이미지를 저장하는 Dictionary 선언 (Key: string, Value: Image<Bgr, byte>)
@@ -21,16 +33,30 @@ namespace Vadit
         private PictureBox _pictureBox; // 이미지를 출력하기 위한 PictureBox
 
 
-        //BackgroundWorker _backgroundWorker; // 비동기 작업을 수행하기 위한 BackgroundWorker
-
-
-        public VdtManager()
+        public VdtManager(ProgressChangedEventHandler OnProgressing)
         {
             IMGDict = new Dictionary<string, Image<Bgr, byte>>(); // 이미지를 저장하기 위한 Dictionary 객체 생성
             _cap = new VideoCapture(0); // 카메라를 열고 설정하기 위한 VideoCapture 객체 생성 (0은 기본 카메라를 나타냄)
             _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
             _points = new List<Point>(); // 랜드마크 좌표를 저장하기 위한 List 초기화
             _pictureBox = new PictureBox(); // 이미지를 출력하기 위한 PictureBox 객체 생성
+
+            // BackgroundWorker 초기화 및 설정
+            _backgroundWorker = new BackgroundWorker(); // 백그라운드 워커 객체 생성
+            _backgroundWorker.WorkerReportsProgress = true; // 중간 보고 할거냐, 이걸 해줘야 중간보고를 할 수 있음
+            _backgroundWorker.DoWork += new DoWorkEventHandler(OnDoWork); // 엔트리 포인트, 실행 할 함수를 매개변수로 줌
+            _backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(OnProgressing); // 진행중인 진행 상활을 보고 받을거임
+
+            _backgroundWorker.RunWorkerAsync();
+        }
+        //쓰레드로 돌릴 것들
+        private void OnDoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                ProcessFrameAndDrawSkeleton(_backgroundWorker);
+                Thread.Sleep(10);
+            }
         }
 
         // Caffe 형식의 OpenPose 딥러닝 모델을 로드하여 반환
@@ -60,7 +86,6 @@ namespace Vadit
                     IMGDict.Add("input", img); // 현재 캡처한 이미지를 "input" 키로 Dictionary에 추가
 
                     // 스켈레톤을 탐지하고 그리기 위한 메서드 호출
-                    Debug.Write("Call  DetectAndDrawSkeleton");
                     DetectAndDrawSkeleton(img, worker);
 
                 }
@@ -120,6 +145,10 @@ namespace Vadit
                     { "Neck", 1 },
                     { "RShoulder", 2 },
                     { "LShoulder", 5 },
+                    { "REye", 15 },
+                    { "LEye", 16 },
+                    {"REar",17},
+                    { "LEar", 18 }
                 };
 
                 // 연결할 포인트 쌍을 나타내는 배열
@@ -184,7 +213,7 @@ namespace Vadit
                 for (int i = 0; i < _points.Count; i++)
                 {
                     var p = _points[i];
-                    if (targetLandmarks.Contains(i) && p != Point.Empty)
+                    if (targetLandmarks.Contains(i) && p != Point.Empty && p.X != 0 && p.Y !=0)
                     {
                         CvInvoke.Circle(img, p, 5, new MCvScalar(0, 255, 0), -1); // 포인트를 원으로 표시
                         CvInvoke.PutText(img, i.ToString(), p, FontFace.HersheySimplex, 0.8, new MCvScalar(0, 0, 255), 1, LineType.AntiAlias); // 포인트 번호 텍스트 추가
@@ -195,6 +224,35 @@ namespace Vadit
                     }
                 }
 
+                Debug.Write("\n17번 좌표 : "+ " X :"+_points[17].X.ToString()+" Y :"+ _points[17].Y.ToString());
+                Debug.Write("\n18번 좌표 : "+ " X :" + _points[18].X.ToString() + " Y :" + _points[18].Y.ToString());
+                double length1718 = CalculateSkeletonLength(_points, 17, 18);
+                double imageWidth = img.Width;
+                double percentage = (length1718 / imageWidth) * 100;
+                Debug.Write("\n---------------------");
+                Debug.Write("\n화면 너비 : " + imageWidth);
+                Debug.Write("\n눈 길이: " + length1718);
+                Debug.Write("\n화면 대비 비율:" + percentage);
+                if (percentage > 28) Debug.Write("\n******************거북목*******************");
+
+                /*
+                // 스켈레톤 길이 계산
+                double length01 = CalculateSkeletonLength(_points, 0, 1);
+                double length02 = CalculateSkeletonLength(_points, 0, 2);
+                double length12 = CalculateSkeletonLength(_points, 1, 2);
+                double length15 = CalculateSkeletonLength(_points, 1, 5);
+                double length25 = CalculateSkeletonLength(_points, 2, 5);
+                */
+
+                //Debug.Write("\n**********0-1 :", length01.ToString());
+                //Debug.Write("2-5 :", length25.ToString());
+
+
+
+                // 0~1/2~5 스켈레톤 길이 비율 계산
+                //double ratio02_01 = length01 / length25;
+                //Debug.Write("\n\n목/어깨 :", ratio02_01.ToString());
+
                 // 스켈레톤 그리기
                 for (int i = 0; i < point_pairs.GetLength(0); i++)
                 {
@@ -203,14 +261,17 @@ namespace Vadit
 
                     if (_points.Contains(_points[startIndex]) && _points.Contains(_points[endIndex])) // 유효한 포인트가 있는 경우
                     {
-                        CvInvoke.Line(img, _points[startIndex], _points[endIndex], new MCvScalar(255, 0, 0), 2); // 선으로 스켈레톤 그리기
+                        if (_points[startIndex].X != 0 && _points[endIndex].X != 0) 
+                            CvInvoke.Line(img, _points[startIndex], _points[endIndex], new MCvScalar(255, 0, 0), 2); // 선으로 스켈레톤 그리기
                     }
                 }
-                Debug.Write("Draw Image");
 
                 //
-                _pictureBox.Image = img.ToBitmap(); // 이미지 출력
-                if (_pictureBox.Image != null) backgroundWorker.ReportProgress(0, img);
+                AnalyzeData analyzeData = new AnalyzeData();
+                analyzeData.AnalyzedImage = img.ToBitmap();
+                analyzeData.Result = "거북목";
+
+                backgroundWorker.ReportProgress(0, analyzeData);
                 
             }
             catch (Exception ex)
@@ -219,11 +280,20 @@ namespace Vadit
             }
         }
 
+        private double CalculateSkeletonLength(List<Point> points, int startIndex, int endIndex)
+        {
+            var startPoint = points[startIndex];
+            var endPoint = points[endIndex];
+
+            double length = Math.Sqrt(Math.Pow(endPoint.X - startPoint.X, 2) + Math.Pow(endPoint.Y - startPoint.Y, 2));
+            return length;
+        }
         public void Dispose()
         {
             _frame?.Dispose();
             _cap?.Dispose();
             _poseNet?.Dispose();
+            _backgroundWorker?.Dispose();
         }
     }
 }
