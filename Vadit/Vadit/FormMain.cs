@@ -21,6 +21,7 @@ namespace Vadit
 
             _formManager = new AppBase.FormManager(mainPanel);
         }
+
         private void btn_poseForm_Click(object sender, EventArgs e)
         {
             _formManager.ChangeForm(typeof(FormCamera));
@@ -44,6 +45,7 @@ namespace Vadit
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             _vdtManager.Dispose();
+            _formCamera.Dispose();
         }
     }
 }

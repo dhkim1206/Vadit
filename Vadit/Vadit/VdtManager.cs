@@ -21,7 +21,7 @@ namespace Vadit
         private PictureBox _pictureBox; // 이미지를 출력하기 위한 PictureBox
 
 
-        BackgroundWorker _backgroundWorker; // 비동기 작업을 수행하기 위한 BackgroundWorker
+        //BackgroundWorker _backgroundWorker; // 비동기 작업을 수행하기 위한 BackgroundWorker
 
 
         public VdtManager()
@@ -42,7 +42,7 @@ namespace Vadit
         }
 
         // 프레임 캡처하고 스켈레톤을 탐지하고 그리기 위한 메서드 (비동기 작업을 위해 BackgroundWorker를 매개변수로 받음)
-        public void ProcessFrameAndDrawSkeleton()
+        public void ProcessFrameAndDrawSkeleton(BackgroundWorker worker)
         {
             if (_cap.IsOpened)
             {
@@ -60,7 +60,8 @@ namespace Vadit
                     IMGDict.Add("input", img); // 현재 캡처한 이미지를 "input" 키로 Dictionary에 추가
 
                     // 스켈레톤을 탐지하고 그리기 위한 메서드 호출
-                    DetectAndDrawSkeleton(img, backgroundWorker);
+                    Debug.Write("Call  DetectAndDrawSkeleton");
+                    DetectAndDrawSkeleton(img, worker);
 
                 }
             }
@@ -205,11 +206,12 @@ namespace Vadit
                         CvInvoke.Line(img, _points[startIndex], _points[endIndex], new MCvScalar(255, 0, 0), 2); // 선으로 스켈레톤 그리기
                     }
                 }
-                Debug.Write("CameraCapture~");
+                Debug.Write("Draw Image");
 
                 //
                 _pictureBox.Image = img.ToBitmap(); // 이미지 출력
-                backgroundWorker.ReportProgress(img);
+                if (_pictureBox.Image != null) backgroundWorker.ReportProgress(0, img);
+                
             }
             catch (Exception ex)
             {

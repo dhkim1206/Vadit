@@ -34,9 +34,7 @@
             btn_statisticsForm = new Button();
             btn_poseForm = new Button();
             mainPanel = new Panel();
-            CameraPanel = new Panel();
             categoryPanel.SuspendLayout();
-            mainPanel.SuspendLayout();
             SuspendLayout();
             // 
             // btn_ProgramExplain
@@ -109,20 +107,11 @@
             // 
             // mainPanel
             // 
-            mainPanel.Controls.Add(CameraPanel);
             mainPanel.Dock = DockStyle.Fill;
             mainPanel.Location = new Point(0, 0);
             mainPanel.Name = "mainPanel";
             mainPanel.Size = new Size(948, 519);
             mainPanel.TabIndex = 4;
-            // 
-            // CameraPanel
-            // 
-            CameraPanel.Dock = DockStyle.Right;
-            CameraPanel.Location = new Point(144, 0);
-            CameraPanel.Name = "CameraPanel";
-            CameraPanel.Size = new Size(804, 519);
-            CameraPanel.TabIndex = 0;
             // 
             // FormMain
             // 
@@ -136,7 +125,6 @@
             Text = "Form1";
             FormClosing += FormMain_FormClosing;
             categoryPanel.ResumeLayout(false);
-            mainPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -148,6 +136,5 @@
         private Button btn_statisticsForm;
         private Button btn_poseForm;
         private Panel mainPanel;
-        private Panel CameraPanel;
     }
 }
