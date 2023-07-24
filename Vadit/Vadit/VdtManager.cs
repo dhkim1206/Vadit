@@ -55,7 +55,6 @@ namespace Vadit
             while (true)
             {
                 ProcessFrameAndDrawSkeleton(_backgroundWorker);
-                Thread.Sleep(10);
             }
         }
 
@@ -125,6 +124,7 @@ namespace Vadit
         // 스켈레톤 탐지하고 그리기 위한 메서드
         private void DetectAndDrawSkeleton(Image<Bgr, byte> img, BackgroundWorker backgroundWorker)
         {
+            AnalyzeData analyzeData = new AnalyzeData();
             try
             {
                 if (!IMGDict.ContainsKey("input"))
@@ -224,8 +224,6 @@ namespace Vadit
                     }
                 }
 
-                Debug.Write("\n17번 좌표 : "+ " X :"+_points[17].X.ToString()+" Y :"+ _points[17].Y.ToString());
-                Debug.Write("\n18번 좌표 : "+ " X :" + _points[18].X.ToString() + " Y :" + _points[18].Y.ToString());
                 double length1718 = CalculateSkeletonLength(_points, 17, 18);
                 double imageWidth = img.Width;
                 double percentage = (length1718 / imageWidth) * 100;
@@ -233,7 +231,25 @@ namespace Vadit
                 Debug.Write("\n화면 너비 : " + imageWidth);
                 Debug.Write("\n눈 길이: " + length1718);
                 Debug.Write("\n화면 대비 비율:" + percentage);
-                if (percentage > 28) Debug.Write("\n******************거북목*******************");
+
+
+                if (percentage > 28 && _points[2].Y > _points[5].Y + 15 || _points[2].Y > _points[5].Y - 15) 
+                    if (_points[17].X != 0 && _points[18].X != 0 && _points[2].Y != 0 && _points[5].Y != 0) analyzeData.Result = "거북목, 척추 측만증";
+                    
+                else if(percentage > 28)
+                    if (_points[17].X != 0 && _points[18].X != 0) analyzeData.Result = "거북목";
+
+                else if (_points[2].Y > _points[5].Y + 15 || _points[2].Y > _points[5].Y - 15)
+                        if (_points[2].Y != 0 && _points[5].Y != 0) analyzeData.Result = "척추 측만증";
+
+                else analyzeData.Result = "정상";
+
+
+
+                Debug.Write("\n왼쪽 어깨 : " + " X : "+ _points[2].X+" Y : " + _points[2].Y);
+                Debug.Write("\n오른쪽 어깨 : " + " X : " + _points[5].X + " Y : " + _points[5].Y);
+                if (_points[2].Y > _points[5].Y+15 || _points[2].Y > _points[5].Y -15) analyzeData.Result = "척추 측만증";
+                else analyzeData.Result = "정상";
 
                 /*
                 // 스켈레톤 길이 계산
@@ -267,9 +283,8 @@ namespace Vadit
                 }
 
                 //
-                AnalyzeData analyzeData = new AnalyzeData();
+
                 analyzeData.AnalyzedImage = img.ToBitmap();
-                analyzeData.Result = "거북목";
 
                 backgroundWorker.ReportProgress(0, analyzeData);
                 

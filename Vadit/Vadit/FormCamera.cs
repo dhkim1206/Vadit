@@ -27,7 +27,6 @@ namespace Vadit
             AnalyzeData obj = e.UserState as AnalyzeData;
             pictureBox1.Image = obj.AnalyzedImage;
             textBox1.Text = obj.Result;
-            label1.Text = obj.Result;
         }
 
         private void FormCamera_FormClosing(object sender, FormClosingEventArgs e)
