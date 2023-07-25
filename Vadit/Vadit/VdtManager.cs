@@ -22,6 +22,7 @@ namespace Vadit
 
     public class VdtManager
     {
+        DataBase _db;
         BackgroundWorker _backgroundWorker;
 
         private VideoCapture _cap = null; // 카메라 설정을 위한 변수 선언
@@ -40,6 +41,8 @@ namespace Vadit
             _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
             _points = new List<Point>(); // 랜드마크 좌표를 저장하기 위한 List 초기화
             
+            _db = new DataBase();
+
             // BackgroundWorker 초기화 및 설정
             _backgroundWorker = new BackgroundWorker(); // 백그라운드 워커 객체 생성
             _backgroundWorker.WorkerReportsProgress = true; // 중간 보고 할거냐, 이걸 해줘야 중간보고를 할 수 있음
