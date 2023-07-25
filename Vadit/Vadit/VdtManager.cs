@@ -18,7 +18,6 @@ namespace Vadit
     {
         public Bitmap AnalyzedImage;
         public string Result;
-
     }
 
     public class VdtManager
@@ -27,10 +26,11 @@ namespace Vadit
 
         private VideoCapture _cap = null; // 카메라 설정을 위한 변수 선언
         private Mat _frame = null; // 프레임을 저장하기 위한 변수 선언
+
         private Dictionary<string, Image<Bgr, byte>> IMGDict; // 이미지를 저장하는 Dictionary 선언 (Key: string, Value: Image<Bgr, byte>)
+
         private Net _poseNet = null; // OpenPose 딥러닝 모델을 로드하는 변수 선언
         private List<Point> _points; // 각 랜드마크를 저장하는 리스트 선언
-        private PictureBox _pictureBox; // 이미지를 출력하기 위한 PictureBox
 
 
         public VdtManager(ProgressChangedEventHandler OnProgressing)
@@ -39,8 +39,7 @@ namespace Vadit
             _cap = new VideoCapture(0); // 카메라를 열고 설정하기 위한 VideoCapture 객체 생성 (0은 기본 카메라를 나타냄)
             _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
             _points = new List<Point>(); // 랜드마크 좌표를 저장하기 위한 List 초기화
-            _pictureBox = new PictureBox(); // 이미지를 출력하기 위한 PictureBox 객체 생성
-
+            
             // BackgroundWorker 초기화 및 설정
             _backgroundWorker = new BackgroundWorker(); // 백그라운드 워커 객체 생성
             _backgroundWorker.WorkerReportsProgress = true; // 중간 보고 할거냐, 이걸 해줘야 중간보고를 할 수 있음
@@ -90,26 +89,6 @@ namespace Vadit
                 }
             }
         }
-        /*
-        // 디렉토리에서 사진 불러오기 위한 메서드
-        public void LoadImage(string filePath)
-        {
-            try
-            {
-                var img = new Image<Bgr, byte>(filePath); // 파일에서 이미지 로드
-                if (IMGDict.ContainsKey("input"))
-                {
-                    IMGDict["input"]?.Dispose();
-                    IMGDict.Remove("input"); // 기존 "input" 키에 저장된 이미지 제거
-                }
-                IMGDict.Add("input", img); // 로드한 이미지를 "input" 키로 Dictionary에 추가
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        */
 
         // "input" 키에 저장된 이미지를 반환하는 메서드
         public Image<Bgr, byte> GetImage()
@@ -232,24 +211,37 @@ namespace Vadit
                 Debug.Write("\n눈 길이: " + length1718);
                 Debug.Write("\n화면 대비 비율:" + percentage);
 
-
-                if (percentage > 28 && _points[2].Y > _points[5].Y + 15 || _points[2].Y > _points[5].Y - 15) 
-                    if (_points[17].X != 0 && _points[18].X != 0 && _points[2].Y != 0 && _points[5].Y != 0) analyzeData.Result = "거북목, 척추 측만증";
-                    
-                else if(percentage > 28)
-                    if (_points[17].X != 0 && _points[18].X != 0) analyzeData.Result = "거북목";
-
-                else if (_points[2].Y > _points[5].Y + 15 || _points[2].Y > _points[5].Y - 15)
+                if(percentage>28)
+                    analyzeData.Result = "거북목, 척추 측만증";
+                
+                if (percentage > 28)
+                {
+                    if (_points[2].Y > _points[5].Y + 10 || _points[5].Y > _points[2].Y + 10){
+                        if (_points[17].X != 0 && _points[18].X != 0 && _points[2].Y != 0 && _points[5].Y != 0) {
+                            analyzeData.Result = "거북목, 척추 측만증"; }
+                    }
+                    else {
+                        analyzeData.Result = "거북목";
+                    }
+                }
+                else if (percentage < 28) {
+                    if (_points[2].Y > _points[5].Y + 10 || _points[5].Y > _points[2].Y + 10)
+                    {
                         if (_points[2].Y != 0 && _points[5].Y != 0) analyzeData.Result = "척추 측만증";
+                    }
 
-                else analyzeData.Result = "정상";
-
+                    else
+                    {
+                        analyzeData.Result = "정상";
+                    }
+                }
+                
 
 
                 Debug.Write("\n왼쪽 어깨 : " + " X : "+ _points[2].X+" Y : " + _points[2].Y);
                 Debug.Write("\n오른쪽 어깨 : " + " X : " + _points[5].X + " Y : " + _points[5].Y);
-                if (_points[2].Y > _points[5].Y+15 || _points[2].Y > _points[5].Y -15) analyzeData.Result = "척추 측만증";
-                else analyzeData.Result = "정상";
+                //if (_points[2].Y > _points[5].Y+15 || _points[2].Y > _points[5].Y -15) analyzeData.Result = "척추 측만증";
+                //else analyzeData.Result = "정상";
 
                 /*
                 // 스켈레톤 길이 계산
@@ -268,6 +260,7 @@ namespace Vadit
                 // 0~1/2~5 스켈레톤 길이 비율 계산
                 //double ratio02_01 = length01 / length25;
                 //Debug.Write("\n\n목/어깨 :", ratio02_01.ToString());
+
 
                 // 스켈레톤 그리기
                 for (int i = 0; i < point_pairs.GetLength(0); i++)

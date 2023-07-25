@@ -47,14 +47,14 @@
             textBox1.Location = new Point(12, 379);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(602, 247);
+            textBox1.Size = new Size(602, 46);
             textBox1.TabIndex = 2;
             // 
             // FormCamera
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(639, 638);
+            ClientSize = new Size(625, 443);
             Controls.Add(textBox1);
             Controls.Add(pictureBox1);
             Name = "FormCamera";
