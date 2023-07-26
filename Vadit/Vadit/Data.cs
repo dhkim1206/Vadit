@@ -6,6 +6,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Vadit
 {
@@ -26,13 +27,18 @@ namespace Vadit
 
         }
         // Inside the Data class
-        public string SaveImageToFile(Image<Bgr, byte> image)
+        public void SaveImageToFile(Image<Bgr, byte> image, string category)
         {
             Create_ImageFile();
 
-            try
-            {
-                string imageName = GenerateUniqueImageName(); // Generate a unique image name
+            try{
+                DateTime date = DateTime.Now; // 현재 시간
+                string timestamp = date.ToString("yyyyMMddHHmmssff");//DateTime.Now.ToString("yyyyMMddHHmmssff"); // 현재 시간
+                string randomId = Guid.NewGuid().ToString("N").Substring(0, 6); // 랜덤 식별자 (6 자리)
+
+                // 이미지 이름
+                string imageName = $"{timestamp}_{randomId}.jpg"; // Adjust the extension as needed
+
                 string imagePath = Path.Combine(imageDirectory, imageName);
 
                 // Convert the Emgu.CV.Image to a byte array
@@ -45,13 +51,13 @@ namespace Vadit
 
                 File.WriteAllBytes(imagePath, imageData);
                 Console.WriteLine("Image saved to: " + imagePath);
-                return imageName; // Return the unique image name
+                InsertDB_Image(date, category, imagePath);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error saving image: " + ex.Message);
-                return null; // Return null to indicate failure
             }
+
         }
         // 이미지 파일 생성
         public void Create_ImageFile()
@@ -62,17 +68,7 @@ namespace Vadit
                 Directory.CreateDirectory(imageDirectory);
             }
         }
-        // 날짜 및 시간으로 이미지 이름 작명
-        private string GenerateUniqueImageName()
-        {
-            string timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff"); // 현재 시간
-            string randomId = Guid.NewGuid().ToString("N").Substring(0, 6); // 랜덤 식별자 (6 자리)
 
-            // 이미지 이름
-            string imageName = $"{timestamp}_{randomId}.jpg"; // Adjust the extension as needed
-
-            return imageName;
-        }
         private void data_show()
         {
             // SQLiteConnection 객체 생성 및 연결
@@ -108,14 +104,14 @@ namespace Vadit
                     sqlite.Open();
 
                     // Create ImageData table
-                    string imageDataTableSql = "CREATE TABLE ImageData (ID INTEGER PRIMARY KEY, Date DATE, Category TEXT, ImagePath TEXT)";
+                    string imageDataTableSql = "CREATE TABLE ImageData (Date DATE PRIMARY KEY, Category TEXT, ImagePath TEXT)";
                     using (var imageDataCmd = new SQLiteCommand(imageDataTableSql, sqlite))
                     {
                         imageDataCmd.ExecuteNonQuery();
                     }
 
                     // Create Statistics table
-                    string statisticsTableSql = "CREATE TABLE Statistics (ID INTEGER PRIMARY KEY, AttitudeScore INT, TurtleNeck INT, Scoliosis INT, Other INT, Date DATE)";
+                    string statisticsTableSql = "CREATE TABLE Statistics (ID INT PRIMARY KEY, AttitudeScore INT, TurtleNeck INT, Scoliosis INT, Other INT, Date DATE)";
                     using (var statisticsCmd = new SQLiteCommand(statisticsTableSql, sqlite))
                     {
                         statisticsCmd.ExecuteNonQuery();
@@ -130,33 +126,26 @@ namespace Vadit
         }
 
         //Insert data
-        private void btInsert_Click(object sender, EventArgs e)
+        public void InsertDB_Image(DateTime date, string category, string imagePath)
         {
-            var con = new SQLiteConnection(cs);
-            con.Open();
-
-            var cmd = new SQLiteCommand(con);
-
-            try
+            using (var con = new SQLiteConnection(cs))
             {
-                cmd.CommandText = "INSERT INTO test(name, id) VALUES(@name, @id)";
+                con.Open();
 
-                // 매개변수 설정
-                //cmd.Parameters.AddWithValue("@name", NAME);
-                //cmd.Parameters.AddWithValue("@id", ID);
+                using (var cmd = new SQLiteCommand(con))
+                {
+                    cmd.CommandText = "INSERT INTO ImageData (Date, Category, ImagePath) VALUES (@Date, @Category, @ImagePath)";
+                    cmd.Parameters.AddWithValue("@Date", date);
+                    cmd.Parameters.AddWithValue("@Category", category);
+                    cmd.Parameters.AddWithValue("@ImagePath", imagePath);
 
-                // 스트링 배열 생성
-                //string[] row = new string[] { NAME, ID };
-
-                //추가
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
+                }
             }
-            catch (Exception)
-            {
-                Console.WriteLine("cannot insert data");
-                return;
-            }
+
+            Debug.Write("Insert into ImageData");
         }
+ 
 
         // 수정
         private void btUpdate_Click(object sender, EventArgs e)
