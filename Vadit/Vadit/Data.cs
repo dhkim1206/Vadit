@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Emgu.CV.Structure;
+using Emgu.CV;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
@@ -7,18 +9,69 @@ using System.Threading.Tasks;
 
 namespace Vadit
 {
-    public class DataBase
+    public class Data
     {
-
         string path = "data_table.db";
         string cs = @"URI=file:" + Application.StartupPath + "\\data_table.db";
+        //string imageDirectory = @"URI=file:" + Application.StartupPath + "\\image_data";
+        string imageDirectory = Path.Combine(Application.StartupPath, "image_data");
 
         SQLiteConnection con;
         SQLiteCommand cmd;
         SQLiteDataReader dr;
-        public DataBase()
+
+        public Data()
         {
             Create_db();
+
+        }
+        // Inside the Data class
+        public string SaveImageToFile(Image<Bgr, byte> image)
+        {
+            Create_ImageFile();
+
+            try
+            {
+                string imageName = GenerateUniqueImageName(); // Generate a unique image name
+                string imagePath = Path.Combine(imageDirectory, imageName);
+
+                // Convert the Emgu.CV.Image to a byte array
+                byte[] imageData;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    image.ToBitmap().Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    imageData = ms.ToArray();
+                }
+
+                File.WriteAllBytes(imagePath, imageData);
+                Console.WriteLine("Image saved to: " + imagePath);
+                return imageName; // Return the unique image name
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error saving image: " + ex.Message);
+                return null; // Return null to indicate failure
+            }
+        }
+        // 이미지 파일 생성
+        public void Create_ImageFile()
+        {
+            // Check if the directory exists, and create it if it doesn't
+            if (!Directory.Exists(imageDirectory))
+            {
+                Directory.CreateDirectory(imageDirectory);
+            }
+        }
+        // 날짜 및 시간으로 이미지 이름 작명
+        private string GenerateUniqueImageName()
+        {
+            string timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff"); // 현재 시간
+            string randomId = Guid.NewGuid().ToString("N").Substring(0, 6); // 랜덤 식별자 (6 자리)
+
+            // 이미지 이름
+            string imageName = $"{timestamp}_{randomId}.jpg"; // Adjust the extension as needed
+
+            return imageName;
         }
         private void data_show()
         {
@@ -88,17 +141,12 @@ namespace Vadit
             {
                 cmd.CommandText = "INSERT INTO test(name, id) VALUES(@name, @id)";
 
-
-
                 // 매개변수 설정
                 //cmd.Parameters.AddWithValue("@name", NAME);
                 //cmd.Parameters.AddWithValue("@id", ID);
 
-
-
                 // 스트링 배열 생성
                 //string[] row = new string[] { NAME, ID };
-
 
                 //추가
                 cmd.ExecuteNonQuery();
@@ -109,7 +157,6 @@ namespace Vadit
                 return;
             }
         }
-
 
         // 수정
         private void btUpdate_Click(object sender, EventArgs e)
@@ -161,17 +208,6 @@ namespace Vadit
                 return;
             }
         }
-        /*
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
-                dgv.CurrentRow.Selected = true;
-                edtName.Text = dgv.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
-                edtID.Text = dgv.Rows[e.RowIndex].Cells["Id"].FormattedValue.ToString();
-            }
-        }
-        */
     }
 }
 

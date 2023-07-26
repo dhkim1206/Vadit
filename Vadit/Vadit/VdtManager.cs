@@ -22,7 +22,7 @@ namespace Vadit
 
     public class VdtManager
     {
-        DataBase _db;
+        Data _data;
         BackgroundWorker _backgroundWorker;
 
         private VideoCapture _cap = null; // 카메라 설정을 위한 변수 선언
@@ -41,7 +41,7 @@ namespace Vadit
             _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
             _points = new List<Point>(); // 랜드마크 좌표를 저장하기 위한 List 초기화
             
-            _db = new DataBase();
+            _data = new Data();
 
             // BackgroundWorker 초기화 및 설정
             _backgroundWorker = new BackgroundWorker(); // 백그라운드 워커 객체 생성
@@ -91,16 +91,6 @@ namespace Vadit
 
                 }
             }
-        }
-
-        // "input" 키에 저장된 이미지를 반환하는 메서드
-        public Image<Bgr, byte> GetImage()
-        {
-            if (IMGDict.ContainsKey("input"))
-            {
-                return IMGDict["input"]?.Clone(); // "input" 키에 저장된 이미지를 복사하여 반환
-            }
-            return null;
         }
 
         // 스켈레톤 탐지하고 그리기 위한 메서드
@@ -206,6 +196,20 @@ namespace Vadit
                     }
                 }
 
+                
+                // 스켈레톤 그리기
+                for (int i = 0; i < point_pairs.GetLength(0); i++)
+                {
+                    var startIndex = point_pairs[i, 0]; // 시작 인덱스
+                    var endIndex = point_pairs[i, 1]; // 종료 인덱스
+
+                    if (_points.Contains(_points[startIndex]) && _points.Contains(_points[endIndex])) // 유효한 포인트가 있는 경우
+                    {
+                        if (_points[startIndex].X != 0 && _points[endIndex].X != 0) 
+                            CvInvoke.Line(img, _points[startIndex], _points[endIndex], new MCvScalar(255, 0, 0), 2); // 선으로 스켈레톤 그리기
+                    }
+                }
+
                 double length1718 = CalculateSkeletonLength(_points, 17, 18);
                 double imageWidth = img.Width;
                 double percentage = (length1718 / imageWidth) * 100;
@@ -214,20 +218,25 @@ namespace Vadit
                 Debug.Write("\n눈 길이: " + length1718);
                 Debug.Write("\n화면 대비 비율:" + percentage);
 
-                if(percentage>28)
+                if (percentage > 28)
                     analyzeData.Result = "거북목, 척추 측만증";
-                
+
                 if (percentage > 28)
                 {
-                    if (_points[2].Y > _points[5].Y + 10 || _points[5].Y > _points[2].Y + 10){
-                        if (_points[17].X != 0 && _points[18].X != 0 && _points[2].Y != 0 && _points[5].Y != 0) {
-                            analyzeData.Result = "거북목, 척추 측만증"; }
+                    if (_points[2].Y > _points[5].Y + 10 || _points[5].Y > _points[2].Y + 10)
+                    {
+                        if (_points[17].X != 0 && _points[18].X != 0 && _points[2].Y != 0 && _points[5].Y != 0)
+                        {
+                            analyzeData.Result = "거북목, 척추 측만증";
+                        }
                     }
-                    else {
+                    else
+                    {
                         analyzeData.Result = "거북목";
                     }
                 }
-                else if (percentage < 28) {
+                else if (percentage < 28)
+                {
                     if (_points[2].Y > _points[5].Y + 10 || _points[5].Y > _points[2].Y + 10)
                     {
                         if (_points[2].Y != 0 && _points[5].Y != 0) analyzeData.Result = "척추 측만증";
@@ -238,10 +247,10 @@ namespace Vadit
                         analyzeData.Result = "정상";
                     }
                 }
-                
 
 
-                Debug.Write("\n왼쪽 어깨 : " + " X : "+ _points[2].X+" Y : " + _points[2].Y);
+
+                Debug.Write("\n왼쪽 어깨 : " + " X : " + _points[2].X + " Y : " + _points[2].Y);
                 Debug.Write("\n오른쪽 어깨 : " + " X : " + _points[5].X + " Y : " + _points[5].Y);
                 //if (_points[2].Y > _points[5].Y+15 || _points[2].Y > _points[5].Y -15) analyzeData.Result = "척추 측만증";
                 //else analyzeData.Result = "정상";
@@ -265,23 +274,10 @@ namespace Vadit
                 //Debug.Write("\n\n목/어깨 :", ratio02_01.ToString());
 
 
-                // 스켈레톤 그리기
-                for (int i = 0; i < point_pairs.GetLength(0); i++)
-                {
-                    var startIndex = point_pairs[i, 0]; // 시작 인덱스
-                    var endIndex = point_pairs[i, 1]; // 종료 인덱스
-
-                    if (_points.Contains(_points[startIndex]) && _points.Contains(_points[endIndex])) // 유효한 포인트가 있는 경우
-                    {
-                        if (_points[startIndex].X != 0 && _points[endIndex].X != 0) 
-                            CvInvoke.Line(img, _points[startIndex], _points[endIndex], new MCvScalar(255, 0, 0), 2); // 선으로 스켈레톤 그리기
-                    }
-                }
-
-                //
 
                 analyzeData.AnalyzedImage = img.ToBitmap();
-
+                //이미지 파일 로컬에 저장
+                _data.SaveImageToFile(img);
                 backgroundWorker.ReportProgress(0, analyzeData);
                 
             }
