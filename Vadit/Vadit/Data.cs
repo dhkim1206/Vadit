@@ -111,7 +111,7 @@ namespace Vadit
                     }
 
                     // Create Statistics table
-                    string statisticsTableSql = "CREATE TABLE Statistics (ID INT PRIMARY KEY, AttitudeScore INT, TurtleNeck INT, Scoliosis INT, Other INT, Date DATE)";
+                    string statisticsTableSql = "CREATE TABLE Statistics ( Date DATE PRIMARY KEY, AttitudeScore INT, TurtleNeck INT, Scoliosis INT, Other INT)";
                     using (var statisticsCmd = new SQLiteCommand(statisticsTableSql, sqlite))
                     {
                         statisticsCmd.ExecuteNonQuery();
@@ -145,7 +145,61 @@ namespace Vadit
 
             Debug.Write("Insert into ImageData");
         }
- 
+
+        public void InsertDB_Statistics()
+        {
+            using (var con = new SQLiteConnection())
+            {
+                con.Open();
+                
+
+            }
+        }
+        public void UpdateDB_Statistics(string category)
+        {
+            using (var con = new SQLiteConnection(cs))
+            {
+                con.Open();
+
+                // Check if there is any data in the Statistics table
+                using (var cmd = new SQLiteCommand("SELECT COUNT(*) FROM Statistics", con))
+                {
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    if (count == 0)
+                    {
+                        // If there is no data, insert the new data
+                        InsertDB_Statistics(category);
+                    }
+                    else
+                    {
+                        // If there is data, update the existing row
+                        using (var updateCmd = new SQLiteCommand(con))
+                        {
+                            updateCmd.CommandText = "UPDATE Statistics SET AttitudeScore = @AttitudeScore, TurtleNeck = @TurtleNeck, Scoliosis = @Scoliosis, Other = @Other, Date = @Date WHERE ID = 1";
+
+                            // Assuming you have properties to store the statistics data
+                            int attitudeScore = GetAttitudeScore(); // Replace this with the actual method to get the value
+                            int turtleNeck = GetTurtleNeckValue(); // Replace this with the actual method to get the value
+                            int scoliosis = GetScoliosisValue();   // Replace this with the actual method to get the value
+                            int other = GetOtherValue();           // Replace this with the actual method to get the value
+
+                            DateTime date = DateTime.Now;
+
+                            updateCmd.Parameters.AddWithValue("@AttitudeScore", attitudeScore);
+                            updateCmd.Parameters.AddWithValue("@TurtleNeck", turtleNeck);
+                            updateCmd.Parameters.AddWithValue("@Scoliosis", scoliosis);
+                            updateCmd.Parameters.AddWithValue("@Other", other);
+                            updateCmd.Parameters.AddWithValue("@Date", date);
+
+                            updateCmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+        }
+
+
 
         // 수정
         private void btUpdate_Click(object sender, EventArgs e)
