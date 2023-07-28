@@ -209,14 +209,12 @@
                                 CvInvoke.Line(img, _points[startIndex], _points[endIndex], new MCvScalar(255, 0, 0), 2); // 선으로 스켈레톤 그리기
                         }
                     }
+                    DateTime time = DateTime.Now;
 
                     double length1718 = CalculateSkeletonLength(_points, 17, 18);
                     double imageWidth = img.Width;
                     double percentage = (length1718 / imageWidth) * 100;
-                    Debug.Write("\n---------------------");
-                    Debug.Write("\n화면 너비 : " + imageWidth);
-                    Debug.Write("\n눈 길이: " + length1718);
-                    Debug.Write("\n화면 대비 비율:" + percentage);
+
 
                     if (percentage > 28)
                     {
@@ -225,55 +223,36 @@
                             if (_points[17].X != 0 && _points[18].X != 0 && _points[2].Y != 0 && _points[5].Y != 0)
                             {
                                 analyzeData.Result = "거북목, 척추 측만증";
-                                _data.SaveImageToFile(img, analyzeData.Result);
+                                _data.SaveImageToFile(time, img, analyzeData.Result);
+                                _data.InsertDB_BadPose(time, analyzeData.Result);
+                                //_data.UpdatePoseCnt_Score(analyzeData.Result);
+                                _data.UpdateBadPoseCnt_Score();
                             }
                         }
                         else
                         {
                             analyzeData.Result = "거북목";
-                            _data.SaveImageToFile(img, analyzeData.Result);
-                        }
+                            _data.SaveImageToFile(time, img, analyzeData.Result);
+                            _data.InsertDB_BadPose(time, analyzeData.Result);
+                            _data.UpdateBadPoseCnt_Score();
+                    }
                     }
                     else if (percentage < 28)
                     {
                         if (_points[2].Y > _points[5].Y + 10 || _points[5].Y > _points[2].Y + 10)
                         {
                             if (_points[2].Y != 0 && _points[5].Y != 0) analyzeData.Result = "척추 측만증";
-                            _data.SaveImageToFile(img, analyzeData.Result);
-                        }
+                            _data.SaveImageToFile(time, img, analyzeData.Result);
+                            _data.InsertDB_BadPose(time, analyzeData.Result);
+                            _data.UpdateBadPoseCnt_Score();
+                    }
 
                         else
                         {
                             analyzeData.Result = "정상";
+                            _data.UpdateGoodPoseCnt_Score();
                         }
                     }
-
-
-
-                    Debug.Write("\n왼쪽 어깨 : " + " X : " + _points[2].X + " Y : " + _points[2].Y);
-                    Debug.Write("\n오른쪽 어깨 : " + " X : " + _points[5].X + " Y : " + _points[5].Y);
-                    //if (_points[2].Y > _points[5].Y+15 || _points[2].Y > _points[5].Y -15) analyzeData.Result = "척추 측만증";
-                    //else analyzeData.Result = "정상";
-
-                    /*
-                    // 스켈레톤 길이 계산
-                    double length01 = CalculateSkeletonLength(_points, 0, 1);
-                    double length02 = CalculateSkeletonLength(_points, 0, 2);
-                    double length12 = CalculateSkeletonLength(_points, 1, 2);
-                    double length15 = CalculateSkeletonLength(_points, 1, 5);
-                    double length25 = CalculateSkeletonLength(_points, 2, 5);
-                    */
-
-                    //Debug.Write("\n**********0-1 :", length01.ToString());
-                    //Debug.Write("2-5 :", length25.ToString());
-
-
-
-                    // 0~1/2~5 스켈레톤 길이 비율 계산
-                    //double ratio02_01 = length01 / length25;
-                    //Debug.Write("\n\n목/어깨 :", ratio02_01.ToString());
-
-
 
                     analyzeData.AnalyzedImage = img.ToBitmap();
                     //이미지 파일 로컬에 저장
