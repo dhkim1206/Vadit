@@ -50,7 +50,8 @@ namespace Vadit
         {
             Create_ImageFile();
 
-            try {
+            try
+            {
                 string timestamp = date.ToString("yyyyMMddHHmmssff");
                 string randomId = Guid.NewGuid().ToString("N").Substring(0, 2); // 랜덤 식별자 (2 자리)
 
@@ -101,7 +102,7 @@ namespace Vadit
 
 
                 // Create BadPose table
-                string BadPoseTableSql = "CREATE TABLE BadPose ( Date DATE PRIMARY KEY, TurtleNeck INT, Scoliosis INT, TurtleNeckScoliosis INT)";
+                string BadPoseTableSql = "CREATE TABLE BadPose ( Date DATE PRIMARY KEY, TurtleNeck INT, Scoliosis INT, Herniations INT)";
                 using (var BadPoseCmd = new SQLiteCommand(BadPoseTableSql, _con))
                 {
                     BadPoseCmd.ExecuteNonQuery();
@@ -176,7 +177,7 @@ namespace Vadit
             }
         }
         */
-        
+
         // 좋은 포즈 횟수 카운트
         public int SelectGoodPoseCnt_Score()
         {
@@ -209,7 +210,6 @@ namespace Vadit
 
         }
 
-
         // 좋은 포즈 카운트 업데이트
         public void UpdateGoodPoseCnt_Score()
         {
@@ -218,7 +218,7 @@ namespace Vadit
             string updateCountQuery = "UPDATE Score SET GoodPoseCnt = @NewCount";
             using (var updateCmd = new SQLiteCommand(updateCountQuery, _con))
             {
-                updateCmd.Parameters.AddWithValue("@NewCount", (updateValue+1));
+                updateCmd.Parameters.AddWithValue("@NewCount", (updateValue + 1));
                 int rowsAffected = updateCmd.ExecuteNonQuery();
 
                 if (rowsAffected > 0)
@@ -274,7 +274,7 @@ namespace Vadit
                     Debug.WriteLine("Failed to update Count value.");
             }
         }
-        
+
         public List<BadPoseData> SelectDB_BadPose()
         {
             List<BadPoseData> badPoseDataList = new List<BadPoseData>();
@@ -283,19 +283,19 @@ namespace Vadit
             {
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
-                        DateTime date = reader.GetDateTime(0);
-                        int turtleNeck = reader.GetInt32(1);
-                        int scoliosis = reader.GetInt32(2);
-                        int turtleNeck_Scoliosis = reader.GetInt32(3);
+                    DateTime date = reader.GetDateTime(0);
+                    int turtleNeck = reader.GetInt32(1);
+                    int scoliosis = reader.GetInt32(2);
+                    int herniations = reader.GetInt32(3);
 
-                        BadPoseData badPoseData = new BadPoseData(date, turtleNeck, scoliosis, turtleNeck_Scoliosis);
-                        badPoseDataList.Add(badPoseData);
+                    BadPoseData badPoseData = new BadPoseData(date, turtleNeck, scoliosis, herniations);
+                    badPoseDataList.Add(badPoseData);
                 }
             }
             Debug.WriteLine("SelectDB_BadPose");
             return badPoseDataList;
         }
-        
+
         // 이미지 테이블 Insert
         public void InsertDB_Image(DateTime date, string category, string imagePath)
         {
@@ -316,29 +316,30 @@ namespace Vadit
         {
             int turtleNeck = 0;
             int scoliosis = 0;
-            int turtleNeck_Scoliosis = 0;
+            int herniations = 0;
 
-            if (category == "거북목")
+            if (category.Contains("거북목"))
             {
                 turtleNeck++;
             }
-            else if (category == "척추 측만증")
+            if (category.Contains("척추 측만증"))
             {
                 scoliosis++;
             }
-            else if (category == "거북목, 척추 측만증")
+            if (category.Contains("추가판 탈출"))
             {
-                turtleNeck_Scoliosis++;
+                herniations++;
             }
+
 
             using (var cmd = new SQLiteCommand(_con))
             {
-                cmd.CommandText = "INSERT INTO BadPose (Date, TurtleNeck, Scoliosis, TurtleNeckScoliosis) VALUES (@Date, @TurtleNeck, @Scoliosis, @TurtleNeckScoliosis)";
+                cmd.CommandText = "INSERT INTO BadPose (Date, TurtleNeck, Scoliosis, Herniations) VALUES (@Date, @TurtleNeck, @Scoliosis, @Herniations)";
 
                 cmd.Parameters.AddWithValue("@Date", date);
                 cmd.Parameters.AddWithValue("@TurtleNeck", turtleNeck);
                 cmd.Parameters.AddWithValue("@Scoliosis", scoliosis);
-                cmd.Parameters.AddWithValue("@TurtleNeckScoliosis", turtleNeck_Scoliosis);
+                cmd.Parameters.AddWithValue("@Herniations", herniations);
 
                 cmd.ExecuteNonQuery();
 

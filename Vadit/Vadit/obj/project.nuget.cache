@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NsXIS6KNCfkF326z29KhKReriy58U5TqWPmpKZ97p8w+P3100BZszd+mm6D/HusWAmwDuKYUxD3inLygI9nW1A==",
+  "dgSpecHash": "NqZ/GZY9XhESy7sI5AsT97McQtc42+Xn0eT/xuXQ0lJB7o2O0dAjRf2Rv34hI5VsBncEiMdcczoRKPHFJbUPOg==",
   "success": true,
-  "projectFilePath": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+  "projectFilePath": "C:\\명준_Vadit\\Vadit\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kdh12\\.nuget\\packages\\emgu.cv\\4.7.0.5276\\emgu.cv.4.7.0.5276.nupkg.sha512",
     "C:\\Users\\kdh12\\.nuget\\packages\\emgu.cv.bitmap\\4.7.0.5276\\emgu.cv.bitmap.4.7.0.5276.nupkg.sha512",
