@@ -16,12 +16,26 @@ namespace Vadit
     public class InfoInputCorrectPose   //입력받은 자세의 좌푯값
     {
         public Image<Bgr, byte> _img;
-        public List<Point> _points;
-        
+        public List<Point> _point;
+        public double _ratio;
+        int[] _indexes;
+        public bool _isPointNotNull = false;
         public void setInfo(Image<Bgr, byte> img, List<Point> points)
         {
             _img = img;
-            _points = points;
+            _point = points;
+            double _ratio = Math.Abs(points[2].X - points[5].X) / Math.Abs(points[0].X - points[1].X);
+        }
+        public void IsPointNotNull()
+        {
+            _indexes = new int[] { 0, 1, 2, 5, 15, 16, 17, 18 };
+            foreach (int i in _indexes)
+            { 
+                if (_point[i].X == 0 || _point[i].Y == 0)
+                    _isPointNotNull = false;
+                else 
+                    _isPointNotNull = true;
+            }
         }
     }
     public class AnalyzeData
@@ -73,6 +87,7 @@ namespace Vadit
                     return;
                 }
                 ProcessFrameAndDrawSkeleton(_backgroundWorker);
+                Debug.WriteLine("드로우 끝");
                 Thread.Sleep(800);
             }
         }
@@ -111,6 +126,14 @@ namespace Vadit
                 _isInputCorrrctPose = true;
                 Debug.WriteLine("입력한 사진 AI처리중");
                 DrawSkeleton(img, _backgroundWorker);
+                _infoInputCorrectPose.IsPointNotNull();
+
+                if (!_infoInputCorrectPose._isPointNotNull)
+                { 
+                    MessageBox.Show("자세가 제대로 인식되지 않았습니다. 바른자세를 다시 입력해주세요.");
+                    return; 
+                }
+                
                 _isInputCorrrctPose = false;
                 Debug.WriteLine("사진 정보 저장 완료.");
                 if (!_backgroundWorker.IsBusy)
@@ -121,7 +144,6 @@ namespace Vadit
             }
         }
 
-
         // Caffe 형식의 OpenPose 딥러닝 모델을 로드하여 반환
         private Net ReadPoseNet()
         {
@@ -129,9 +151,7 @@ namespace Vadit
             string modelPath = @"C:\openpose\models\pose\body_25\pose_iter_584000.caffemodel";
             return DnnInvoke.ReadNetFromCaffe(prototxt, modelPath);
         }
-
         // 프레임 캡처하고 스켈레톤을 탐지하고 그리기 위한 메서드 (비동기 작업을 위해 BackgroundWorker를 매개변수로 받음)
-
         public void ProcessFrameAndDrawSkeleton(BackgroundWorker worker)
         {
             if (_cap.IsOpened)
@@ -149,6 +169,7 @@ namespace Vadit
                     IMGDict.Add("input", img); // 현재 캡처한 이미지를 "input" 키로 Dictionary에 추가
 
                     // 스켈레톤을 탐지하고 그리기 위한 메서드 호출
+
                     DrawSkeleton(img, worker);
                 }
             }
@@ -162,9 +183,7 @@ namespace Vadit
             }
             return null;
         }
-
         // 스켈레톤 탐지하고 그리기 위한 메서드
-
         private void DrawSkeleton(Image<Bgr, byte> img, BackgroundWorker backgroundWorker)
         {
             try
@@ -266,40 +285,111 @@ namespace Vadit
                     }
                 }
                 if (_isInputCorrrctPose)  //만약 이게 입력한 바른자세 이미지라면~
-                    {
+                {
                     _infoInputCorrectPose.setInfo(img, _points);
-                    Debug.WriteLine("17번:["+ _points[17].X + "," + _points[17].Y + "]");
-                    Debug.WriteLine("15번:[" + _points[15].X + "," + _points[15].Y + "]");
-                    Debug.WriteLine("0번:[" + _points[0].X + "," + _points[0].Y + "]");
-                    Debug.WriteLine("16번:[" + _points[16].X + "," + _points[16].Y + "]");
-                    Debug.WriteLine("18번:[" + _points[18].X + "," + _points[18].Y + "]");
-                    Debug.WriteLine("2번:[" + _points[2].X + "," + _points[2].Y + "]");
-                    Debug.WriteLine("5번:[" + _points[5].X + "," + _points[5].Y + "]");
-                    Debug.WriteLine("1번:[" + _points[1].X + "," + _points[1].Y + "]");
+                    Debug.WriteLine("17번:[" + _infoInputCorrectPose._point[17].X + "," + _infoInputCorrectPose._point[17].Y + "]");
+                    Debug.WriteLine("15번:[" + _infoInputCorrectPose._point[15].X + "," + _infoInputCorrectPose._point[15].Y + "]");
+                    Debug.WriteLine("0번:[" + _infoInputCorrectPose._point[0].X + "," + _infoInputCorrectPose._point[0].Y + "]");
+                    Debug.WriteLine("16번:[" + _infoInputCorrectPose._point[16].X + "," + _infoInputCorrectPose._point[16].Y + "]");
+                    Debug.WriteLine("18번:[" + _infoInputCorrectPose._point[18].X + "," + _infoInputCorrectPose._point[18].Y + "]");
+                    Debug.WriteLine("2번:[" + _infoInputCorrectPose._point[2].X + "," + _infoInputCorrectPose._point[2].Y + "]");
+                    Debug.WriteLine("5번:[" + _infoInputCorrectPose._point[5].X + "," + _infoInputCorrectPose._point[5].Y + "]");
+                    Debug.WriteLine("1번:[" + _infoInputCorrectPose._point[1].X + "," + _infoInputCorrectPose._point[1].Y + "]");
                 }
-                else 
-                    DetectPose(img, _points, backgroundWorker);
-                
+                else if (_infoInputCorrectPose._isPointNotNull)
+                {
+                    DetectPoseByRatio(img, _points, backgroundWorker);
+                }
+                else return;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }//DrawSkeleton메서드 끝
-        public void DetectPose(Image<Bgr, byte> img, List<Point> points, BackgroundWorker backgroundWorker)
+        public void DetectPoseByLength(Image<Bgr, byte> img, List<Point> points, BackgroundWorker backgroundWorker)
         {
             AnalyzeData _analyzeData = new AnalyzeData();
             var _img = img;
             var _points = points;
             var _backgroundWorker = backgroundWorker;
+            int _dtCorrectPose17to18 = Math.Abs(_infoInputCorrectPose._point[18].Y - _infoInputCorrectPose._point[17].Y);
+            bool conditionMet = false;
+            if (_infoInputCorrectPose._isPointNotNull)
+            {
+                _analyzeData.AnalyzedImage = img.ToBitmap();
+                _analyzeData.Result += "올바른 자세를 입력해주세요";
+                backgroundWorker.ReportProgress(0, _analyzeData);
+                return;
+            }
 
-            double length1718 = CalculateSkeletonLength(_points, 17, 18);
-               
-                    if (Math.Abs(_points[2].Y - _points[5].Y)>10)
-                    {
-                        _analyzeData.Result = "척추 측만증";
-                    }
+            if (_dtCorrectPose17to18 < Math.Abs(_points[18].X - _points[17].X + 15))
+            {
+                _analyzeData.Result += "거북목";
+                conditionMet = true;
+            }
+
+            if (Math.Abs(_points[2].Y - _points[5].Y) > 10)
+            {
+                _analyzeData.Result += "척추 측만증";
+                conditionMet = true;
+            }
+            if (_dtCorrectPose17to18 > Math.Abs(_points[18].X - _points[17].X + 15))
+            {
+                _analyzeData.Result += "추간판 탈출";
+                conditionMet = true;
+            }
+            if (!conditionMet)
+            {
+                _analyzeData.Result = "정상";
+            }
+
+            _analyzeData.AnalyzedImage = img.ToBitmap();
+            backgroundWorker.ReportProgress(0, _analyzeData);
+        }
+
+        public void DetectPoseByRatio(Image<Bgr, byte> img, List<Point> points, BackgroundWorker backgroundWorker)
+        {   //비율로 디텍트하는 메서드. 길이랑 비교하는 메서드랑 비교 후 삭제.
+            AnalyzeData _analyzeData = new AnalyzeData();
+            _analyzeData.Result = null;
+            var _img = img;
+            var _points = points;
+            var _backgroundWorker = backgroundWorker;
+            bool conditionMet = false;
+            double _ratio = 0;
+            if(!_infoInputCorrectPose._isPointNotNull)
+            {
+                _analyzeData.AnalyzedImage = img.ToBitmap();
+                _analyzeData.Result += "올바른 자세를 입력해주세요";
+                backgroundWorker.ReportProgress(0, _analyzeData);
+                return;
+            }
+            if((Math.Abs(_points[0].X - _points[1].X)) != 0)
+                _analyzeData.Result += "자세가 인식되지 않았습니다.";
+
+            if (_infoInputCorrectPose._isPointNotNull)
+                _ratio = (Math.Abs(_points[2].X - _points[5].X)) / (Math.Abs(_points[0].X - _points[1].X));
             
+
+            if (Math.Abs(_points[2].Y - _points[5].Y) > 10)
+            {
+                _analyzeData.Result += "척추 측만증";
+                conditionMet = true;
+            }
+            if (_ratio > _infoInputCorrectPose._ratio + 0.2)
+            {
+                _analyzeData.Result += "거북목";
+                conditionMet = true;
+            }
+            if (_ratio < _infoInputCorrectPose._ratio + 0.2)
+            {
+                _analyzeData.Result += "추간판 탈출";
+                conditionMet = true;
+            }
+            if (!conditionMet)
+            {
+                _analyzeData.Result = "정상";
+            }
             _analyzeData.AnalyzedImage = img.ToBitmap();
             backgroundWorker.ReportProgress(0, _analyzeData);
         }
@@ -311,8 +401,6 @@ namespace Vadit
             double length = Math.Sqrt(Math.Pow(endPoint.X - startPoint.X, 2) + Math.Pow(endPoint.Y - startPoint.Y, 2));
             return length;
         }
-        
-
         public void Dispose()
         {
             _frame?.Dispose();

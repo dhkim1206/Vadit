@@ -1699,11 +1699,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kmjkt\\OneDrive\\문서\\GitHub\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+      "projectUniqueName": "C:\\Visual Project\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
       "projectName": "Vadit",
-      "projectPath": "C:\\Users\\kmjkt\\OneDrive\\문서\\GitHub\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+      "projectPath": "C:\\Visual Project\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
       "packagesPath": "C:\\Users\\kmjkt\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kmjkt\\OneDrive\\문서\\GitHub\\Vadit\\Vadit\\Vadit\\obj\\",
+      "outputPath": "C:\\Visual Project\\Vadit\\Vadit\\Vadit\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kmjkt\\AppData\\Roaming\\NuGet\\NuGet.Config",
