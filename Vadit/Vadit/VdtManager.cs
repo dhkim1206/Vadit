@@ -24,7 +24,8 @@ namespace Vadit
         {
             _img = img;
             _point = points;
-            double _ratio = Math.Abs(points[2].X - points[5].X) / Math.Abs(points[0].X - points[1].X);
+            if(Math.Abs(points[0].X - points[1].X) != 0)
+                _ratio = Math.Abs(points[2].X - points[5].X) / Math.Abs(points[0].X - points[1].X);
         }
         public void IsPointNotNull()
         {
@@ -141,7 +142,7 @@ namespace Vadit
                 Debug.WriteLine("사진 정보 저장 완료.");
                 if (!_backgroundWorker.IsBusy)
                 {
-                  //  _backgroundWorker.RunWorkerAsync();
+                    _backgroundWorker.RunWorkerAsync();
                     _isPressbtnResetPose = false;
                 }
             }
@@ -367,31 +368,29 @@ namespace Vadit
                 backgroundWorker.ReportProgress(0, _analyzeData);
                 return;
             }
-            if((Math.Abs(_points[0].X - _points[1].X)) != 0)
-                _analyzeData.Result += "자세가 인식되지 않았습니다.";
 
-            if (_infoInputCorrectPose._isPointNotNull)
+            if (_infoInputCorrectPose._isPointNotNull&& (Math.Abs(_points[0].X - _points[1].X) != 0))
                 _ratio = (Math.Abs(_points[2].X - _points[5].X)) / (Math.Abs(_points[0].X - _points[1].X));
             
 
             if (Math.Abs(_points[2].Y - _points[5].Y) > 10)
             {
-                _analyzeData.Result += "척추 측만증";
+                _analyzeData.Result += " <척추 측만증> ";
                 conditionMet = true;
             }
             if (_ratio > _infoInputCorrectPose._ratio + 0.2)
             {
-                _analyzeData.Result += "거북목";
+                _analyzeData.Result += " <거북목> ";
                 conditionMet = true;
             }
             if (_ratio < _infoInputCorrectPose._ratio + 0.2)
             {
-                _analyzeData.Result += "추간판 탈출";
+                _analyzeData.Result += " <추간판 탈출> ";
                 conditionMet = true;
             }
             if (!conditionMet)
             {
-                _analyzeData.Result = "정상";
+                _analyzeData.Result = "<정상>";
             }
             _analyzeData.AnalyzedImage = img.ToBitmap();
             backgroundWorker.ReportProgress(0, _analyzeData);
