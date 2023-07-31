@@ -2,6 +2,7 @@
 using Emgu.CV.Structure;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Reflection.Emit;
 using System.Threading;
@@ -13,10 +14,11 @@ namespace Vadit
     public partial class FormCamera : Form
     {
         private VdtManager _vdtManager;
-
+        AnalyzeData _analyzeData;
         public FormCamera()
         {
             InitializeComponent();
+
             _vdtManager = new VdtManager(OnProgressing);
 
         }
@@ -32,6 +34,19 @@ namespace Vadit
         private void FormCamera_FormClosing(object sender, FormClosingEventArgs e)
         {
             _vdtManager.Dispose();
+        }
+
+        private void btnResetPose_Click(object sender, EventArgs e)
+        {
+            _vdtManager.CancelBackgruondWorker();
+            _analyzeData = _vdtManager.ReceiveCorrectPosture();
+            pictureBox1.Image = _analyzeData.Frame.ToBitmap();
+            textBox1.Text = _analyzeData.Result;
+        }
+        private void btnResetComplet_Click(object sender, EventArgs e)
+        {
+            _vdtManager.CompletePoseInput();
+
         }
     }
 }
