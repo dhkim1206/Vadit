@@ -28,14 +28,17 @@ namespace Vadit
         }
         public void IsPointNotNull()
         {
+            int c = 0;
             _indexes = new int[] { 0, 1, 2, 5, 15, 16, 17, 18 };
             foreach (int i in _indexes)
-            { 
+            {
                 if (_point[i].X == 0 || _point[i].Y == 0)
-                    _isPointNotNull = false;
-                else 
-                    _isPointNotNull = true;
+                    c++;
             }
+            if (c == 0)
+                _isPointNotNull = true;
+            else if(c <= 0)
+                _isPointNotNull = false;
         }
     }
     public class AnalyzeData
