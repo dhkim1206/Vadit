@@ -1764,19 +1764,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kdh12\\.nuget\\packages\\": {}
+    "C:\\Users\\kmjkt\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\명준_Vadit\\Vadit\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+      "projectUniqueName": "C:\\Visual Project\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
       "projectName": "Vadit",
-      "projectPath": "C:\\명준_Vadit\\Vadit\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
-      "packagesPath": "C:\\Users\\kdh12\\.nuget\\packages\\",
-      "outputPath": "C:\\명준_Vadit\\Vadit\\Vadit\\Vadit\\Vadit\\obj\\",
+      "projectPath": "C:\\Visual Project\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+      "packagesPath": "C:\\Users\\kmjkt\\.nuget\\packages\\",
+      "outputPath": "C:\\Visual Project\\Vadit\\Vadit\\Vadit\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kdh12\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kmjkt\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

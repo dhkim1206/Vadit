@@ -38,15 +38,12 @@ namespace Vadit
 
         private void btnResetPose_Click(object sender, EventArgs e)
         {
-            _vdtManager.CancelBackgruondWorker();
-            _analyzeData = _vdtManager.ReceiveCorrectPosture();
-            pictureBox1.Image = _analyzeData.Frame.ToBitmap();
-            textBox1.Text = _analyzeData.Result;
+            _vdtManager.OnClikbtnReset()
         }
         private void btnResetComplet_Click(object sender, EventArgs e)
         {
             _vdtManager.CompletePoseInput();
-
         }
+
     }
 }

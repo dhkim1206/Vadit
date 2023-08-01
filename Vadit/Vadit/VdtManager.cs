@@ -28,19 +28,23 @@ namespace Vadit
         {
             _img = img;
             _point = points;
-            double _ratio = Math.Abs(points[2].X - points[5].X) / Math.Abs(points[0].X - points[1].X);
+            if (Math.Abs(points[0].X - points[1].X) != 0)
+                _ratio = Math.Abs(points[2].X - points[5].X) / Math.Abs(points[0].X - points[1].X);
         }
 
         public void IsPointNotNull()
         {
+            int c = 0;
             _indexes = new int[] { 0, 1, 2, 5, 15, 16, 17, 18 };
             foreach (int i in _indexes)
-            { 
+            {
                 if (_point[i].X == 0 || _point[i].Y == 0)
-                    _isPointNotNull = false;
-                else 
-                    _isPointNotNull = true;
+                    c++;
             }
+            if (c == 0)
+                _isPointNotNull = true;
+            else if (c <= 0)
+                _isPointNotNull = false;
         }
     }
     public class AnalyzeData
@@ -52,7 +56,7 @@ namespace Vadit
 
     public class VdtManager
     {
-        BackgroundWorker _backgroundWorker;
+        public BackgroundWorker _backgroundWorker;
 
         private VideoCapture _cap = null; // 카메라 설정을 위한 변수 선언
         private Mat _frame = null; // 프레임을 저장하기 위한 변수 선언
@@ -65,7 +69,6 @@ namespace Vadit
         private Net _poseNet = null; // OpenPose 딥러닝 모델을 로드하는 변수 선언
         private List<Point> _points; // 각 랜드마크를 저장하는 리스트 선
 
-
         Data _data;
 
         public VdtManager(ProgressChangedEventHandler OnProgressing)
@@ -73,6 +76,7 @@ namespace Vadit
             IMGDict = new Dictionary<string, Image<Bgr, byte>>(); // 이미지를 저장하기 위한 Dictionary 객체 생성
             _cap = new VideoCapture(0); // 카메라를 열고 설정하기 위한 VideoCapture 객체 생성 (0은 기본 카메라를 나타냄)
             _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
+
             _points = new List<Point>(); // 랜드마크 좌표를 저장하기 위한 List 초기화
 
             _data = new Data();
@@ -83,7 +87,7 @@ namespace Vadit
             _backgroundWorker.DoWork += new DoWorkEventHandler(OnDoWork); // 엔트리 포인트, 실행 할 함수를 매개변수로 줌
             _backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(OnProgressing); // 진행중인 진행 상활을 보고 받을거임
             _backgroundWorker.WorkerSupportsCancellation = true;
-            _backgroundWorker.RunWorkerAsync();
+         //   _backgroundWorker.RunWorkerAsync();
 
         }
         //쓰레드로 돌릴 것들
@@ -98,7 +102,21 @@ namespace Vadit
                     Debug.WriteLine("쓰레드 중단");
                     return;
                 }
-                ProcessFrameAndDrawSkeleton(_backgroundWorker);
+                if (_isPressbtnResetPose = true)
+                {
+
+                    Debug.WriteLine("사진 입력받는중");
+                    _frame = new Mat();
+                    AnalyzeData _analyzeData = new AnalyzeData();
+                    _cap.Read(_frame);
+                    _analyzeData.Frame = _frame;
+                    _analyzeData.Result = "바른 자세를 입력하고있습니다.";
+                    _analyzeData.AnalyzedImage = _frame.ToBitmap();
+                    _backgroundWorker.ReportProgress(0, _analyzeData);
+                    _infoInputCorrectPose._img = _frame.ToBitmap();
+                }
+                else
+                    ProcessFrameAndDrawSkeleton(_backgroundWorker);
                 Debug.WriteLine("드로우 끝");
                 Thread.Sleep(800);
             }
@@ -106,29 +124,16 @@ namespace Vadit
 
         public void OnClikbtnReset()
         {
-            if (_backgroundWorker.IsBusy)
+            if (!_backgroundWorker.IsBusy)
             {
                 MessageBox.Show("자세 입력모드를 실행하겠습니다. 잠시만기다려주세요");
+
+                _isPressbtnResetPose = true;
+                _backgroundWorker.RunWorkerAsync();
             }
-           
+
         }
-
-
-        public AnalyzeData ReceiveCorrectPosture()
-        {
-                    OnClikbtnReset();
-                    _isPressbtnResetPose = true;
-                    Debug.WriteLine("사진 입력받는중");
-                    _frame = new Mat();
-                    _cap.Read(_frame);
-                    AnalyzeData _analyzeData = new AnalyzeData();
-
-                    _analyzeData.Frame = _frame;
-                    _analyzeData.Result = "바른 자세를 입력하고있습니다.";
-                    return _analyzeData;
-        }
-
-
+  
         public void CompletePoseInput() //올바른 자세 입력 완료 버튼을 누르면 실행
         {
             if (_isPressbtnResetPose == false)
@@ -138,8 +143,8 @@ namespace Vadit
                 MessageBox.Show("처리중입니다. 잠시만 기다려주세요!");
             else
             {
-                Mat correctPose = ReceiveCorrectPosture().Frame;
-                var img = correctPose.ToImage<Bgr, byte>();
+
+                var img = _infoInputCorrectPose._img;
                 _isInputCorrrctPose = true;
                 Debug.WriteLine("입력한 사진 AI처리중");
                 DrawSkeleton(img, _backgroundWorker);
@@ -164,8 +169,8 @@ namespace Vadit
         // Caffe 형식의 OpenPose 딥러닝 모델을 로드하여 반환
         private Net ReadPoseNet()
         {
-            string prototxt = @"C:\openpose-master\models\pose\body_25\pose_deploy.prototxt";
-            string modelPath = @"C:\openpose-master\models\pose\body_25\pose_iter_584000.caffemodel";
+            string prototxt = @"C:\openpose\models\pose\body_25\pose_deploy.prototxt";
+            string modelPath = @"C:\openpose\models\pose\body_25\pose_iter_584000.caffemodel";
             return DnnInvoke.ReadNetFromCaffe(prototxt, modelPath);
         }
 
@@ -401,30 +406,30 @@ namespace Vadit
                 return;
             }
 
-            if (_infoInputCorrectPose._isPointNotNull)
+            if (_infoInputCorrectPose._isPointNotNull && (Math.Abs(_points[0].X - _points[1].X) != 0))
                 _ratio = (Math.Abs(_points[2].X - _points[5].X)) / (Math.Abs(_points[0].X - _points[1].X));
             
 
             if (Math.Abs(_points[2].Y - _points[5].Y) > 10)
             {
-                _analyzeData.Result += "척추 측만증";
+                _analyzeData.Result += " <척추 측만증> ";
                 conditionMet = true;
             }
             if (_ratio > _infoInputCorrectPose._ratio + 0.2)
             {
-                _analyzeData.Result += "거북목";
+                _analyzeData.Result += " <거북목> ";
                 conditionMet = true;
 
             }
             if (_ratio < _infoInputCorrectPose._ratio + 0.2)
             {
-                _analyzeData.Result += "추간판 탈출";
+                _analyzeData.Result += " <추간판 탈출> ";
                 conditionMet = true;
             }
 
             if (!conditionMet)
             {
-                _analyzeData.Result = "정상";
+                _analyzeData.Result = " <정상> ";
                 _data.UpdateGoodPoseCnt_Score();
             }
             else
