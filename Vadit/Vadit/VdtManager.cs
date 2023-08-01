@@ -113,12 +113,12 @@ namespace Vadit
                     _analyzeData.Result = "바른 자세를 입력하고있습니다.";
                     _analyzeData.AnalyzedImage = _frame.ToBitmap();
                     _backgroundWorker.ReportProgress(0, _analyzeData);
-                    _infoInputCorrectPose._img = _frame.ToBitmap();
+                    _infoInputCorrectPose._img = _frame.ToImage<Bgr, byte>();
                 }
                 else
                     ProcessFrameAndDrawSkeleton(_backgroundWorker);
                 Debug.WriteLine("드로우 끝");
-                Thread.Sleep(800);
+                Thread.Sleep(200);
             }
         }
 
@@ -136,14 +136,14 @@ namespace Vadit
   
         public void CompletePoseInput() //올바른 자세 입력 완료 버튼을 누르면 실행
         {
+
             if (_isPressbtnResetPose == false)
                 MessageBox.Show("먼저 자세입력을 눌러주세요");
-            else if 
-                (_backgroundWorker.IsBusy)
-                MessageBox.Show("처리중입니다. 잠시만 기다려주세요!");
-            else
+            else 
             {
+                _backgroundWorker.CancelAsync();
 
+                MessageBox.Show("처리중입니다. 잠시만 기다려주세요!");
                 var img = _infoInputCorrectPose._img;
                 _isInputCorrrctPose = true;
                 Debug.WriteLine("입력한 사진 AI처리중");

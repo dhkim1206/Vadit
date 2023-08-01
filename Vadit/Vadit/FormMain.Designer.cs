@@ -41,7 +41,7 @@
             // 
             btn_ProgramExplain.BackColor = Color.White;
             btn_ProgramExplain.BackgroundImageLayout = ImageLayout.None;
-            btn_ProgramExplain.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_ProgramExplain.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btn_ProgramExplain.Location = new Point(0, 0);
             btn_ProgramExplain.Name = "btn_ProgramExplain";
             btn_ProgramExplain.RightToLeft = RightToLeft.Yes;
@@ -67,8 +67,8 @@
             // 
             btn_FormSetting.BackColor = Color.White;
             btn_FormSetting.BackgroundImageLayout = ImageLayout.None;
-            btn_FormSetting.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_FormSetting.Location = new Point(0, 150);
+            btn_FormSetting.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_FormSetting.Location = new Point(0, 168);
             btn_FormSetting.Name = "btn_FormSetting";
             btn_FormSetting.RightToLeft = RightToLeft.Yes;
             btn_FormSetting.Size = new Size(146, 50);
@@ -81,8 +81,8 @@
             // 
             btn_statisticsForm.BackColor = Color.White;
             btn_statisticsForm.BackgroundImageLayout = ImageLayout.None;
-            btn_statisticsForm.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_statisticsForm.Location = new Point(0, 100);
+            btn_statisticsForm.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_statisticsForm.Location = new Point(0, 112);
             btn_statisticsForm.Name = "btn_statisticsForm";
             btn_statisticsForm.RightToLeft = RightToLeft.Yes;
             btn_statisticsForm.Size = new Size(146, 50);
@@ -95,13 +95,13 @@
             // 
             btn_poseForm.BackColor = Color.White;
             btn_poseForm.BackgroundImageLayout = ImageLayout.None;
-            btn_poseForm.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_poseForm.Location = new Point(0, 50);
+            btn_poseForm.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_poseForm.Location = new Point(0, 56);
             btn_poseForm.Name = "btn_poseForm";
             btn_poseForm.RightToLeft = RightToLeft.Yes;
             btn_poseForm.Size = new Size(146, 50);
             btn_poseForm.TabIndex = 0;
-            btn_poseForm.Text = "자세 분석";
+            btn_poseForm.Text = "자세분석";
             btn_poseForm.UseVisualStyleBackColor = false;
             btn_poseForm.Click += btn_poseForm_Click;
             // 

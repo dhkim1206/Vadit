@@ -22,28 +22,23 @@ namespace Vadit
             _vdtManager = new VdtManager(OnProgressing);
 
         }
-
         // 전달 받을 것들
         private void OnProgressing(object sender, ProgressChangedEventArgs e)
         {
             AnalyzeData obj = e.UserState as AnalyzeData;
             pictureBox1.Image = obj.AnalyzedImage;
-            textBox1.Text = obj.Result;
         }
-
         private void FormCamera_FormClosing(object sender, FormClosingEventArgs e)
         {
             _vdtManager.Dispose();
         }
-
         private void btnResetPose_Click(object sender, EventArgs e)
         {
-            _vdtManager.OnClikbtnReset()
+            _vdtManager.OnClikbtnReset();
         }
         private void btnResetComplet_Click(object sender, EventArgs e)
         {
             _vdtManager.CompletePoseInput();
         }
-
     }
 }
