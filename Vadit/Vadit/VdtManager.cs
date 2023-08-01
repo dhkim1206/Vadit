@@ -28,7 +28,8 @@ namespace Vadit
         {
             _img = img;
             _point = points;
-            double _ratio = Math.Abs(points[2].X - points[5].X) / Math.Abs(points[0].X - points[1].X);
+            if (Math.Abs(points[0].X - points[1].X) != 0)
+                _ratio = Math.Abs(points[2].X - points[5].X) / Math.Abs(points[0].X - points[1].X);
         }
 
         public void IsPointNotNull()
@@ -283,8 +284,10 @@ namespace Vadit
                         _points.Add(Point.Empty); // 유효하지 않은 포인트는 Empty로 추가
                     }
                 }
+
                 // 출력할 랜드마크 인덱스
                 var targetLandmarks = new List<int>() { 0, 1, 2, 5, 15, 16, 17, 18 };
+
                 // 이미지에 좌표 포인트 표시
                 for (int i = 0; i < _points.Count; i++)
                 {
@@ -391,7 +394,7 @@ namespace Vadit
             double _ratio = 0;
 
             DateTime time = DateTime.Now;
-
+            DateTime date = time.Date;
 
             if (!_infoInputCorrectPose._isPointNotNull)
             {
@@ -401,22 +404,22 @@ namespace Vadit
                 return;
             }
 
-            if (_infoInputCorrectPose._isPointNotNull)
+            if (_infoInputCorrectPose._isPointNotNull && (Math.Abs(_points[0].X - _points[1].X)!=0))
                 _ratio = (Math.Abs(_points[2].X - _points[5].X)) / (Math.Abs(_points[0].X - _points[1].X));
             
 
-            if (Math.Abs(_points[2].Y - _points[5].Y) > 10)
+            if (Math.Abs(_points[2].Y - _points[5].Y) > 15)
             {
                 _analyzeData.Result += "척추 측만증";
                 conditionMet = true;
             }
-            if (_ratio > _infoInputCorrectPose._ratio + 0.2)
+            if (_ratio > _infoInputCorrectPose._ratio + 0.4)
             {
                 _analyzeData.Result += "거북목";
                 conditionMet = true;
 
             }
-            if (_ratio < _infoInputCorrectPose._ratio + 0.2)
+            if (_ratio < _infoInputCorrectPose._ratio + 0.5)
             {
                 _analyzeData.Result += "추간판 탈출";
                 conditionMet = true;
@@ -425,15 +428,14 @@ namespace Vadit
             if (!conditionMet)
             {
                 _analyzeData.Result = "정상";
-                _data.UpdateGoodPoseCnt_Score();
+                _data.UpdateGoodPoseCnt_Score(date);
             }
             else
             {
-                _data.UpdateBadPoseCnt_Score();
+                _data.UpdateBadPoseCnt_Score(date);
+                _data.SaveImageToFile(time, img, _analyzeData.Result);
 
             }
-
-            _data.SaveImageToFile(time, img, _analyzeData.Result);
             _data.InsertDB_BadPose(time, _analyzeData.Result);
             //_data.UpdatePoseCnt_Score(analyzeData.Result);
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NqZ/GZY9XhESy7sI5AsT97McQtc42+Xn0eT/xuXQ0lJB7o2O0dAjRf2Rv34hI5VsBncEiMdcczoRKPHFJbUPOg==",
+  "dgSpecHash": "61UBGd/MU7rWVly/9x3BEtKw8Al9st/mkZKA+5267jcWO9wnR+fqcjNeiA074Yq1BZrnycNmEuOkRS/noenItA==",
   "success": true,
-  "projectFilePath": "C:\\명준_Vadit\\Vadit\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+  "projectFilePath": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kdh12\\.nuget\\packages\\emgu.cv\\4.7.0.5276\\emgu.cv.4.7.0.5276.nupkg.sha512",
     "C:\\Users\\kdh12\\.nuget\\packages\\emgu.cv.bitmap\\4.7.0.5276\\emgu.cv.bitmap.4.7.0.5276.nupkg.sha512",
@@ -31,7 +31,8 @@
     "C:\\Users\\kdh12\\.nuget\\packages\\system.runtime.interopservices.runtimeinformation\\4.3.0\\system.runtime.interopservices.runtimeinformation.4.3.0.nupkg.sha512",
     "C:\\Users\\kdh12\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\kdh12\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
-    "C:\\Users\\kdh12\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512"
+    "C:\\Users\\kdh12\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
+    "C:\\Users\\kdh12\\.nuget\\packages\\winforms.datavisualization\\1.8.0\\winforms.datavisualization.1.8.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\명준_Vadit\\Vadit\\Vadit\\Vadit\\Vadit\\Vadit.csproj": {}
+    "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj": {}
   },
   "projects": {
-    "C:\\명준_Vadit\\Vadit\\Vadit\\Vadit\\Vadit\\Vadit.csproj": {
+    "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\명준_Vadit\\Vadit\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+        "projectUniqueName": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
         "projectName": "Vadit",
-        "projectPath": "C:\\명준_Vadit\\Vadit\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+        "projectPath": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
         "packagesPath": "C:\\Users\\kdh12\\.nuget\\packages\\",
-        "outputPath": "C:\\명준_Vadit\\Vadit\\Vadit\\Vadit\\Vadit\\obj\\",
+        "outputPath": "C:\\Vadit\\Vadit\\Vadit\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kdh12\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,6 +55,10 @@
             "System.Data.SQLite.Core": {
               "target": "Package",
               "version": "[1.0.118, )"
+            },
+            "WinForms.DataVisualization": {
+              "target": "Package",
+              "version": "[1.8.0, )"
             }
           },
           "imports": [
