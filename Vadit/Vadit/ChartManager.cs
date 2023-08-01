@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
+using System.Drawing;
+using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Vadit
@@ -57,9 +59,10 @@ namespace Vadit
             chart.Series.Clear();
 
             Series series = new Series("GoodPosePercentage");
-            series.ChartType = SeriesChartType.Line;
+            series.ChartType = SeriesChartType.Line; // 선형 차트로 변경
             series.XValueType = ChartValueType.Date;
             series.XValueMember = "Date";
+            series.BorderWidth = 2; // 선의 굵기 조정
 
             foreach (DataRow row in _chartData.Rows)
             {
@@ -72,6 +75,50 @@ namespace Vadit
 
             chart.ChartAreas[0].AxisY.Minimum = 0;
             chart.ChartAreas[0].AxisY.Maximum = 100;
+
+            chart.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+            chart.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
+
+            // 세로 줄을 점선으로 변경
+            chart.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
+            chart.ChartAreas[0].AxisX.MinorGrid.LineDashStyle = ChartDashStyle.Dot;
+
+            // X 축 날짜 형식 지정
+            chart.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd";
+
+            // 데이터 포인트 클릭 이벤트 추가
+            foreach (DataPoint dataPoint in series.Points)
+            {
+                dataPoint.ToolTip = "Click to view photo";
+                dataPoint.MarkerStyle = MarkerStyle.Circle;
+                dataPoint.MarkerSize = 10;
+                dataPoint.MarkerColor = Color.Red;
+                dataPoint.MarkerBorderColor = Color.Black;
+                dataPoint.MarkerBorderWidth = 2;
+            }
+
+            chart.MouseClick += Chart_MouseClick;
+        }
+
+        private void Chart_MouseClick(object sender, MouseEventArgs e)
+        {
+            Chart chart = (Chart)sender;
+            HitTestResult hitResult = chart.HitTest(e.X, e.Y);
+
+            if (hitResult.ChartElementType == ChartElementType.DataPoint)
+            {
+                DataPoint dataPoint = hitResult.Series.Points[hitResult.PointIndex];
+                DateTime selectedDate = DateTime.FromOADate(dataPoint.XValue).Date;
+                ShowPhotoGridView(selectedDate);
+            }
+        }
+
+        private void ShowPhotoGridView(DateTime selectedDate)
+        {
+            FormPictures formPictures = new FormPictures(selectedDate);
+            formPictures.ShowDialog();
+            // 여기에 해당 날짜에 해당하는 DB테이블의 사진을 불러와서 새로운 창에 그리드로 보여주는 로직을 구현합니다.
+            // 예를 들면 다이얼로그 또는 폼을 만들고, 거기에 그리드를 추가하고 사진을 로드하여 표시합니다.
         }
     }
 }

@@ -90,7 +90,7 @@ namespace Vadit
             {
                 SQLiteConnection.CreateFile(path);
 
-                _con = new SQLiteConnection(@"Data Source=" + path);
+
                 _con.Open();
 
                 // Create ImageData table
@@ -123,6 +123,7 @@ namespace Vadit
                 return;
             }
         }
+
         /*
         // 좋은 포즈 횟수 카운트 또는 나쁜 포즈 횟수 카운트 뽑아오기
         public int SelectPoseCnt_Score(string isGoodPose)
@@ -285,7 +286,7 @@ namespace Vadit
             using (var cmd = new SQLiteCommand(_con))
             {
                 cmd.CommandText = "INSERT INTO ImageData (Date, Category, ImagePath) VALUES (@Date, @Category, @ImagePath)";
-                cmd.Parameters.AddWithValue("@Date", date);
+                cmd.Parameters.AddWithValue("@Date", date.Date);
                 cmd.Parameters.AddWithValue("@Category", category);
                 cmd.Parameters.AddWithValue("@ImagePath", imagePath);
 
