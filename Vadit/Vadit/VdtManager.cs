@@ -165,8 +165,8 @@ namespace Vadit
         // Caffe 형식의 OpenPose 딥러닝 모델을 로드하여 반환
         private Net ReadPoseNet()
         {
-            string prototxt = @"C:\openpose-master\models\pose\body_25\pose_deploy.prototxt";
-            string modelPath = @"C:\openpose-master\models\pose\body_25\pose_iter_584000.caffemodel";
+            string prototxt = Path.Combine(Application.StartupPath, "pose_deploy.prototxt");
+            string modelPath = Path.Combine(Application.StartupPath, "pose_iter_584000.caffemodel");
             return DnnInvoke.ReadNetFromCaffe(prototxt, modelPath);
         }
 
