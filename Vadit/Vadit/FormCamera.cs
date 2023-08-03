@@ -18,27 +18,36 @@ namespace Vadit
         public FormCamera()
         {
             InitializeComponent();
-
             _vdtManager = new VdtManager(OnProgressing);
-
+            _vdtManager.StartSettingCorrectPose();
         }
         // 전달 받을 것들
         private void OnProgressing(object sender, ProgressChangedEventArgs e)
         {
             AnalyzeData obj = e.UserState as AnalyzeData;
             pictureBox1.Image = obj.AnalyzedImage;
+            tbtesttext.Text = obj.Result.ToString();
         }
         private void FormCamera_FormClosing(object sender, FormClosingEventArgs e)
         {
             _vdtManager.Dispose();
         }
-        private void btnResetPose_Click(object sender, EventArgs e)
+        private async void btnResetPose_Click(object sender, EventArgs e)
         {
-            _vdtManager.OnClikbtnReset();
-        }
-        private void btnResetComplet_Click(object sender, EventArgs e)
-        {
-            _vdtManager.CompletePoseInput();
+            pictureBox2.Image = _vdtManager.OnclikBtnResetPose();
+
+            pnWait.Visible = true;
+            await Task.Delay(500);
+            if (_vdtManager.InputCorrectPose())
+            {
+                _vdtManager.EndPoseSetting();
+                await Task.Delay(500);
+                _vdtManager.Dispose();
+                    this.Close();
+                _vdtManager.run();
+            }
+            pnWait.Visible = false;
+            pictureBox2.Image = _vdtManager._infoInputCorrectPose._img.ToBitmap();
         }
     }
 }

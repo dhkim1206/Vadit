@@ -33,8 +33,10 @@
             pictureBox2 = new PictureBox();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            button1 = new Button();
+            tbtesttext = new TextBox();
             pnWait = new Panel();
-            label3 = new Label();
+            lbwait = new Label();
             label2 = new Label();
             label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -84,6 +86,8 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(button1);
+            tabPage1.Controls.Add(tbtesttext);
             tabPage1.Controls.Add(pnWait);
             tabPage1.Controls.Add(label2);
             tabPage1.Controls.Add(label1);
@@ -98,24 +102,40 @@
             tabPage1.Text = "바른 자세촬영";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            button1.Location = new Point(502, 11);
+            button1.Name = "button1";
+            button1.Size = new Size(260, 23);
+            button1.TabIndex = 10;
+            button1.Text = "테스트를  위한 버튼(이탭을 나갔을때 가정)";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // tbtesttext
+            // 
+            tbtesttext.Location = new Point(401, 381);
+            tbtesttext.Name = "tbtesttext";
+            tbtesttext.Size = new Size(361, 23);
+            tbtesttext.TabIndex = 9;
+            // 
             // pnWait
             // 
-            pnWait.Controls.Add(label3);
+            pnWait.Controls.Add(lbwait);
             pnWait.Location = new Point(225, 164);
             pnWait.Name = "pnWait";
             pnWait.Size = new Size(312, 40);
             pnWait.TabIndex = 8;
             pnWait.Visible = false;
             // 
-            // label3
+            // lbwait
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(15, 11);
-            label3.Name = "label3";
-            label3.Size = new Size(276, 19);
-            label3.TabIndex = 8;
-            label3.Text = "자세를 분석할 동안 잠시만 기다려 주세요!";
+            lbwait.AutoSize = true;
+            lbwait.Font = new Font("맑은 고딕", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbwait.Location = new Point(15, 11);
+            lbwait.Name = "lbwait";
+            lbwait.Size = new Size(258, 17);
+            lbwait.TabIndex = 8;
+            lbwait.Text = "자세를 분석할 동안 잠시만 기다려 주세요!";
             // 
             // label2
             // 
@@ -142,6 +162,7 @@
             ClientSize = new Size(810, 488);
             Controls.Add(tabControl1);
             Name = "FormCamera";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "바른자세 설정";
             FormClosing += FormCamera_FormClosing;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -164,6 +185,8 @@
         private Label label2;
         private Label label1;
         private Panel pnWait;
-        private Label label3;
+        private Label lbwait;
+        private TextBox tbtesttext;
+        private Button button1;
     }
 }

@@ -16,5 +16,11 @@ namespace Vadit
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormCamera subForm1 = new FormCamera();
+            subForm1.Show();
+        }
     }
 }

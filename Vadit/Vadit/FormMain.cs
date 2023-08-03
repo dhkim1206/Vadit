@@ -20,11 +20,6 @@ namespace Vadit
 
         }
 
-        private void btn_poseForm_Click(object sender, EventArgs e)
-        {
-            _formManager.ChangeForm(typeof(FormCamera));
-
-        }
 
         private void btn_ProgramExplain_Click(object sender, EventArgs e)
         {
