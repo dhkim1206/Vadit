@@ -65,19 +65,14 @@ namespace Vadit
         private bool _isInputCorrrctPose = false;//드로우 스켈레톤에서 이게 올바른자세 입력한 이미지인지 아닌지 판별하기위해
         private Net _poseNet = null; 
         private List<Point> _points;
-
         Data _data;
 
         public VdtManager(ProgressChangedEventHandler OnProgressing)
         {
-
             _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
-
             _points = new List<Point>(); // 랜드마크 좌표를 저장하기 위한 List 초기화
-
             _data = new Data();
 
-            // BackgroundWorker 초기화 및 설정
             _bgw = new BackgroundWorker(); // 백그라운드 워커 객체 생성
             _bgw.WorkerReportsProgress = true; // 중간 보고 할거냐, 이걸 해줘야 중간보고를 할 수 있음
             _bgw.DoWork += new DoWorkEventHandler(OnDoWork); // 엔트리 포인트, 실행 할 함수를 매개변수로 줌
@@ -115,80 +110,9 @@ namespace Vadit
                 Thread.Sleep(200);
             }
         }
-        public Bitmap OnclikBtnResetPose() //연속으로 사진을 찍어 영상처럼 보여주는 메서드
-        {
-            _frame = new Mat();
-            _cap.Read(_frame);
-            var img = _frame.ToImage<Bgr, byte>();
-            _infoInputCorrectPose._img = img;
-            return _infoInputCorrectPose._img.ToBitmap();
-        }
-
-
-        public bool InputCorrectPose()  //자세 캡쳐 버튼 누르면 실행됨. 올바른 자세인지 아닌지 더불어 창닫기까지.
-        {
-            DrawSkeleton(_infoInputCorrectPose._img, _bgw);
-            _infoInputCorrectPose.IsPointNotNull();
-            if (!_infoInputCorrectPose._isPointNotNull)
-            {
-                MessageBox.Show("자세가 제대로 인식되지 않았습니다. 바른자세를 다시 입력해주세요.");
-                return false;
-            }
-            else 
-            {
-                var confirmResult = MessageBox.Show("이 자세로 셋팅하시겠습니까?", "알림", MessageBoxButtons.YesNo);
-
-                if (confirmResult == DialogResult.Yes)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
-        public void StartSettingCorrectPose() //formcamera 초기화와 함께 호출됨. 자세입력모드 진입
-        {
-            if(_bgw.IsBusy)
-                _bgw.CancelAsync();
-            while (_bgw.IsBusy)
-                Thread.Sleep(50);
-            if (!_bgw.IsBusy)
-            {
-                Debug.WriteLine("자세 입력모드를 실행하겠습니다. 잠시만기다려주세요");
-
-                _isInputCorrrctPose = true;
-                _bgw.RunWorkerAsync();
-            }
-        }
-        public void EndPoseSetting()        //입력모드 끄고 백그라운드 종료
-        {
-            _isInputCorrrctPose = false;
-            if (_bgw.IsBusy)
-                _bgw.CancelAsync();
-        }
-        public void run()       //백그라운드 다시 실행
-        {
-            if (!_bgw.IsBusy)
-                _bgw.RunWorkerAsync();
-        }
-
-
-        // Caffe 형식의 OpenPose 딥러닝 모델을 로드하여 반환
-        private Net ReadPoseNet()
-        {
-            string prototxt = @"C:\openpose\models\pose\body_25\pose_deploy.prototxt";
-            string modelPath = @"C:\openpose\models\pose\body_25\pose_iter_584000.caffemodel";
-            return DnnInvoke.ReadNetFromCaffe(prototxt, modelPath);
-        }
-
         // 프레임 캡처하고 스켈레톤을 탐지하고 그리기 위한 메서드 (비동기 작업을 위해 BackgroundWorker를 매개변수로 받음)
         public void ProcessFrameAndDrawSkeleton(BackgroundWorker worker)
         {
-            if (_bgw.IsBusy)
-            {
                 if (_cap.IsOpened)
                 {
                     _frame = new Mat();
@@ -201,7 +125,6 @@ namespace Vadit
                         DrawSkeleton(img, worker);
                     }
                 }
-            }
         }
         // 스켈레톤 탐지하고 그리기 위한 메서드
         private void DrawSkeleton(Image<Bgr, byte> img, BackgroundWorker backgroundWorker)
@@ -329,9 +252,14 @@ namespace Vadit
                 MessageBox.Show(ex.Message);
             }
         }
-
         // DrawSkeleton메서드 끝
-
+        private Net ReadPoseNet()
+        {
+            string prototxt = @"C:\openpose\models\pose\body_25\pose_deploy.prototxt";
+            string modelPath = @"C:\openpose\models\pose\body_25\pose_iter_584000.caffemodel";
+            return DnnInvoke.ReadNetFromCaffe(prototxt, modelPath);
+        }
+        // Caffe 형식의 OpenPose 딥러닝 모델을 로드하여 반환
         public void DetectPoseByRatio(Image<Bgr, byte> img, List<Point> points, BackgroundWorker backgroundWorker)
         {   //비율로 디텍트하는 메서드. 길이랑 비교하는 메서드랑 비교 후 삭제.
             AnalyzeData _analyzeData = new AnalyzeData();
@@ -355,7 +283,7 @@ namespace Vadit
 
             if (_infoInputCorrectPose._isPointNotNull && (Math.Abs(_points[0].X - _points[1].X) != 0))
                 _ratio = (Math.Abs(_points[2].X - _points[5].X)) / (Math.Abs(_points[0].X - _points[1].X));
-            
+
 
             if (Math.Abs(_points[2].Y - _points[5].Y) > 10)
             {
@@ -393,6 +321,64 @@ namespace Vadit
             backgroundWorker.ReportProgress(0, _analyzeData);
         }
 
+
+        //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓바른 자세입력에 관한 코드↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+        public void StartSettingCorrectPose() //formcamera 초기화와 함께 호출됨. 자세입력모드 진입
+        {
+            if (_bgw.IsBusy)
+                _bgw.CancelAsync();
+            while (_bgw.IsBusy)
+                Thread.Sleep(50);
+            if (!_bgw.IsBusy)
+            {
+                Debug.WriteLine("자세 입력모드를 실행하겠습니다. 잠시만기다려주세요");
+
+                _isInputCorrrctPose = true;
+                _bgw.RunWorkerAsync();
+            }
+        }
+        public Bitmap OnclikBtnResetPose() //연속으로 사진을 찍어 영상처럼 보여주는 메서드
+        {
+            _frame = new Mat();
+            _cap.Read(_frame);
+            var img = _frame.ToImage<Bgr, byte>();
+            _infoInputCorrectPose._img = img;
+            return _infoInputCorrectPose._img.ToBitmap();
+        }
+        public bool InputCorrectPose()  //자세 캡쳐 버튼 누르면 실행됨. 올바른 자세인지 아닌지 더불어 창닫기까지.
+        {
+            DrawSkeleton(_infoInputCorrectPose._img, _bgw);
+            _infoInputCorrectPose.IsPointNotNull();
+            if (!_infoInputCorrectPose._isPointNotNull)
+            {
+                MessageBox.Show("자세가 제대로 인식되지 않았습니다. 바른자세를 다시 입력해주세요.");
+                return false;
+            }
+            else 
+            {
+                var confirmResult = MessageBox.Show("이 자세로 셋팅하시겠습니까?", "알림", MessageBoxButtons.YesNo);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        public void EndPoseSetting()        //입력모드 끄고 백그라운드 종료
+        {
+            _isInputCorrrctPose = false;
+            if (_bgw.IsBusy)
+                _bgw.CancelAsync();
+        }
+        public void run()       //백그라운드 다시 실행
+        {
+            if (!_bgw.IsBusy)
+                _bgw.RunWorkerAsync();
+        }
         public void Dispose()   //할당해제
         {
             _frame?.Dispose();
@@ -400,5 +386,8 @@ namespace Vadit
             _poseNet?.Dispose();
             _bgw?.Dispose();
         }
+        //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑바른 자세입력에 관한 코드↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+
     }
 }
