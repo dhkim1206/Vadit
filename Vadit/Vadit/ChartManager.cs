@@ -65,20 +65,36 @@ namespace Vadit
             chart.Series.Clear();
             Series series = new Series("GoodPosePercentage");
 
+            /*
+            // Create a series for the bar chart (GoodPoseCount and BadPoseCount)
+            Series barSeries = new Series("BarSeries");
+            barSeries.ChartType = SeriesChartType.Column; // Bar chart type
+            barSeries.XValueType = ChartValueType.Date;
+            barSeries.XValueMember = "Date";
+            barSeries.YValueMembers = "GoodPoseCount, BadPoseCount"; // Comma-separated column names
+            */
+
             // 차트 유형 설정 (Line 차트)
             series.ChartType = SeriesChartType.Line;
+            //barSeries.ChartType = SeriesChartType.Bar;
+
             // X축 값이 실제 날짜이므로 인덱스를 사용하지 않도록 설정
             series.IsXValueIndexed = false;
+            //barSeries.IsXValueIndexed = false;
 
             // X축 값 형식 설정 (날짜)
             series.XValueType = ChartValueType.Date;
+            //barSeries.XValueType = ChartValueType.Date;
 
             // 데이터 바인딩
             series.XValueMember = "Date";
             series.YValueMembers = "GoodPosePercentage";
+            //barSeries.XValueMember = "Date";
+            //barSeries.YValueMembers = "GoodPosePercentage";
 
             // 선 두께 설정
             series.BorderWidth = 2;
+            //barSeries.BorderWidth = 2;
 
             // 데이터 포인트 생성 및 추가
             foreach (DataRow row in _chartData.Rows)
@@ -86,29 +102,27 @@ namespace Vadit
                 DateTime date = (DateTime)row["Date"];
                 double goodPosePercentage = Convert.ToDouble(row["GoodPosePercentage"]);
                 series.Points.AddXY(date, goodPosePercentage);
+                //barSeries.Points.AddXY(date, goodPosePercentage);
             }
 
             // Series를 차트에 추가
             chart.Series.Add(series);
+            //chart.Series.Add(barSeries);
 
             // Y축 범위 설정 (0 ~ 100)
             chart.ChartAreas[0].AxisY.Minimum = 0;
             chart.ChartAreas[0].AxisY.Maximum = 100;
 
-            // 차트 배경색 설정
-            chart.BackColor = Color.Navy;
-            chart.ChartAreas[0].BackColor = Color.Navy;
-
             // 축 색상 설정
-            chart.ChartAreas[0].AxisX.LineColor = Color.White;
-            chart.ChartAreas[0].AxisY.LineColor = Color.White;
+            chart.ChartAreas[0].AxisX.LineColor = Color.Gray;
+            chart.ChartAreas[0].AxisY.LineColor = Color.Gray;
             chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Gray;
             chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Gray;
-            chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Gray;
+            chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.White;
 
-            // 차트 배경색 어둡게 설정 (RGB 값 조정)
-            chart.BackColor = Color.FromArgb(30, 30, 60);
-            chart.ChartAreas[0].BackColor = Color.FromArgb(30, 30, 60);
+            // 배경색과 차트 영역의 배경색을 어두운 회색으로 설정
+            chart.BackColor = Color.FromArgb(38, 45, 51);
+            chart.ChartAreas[0].BackColor = Color.FromArgb(38, 45, 51);
 
             // 데이터 포인트 색상 변경
             series.Color = Color.GreenYellow;
@@ -152,7 +166,7 @@ namespace Vadit
             chart.ChartAreas[0].AxisX.LabelStyle.Format = "MM-dd";
 
             // X축 레이블 색상 설정
-            chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Gray;
+            chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
 
             // 차트 클릭 이벤트 핸들러 등록
             chart.MouseClick += Chart_MouseClick;
@@ -176,8 +190,6 @@ namespace Vadit
         {
             FormPictures formPictures = new FormPictures(selectedDate);
             formPictures.ShowDialog();
-            // 여기에 해당 날짜에 해당하는 DB테이블의 사진을 불러와서 새로운 창에 그리드로 보여주는 로직을 구현합니다.
-            // 예를 들면 다이얼로그 또는 폼을 만들고, 거기에 그리드를 추가하고 사진을 로드하여 표시합니다.
         }
 
     }

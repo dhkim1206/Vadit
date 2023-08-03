@@ -410,18 +410,18 @@ namespace Vadit
 
             if (Math.Abs(_points[2].Y - _points[5].Y) > 15)
             {
-                _analyzeData.Result += "척추 측만증";
+                _analyzeData.Result += "척추 측만증, ";
                 conditionMet = true;
             }
             if (_ratio > _infoInputCorrectPose._ratio + 0.4)
             {
-                _analyzeData.Result += "거북목";
+                _analyzeData.Result += "거북목, ";
                 conditionMet = true;
 
             }
             if (_ratio < _infoInputCorrectPose._ratio + 0.5)
             {
-                _analyzeData.Result += "추간판 탈출";
+                _analyzeData.Result += "추가판 탈출, ";
                 conditionMet = true;
             }
 

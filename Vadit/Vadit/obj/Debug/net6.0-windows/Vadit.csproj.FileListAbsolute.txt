@@ -231,3 +231,4 @@ C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\SQLite.Int
 C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormPictures.resources
 C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\WinForms.DataVisualization.Utilities.dll
 C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\WinForms.DataVisualization.dll
+C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.Properties.Resources.resources

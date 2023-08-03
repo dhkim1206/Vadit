@@ -53,10 +53,9 @@ namespace Vadit
             try
             {
                 string timestamp = date.ToString("yyyyMMddHHmmssff");
-                string randomId = Guid.NewGuid().ToString("N").Substring(0, 2); // 랜덤 식별자 (2 자리)
 
                 // 이미지 이름
-                string imageName = $"{timestamp}_{randomId}.jpg";
+                string imageName = $"{timestamp}.jpg";
 
                 string imagePath = Path.Combine(imageDirectory, imageName);
 
@@ -83,23 +82,29 @@ namespace Vadit
             if (!Directory.Exists(imageDirectory)) Directory.CreateDirectory(imageDirectory);
         }
 
-        // 데이터베이스 생성
         private void Create_db()
         {
             if (!System.IO.File.Exists(path))
             {
                 SQLiteConnection.CreateFile(path);
 
-
+                // Use cs variable to open the connection
+                _con = new SQLiteConnection(cs);
                 _con.Open();
 
+                // Create Score table (move it to the beginning)
+                string totlaScore = "CREATE TABLE Score ( Date DATE PRIMARY KEY, GoodPoseCnt INT, BadPoseCnt INT)";
+                using (var totlaScoretCmd = new SQLiteCommand(totlaScore, _con))
+                {
+                    totlaScoretCmd.ExecuteNonQuery();
+                }
+
                 // Create ImageData table
-                string imageDataTableSql = "CREATE TABLE ImageData (Date DATE PRIMARY KEY, Category TEXT, ImagePath TEXT)";
+                string imageDataTableSql = "CREATE TABLE ImageData (Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE, Category TEXT, ImagePath TEXT)";
                 using (var imageDataCmd = new SQLiteCommand(imageDataTableSql, _con))
                 {
                     imageDataCmd.ExecuteNonQuery();
                 }
-
 
                 // Create BadPose table
                 string BadPoseTableSql = "CREATE TABLE BadPose ( Date DATE PRIMARY KEY, TurtleNeck INT, Scoliosis INT, Herniations INT)";
@@ -107,22 +112,16 @@ namespace Vadit
                 {
                     BadPoseCmd.ExecuteNonQuery();
                 }
-
-                // Create Score table
-                string totlaScore = "CREATE TABLE Score ( Date DATE PRIMARY KEY, GoodPoseCnt INT, BadPoseCnt INT)";
-                using (var totlaScoretCmd = new SQLiteCommand(totlaScore, _con))
-                {
-                    totlaScoretCmd.ExecuteNonQuery();
-                }
             }
             else
             {
-                _con = new SQLiteConnection(@"Data Source=" + path);
+                _con = new SQLiteConnection(cs);
                 _con.Open();
                 Debug.WriteLine("Database cannot be created because it already exists.");
                 return;
             }
         }
+
 
         /*
         // 좋은 포즈 횟수 카운트 또는 나쁜 포즈 횟수 카운트 뽑아오기
