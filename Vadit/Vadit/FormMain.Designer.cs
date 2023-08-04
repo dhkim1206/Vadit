@@ -34,15 +34,21 @@
             btn_statisticsForm = new Button();
             btn_poseForm = new Button();
             mainPanel = new Panel();
+            panel1 = new Panel();
+            button2 = new Button();
             categoryPanel.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // btn_ProgramExplain
             // 
-            btn_ProgramExplain.BackColor = Color.White;
+            btn_ProgramExplain.BackColor = Color.FromArgb(38, 38, 38);
             btn_ProgramExplain.BackgroundImageLayout = ImageLayout.None;
+            btn_ProgramExplain.FlatAppearance.BorderSize = 0;
+            btn_ProgramExplain.FlatStyle = FlatStyle.Flat;
             btn_ProgramExplain.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_ProgramExplain.Location = new Point(0, 0);
+            btn_ProgramExplain.ForeColor = SystemColors.ButtonShadow;
+            btn_ProgramExplain.Location = new Point(0, 3);
             btn_ProgramExplain.Name = "btn_ProgramExplain";
             btn_ProgramExplain.RightToLeft = RightToLeft.Yes;
             btn_ProgramExplain.Size = new Size(146, 50);
@@ -53,25 +59,28 @@
             // 
             // categoryPanel
             // 
+            categoryPanel.BackColor = Color.FromArgb(58, 58, 58);
             categoryPanel.Controls.Add(btn_ProgramExplain);
             categoryPanel.Controls.Add(btn_FormSetting);
             categoryPanel.Controls.Add(btn_statisticsForm);
             categoryPanel.Controls.Add(btn_poseForm);
-            categoryPanel.Dock = DockStyle.Left;
-            categoryPanel.Location = new Point(0, 0);
+            categoryPanel.Location = new Point(0, 37);
             categoryPanel.Name = "categoryPanel";
-            categoryPanel.Size = new Size(146, 519);
+            categoryPanel.Size = new Size(146, 482);
             categoryPanel.TabIndex = 3;
             // 
             // btn_FormSetting
             // 
-            btn_FormSetting.BackColor = Color.White;
+            btn_FormSetting.BackColor = Color.FromArgb(58, 58, 58);
             btn_FormSetting.BackgroundImageLayout = ImageLayout.None;
+            btn_FormSetting.FlatAppearance.BorderSize = 0;
+            btn_FormSetting.FlatStyle = FlatStyle.Flat;
             btn_FormSetting.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_FormSetting.Location = new Point(0, 150);
+            btn_FormSetting.ForeColor = SystemColors.ButtonShadow;
+            btn_FormSetting.Location = new Point(12, 221);
             btn_FormSetting.Name = "btn_FormSetting";
             btn_FormSetting.RightToLeft = RightToLeft.Yes;
-            btn_FormSetting.Size = new Size(146, 50);
+            btn_FormSetting.Size = new Size(115, 41);
             btn_FormSetting.TabIndex = 2;
             btn_FormSetting.Text = "설정";
             btn_FormSetting.UseVisualStyleBackColor = false;
@@ -79,10 +88,13 @@
             // 
             // btn_statisticsForm
             // 
-            btn_statisticsForm.BackColor = Color.White;
+            btn_statisticsForm.BackColor = Color.FromArgb(38, 38, 38);
             btn_statisticsForm.BackgroundImageLayout = ImageLayout.None;
+            btn_statisticsForm.FlatAppearance.BorderSize = 0;
+            btn_statisticsForm.FlatStyle = FlatStyle.Flat;
             btn_statisticsForm.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_statisticsForm.Location = new Point(0, 100);
+            btn_statisticsForm.ForeColor = SystemColors.ButtonShadow;
+            btn_statisticsForm.Location = new Point(0, 150);
             btn_statisticsForm.Name = "btn_statisticsForm";
             btn_statisticsForm.RightToLeft = RightToLeft.Yes;
             btn_statisticsForm.Size = new Size(146, 50);
@@ -93,10 +105,13 @@
             // 
             // btn_poseForm
             // 
-            btn_poseForm.BackColor = Color.White;
+            btn_poseForm.BackColor = Color.FromArgb(38, 38, 38);
             btn_poseForm.BackgroundImageLayout = ImageLayout.None;
+            btn_poseForm.FlatAppearance.BorderSize = 0;
+            btn_poseForm.FlatStyle = FlatStyle.Flat;
             btn_poseForm.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_poseForm.Location = new Point(0, 50);
+            btn_poseForm.ForeColor = SystemColors.ButtonShadow;
+            btn_poseForm.Location = new Point(0, 75);
             btn_poseForm.Name = "btn_poseForm";
             btn_poseForm.RightToLeft = RightToLeft.Yes;
             btn_poseForm.Size = new Size(146, 50);
@@ -107,24 +122,53 @@
             // 
             // mainPanel
             // 
-            mainPanel.Dock = DockStyle.Fill;
-            mainPanel.Location = new Point(146, 0);
+            mainPanel.BackColor = Color.FromArgb(38, 38, 38);
+            mainPanel.Location = new Point(146, 37);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(802, 519);
+            mainPanel.Size = new Size(802, 482);
             mainPanel.TabIndex = 4;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(25, 25, 25);
+            panel1.Controls.Add(button2);
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(948, 40);
+            panel1.TabIndex = 0;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(25, 25, 25);
+            button2.BackgroundImageLayout = ImageLayout.None;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.ForeColor = SystemColors.ButtonShadow;
+            button2.Location = new Point(908, 6);
+            button2.Name = "button2";
+            button2.RightToLeft = RightToLeft.Yes;
+            button2.Size = new Size(34, 28);
+            button2.TabIndex = 4;
+            button2.Text = "X";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 519);
+            Controls.Add(panel1);
             Controls.Add(mainPanel);
             Controls.Add(categoryPanel);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             FormClosing += FormMain_FormClosing;
             categoryPanel.ResumeLayout(false);
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -136,5 +180,7 @@
         private Button btn_statisticsForm;
         private Button btn_poseForm;
         private Panel mainPanel;
+        private Panel panel1;
+        private Button button2;
     }
 }
