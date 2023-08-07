@@ -13,40 +13,64 @@ namespace Vadit
 {
     public partial class FormCamera : Form
     {
-        private VdtManager _vdtManager;
         AnalyzeData _analyzeData;
+        InfoInputCorrectPose _infoPose = null;
+        private System.Windows.Forms.Timer delayTimer;
         public FormCamera()
         {
             InitializeComponent();
-
-            _vdtManager = new VdtManager(OnProgressing);
-
+            if (AppGlobal.VM != null)
+                AppGlobal.VM._bgw.CancelAsync();
+            AppGlobal.isinputmode = true;
+            delayTimer = new System.Windows.Forms.Timer();
+            delayTimer.Interval = 1000;
+            delayTimer.Tick += new EventHandler(OnDelayTimerTick);
         }
-
+        private void OnDelayTimerTick(object sender, EventArgs e)
+        {
+            delayTimer.Stop();
+            AppGlobal.VM = new VdtManager(OnProgressing);
+            AppGlobal.VM.StartSettingCorrectPose();
+        }
         // 전달 받을 것들
         private void OnProgressing(object sender, ProgressChangedEventArgs e)
         {
             AnalyzeData obj = e.UserState as AnalyzeData;
             pictureBox1.Image = obj.AnalyzedImage;
-            textBox1.Text = obj.Result;
+            tbtesttext.Text = obj.Result.ToString();
         }
+        private void FormCamera_Load(object sender, EventArgs e)
+        {
+            delayTimer.Start();
 
+        }
         private void FormCamera_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _vdtManager.Dispose();
+            AppGlobal.isinputmode = false;
+            FormMain fm = new FormMain();
+            fm.StartDetect();
+        }
+        private async void btnResetPose_Click(object sender, EventArgs e)
+        {
+            pictureBox2.Image = AppGlobal.VM.OnclikBtnResetPose();
+            pnWait.Visible = true;
+            await Task.Delay(500);
+            if (AppGlobal.VM.InputCorrectPose())
+            {
+                _infoPose = AppGlobal.VM._infoInputCorrectPose;
+                AppGlobal.VM._isInputCorrrctPose = false;
+                AppGlobal.VM._bgw.CancelAsync();
+                //AppGlobal.VM.Dispose();
+                this.Close();
+            }
+            else
+            {
+            pnWait.Visible = false;
+            pictureBox2.Image = AppGlobal.VM._infoInputCorrectPose._img.ToBitmap();
+            }
+
         }
 
-        private void btnResetPose_Click(object sender, EventArgs e)
-        {
-            _vdtManager.CancelBackgruondWorker();
-            _analyzeData = _vdtManager.ReceiveCorrectPosture();
-            pictureBox1.Image = _analyzeData.Frame.ToBitmap();
-            textBox1.Text = _analyzeData.Result;
-        }
-        private void btnResetComplet_Click(object sender, EventArgs e)
-        {
-            _vdtManager.CompletePoseInput();
 
-        }
     }
 }
