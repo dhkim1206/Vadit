@@ -2,22 +2,51 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
-using System.IO;
+using System.Drawing;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Vadit
 {
+    public class ImageData
+    {
+        public string ImagePath { get; set; }
+        public string Category { get; set; }
+        public DateTime Date { get; set; }
+
+        public ImageData(string imagePath, string category, DateTime date)
+        {
+            ImagePath = imagePath;
+            Category = category;
+            Date = date;
+        }
+    }
+
+    public class BadPoseData
+    {
+        public DateTime Date { get; set; }
+        public int Turtleneck { get; set; }
+        public int Scoliosis { get; set; }
+        public int Herniations { get; set; }
+
+        public BadPoseData(DateTime date, int turtleneck, int scoliosis, int herniations)
+        {
+            Date = date;
+            Turtleneck = turtleneck;
+            Scoliosis = scoliosis;
+            Herniations = herniations;
+        }
+    }
+
     public class FlowPanelManager
     {
         string path = "data_table.db";
         private FlowLayoutPanel _imageFlowLayout;
-        private List<(string ImagePath, string Category, DateTime Date)> _pictureInfoList;
+        private List<(ImageData ImageData, BadPoseData BadPoseData)> _pictureInfoList;
 
         public FlowPanelManager(FlowLayoutPanel imageFlowLayout, DateTime selectedDate)
         {
             _imageFlowLayout = imageFlowLayout;
-            _pictureInfoList = LoadPicturesFromDatabase(selectedDate.Date);
+            _pictureInfoList = LoadDataFromDatabase(selectedDate.Date);
             AddImagesToFlowLayout();
         }
 
@@ -31,48 +60,52 @@ namespace Vadit
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 pictureBox.Width = _imageFlowLayout.Height;
                 pictureBox.Height = _imageFlowLayout.Height;
-                pictureBox.Image = Image.FromFile(pictureInfo.ImagePath);
+                pictureBox.Image = Image.FromFile(pictureInfo.ImageData.ImagePath);
 
-                // 그릴 텍스트 정보
-                string dateText = pictureInfo.Date.ToString("yyyy-MM-dd");
-                string categoryText = pictureInfo.Category;
+                string categoryText = pictureInfo.ImageData.Category;
+                string fullDateTimeText = pictureInfo.BadPoseData != null ? pictureInfo.BadPoseData.Date.ToString("yyyy-MM-dd HH:mm:ss") : string.Empty;
 
-                // 이미지 위에 텍스트 그리기
-                using (Graphics g = Graphics.FromImage(pictureBox.Image))
+                using (Font font = new Font(FontFamily.GenericSansSerif, 50, FontStyle.Regular, GraphicsUnit.Pixel))
                 {
-                    using (Font font = new Font(FontFamily.GenericSansSerif, 50, FontStyle.Regular, GraphicsUnit.Pixel))
+                    Bitmap imageWithText = new Bitmap(pictureBox.Image);
+
+                    using (Graphics g = Graphics.FromImage(imageWithText))
                     {
-                        // 날짜 텍스트 그리기 (검정)
-                        g.DrawString(dateText, font, Brushes.Black, new PointF(5, 5));
+                        using (Brush backgroundBrush = new SolidBrush(Color.Black))
+                        {
+                            g.FillRectangle(backgroundBrush, 0, 0, 650, 60);
+                        }
 
-                        // 카테고리 텍스트 그리기 (빨간색)
+                        if (!string.IsNullOrEmpty(fullDateTimeText))
+                        {
+                            g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(75, 0));
+                        }
+
                         SizeF textSize = g.MeasureString(categoryText, font);
-                        float textX = (pictureBox.Width - textSize.Width) / 2 + 280; // 10만큼 오른쪽으로 이동
-                        float textY = pictureBox.Height - textSize.Height +350;
+                        float textX = (pictureBox.Width - textSize.Width) / 2 + 280;
+                        float textY = pictureBox.Height - textSize.Height + 350;
                         g.DrawString(categoryText, font, Brushes.Yellow, new PointF(textX, textY));
-
                     }
+
+                    pictureBox.Image = imageWithText;
                 }
 
                 _imageFlowLayout.Controls.Add(pictureBox);
             }
         }
 
-
-
-        private List<(string ImagePath, string Category, DateTime Date)> LoadPicturesFromDatabase(DateTime selectedDate)
+        private List<(ImageData ImageData, BadPoseData BadPoseData)> LoadDataFromDatabase(DateTime selectedDate)
         {
-            List<(string ImagePath, string Category, DateTime Date)> pictureInfoList = new List<(string, string, DateTime)>();
+            List<(ImageData ImageData, BadPoseData BadPoseData)> dataInfoList = new List<(ImageData, BadPoseData)>();
 
             using (SQLiteConnection con = new SQLiteConnection(@"Data Source=" + path))
             {
                 con.Open();
-                string query = "SELECT ImagePath, Category, Date FROM ImageData WHERE `Date` = @SelectedDate";
 
+                string query = "SELECT ImagePath, Category, Date FROM ImageData WHERE strftime('%Y-%m-%d', `Date`) = strftime('%Y-%m-%d', @SelectedDate)";
                 using (SQLiteCommand cmd = new SQLiteCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@SelectedDate", selectedDate.Date);
-                    Debug.WriteLine(selectedDate.Date);
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -80,19 +113,57 @@ namespace Vadit
                             string imagePath = reader.GetString(0);
                             string category = reader.GetString(1);
                             DateTime date = reader.GetDateTime(2);
-                            pictureInfoList.Add((imagePath, category, date));
-                            Debug.WriteLine(imagePath);
+                            var imageData = new ImageData(imagePath, category, date);
+                            dataInfoList.Add((imageData, null)); // BadPoseData는 null로 설정
+                        }
+                    }
+                }
+
+                string badPoseQuery = "SELECT Date, TurtleNeck, Scoliosis, Herniations FROM BadPose WHERE strftime('%Y-%m-%d', `Date`) = strftime('%Y-%m-%d', @SelectedDate)";
+                using (SQLiteCommand cmd = new SQLiteCommand(badPoseQuery, con))
+                {
+                    cmd.Parameters.AddWithValue("@SelectedDate", selectedDate.Date);
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DateTime badPoseDate = reader.GetDateTime(0);
+                            Debug.WriteLine(badPoseDate);
+                            int turtleneck = reader.GetInt32(1);
+                            int scoliosis = reader.GetInt32(2);
+                            int herniations = reader.GetInt32(3);
+                            var badPoseData = new BadPoseData(badPoseDate, turtleneck, scoliosis, herniations);
+
+                            bool matched = false;
+                            for (int i = 0; i < dataInfoList.Count; i++)
+                            {
+                                var dataInfo = dataInfoList[i];
+                                if (dataInfo.ImageData.Date.Date == badPoseData.Date.Date)
+                                {
+                                    dataInfoList[i] = (dataInfo.ImageData, badPoseData);
+                                    matched = true;
+                                    break;
+                                }
+                            }
+
+                            if (!matched)
+                            {
+                                // BadPose 데이터가 없는 경우 기본값으로 설정하여 추가
+                                var imageData = new ImageData("", "", badPoseData.Date);
+                                dataInfoList.Add((imageData, badPoseData));
+                            }
+
                         }
                     }
                 }
             }
 
-            return pictureInfoList;
+            return dataInfoList;
         }
 
         public void ShowImagesForSelectedDate(DateTime selectedDate)
         {
-            _pictureInfoList = LoadPicturesFromDatabase(selectedDate);
+            _pictureInfoList = LoadDataFromDatabase(selectedDate);
             AddImagesToFlowLayout();
         }
     }
