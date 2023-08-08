@@ -30,17 +30,5 @@ namespace Vadit
             _chartManager.LoadChartData();
             _chartManager.BindChartData(chart1);
         }
-
-        private void btnScrollUp_Click(object sender, EventArgs e)
-        {
-            _flowPanelManager.ScrollUp();
-        }
-
-        private void btnScrollDown_Click(object sender, EventArgs e)
-        {
-            _flowPanelManager.ScrollDown();
-
-        }
-
     }
 }

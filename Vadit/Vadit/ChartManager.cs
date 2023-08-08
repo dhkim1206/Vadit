@@ -9,6 +9,7 @@ public class ChartManager
 {
     private DataTable _chartData;
     private DashBoardManager _flowPanelManager;
+    private DataPoint _selectedDataPoint;
 
     public ChartManager(DashBoardManager flowPanelManager)
     {
@@ -88,11 +89,11 @@ public class ChartManager
             DateTime date = DateTime.FromOADate(dataPoint.XValue);
             if (date.Date == DateTime.Today.Date)
             {
-                dataPoint.MarkerColor = Color.Red;
+                dataPoint.MarkerColor = Color.LightBlue;
             }
             else
             {
-                dataPoint.MarkerColor = Color.LightBlue;
+                dataPoint.MarkerColor = Color.GreenYellow;
             }
 
             dataPoint.ToolTip = "Click to view photo";
@@ -110,7 +111,11 @@ public class ChartManager
         chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
         chart.MouseClick += Chart_MouseClick;
     }
-
+    private Color GetMarkerColor(DataPoint dataPoint)
+    {
+        DateTime date = DateTime.FromOADate(dataPoint.XValue);
+        return (date.Date == DateTime.Today.Date) ? Color.Red : Color.GreenYellow;
+    }
     private void Chart_MouseClick(object sender, MouseEventArgs e)
     {
         Chart chart = (Chart)sender;
@@ -119,6 +124,15 @@ public class ChartManager
         if (hitResult.ChartElementType == ChartElementType.DataPoint)
         {
             DataPoint dataPoint = hitResult.Series.Points[hitResult.PointIndex];
+            if (_selectedDataPoint != null)
+            {
+                _selectedDataPoint.MarkerColor = GetMarkerColor(_selectedDataPoint);
+            }
+
+            _selectedDataPoint = dataPoint;
+            _selectedDataPoint.MarkerColor = Color.Red;
+
+
             DateTime selectedDate = DateTime.FromOADate(dataPoint.XValue).Date;
             _flowPanelManager.ShowImagesForSelectedDate(selectedDate);
             

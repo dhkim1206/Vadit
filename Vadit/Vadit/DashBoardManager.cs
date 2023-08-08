@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,12 +10,19 @@ namespace Vadit
     {
         private PictureBox _selectedPictureBox; // 현재 선택된 PictureBox를 저장하는 변수
 
-        string path = "data_table.db";
+        private string path = "data_table.db";
         private FlowLayoutPanel _panel_imageFlowLayout;
         private Label _lb_TrutleNeck;
         private Label _lb_scoliosis;
         private Label _lb_herniations;
         private List<(string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations)> _pictureInfoList;
+
+        private const int WM_VSCROLL = 0x0115;
+        private const int SB_LINEUP = 0;
+        private const int SB_LINEDOWN = 1;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         public DashBoardManager(FlowLayoutPanel imageFlowLayout, DateTime selectedDate, Label trutleNeck, Label scoliosis, Label herniations)
         {
@@ -26,104 +32,108 @@ namespace Vadit
             _lb_herniations = herniations;
             _panel_imageFlowLayout.AutoScroll = true; // AutoScroll 속성을 False로 설정
             _pictureInfoList = LoadDataFromDatabase(selectedDate);
-            Update_DashBoard();
-        }
-        public void ScrollUp()
-        {
-            // FlowLayoutPanel의 수직 스크롤을 위로 이동시킵니다.
-            int scrollAmount = SystemInformation.VerticalScrollBarThumbHeight / 1000000; // 스크롤 양 조절
-            SendMessage(_panel_imageFlowLayout.Handle, WM_VSCROLL, -(SB_LINEUP), 0);
+            UpdateDashBoard();
         }
 
-        public void ScrollDown()
+        public void Scroll(int scrollDirection)
         {
-            // FlowLayoutPanel의 수직 스크롤을 아래로 이동시킵니다.
-            int scrollAmount = SystemInformation.VerticalScrollBarThumbHeight / 1000000; // 스크롤 양 조절
-            SendMessage(_panel_imageFlowLayout.Handle, WM_VSCROLL, SB_LINEDOWN, 0);
+            int scrollAmount = SystemInformation.VerticalScrollBarThumbHeight / 1000000;
+            SendMessage(_panel_imageFlowLayout.Handle, WM_VSCROLL, scrollDirection, 0);
         }
 
-        // Win32 API 메서드 사용을 위한 상수 정의
-        private const int WM_VSCROLL = 0x0115;
-        private const int SB_LINEUP = 0;
-        private const int SB_LINEDOWN = 1;
-
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
-
-
-        private void Update_DashBoard()
+        private void ConfigurePictureBoxClickEvent(PictureBox pictureBox)
         {
+            pictureBox.Click += (sender, e) =>
+            {
+                if (_selectedPictureBox != null)
+                {
+                    _selectedPictureBox.BackColor = Color.Transparent;
+                }
+
+                _selectedPictureBox = (PictureBox)sender;
+                _selectedPictureBox.BackColor = Color.Red;
+
+                FormBigImage formBigImage = new FormBigImage(_selectedPictureBox.Image);
+                formBigImage.ShowDialog();
+            };
+        }
+
+        private void UpdateLabels(int turtleneckSum, int scoliosisSum, int herniationsSum)
+        {
+
+            _lb_TrutleNeck.Text = "거북목 : " + turtleneckSum.ToString();
+            _lb_scoliosis.Text = "척추 측만증 : " + scoliosisSum.ToString();
+            _lb_herniations.Text = "추간판 탈출 : " + herniationsSum.ToString();
+            
+        }
+        private void ClearLabel()
+        {
+            _lb_herniations.Text = "";
+            _lb_TrutleNeck.Text = "";
+            _lb_scoliosis.Text = "";
+        }
+
+        private void UpdateDashBoard()
+        {
+            ClearLabel();
             _panel_imageFlowLayout.Controls.Clear();
-            int turtleneckSum = 0; // Turtleneck 값들의 총합을 저장할 변수 선언
-            int scoliosisSum = 0; // Turtleneck 값들의 총합을 저장할 변수 선언
-            int herniationsSum = 0; // Turtleneck 값들의 총합을 저장할 변수 선언
+            int turtleneckSum = 0;
+            int scoliosisSum = 0;
+            int herniationsSum = 0;
 
             foreach (var pictureInfo in _pictureInfoList)
             {
-                PictureBox pictureBox = new PictureBox();
-                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Width = _panel_imageFlowLayout.Height;
-                pictureBox.Height = _panel_imageFlowLayout.Height;
-                pictureBox.Padding = new Padding(5); // 여백 추가
-                pictureBox.Image = Image.FromFile(pictureInfo.ImagePath);
+                PictureBox pictureBox = CreatePictureBox(pictureInfo);
+                ConfigurePictureBoxClickEvent(pictureBox);
 
-
-                int turtleneckValue = pictureInfo.Turtleneck; // 현재 pictureInfo의 Turtleneck 값
-                turtleneckSum += turtleneckValue; // Turtleneck 값을 더하여 총합 갱신
-
-                int scoliosisValue = pictureInfo.Scoliosis; // 현재 pictureInfo의 Scoliosis 값
-                scoliosisSum += scoliosisValue; // Scoliosis 값을 더하여 총합 갱신
-
-                int herniationsValue = pictureInfo.Herniations; // 현재 pictureInfo의 Herniations 값
-                herniationsSum += herniationsValue; // Herniations 값을 더하여 총합 갱신
-
-                string categoryText = pictureInfo.Category;
-                string fullDateTimeText = pictureInfo.Date.ToString("yyyy-MM-dd HH:mm:ss");
-
-                using (Font font = new Font(FontFamily.GenericSansSerif, 50, FontStyle.Regular, GraphicsUnit.Pixel))
-                {
-                    Bitmap imageWithText = new Bitmap(pictureBox.Image);
-
-                    using (Graphics g = Graphics.FromImage(imageWithText))
-                    {
-                        using (Brush backgroundBrush = new SolidBrush(Color.Black))
-                        {
-                            g.FillRectangle(backgroundBrush, 0, 0, 650, 60);
-                        }
-
-                        SizeF textSize = g.MeasureString(categoryText, font);
-                        float textX = (pictureBox.Width - textSize.Width) / 2 + 280;
-                        float textY = pictureBox.Height - textSize.Height + 350;
-                        g.DrawString(categoryText, font, Brushes.Yellow, new PointF(textX, textY));
-                        g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(75, 0));
-                    }
-                    pictureBox.Image = imageWithText;
-
-                    pictureBox.Click += (sender, e) =>
-                    {
-                        // 기존 선택된 PictureBox의 배경을 원래대로 복원
-                        if (_selectedPictureBox != null)
-                        {
-                            _selectedPictureBox.BackColor = Color.Transparent; // 원래 배경 색으로 복원
-                        }
-
-                        // 현재 선택된 PictureBox의 배경을 빨간색으로 변경
-                        _selectedPictureBox = pictureBox;
-                        _selectedPictureBox.BackColor = Color.Red;
-
-                        FormBigImage formBigImage = new FormBigImage(pictureBox.Image);
-                        formBigImage.ShowDialog();
-                    };
-                }
-                _lb_TrutleNeck.Text = "거북목 : " + turtleneckSum.ToString();
-                _lb_scoliosis.Text = "척추 측만증 : "+scoliosisSum.ToString();
-                _lb_herniations.Text = "추간판 탈출 : " + herniationsSum.ToString();
-
-                if ((turtleneckSum + scoliosisSum + herniationsSum) == 0) { _lb_TrutleNeck.Text = ""; _lb_scoliosis.Text = ""; _lb_herniations.Text = ""; }
-
+                turtleneckSum += pictureInfo.Turtleneck;
+                scoliosisSum += pictureInfo.Scoliosis;
+                herniationsSum += pictureInfo.Herniations;
 
                 _panel_imageFlowLayout.Controls.Add(pictureBox);
             }
+            if (_pictureInfoList.Count == 0)
+            {
+            }
+
+            UpdateLabels(turtleneckSum, scoliosisSum, herniationsSum);
+
+        }
+
+        private PictureBox CreatePictureBox((string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations) pictureInfo)
+        {
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox.Width = _panel_imageFlowLayout.Height;
+            pictureBox.Height = _panel_imageFlowLayout.Height;
+            pictureBox.Padding = new Padding(5);
+            pictureBox.Image = Image.FromFile(pictureInfo.ImagePath);
+
+            string categoryText = pictureInfo.Category;
+            string fullDateTimeText = pictureInfo.Date.ToString("yyyy-MM-dd HH:mm:ss");
+
+            using (Font font = new Font(FontFamily.GenericSansSerif, 50, FontStyle.Regular, GraphicsUnit.Pixel))
+            {
+                Bitmap imageWithText = new Bitmap(pictureBox.Image);
+
+                using (Graphics g = Graphics.FromImage(imageWithText))
+                {
+                    using (Brush backgroundBrush = new SolidBrush(Color.Black))
+                    {
+                        g.FillRectangle(backgroundBrush, 0, 0, 650, 60);
+                    }
+
+                    SizeF textSize = g.MeasureString(categoryText, font);
+                    float textX = (pictureBox.Width - textSize.Width) / 2 + 280;
+                    float textY = pictureBox.Height - textSize.Height + 350;
+                    g.DrawString(categoryText, font, Brushes.Yellow, new PointF(textX, textY));
+                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(75, 0));
+                }
+
+                pictureBox.Image = imageWithText;
+            }
+
+            return pictureBox;
         }
 
         private List<(string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations)> LoadDataFromDatabase(DateTime selectedDate)
@@ -163,7 +173,7 @@ namespace Vadit
         public void ShowImagesForSelectedDate(DateTime selectedDate)
         {
             _pictureInfoList = LoadDataFromDatabase(selectedDate);
-            Update_DashBoard();
+            UpdateDashBoard();
         }
     }
 }

@@ -33,8 +33,6 @@
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             PictureFlowLayout = new FlowLayoutPanel();
-            btnScrollUp = new Button();
-            btnScrollDown = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -61,36 +59,16 @@
             // 
             // PictureFlowLayout
             // 
-            PictureFlowLayout.Location = new Point(24, 342);
+            PictureFlowLayout.Location = new Point(24, 335);
             PictureFlowLayout.Name = "PictureFlowLayout";
             PictureFlowLayout.Size = new Size(774, 120);
             PictureFlowLayout.TabIndex = 1;
-            // 
-            // btnScrollUp
-            // 
-            btnScrollUp.Location = new Point(642, 299);
-            btnScrollUp.Name = "btnScrollUp";
-            btnScrollUp.Size = new Size(75, 23);
-            btnScrollUp.TabIndex = 0;
-            btnScrollUp.Text = "button1";
-            btnScrollUp.UseVisualStyleBackColor = true;
-            btnScrollUp.Click += btnScrollUp_Click;
-            // 
-            // btnScrollDown
-            // 
-            btnScrollDown.Location = new Point(723, 299);
-            btnScrollDown.Name = "btnScrollDown";
-            btnScrollDown.Size = new Size(75, 23);
-            btnScrollDown.TabIndex = 2;
-            btnScrollDown.Text = "button2";
-            btnScrollDown.UseVisualStyleBackColor = true;
-            btnScrollDown.Click += btnScrollDown_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(24, 318);
+            label1.Location = new Point(24, 313);
             label1.Name = "label1";
             label1.Size = new Size(54, 15);
             label1.TabIndex = 3;
@@ -100,7 +78,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(100, 318);
+            label2.Location = new Point(100, 313);
             label2.Name = "label2";
             label2.Size = new Size(82, 15);
             label2.TabIndex = 4;
@@ -110,7 +88,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(206, 319);
+            label3.Location = new Point(206, 314);
             label3.Name = "label3";
             label3.Size = new Size(82, 15);
             label3.TabIndex = 5;
@@ -125,8 +103,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(btnScrollDown);
-            Controls.Add(btnScrollUp);
             Controls.Add(PictureFlowLayout);
             Controls.Add(chart1);
             Name = "FormStatistics";
@@ -141,8 +117,6 @@
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private FlowLayoutPanel PictureFlowLayout;
-        private Button btnScrollUp;
-        private Button btnScrollDown;
         private Label label1;
         private Label label2;
         private Label label3;
