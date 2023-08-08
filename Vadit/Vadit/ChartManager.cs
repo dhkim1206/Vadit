@@ -117,7 +117,7 @@ public class ChartManager
     private Color GetMarkerColor(DataPoint dataPoint)
     {
         DateTime date = DateTime.FromOADate(dataPoint.XValue);
-        return (date.Date == DateTime.Today.Date) ? Color.Red : Color.GreenYellow;
+        return (date.Date == DateTime.Today.Date) ? Color.LightBlue : Color.GreenYellow;
     }
     private void Chart_MouseClick(object sender, MouseEventArgs e)
     {
