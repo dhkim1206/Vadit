@@ -54,7 +54,7 @@
             series2.Name = "Series2";
             chart1.Series.Add(series1);
             chart1.Series.Add(series2);
-            chart1.Size = new Size(723, 300);
+            chart1.Size = new Size(774, 300);
             chart1.TabIndex = 0;
             chart1.Text = "chart1";
             title1.Font = new Font("함초롬돋움", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
