@@ -9,6 +9,8 @@ namespace Vadit
 {
     public class DashBoardManager
     {
+        private PictureBox _selectedPictureBox; // 현재 선택된 PictureBox를 저장하는 변수
+
         string path = "data_table.db";
         private FlowLayoutPanel _panel_imageFlowLayout;
         private Label _lb_TrutleNeck;
@@ -97,11 +99,17 @@ namespace Vadit
                     }
                     pictureBox.Image = imageWithText;
 
-                    // 클릭 이벤트 핸들러 등록
                     pictureBox.Click += (sender, e) =>
                     {
-                        // 배경색 변경
-                        pictureBox.BackColor = Color.Red;
+                        // 기존 선택된 PictureBox의 배경을 원래대로 복원
+                        if (_selectedPictureBox != null)
+                        {
+                            _selectedPictureBox.BackColor = Color.Transparent; // 원래 배경 색으로 복원
+                        }
+
+                        // 현재 선택된 PictureBox의 배경을 빨간색으로 변경
+                        _selectedPictureBox = pictureBox;
+                        _selectedPictureBox.BackColor = Color.Red;
 
                         FormBigImage formBigImage = new FormBigImage(pictureBox.Image);
                         formBigImage.ShowDialog();
