@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -17,22 +18,28 @@ namespace Vadit
 {
     public class InfoInputCorrectPose   //입력받은 자세의 좌푯값
     {
-        public Image<Bgr, byte> _img;
+        public Image<Bgr, byte> _img = null;
         public List<Point> _point = null;
-        public double _ratio;
+        public double _ratio = 0;
         int[] _indexes;
         public bool _isPointNotNull = false;
         public void setInfo(Image<Bgr, byte> img, List<Point> points)
         {
-            _img = img;
-            _point = points;
-            if (Math.Abs(points[0].X - points[1].X) != 0)
-                _ratio = Math.Abs(points[2].X - points[5].X) / Math.Abs(points[0].X - points[1].X);
+            this._img = img;
+            this._point = points;
+            if (Math.Abs(points[0].Y - points[1].Y) != 0)
+                this._ratio = (double)Math.Abs(points[2].X - points[5].X) / (double)Math.Abs(points[0].Y - points[1].Y);
+
+            this.IsPointNotNull();
+            Debug.WriteLine($"설정된 자세: {_ratio:F3}");
+            Debug.WriteLine($"어깨 길이: {Math.Abs(points[2].X - points[5].X):F3}");
+            Debug.WriteLine($"목길이: {Math.Abs(points[0].X - points[1].X):F3}");
+
         }
         public void IsPointNotNull()
         {
             if (_point == null)
-                _isPointNotNull = false;
+                this._isPointNotNull = false;
             else
             {
                 int c = 0;
@@ -43,9 +50,9 @@ namespace Vadit
                         c++;
                 }
                 if (c == 0)
-                    _isPointNotNull = true;
+                    this._isPointNotNull = true;
                 else if (c > 0)
-                    _isPointNotNull = false;
+                    this._isPointNotNull = false;
             }
         }
     }
@@ -86,7 +93,7 @@ namespace Vadit
             _cap = new VideoCapture(0);
             while (true)
             {
-                    if (_cap != null)
+                if (_cap != null)
                     {
                         Debug.WriteLine("무한루프 시작");
                         if (_bgw.CancellationPending)
@@ -118,7 +125,9 @@ namespace Vadit
         // 프레임 캡처하고 스켈레톤을 탐지하고 그리기 위한 메서드 (비동기 작업을 위해 BackgroundWorker를 매개변수로 받음)
         public void ProcessFrameAndDrawSkeleton(BackgroundWorker worker)
         {
-            if(_cap != null)
+            _cap = new VideoCapture(0);
+            if (_cap != null)  
+                
             {
 
                 if (_cap.IsOpened)
@@ -126,16 +135,16 @@ namespace Vadit
                     _frame = new Mat();
                     _cap.Read(_frame); // 카메라에서 프레임 캡처
                     if (!_frame.IsEmpty)
-                    {
+                    { //w중단점 해보고 화요일 여기서부터 해보기
                         var img = _frame.ToImage<Bgr, byte>(); // 프레임을 Image<Bgr, byte> 형식으로 변환
 
                         // 스켈레톤을 탐지하고 그리기 위한 메서드 호출
-                        DrawSkeleton(img, worker);
+                        DrawSkeleton(img, worker); 
                     }
                 }
             }
-            Debug.WriteLine("캠 아예없다");
-            ProcessFrameAndDrawSkeleton(_bgw);
+
+            return;
         }
         // 스켈레톤 탐지하고 그리기 위한 메서드
         private void DrawSkeleton(Image<Bgr, byte> img, BackgroundWorker backgroundWorker)
@@ -282,38 +291,40 @@ namespace Vadit
             var _backgroundWorker = backgroundWorker;
             bool conditionMet = false;
             double _ratio = 0;
-
             DateTime time = DateTime.Now;
+            int[] _indexes;
+            int c = 0;
 
-            if (_isInputCorrrctPose)
-            {
-                if (!AppGlobal.CorrectPose._isPointNotNull)
+                _indexes = new int[] { 0, 1, 2, 5, 15, 16, 17, 18 };
+                foreach (int i in _indexes)
                 {
-                AppGlobal.CorrectPose.IsPointNotNull();
-                _analyzeData.AnalyzedImage = img.ToBitmap();
-                _analyzeData.Result = "올바른 자세를 입력해주세요";
-                backgroundWorker.ReportProgress(0, _analyzeData);
-                return;
+                    if (_points[i].X == 0 || _points[i].Y == 0)
+                        c++;
                 }
-
-            }
+            if (c > 0)
+                return;
 
             if (AppGlobal.CorrectPose._isPointNotNull && (Math.Abs(_points[0].X - _points[1].X) != 0))
-                _ratio = (Math.Abs(_points[2].X - _points[5].X)) / (Math.Abs(_points[0].X - _points[1].X));
+                _ratio = ((double)Math.Abs(_points[2].X - _points[5].X)) / ((double)Math.Abs(_points[0].Y - _points[1].Y));
+            if (_ratio == 0)
+                return;
+
+            Debug.WriteLine($"올바른 자세: {AppGlobal.CorrectPose._ratio:F3}");
+            Debug.WriteLine($"현재측정: {_ratio:F3}");
 
 
-            if (Math.Abs(_points[2].Y - _points[5].Y) > 10)
+            if (Math.Abs(_points[2].Y - _points[5].Y) > 20)
             {
                 _analyzeData.Result += " <척추 측만증> ";
                 conditionMet = true;
             }
-            if (_ratio > AppGlobal.CorrectPose._ratio + 0.2)
+            if (_ratio > AppGlobal.CorrectPose._ratio + 0.6)
             {
                 _analyzeData.Result += " <거북목> ";
                 conditionMet = true;
 
             }
-            if (_ratio < AppGlobal.CorrectPose._ratio + 0.2)
+            if (_ratio < AppGlobal.CorrectPose._ratio + 3)
             {
                 _analyzeData.Result += " <추간판 탈출> ";
                 conditionMet = true;
@@ -340,7 +351,7 @@ namespace Vadit
 
 
         //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓바른 자세입력에 관한 코드↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-        public void StartSettingCorrectPose() //formcamera 초기화와 함께 호출됨. 자세입력모드 진입
+        public void StartSettingCorrectPose() //formcamera 초기화와 함께 호출됨. 자세입력 트루 후 Run
         {
             if (_bgw.IsBusy)
                 _bgw.CancelAsync();
@@ -354,7 +365,7 @@ namespace Vadit
                 _bgw.RunWorkerAsync();
             }
         }
-        public Bitmap OnclikBtnResetPose() //연속으로 사진을 찍어 영상처럼 보여주는 메서드
+        public Bitmap OnclikBtnResetPose() //사진을 찍어주는 메서드 이 객체 안에있는 올바른자세 정보에 사진을 넣음.
         {
             if (_cap.IsOpened)
             {

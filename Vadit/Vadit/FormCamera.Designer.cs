@@ -33,7 +33,6 @@
             pictureBox2 = new PictureBox();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            button1 = new Button();
             tbtesttext = new TextBox();
             pnWait = new Panel();
             lbwait = new Label();
@@ -86,7 +85,6 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(button1);
             tabPage1.Controls.Add(tbtesttext);
             tabPage1.Controls.Add(pnWait);
             tabPage1.Controls.Add(label2);
@@ -101,15 +99,6 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "바른 자세촬영";
             tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(502, 11);
-            button1.Name = "button1";
-            button1.Size = new Size(260, 23);
-            button1.TabIndex = 10;
-            button1.Text = "테스트를  위한 버튼(이탭을 나갔을때 가정)";
-            button1.UseVisualStyleBackColor = true;
             // 
             // tbtesttext
             // 
@@ -188,6 +177,5 @@
         private Panel pnWait;
         private Label lbwait;
         private TextBox tbtesttext;
-        private Button button1;
     }
 }
