@@ -31,6 +31,7 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             PictureFlowLayout = new FlowLayoutPanel();
             label1 = new Label();
@@ -56,6 +57,11 @@
             chart1.Size = new Size(723, 300);
             chart1.TabIndex = 0;
             chart1.Text = "chart1";
+            title1.Font = new Font("함초롬돋움", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            title1.ForeColor = Color.White;
+            title1.Name = "Title1";
+            title1.Text = "좋은 자세 비율";
+            chart1.Titles.Add(title1);
             // 
             // PictureFlowLayout
             // 

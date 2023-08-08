@@ -56,6 +56,7 @@ public class ChartManager
 
     public void BindChartData(Chart chart)
     {
+
         chart.Series.Clear();
         Series series = new Series("GoodPosePercentage");
         series.ChartType = SeriesChartType.Line;
