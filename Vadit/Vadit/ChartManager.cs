@@ -36,7 +36,7 @@ public class ChartManager
                         int goodPoseCount = reader.GetInt32(1);
                         int badPoseCount = reader.GetInt32(2);
 
-                        Debug.WriteLine($"Date: {date}, GoodPoseCount: {goodPoseCount}, BadPoseCount: {badPoseCount}");
+                        //Debug.WriteLine($"Date: {date}, GoodPoseCount: {goodPoseCount}, BadPoseCount: {badPoseCount}");
 
                         _chartData.Rows.Add(date, goodPoseCount, badPoseCount);
                     }
