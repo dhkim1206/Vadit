@@ -16,12 +16,12 @@ namespace Vadit
     public partial class FormStatistics : Form
     {
         private ChartManager _chartManager;
-        private FlowPanelManager _flowPanelManager;
+        private DashBoardManager _flowPanelManager;
 
         public FormStatistics()
         {
             InitializeComponent();
-            _flowPanelManager = new FlowPanelManager(PictureFlowLayout, DateTime.Now.Date);
+            _flowPanelManager = new DashBoardManager(PictureFlowLayout, DateTime.Now.Date, label1, label2, label3);
             _chartManager = new ChartManager(_flowPanelManager);
         }
 
@@ -30,5 +30,17 @@ namespace Vadit
             _chartManager.LoadChartData();
             _chartManager.BindChartData(chart1);
         }
+
+        private void btnScrollUp_Click(object sender, EventArgs e)
+        {
+            _flowPanelManager.ScrollUp();
+        }
+
+        private void btnScrollDown_Click(object sender, EventArgs e)
+        {
+            _flowPanelManager.ScrollDown();
+
+        }
+
     }
 }

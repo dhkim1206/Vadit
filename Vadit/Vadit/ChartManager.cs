@@ -8,9 +8,9 @@ using Vadit;
 public class ChartManager
 {
     private DataTable _chartData;
-    private FlowPanelManager _flowPanelManager;
+    private DashBoardManager _flowPanelManager;
 
-    public ChartManager(FlowPanelManager flowPanelManager)
+    public ChartManager(DashBoardManager flowPanelManager)
     {
         _flowPanelManager = flowPanelManager;
         _chartData = new DataTable();
@@ -36,7 +36,6 @@ public class ChartManager
                         int goodPoseCount = reader.GetInt32(1);
                         int badPoseCount = reader.GetInt32(2);
 
-                        //Debug.WriteLine($"Date: {date}, GoodPoseCount: {goodPoseCount}, BadPoseCount: {badPoseCount}");
 
                         _chartData.Rows.Add(date, goodPoseCount, badPoseCount);
                     }
@@ -121,12 +120,9 @@ public class ChartManager
         {
             DataPoint dataPoint = hitResult.Series.Points[hitResult.PointIndex];
             DateTime selectedDate = DateTime.FromOADate(dataPoint.XValue).Date;
-            ShowPhotoFlowPanel(selectedDate);
+            _flowPanelManager.ShowImagesForSelectedDate(selectedDate);
+            
         }
     }
 
-    private void ShowPhotoFlowPanel(DateTime selectedDate)
-    {
-        _flowPanelManager.ShowImagesForSelectedDate(selectedDate);
-    }
 }
