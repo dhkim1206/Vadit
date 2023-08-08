@@ -109,6 +109,8 @@ public class ChartManager
         chart.ChartAreas[0].AxisX.MinorGrid.LineDashStyle = ChartDashStyle.Dot;
         chart.ChartAreas[0].AxisX.LabelStyle.Format = "MM-dd";
         chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
+        chart.ChartAreas[0].AxisY.LabelStyle.Format = "0'%'";
+        chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.White;
         chart.MouseClick += Chart_MouseClick;
     }
     private Color GetMarkerColor(DataPoint dataPoint)
