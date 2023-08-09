@@ -55,6 +55,14 @@
             "Emgu.CV.runtime.windows": {
               "target": "Package",
               "version": "[4.7.0.5276, )"
+            },
+            "System.Data.SQLite.Core": {
+              "target": "Package",
+              "version": "[1.0.118, )"
+            },
+            "WinForms.DataVisualization": {
+              "target": "Package",
+              "version": "[1.8.0, )"
             }
           },
           "imports": [
