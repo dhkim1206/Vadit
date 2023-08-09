@@ -16,5 +16,15 @@ namespace Vadit
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (AppGlobal.VM != null)
+                if (AppGlobal.VM._bgw.IsBusy)
+                    AppGlobal.VM._bgw.CancelAsync();
+            FormCamera subForm1 = new FormCamera();
+            subForm1.Show();
+
+        }
     }
 }

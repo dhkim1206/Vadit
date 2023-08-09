@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
@@ -19,7 +20,15 @@ namespace Vadit
             _formManager = new AppBase.FormManager(mainPanel);
 
         }
-
+        public void StartDetect()
+        {
+            AppGlobal.VM = new VdtManager(OnProgressing);
+            AppGlobal.VM._bgw.RunWorkerAsync();
+        }
+        private void OnProgressing(object sender, ProgressChangedEventArgs e)
+        {
+            AnalyzeData obj = e.UserState as AnalyzeData;
+        }
         private void btn_poseForm_Click(object sender, EventArgs e)
         {
             _formManager.ChangeForm(typeof(FormCamera));
