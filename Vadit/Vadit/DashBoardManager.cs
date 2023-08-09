@@ -80,7 +80,17 @@ namespace Vadit
             int turtleneckSum = 0;
             int scoliosisSum = 0;
             int herniationsSum = 0;
+            if (_pictureInfoList.Count == 0)
+            {
+                Label noDataLabel = new Label();
+                noDataLabel.Text = "데이터가 없음";
+                noDataLabel.Font = new Font(FontFamily.GenericSansSerif, 16, FontStyle.Bold);
+                noDataLabel.ForeColor = Color.White;
+                noDataLabel.TextAlign = ContentAlignment.MiddleCenter;
+                noDataLabel.Dock = DockStyle.Fill;
 
+                _panel_imageFlowLayout.Controls.Add(noDataLabel);
+            }
             foreach (var pictureInfo in _pictureInfoList)
             {
                 PictureBox pictureBox = CreatePictureBox(pictureInfo);

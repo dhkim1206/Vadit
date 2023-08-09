@@ -309,7 +309,7 @@ namespace Vadit
             {
                 scoliosis++;
             }
-            if (category.Contains("추가판 탈출"))
+            if (category.Contains("추간판 탈출"))
             {
                 herniations++;
             }

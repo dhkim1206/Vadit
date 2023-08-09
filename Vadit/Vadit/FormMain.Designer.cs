@@ -32,7 +32,6 @@
             categoryPanel = new Panel();
             btn_FormSetting = new Button();
             btn_statisticsForm = new Button();
-            btn_poseForm = new Button();
             mainPanel = new Panel();
             panel1 = new Panel();
             button2 = new Button();
@@ -48,7 +47,7 @@
             btn_ProgramExplain.FlatStyle = FlatStyle.Flat;
             btn_ProgramExplain.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btn_ProgramExplain.ForeColor = SystemColors.ButtonShadow;
-            btn_ProgramExplain.Location = new Point(0, 3);
+            btn_ProgramExplain.Location = new Point(0, 5);
             btn_ProgramExplain.Name = "btn_ProgramExplain";
             btn_ProgramExplain.RightToLeft = RightToLeft.Yes;
             btn_ProgramExplain.Size = new Size(146, 50);
@@ -63,7 +62,6 @@
             categoryPanel.Controls.Add(btn_ProgramExplain);
             categoryPanel.Controls.Add(btn_FormSetting);
             categoryPanel.Controls.Add(btn_statisticsForm);
-            categoryPanel.Controls.Add(btn_poseForm);
             categoryPanel.Location = new Point(0, 37);
             categoryPanel.Name = "categoryPanel";
             categoryPanel.Size = new Size(146, 482);
@@ -71,16 +69,16 @@
             // 
             // btn_FormSetting
             // 
-            btn_FormSetting.BackColor = Color.FromArgb(58, 58, 58);
+            btn_FormSetting.BackColor = Color.FromArgb(38, 38, 38);
             btn_FormSetting.BackgroundImageLayout = ImageLayout.None;
             btn_FormSetting.FlatAppearance.BorderSize = 0;
             btn_FormSetting.FlatStyle = FlatStyle.Flat;
             btn_FormSetting.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btn_FormSetting.ForeColor = SystemColors.ButtonShadow;
-            btn_FormSetting.Location = new Point(12, 221);
+            btn_FormSetting.Location = new Point(0, 115);
             btn_FormSetting.Name = "btn_FormSetting";
             btn_FormSetting.RightToLeft = RightToLeft.Yes;
-            btn_FormSetting.Size = new Size(115, 41);
+            btn_FormSetting.Size = new Size(146, 50);
             btn_FormSetting.TabIndex = 2;
             btn_FormSetting.Text = "설정";
             btn_FormSetting.UseVisualStyleBackColor = false;
@@ -94,7 +92,7 @@
             btn_statisticsForm.FlatStyle = FlatStyle.Flat;
             btn_statisticsForm.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btn_statisticsForm.ForeColor = SystemColors.ButtonShadow;
-            btn_statisticsForm.Location = new Point(0, 150);
+            btn_statisticsForm.Location = new Point(0, 60);
             btn_statisticsForm.Name = "btn_statisticsForm";
             btn_statisticsForm.RightToLeft = RightToLeft.Yes;
             btn_statisticsForm.Size = new Size(146, 50);
@@ -102,23 +100,6 @@
             btn_statisticsForm.Text = "통계";
             btn_statisticsForm.UseVisualStyleBackColor = false;
             btn_statisticsForm.Click += btn_statisticsForm_Click;
-            // 
-            // btn_poseForm
-            // 
-            btn_poseForm.BackColor = Color.FromArgb(38, 38, 38);
-            btn_poseForm.BackgroundImageLayout = ImageLayout.None;
-            btn_poseForm.FlatAppearance.BorderSize = 0;
-            btn_poseForm.FlatStyle = FlatStyle.Flat;
-            btn_poseForm.Font = new Font("함초롬돋움", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_poseForm.ForeColor = SystemColors.ButtonShadow;
-            btn_poseForm.Location = new Point(0, 75);
-            btn_poseForm.Name = "btn_poseForm";
-            btn_poseForm.RightToLeft = RightToLeft.Yes;
-            btn_poseForm.Size = new Size(146, 50);
-            btn_poseForm.TabIndex = 0;
-            btn_poseForm.Text = "자세 분석";
-            btn_poseForm.UseVisualStyleBackColor = false;
-            btn_poseForm.Click += btn_poseForm_Click;
             // 
             // mainPanel
             // 
@@ -178,7 +159,6 @@
         private Panel categoryPanel;
         private Button btn_FormSetting;
         private Button btn_statisticsForm;
-        private Button btn_poseForm;
         private Panel mainPanel;
         private Panel panel1;
         private Button button2;
