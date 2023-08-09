@@ -223,63 +223,12 @@ C:\명준_Vadit\Vadit\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\linux-
 C:\명준_Vadit\Vadit\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
 C:\명준_Vadit\Vadit\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
 C:\명준_Vadit\Vadit\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Vadit.exe
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Vadit.deps.json
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Vadit.runtimeconfig.json
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Vadit.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Vadit.pdb
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Emgu.CV.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Emgu.CV.Bitmap.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Microsoft.Win32.SystemEvents.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\System.Data.SQLite.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\System.Drawing.Common.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-arm64\native\cvextern.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\cvextern.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\opencv_videoio_ffmpeg470_64.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\cvextern.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\opencv_videoio_ffmpeg470.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-arm64\native\concrt140.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-arm64\native\msvcp140.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-arm64\native\msvcp140_1.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-arm64\native\msvcp140_2.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-arm64\native\msvcp140_atomic_wait.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-arm64\native\msvcp140_codecvt_ids.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-arm64\native\vcruntime140.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-arm64\native\vcruntime140_1.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\concrt140.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\msvcp140.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\msvcp140_1.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\msvcp140_2.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\msvcp140_atomic_wait.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\msvcp140_codecvt_ids.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\vcruntime140.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\vcruntime140_1.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\concrt140.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\msvcp140.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\msvcp140_1.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\msvcp140_2.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\msvcp140_atomic_wait.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\msvcp140_codecvt_ids.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\vcruntime140.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\linux-x64\native\SQLite.Interop.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
-C:\Visual Project\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Drawing.Common.dll
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.csproj.AssemblyReference.cache
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormCamera.resources
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormMain.resources
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormSetting.resources
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormStatistics.resources
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.csproj.GenerateResource.cache
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.GeneratedMSBuildEditorConfig.editorconfig
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.AssemblyInfoInputs.cache
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.AssemblyInfo.cs
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.csproj.CoreCompileInputs.cache
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.csproj.CopyComplete
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.dll
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\refint\Vadit.dll
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.pdb
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.genruntimeconfig.cache
-C:\Visual Project\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\ref\Vadit.dll
+C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\System.Data.SQLite.dll
+C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\linux-x64\native\SQLite.Interop.dll
+C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
+C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
+C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
+C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\WinForms.DataVisualization.Utilities.dll
+C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\WinForms.DataVisualization.dll
+C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.Properties.Resources.resources
+C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormBigImage.resources

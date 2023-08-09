@@ -17,7 +17,6 @@ namespace Vadit
             else
                 return null;
         }
-
         // 문자 입력만 가능
         public static void AllowOnlyLetterInput(object sender)
         {
