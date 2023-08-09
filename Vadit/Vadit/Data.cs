@@ -41,6 +41,7 @@ namespace Vadit
 
         public Data()
         {
+            DeleteOldData();
             Create_db();
 
         }
@@ -292,7 +293,27 @@ namespace Vadit
                 cmd.ExecuteNonQuery();
             }
         }
+        // 데이터베이스에서 일주일 이상 지난 데이터 삭제
+        public void DeleteOldData()
+        {
+            DateTime oneWeekAgo = DateTime.Today.AddDays(-7); // 일주일 전 날짜 계산
 
+            using (var cmd = new SQLiteCommand(_con))
+            {
+                // Score 테이블에서 일주일 이상 지난 데이터 삭제
+                cmd.CommandText = "DELETE FROM Score WHERE Date < @OneWeekAgo";
+                cmd.Parameters.AddWithValue("@OneWeekAgo", oneWeekAgo);
+                cmd.ExecuteNonQuery();
+
+                // ImageData 테이블에서 일주일 이상 지난 데이터 삭제
+                cmd.CommandText = "DELETE FROM ImageData WHERE Date < @OneWeekAgo";
+                cmd.ExecuteNonQuery();
+
+                // BadPose 테이블에서 일주일 이상 지난 데이터 삭제
+                cmd.CommandText = "DELETE FROM BadPose WHERE Date < @OneWeekAgo";
+                cmd.ExecuteNonQuery();
+            }
+        }
 
 
         public void InsertDB_BadPose(DateTime date, string category)
