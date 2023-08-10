@@ -54,22 +54,15 @@ namespace Vadit
         }
         private async void btnResetPose_Click(object sender, EventArgs e)
         {
-            pictureBox2.Image = AppGlobal.VM.OnclikBtnResetPose();  //여기 안에서 생성된 VM의 inputfo 지금사진 넣음.
             pnWait.Visible = true;
-
-            await Task.Delay(500);/*
+            await Task.Delay(300);
+            pictureBox2.Image = await AppGlobal.VM.OnclikBtnResetPose();  // await 추가
+            await Task.Delay(500);
+            AppGlobal.VM.InputCorrectPose();
             pictureBox2.Image = AppGlobal.VM._infoInputCorrectPose._img.ToBitmap();
-            await Task.Delay(500);*/
-            if (AppGlobal.VM.InputCorrectPose())    //여기 안에서 생성된 VM의 inputfo가 제대로된 값이면 트루.
+            if (AppGlobal.VM.AskSettingPose())
             {
-
-                AppGlobal.CorrectPose.setInfo(AppGlobal.VM._infoInputCorrectPose._img,
-                AppGlobal.VM._infoInputCorrectPose._point); //전역으로 선언된 바른 자세에 지금 값 넣기.
-
-                AppGlobal.CorrectPose.IsPointNotNull();     //전연으로 선언된 바른자세에 잘못된값 없는지 확인.
-                AppGlobal.VM._isInputCorrrctPose = false;
-                AppGlobal.VM._bgw.CancelAsync();
-                //AppGlobal.VM.Dispose();
+                AppGlobal.VM.HandleSettingMessage();
                 this.Close();
             }
             else
@@ -77,7 +70,7 @@ namespace Vadit
                 pnWait.Visible = false;
                 pictureBox2.Image = AppGlobal.VM._infoInputCorrectPose._img.ToBitmap();
             }
-
         }
+
     }
 }

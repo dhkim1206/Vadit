@@ -368,12 +368,13 @@ namespace Vadit
                 _bgw.RunWorkerAsync();
             }
         }
-        public Bitmap OnclikBtnResetPose() //사진을 찍어주는 메서드 이 객체 안에있는 올바른자세 정보에 사진을 넣음.
+        public async Task<Bitmap> OnclikBtnResetPose() //사진을 찍어주는 메서드 이 객체 안에있는 올바른자세 정보에 사진을 넣음.
         {
             if (_cap.IsOpened)
             {
                 _frame = new Mat();
                 _cap.Read(_frame);
+                
                 var img = _frame.ToImage<Bgr, byte>();
                 _infoInputCorrectPose._img = img;
                 return _infoInputCorrectPose._img.ToBitmap();
@@ -385,10 +386,14 @@ namespace Vadit
 
 
 
-        public bool InputCorrectPose()  //자세 캡쳐 버튼 누르면 실행됨. 올바른 자세인지 아닌지 더불어 창닫기까지.
+        public void InputCorrectPose()  //자세 캡쳐 버튼 누르면 실행됨. 올바른 자세인지 아닌지 더불어 창닫기까지.
         {
             DrawSkeleton(_infoInputCorrectPose._img, _bgw);
             _infoInputCorrectPose.IsPointNotNull();
+
+        }
+        public bool AskSettingPose()
+        {
             if (!_infoInputCorrectPose._isPointNotNull)
             {
                 MessageBox.Show("자세가 제대로 인식되지 않았습니다. 바른자세를 다시 입력해주세요.");
@@ -408,6 +413,16 @@ namespace Vadit
                 }
             }
         }
+        public void HandleSettingMessage()
+        {
+            AppGlobal.CorrectPose.setInfo(AppGlobal.VM._infoInputCorrectPose._img,
+            AppGlobal.VM._infoInputCorrectPose._point);
+
+            AppGlobal.CorrectPose.IsPointNotNull();
+            AppGlobal.VM._isInputCorrrctPose = false;
+            AppGlobal.VM._bgw.CancelAsync();
+        }
+
         public void EndPoseSetting()        //입력모드 끄고 백그라운드 종료
         {
             _isInputCorrrctPose = false;
