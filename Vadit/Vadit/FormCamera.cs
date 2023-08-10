@@ -19,6 +19,8 @@ namespace Vadit
         public FormCamera()
         {
             InitializeComponent();
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             if (AppGlobal.VM != null)
                 AppGlobal.VM._bgw.CancelAsync();
             AppGlobal.isinputmode = true;
@@ -77,7 +79,5 @@ namespace Vadit
             }
 
         }
-
-
     }
 }

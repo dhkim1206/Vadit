@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             pictureBox1 = new PictureBox();
-            btnResetPose = new Button();
             pictureBox2 = new PictureBox();
+            btnResetPose = new Button();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tbtesttext = new TextBox();
@@ -54,6 +54,15 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
+            // pictureBox2
+            // 
+            pictureBox2.BackColor = SystemColors.ControlDarkDark;
+            pictureBox2.Location = new Point(401, 42);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(361, 333);
+            pictureBox2.TabIndex = 5;
+            pictureBox2.TabStop = false;
+            // 
             // btnResetPose
             // 
             btnResetPose.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
@@ -65,23 +74,14 @@
             btnResetPose.UseVisualStyleBackColor = true;
             btnResetPose.Click += btnResetPose_Click;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.BackColor = SystemColors.ControlDarkDark;
-            pictureBox2.Location = new Point(401, 42);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(361, 333);
-            pictureBox2.TabIndex = 5;
-            pictureBox2.TabStop = false;
-            // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
-            tabControl1.Location = new Point(12, 12);
+            tabControl1.Location = new Point(12, -3);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(786, 453);
-            tabControl1.TabIndex = 6;
+            tabControl1.TabIndex = 7;
             // 
             // tabPage1
             // 
@@ -129,7 +129,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(401, 15);
+            label2.Location = new Point(404, 18);
             label2.Name = "label2";
             label2.Size = new Size(95, 15);
             label2.TabIndex = 7;
@@ -138,7 +138,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(17, 15);
+            label1.Location = new Point(20, 18);
             label1.Name = "label1";
             label1.Size = new Size(43, 15);
             label1.TabIndex = 6;
@@ -148,11 +148,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(810, 488);
+            ClientSize = new Size(810, 447);
             Controls.Add(tabControl1);
             Name = "FormCamera";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "바른자세 설정";
+            Text = "FormCamera";
             FormClosing += FormCamera_FormClosing;
             Load += FormCamera_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -168,14 +167,14 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private Button btnResetPose;
         private PictureBox pictureBox2;
+        private Button btnResetPose;
         private TabControl tabControl1;
         private TabPage tabPage1;
-        private Label label2;
-        private Label label1;
+        private TextBox tbtesttext;
         private Panel pnWait;
         private Label lbwait;
-        private TextBox tbtesttext;
+        private Label label2;
+        private Label label1;
     }
 }

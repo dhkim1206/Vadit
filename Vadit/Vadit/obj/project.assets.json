@@ -508,6 +508,25 @@
             "related": ".xml"
           }
         }
+      },
+      "WinForms.DataVisualization/1.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/WinForms.DataVisualization.Utilities.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/net6.0-windows7.0/WinForms.DataVisualization.dll": {
+            "related": ".pdb;.Utilities.pdb;.Utilities.xml;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/WinForms.DataVisualization.Utilities.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/net6.0-windows7.0/WinForms.DataVisualization.dll": {
+            "related": ".pdb;.Utilities.pdb;.Utilities.xml;.xml"
+          }
+        }
       }
     }
   },
@@ -1753,6 +1772,43 @@
         "system.threading.tasks.4.3.0.nupkg.sha512",
         "system.threading.tasks.nuspec"
       ]
+    },
+    "WinForms.DataVisualization/1.8.0": {
+      "sha512": "+L0hJaW1kq78Z4HQlIhq8Jmsuz8n9rRaJgTdwLwzYItgiL6U9zNgM+RWRBsD3pSUw1QRMy7GlpZI/+XMmnXCmA==",
+      "type": "package",
+      "path": "winforms.datavisualization/1.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "NuGetReadme.md",
+        "lib/net6.0-windows7.0/Design/WinForms/Server/WinForms.DataVisualization.Designer.ClientServerProtocol.dll",
+        "lib/net6.0-windows7.0/Design/WinForms/Server/WinForms.DataVisualization.Designer.Server.dll",
+        "lib/net6.0-windows7.0/Design/WinForms/Server/WinForms.DataVisualization.Utilities.dll",
+        "lib/net6.0-windows7.0/Design/WinForms/WinForms.DataVisualization.Designer.Client.dll",
+        "lib/net6.0-windows7.0/Design/WinForms/WinForms.DataVisualization.Designer.ClientServerProtocol.dll",
+        "lib/net6.0-windows7.0/Design/WinForms/WinForms.DataVisualization.Utilities.dll",
+        "lib/net6.0-windows7.0/WinForms.DataVisualization.Utilities.dll",
+        "lib/net6.0-windows7.0/WinForms.DataVisualization.Utilities.pdb",
+        "lib/net6.0-windows7.0/WinForms.DataVisualization.Utilities.xml",
+        "lib/net6.0-windows7.0/WinForms.DataVisualization.dll",
+        "lib/net6.0-windows7.0/WinForms.DataVisualization.pdb",
+        "lib/net6.0-windows7.0/WinForms.DataVisualization.xml",
+        "lib/net7.0-windows7.0/Design/WinForms/Server/WinForms.DataVisualization.Designer.ClientServerProtocol.dll",
+        "lib/net7.0-windows7.0/Design/WinForms/Server/WinForms.DataVisualization.Designer.Server.dll",
+        "lib/net7.0-windows7.0/Design/WinForms/Server/WinForms.DataVisualization.Utilities.dll",
+        "lib/net7.0-windows7.0/Design/WinForms/WinForms.DataVisualization.Designer.Client.dll",
+        "lib/net7.0-windows7.0/Design/WinForms/WinForms.DataVisualization.Designer.ClientServerProtocol.dll",
+        "lib/net7.0-windows7.0/Design/WinForms/WinForms.DataVisualization.Utilities.dll",
+        "lib/net7.0-windows7.0/WinForms.DataVisualization.Utilities.dll",
+        "lib/net7.0-windows7.0/WinForms.DataVisualization.Utilities.pdb",
+        "lib/net7.0-windows7.0/WinForms.DataVisualization.Utilities.xml",
+        "lib/net7.0-windows7.0/WinForms.DataVisualization.dll",
+        "lib/net7.0-windows7.0/WinForms.DataVisualization.pdb",
+        "lib/net7.0-windows7.0/WinForms.DataVisualization.xml",
+        "winforms.datavisualization.1.8.0.nupkg.sha512",
+        "winforms.datavisualization.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -1760,23 +1816,24 @@
       "Emgu.CV >= 4.7.0.5276",
       "Emgu.CV.Bitmap >= 4.7.0.5276",
       "Emgu.CV.runtime.windows >= 4.7.0.5276",
-      "System.Data.SQLite.Core >= 1.0.118"
+      "System.Data.SQLite.Core >= 1.0.118",
+      "WinForms.DataVisualization >= 1.8.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kmjkt\\.nuget\\packages\\": {}
+    "C:\\Users\\kdh12\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Visual Project\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+      "projectUniqueName": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
       "projectName": "Vadit",
-      "projectPath": "C:\\Visual Project\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
-      "packagesPath": "C:\\Users\\kmjkt\\.nuget\\packages\\",
-      "outputPath": "C:\\Visual Project\\Vadit\\Vadit\\Vadit\\obj\\",
+      "projectPath": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+      "packagesPath": "C:\\Users\\kdh12\\.nuget\\packages\\",
+      "outputPath": "C:\\Vadit\\Vadit\\Vadit\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kmjkt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kdh12\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1817,6 +1874,10 @@
           "System.Data.SQLite.Core": {
             "target": "Package",
             "version": "[1.0.118, )"
+          },
+          "WinForms.DataVisualization": {
+            "target": "Package",
+            "version": "[1.8.0, )"
           }
         },
         "imports": [
