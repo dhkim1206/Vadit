@@ -11,18 +11,12 @@ namespace Vadit
         private PictureBox _selectedPictureBox; // 현재 선택된 PictureBox를 저장하는 변수
 
         private string path = "data_table.db";
+
         private FlowLayoutPanel _panel_imageFlowLayout;
         private Label _lb_TrutleNeck;
         private Label _lb_scoliosis;
         private Label _lb_herniations;
         private List<(string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations)> _pictureInfoList;
-
-        private const int WM_VSCROLL = 0x0115;
-        private const int SB_LINEUP = 0;
-        private const int SB_LINEDOWN = 1;
-
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         public DashBoardManager(FlowLayoutPanel imageFlowLayout, DateTime selectedDate, Label trutleNeck, Label scoliosis, Label herniations)
         {
@@ -30,25 +24,18 @@ namespace Vadit
             _lb_TrutleNeck = trutleNeck;
             _lb_scoliosis = scoliosis;
             _lb_herniations = herniations;
-            _panel_imageFlowLayout.AutoScroll = true; // AutoScroll 속성을 False로 설정
+
+            _panel_imageFlowLayout.AutoScroll = true;
+
             _pictureInfoList = LoadDataFromDatabase(selectedDate);
             UpdateDashBoard();
         }
 
-        public void Scroll(int scrollDirection)
-        {
-            int scrollAmount = SystemInformation.VerticalScrollBarThumbHeight / 1000000;
-            SendMessage(_panel_imageFlowLayout.Handle, WM_VSCROLL, scrollDirection, 0);
-        }
 
         private void ConfigurePictureBoxClickEvent(PictureBox pictureBox)
         {
-            pictureBox.Click += (sender, e) =>
-            {
-                if (_selectedPictureBox != null)
-                {
-                    _selectedPictureBox.BackColor = Color.Transparent;
-                }
+            pictureBox.Click += (sender, e) => {
+                if (_selectedPictureBox != null) _selectedPictureBox.BackColor = Color.Transparent;
 
                 _selectedPictureBox = (PictureBox)sender;
                 _selectedPictureBox.BackColor = Color.Red;
@@ -60,11 +47,9 @@ namespace Vadit
 
         private void UpdateLabels(int turtleneckSum, int scoliosisSum, int herniationsSum)
         {
-
             _lb_TrutleNeck.Text = "거북목 : " + turtleneckSum.ToString();
             _lb_scoliosis.Text = "척추 측만증 : " + scoliosisSum.ToString();
-            _lb_herniations.Text = "추간판 탈출 : " + herniationsSum.ToString();
-            
+            _lb_herniations.Text = "추간판 탈출 : " + herniationsSum.ToString();        
         }
         private void ClearLabel()
         {
@@ -77,9 +62,11 @@ namespace Vadit
         {
             ClearLabel();
             _panel_imageFlowLayout.Controls.Clear();
+
             int turtleneckSum = 0;
             int scoliosisSum = 0;
             int herniationsSum = 0;
+
             if (_pictureInfoList.Count == 0)
             {
                 Label noDataLabel = new Label();

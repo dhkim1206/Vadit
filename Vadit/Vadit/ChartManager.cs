@@ -114,11 +114,13 @@ public class ChartManager
         chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.White;
         chart.MouseClick += Chart_MouseClick;
     }
+
     private Color GetMarkerColor(DataPoint dataPoint)
     {
         DateTime date = DateTime.FromOADate(dataPoint.XValue);
         return (date.Date == DateTime.Today.Date) ? Color.LightBlue : Color.GreenYellow;
     }
+
     private void Chart_MouseClick(object sender, MouseEventArgs e)
     {
         Chart chart = (Chart)sender;
