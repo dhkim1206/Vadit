@@ -112,7 +112,6 @@
             Controls.Add(PictureFlowLayout);
             Controls.Add(chart1);
             Name = "FormStatistics";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormStatistics";
             Load += FormStatistics_Load;
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();

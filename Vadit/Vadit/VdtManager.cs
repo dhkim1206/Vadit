@@ -80,7 +80,6 @@ namespace Vadit
             _points = new List<Point>(); // 랜드마크 좌표를 저장하기 위한 List 초기화
             _data = new Data(Application.StartupPath);
 
-
             _bgw = new BackgroundWorker(); // 백그라운드 워커 객체 생성
             _bgw.WorkerReportsProgress = true; // 중간 보고 할거냐, 이걸 해줘야 중간보고를 할 수 있음
             _bgw.DoWork += new DoWorkEventHandler(OnDoWork); // 엔트리 포인트, 실행 할 함수를 매개변수로 줌

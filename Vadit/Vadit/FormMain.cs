@@ -1,14 +1,18 @@
+using Emgu.CV.Ocl;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
+using static Vadit.AppBase;
 
 namespace Vadit
 {
     public partial class FormMain : Form
     {
         AppBase.FormManager _formManager;
+
+        FormPopUp _formPopUp;
 
         public VdtManager _vdtManager;
 
@@ -18,6 +22,13 @@ namespace Vadit
             InitializeComponent();
 
             _formManager = new AppBase.FormManager(mainPanel);
+
+            AppBase.AppConf = new AppConfig("data.xml");
+
+            _formPopUp = new FormPopUp();
+            
+            //메인 화면에 상시 등장하는 폼
+            //_formManager.ChangeForm(typeof(DashForm));
 
         }
         public void StartDetect()
@@ -29,9 +40,15 @@ namespace Vadit
         {
             AnalyzeData obj = e.UserState as AnalyzeData;
         }
+        private void btn_poseForm_Click(object sender, EventArgs e)
+        {
+            _formManager.ChangeForm(typeof(FormCamera));
+
+        }
 
         private void btn_ProgramExplain_Click(object sender, EventArgs e)
         {
+
         }
 
         private void btn_statisticsForm_Click(object sender, EventArgs e)
@@ -46,6 +63,8 @@ namespace Vadit
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _formManager.CloseCurrentForm();
+
             _vdtManager.Dispose();
         }
 
@@ -53,6 +72,11 @@ namespace Vadit
         {
             this.Close();
             this.Dispose();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _formPopUp.Show();
         }
     }
 }

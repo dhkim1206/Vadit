@@ -117,7 +117,7 @@ namespace Vadit
                 cmd.Parameters.AddWithValue("@Date", date.Date);
                 cmd.Parameters.AddWithValue("@GoodPoseCount", 0);
                 cmd.Parameters.AddWithValue("@BadPoseCount", 0);
-                Debug.WriteLine("Insert Zero Pose Count : ", date.Date+ ","+ 0+"," + 0);
+                Debug.WriteLine("Insert Zero Pose Count : ", date.Date + "," + 0 + "," + 0);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -134,7 +134,7 @@ namespace Vadit
                 int rowsAffected = updateCmd.ExecuteNonQuery();
 
                 if (rowsAffected > 0)
-                    Debug.WriteLine("PoseCount "+rowsAffected +" updated successfully.");
+                    Debug.WriteLine("PoseCount " + rowsAffected + " updated successfully.");
                 else
                     Debug.WriteLine("Failed to update Count value.");
             }
