@@ -374,7 +374,7 @@ namespace Vadit
             {
                 _frame = new Mat();
                 _cap.Read(_frame);
-                
+                var fram = _frame;
                 var img = _frame.ToImage<Bgr, byte>();
                 _infoInputCorrectPose._img = img;
                 return _infoInputCorrectPose._img.ToBitmap();

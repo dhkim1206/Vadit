@@ -24,6 +24,7 @@ namespace Vadit
             if (AppGlobal.VM != null)
                 AppGlobal.VM._bgw.CancelAsync();
             AppGlobal.isinputmode = true;
+            
             delayTimer = new System.Windows.Forms.Timer();
             delayTimer.Interval = 1000;
             delayTimer.Tick += new EventHandler(OnDelayTimerTick);
@@ -31,6 +32,7 @@ namespace Vadit
         private void OnDelayTimerTick(object sender, EventArgs e)
         {
             delayTimer.Stop();
+
             AppGlobal.VM = new VdtManager(OnProgressing);
             AppGlobal.VM.StartSettingCorrectPose();
         }
