@@ -26,7 +26,7 @@ namespace Vadit
             AppBase.AppConf = new AppConfig("data.xml");
 
             _formPopUp = new FormPopUp();
-            
+
             //메인 화면에 상시 등장하는 폼
             //_formManager.ChangeForm(typeof(DashForm));
 
@@ -39,11 +39,6 @@ namespace Vadit
         private void OnProgressing(object sender, ProgressChangedEventArgs e)
         {
             AnalyzeData obj = e.UserState as AnalyzeData;
-        }
-        private void btn_poseForm_Click(object sender, EventArgs e)
-        {
-            _formManager.ChangeForm(typeof(FormCamera));
-
         }
 
         private void btn_ProgramExplain_Click(object sender, EventArgs e)
@@ -68,15 +63,15 @@ namespace Vadit
             _vdtManager.Dispose();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            this.Dispose();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             _formPopUp.Show();
+        }
+
+        private void btnCloseForm_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
         }
     }
 }

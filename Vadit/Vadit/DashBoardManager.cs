@@ -10,6 +10,7 @@ namespace Vadit
     {
         private PictureBox _selectedPictureBox; // 현재 선택된 PictureBox를 저장하는 변수
 
+        private Panel _panel;
         private string path = "data_table.db";
         private FlowLayoutPanel _panel_imageFlowLayout;
         private Label _lb_TrutleNeck;
@@ -17,15 +18,10 @@ namespace Vadit
         private Label _lb_herniations;
         private List<(string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations)> _pictureInfoList;
 
-        private const int WM_VSCROLL = 0x0115;
-        private const int SB_LINEUP = 0;
-        private const int SB_LINEDOWN = 1;
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
-
-        public DashBoardManager(FlowLayoutPanel imageFlowLayout, DateTime selectedDate, Label trutleNeck, Label scoliosis, Label herniations)
+        public DashBoardManager(Panel panel, FlowLayoutPanel imageFlowLayout, DateTime selectedDate, Label trutleNeck, Label scoliosis, Label herniations)
         {
+            _panel = panel;
             _panel_imageFlowLayout = imageFlowLayout;
             _lb_TrutleNeck = trutleNeck;
             _lb_scoliosis = scoliosis;
@@ -33,12 +29,6 @@ namespace Vadit
             _panel_imageFlowLayout.AutoScroll = true; // AutoScroll 속성을 False로 설정
             _pictureInfoList = LoadDataFromDatabase(selectedDate);
             UpdateDashBoard();
-        }
-
-        public void Scroll(int scrollDirection)
-        {
-            int scrollAmount = SystemInformation.VerticalScrollBarThumbHeight / 1000000;
-            SendMessage(_panel_imageFlowLayout.Handle, WM_VSCROLL, scrollDirection, 0);
         }
 
         private void ConfigurePictureBoxClickEvent(PictureBox pictureBox)
@@ -75,6 +65,7 @@ namespace Vadit
 
         private void UpdateDashBoard()
         {
+            _panel.Hide();
             ClearLabel();
             _panel_imageFlowLayout.Controls.Clear();
             int turtleneckSum = 0;
@@ -90,6 +81,7 @@ namespace Vadit
                 noDataLabel.Dock = DockStyle.Fill;
 
                 _panel_imageFlowLayout.Controls.Add(noDataLabel);
+                _panel.Show();
             }
             foreach (var pictureInfo in _pictureInfoList)
             {

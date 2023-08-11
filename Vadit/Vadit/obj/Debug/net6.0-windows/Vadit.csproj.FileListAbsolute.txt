@@ -362,3 +362,4 @@ C:\Vadit_Main\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0
 C:\Vadit_Main\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.csproj.CopyComplete
 C:\Vadit_Main\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.genruntimeconfig.cache
 C:\Vadit_Main\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\ref\Vadit.dll
+C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormPopUp.resources

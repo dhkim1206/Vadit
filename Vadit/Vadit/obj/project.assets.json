@@ -1826,11 +1826,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Vadit_Main\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+      "projectUniqueName": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
       "projectName": "Vadit",
-      "projectPath": "C:\\Vadit_Main\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
+      "projectPath": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
       "packagesPath": "C:\\Users\\kdh12\\.nuget\\packages\\",
-      "outputPath": "C:\\Vadit_Main\\Vadit\\Vadit\\Vadit\\obj\\",
+      "outputPath": "C:\\Vadit\\Vadit\\Vadit\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kdh12\\AppData\\Roaming\\NuGet\\NuGet.Config",
