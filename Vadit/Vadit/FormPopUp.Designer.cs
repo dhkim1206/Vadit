@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.FloatingTimer = new System.Windows.Forms.Timer(this.components);
+            this.DefaultTimer = new System.Windows.Forms.Timer(this.components);
             this.UserPanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,10 +46,10 @@
             this.CommentPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // FloatingTimer
+            // DefaultTimer
             // 
-            this.FloatingTimer.Interval = 1000;
-            this.FloatingTimer.Tick += new System.EventHandler(this.FloatingTimer_Tick);
+            this.DefaultTimer.Interval = 1000;
+            this.DefaultTimer.Tick += new System.EventHandler(this.DefaultTimer_Tick);
             // 
             // UserPanel
             // 
@@ -71,7 +71,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 20);
             this.label2.TabIndex = 2;
-            this.label2.Text = "label3";
+            this.label2.Text = "label2";
             // 
             // label1
             // 
@@ -80,7 +80,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "label4";
+            this.label1.Text = "label1";
             // 
             // UserPosePicBox
             // 
@@ -181,15 +181,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer FloatingTimer;
+        private System.Windows.Forms.Timer DefaultTimer;
         private Panel UserPanel;
         private Label label2;
-        private Label label1;
         private PictureBox UserPosePicBox;
         private Panel ExamplePosePanel;
         private PictureBox ExamplePosePicBox;
         private Panel CommentPanel;
         private Button CommentButton;
         private Label CommentLabel;
+        private Label label1;
     }
 }

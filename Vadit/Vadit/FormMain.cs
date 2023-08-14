@@ -2,6 +2,7 @@ using Emgu.CV.Ocl;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Reflection.Emit;
 using System.Threading;
 using System.Windows.Forms;
 using static Vadit.AppBase;
@@ -20,13 +21,12 @@ namespace Vadit
         {
 
             InitializeComponent();
-
             _formManager = new AppBase.FormManager(mainPanel);
 
             AppBase.AppConf = new AppConfig("data.xml");
 
             _formPopUp = new FormPopUp();
-            
+
             //메인 화면에 상시 등장하는 폼
             //_formManager.ChangeForm(typeof(DashForm));
 
@@ -65,7 +65,8 @@ namespace Vadit
         {
             _formManager.CloseCurrentForm();
 
-            _vdtManager.Dispose();
+            // 오류 발생하므로 일단 빼둠
+            //_vdtManager.Dispose();
         }
 
         private void button2_Click(object sender, EventArgs e)

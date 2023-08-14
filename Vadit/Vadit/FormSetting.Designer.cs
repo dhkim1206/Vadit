@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.SettingtabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.checkAlarm = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.cboPicterm = new System.Windows.Forms.ComboBox();
+            this.cboPicSaving = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             this.checkLongPlay = new System.Windows.Forms.CheckBox();
             this.checkPose = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl1.SuspendLayout();
+            this.SettingtabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFrame)).BeginInit();
             this.pnNoti.SuspendLayout();
@@ -75,18 +75,19 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "자세 재설정 하기";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // tabControl1
+            // SettingtabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1013, 596);
-            this.tabControl1.TabIndex = 39;
+            this.SettingtabControl.Controls.Add(this.tabPage1);
+            this.SettingtabControl.Controls.Add(this.tabPage2);
+            this.SettingtabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.SettingtabControl.Location = new System.Drawing.Point(0, -41);
+            this.SettingtabControl.Margin = new System.Windows.Forms.Padding(2);
+            this.SettingtabControl.Name = "SettingtabControl";
+            this.SettingtabControl.SelectedIndex = 0;
+            this.SettingtabControl.Size = new System.Drawing.Size(1013, 637);
+            this.SettingtabControl.TabIndex = 39;
             // 
             // tabPage1
             // 
@@ -94,7 +95,7 @@
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.checkAlarm);
             this.tabPage1.Controls.Add(this.label13);
-            this.tabPage1.Controls.Add(this.cboPicterm);
+            this.tabPage1.Controls.Add(this.cboPicSaving);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.label10);
@@ -110,7 +111,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(1005, 563);
+            this.tabPage1.Size = new System.Drawing.Size(1005, 604);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "기본설정";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -149,19 +150,19 @@
             this.label13.TabIndex = 39;
             this.label13.Text = "사진 저장기한";
             // 
-            // cboPicterm
+            // cboPicSaving
             // 
-            this.cboPicterm.FormattingEnabled = true;
-            this.cboPicterm.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.cboPicterm.Items.AddRange(new object[] {
+            this.cboPicSaving.FormattingEnabled = true;
+            this.cboPicSaving.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.cboPicSaving.Items.AddRange(new object[] {
             "15일동안 저장",
             "30일동안 저장",
             "90일동안 저장"});
-            this.cboPicterm.Location = new System.Drawing.Point(134, 495);
-            this.cboPicterm.Margin = new System.Windows.Forms.Padding(2);
-            this.cboPicterm.Name = "cboPicterm";
-            this.cboPicterm.Size = new System.Drawing.Size(142, 28);
-            this.cboPicterm.TabIndex = 38;
+            this.cboPicSaving.Location = new System.Drawing.Point(134, 495);
+            this.cboPicSaving.Margin = new System.Windows.Forms.Padding(2);
+            this.cboPicSaving.Name = "cboPicSaving";
+            this.cboPicSaving.Size = new System.Drawing.Size(142, 28);
+            this.cboPicSaving.TabIndex = 38;
             // 
             // label8
             // 
@@ -372,7 +373,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(1005, 563);
+            this.tabPage2.Size = new System.Drawing.Size(1005, 534);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "바른자세 설정";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -383,13 +384,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1013, 596);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.SettingtabControl);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormSetting";
             this.Text = "FormSetting";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSetting_FormClosing);
             this.Load += new System.EventHandler(this.FormSetting_Load);
-            this.tabControl1.ResumeLayout(false);
+            this.SettingtabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFrame)).EndInit();
@@ -407,12 +408,12 @@
         #endregion
 
         private Button button1;
-        private TabControl tabControl1;
+        private TabControl SettingtabControl;
         private TabPage tabPage1;
         private Label label1;
         private CheckBox checkAlarm;
         private Label label13;
-        private ComboBox cboPicterm;
+        private ComboBox cboPicSaving;
         private Label label8;
         private Label label9;
         private Label label10;
