@@ -62,7 +62,11 @@ namespace Vadit
             await Task.Delay(500);
             AppGlobal.VM.InputCorrectPose();
             pictureBox2.Image = AppGlobal.VM._infoInputCorrectPose._img.ToBitmap();
+<<<<<<< Updated upstream
             if (AppGlobal.VM.AskSettingPose())
+=======
+            if (AppGlobal.VM.AskSettingPose())    //여기 안에서 생성된 VM의 inputfo가 제대로된 값이면 트루.
+>>>>>>> Stashed changes
             {
                 AppGlobal.VM.HandleSettingMessage();
                 this.Close();

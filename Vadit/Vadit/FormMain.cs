@@ -1,8 +1,18 @@
+<<<<<<< Updated upstream
+=======
+﻿using Emgu.CV.Ocl;
+>>>>>>> Stashed changes
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Reflection.Emit;
 using System.Threading;
 using System.Windows.Forms;
+<<<<<<< Updated upstream
+=======
+using static Vadit.AppBase;
+using Timer = System.Threading.Timer;
+>>>>>>> Stashed changes
 
 namespace Vadit
 {
@@ -11,15 +21,24 @@ namespace Vadit
         AppBase.FormManager _formManager;
 
         public VdtManager _vdtManager;
-
         public FormMain()
         {
-
             InitializeComponent();
-
             _formManager = new AppBase.FormManager(mainPanel);
+<<<<<<< Updated upstream
+=======
+            AppBase.AppConf = new AppConfig("data.xml");
+            _formPopUp = new FormPopUp();
+            AppGlobal.StartTimer();
+>>>>>>> Stashed changes
 
         }
+
+        /*        public void PreventLongUseTimer_Tick(object sender, EventArgs e)
+                {
+                    Debug.WriteLine("1ksdjfkjdfngjkdfbjkbnsfdgsfgvdabdsabsdbsdfb시간 경과");
+                }
+        */
         public void StartDetect()
         {
             AppGlobal.VM = new VdtManager(OnProgressing);
@@ -31,9 +50,10 @@ namespace Vadit
         }
         private void btn_poseForm_Click(object sender, EventArgs e)
         {
-            _formManager.ChangeForm(typeof(FormCamera));
 
+            _formManager.ChangeForm(typeof(FormCamera));
         }
+
 
         private void btn_ProgramExplain_Click(object sender, EventArgs e)
         {
@@ -59,5 +79,14 @@ namespace Vadit
             this.Close();
             this.Dispose();
         }
+<<<<<<< Updated upstream
+=======
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _formPopUp.Show();
+        }
+
+>>>>>>> Stashed changes
     }
 }
