@@ -31,7 +31,6 @@
             button1 = new Button();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            label1 = new Label();
             checkAlarm = new CheckBox();
             label13 = new Label();
             cboPicterm = new ComboBox();
@@ -53,6 +52,7 @@
             checkLongPlay = new CheckBox();
             checkPose = new CheckBox();
             tabPage2 = new TabPage();
+            label1 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarFrame).BeginInit();
@@ -114,17 +114,6 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "기본설정";
             tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(419, 33);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(45, 19);
-            label1.TabIndex = 42;
-            label1.Text = "label1";
             // 
             // checkAlarm
             // 
@@ -227,7 +216,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label12.Location = new Point(5, 286);
-            label12.Margin = new Padding(3, 3, 3, 3);
+            label12.Margin = new Padding(3);
             label12.Name = "label12";
             label12.Size = new Size(98, 19);
             label12.TabIndex = 36;
@@ -241,7 +230,7 @@
             pnNoti.Location = new Point(5, 142);
             pnNoti.Margin = new Padding(2);
             pnNoti.Name = "pnNoti";
-            pnNoti.Padding = new Padding(6, 6, 6, 6);
+            pnNoti.Padding = new Padding(6);
             pnNoti.Size = new Size(517, 128);
             pnNoti.TabIndex = 24;
             pnNoti.Tag = "0";
@@ -251,9 +240,9 @@
             panel4.BackColor = Color.WhiteSmoke;
             panel4.Controls.Add(pb1);
             panel4.Location = new Point(12, 9);
-            panel4.Margin = new Padding(6, 6, 6, 6);
+            panel4.Margin = new Padding(6);
             panel4.Name = "panel4";
-            panel4.Padding = new Padding(3, 3, 3, 3);
+            panel4.Padding = new Padding(3);
             panel4.Size = new Size(156, 109);
             panel4.TabIndex = 2;
             // 
@@ -274,9 +263,9 @@
             panel6.BackColor = Color.WhiteSmoke;
             panel6.Controls.Add(pb2);
             panel6.Location = new Point(180, 9);
-            panel6.Margin = new Padding(6, 6, 6, 6);
+            panel6.Margin = new Padding(6);
             panel6.Name = "panel6";
-            panel6.Padding = new Padding(3, 3, 3, 3);
+            panel6.Padding = new Padding(3);
             panel6.Size = new Size(156, 109);
             panel6.TabIndex = 1;
             // 
@@ -297,9 +286,9 @@
             panel7.BackColor = Color.WhiteSmoke;
             panel7.Controls.Add(pb3);
             panel7.Location = new Point(348, 9);
-            panel7.Margin = new Padding(4, 4, 4, 4);
+            panel7.Margin = new Padding(4);
             panel7.Name = "panel7";
-            panel7.Padding = new Padding(3, 3, 3, 3);
+            panel7.Padding = new Padding(3);
             panel7.Size = new Size(156, 109);
             panel7.TabIndex = 0;
             panel7.Tag = "";
@@ -320,7 +309,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label7.Location = new Point(5, 120);
-            label7.Margin = new Padding(3, 3, 3, 3);
+            label7.Margin = new Padding(3);
             label7.Name = "label7";
             label7.Size = new Size(145, 19);
             label7.TabIndex = 23;
@@ -370,6 +359,17 @@
             tabPage2.Text = "바른자세 설정";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(419, 33);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(45, 19);
+            label1.TabIndex = 42;
+            label1.Text = "label1";
+            // 
             // FormSetting
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -400,7 +400,6 @@
         private Button button1;
         private TabControl tabControl1;
         private TabPage tabPage1;
-        private Label label1;
         private CheckBox checkAlarm;
         private Label label13;
         private ComboBox cboPicterm;
@@ -422,5 +421,6 @@
         private CheckBox checkLongPlay;
         private CheckBox checkPose;
         private TabPage tabPage2;
+        private Label label1;
     }
 }

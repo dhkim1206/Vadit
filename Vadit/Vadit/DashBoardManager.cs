@@ -50,11 +50,17 @@ namespace Vadit
 
         private void UpdateLabels(int turtleneckSum, int scoliosisSum, int herniationsSum)
         {
-
             _lb_TrutleNeck.Text = "거북목 : " + turtleneckSum.ToString();
             _lb_scoliosis.Text = "척추 측만증 : " + scoliosisSum.ToString();
             _lb_herniations.Text = "추간판 탈출 : " + herniationsSum.ToString();
-            
+
+            if ((turtleneckSum + scoliosisSum + herniationsSum) == 0)
+            {
+                _lb_TrutleNeck.Text = "";
+                _lb_scoliosis.Text = "";
+                _lb_herniations.Text = "";
+            }
+
         }
         private void ClearLabel()
         {
@@ -71,6 +77,7 @@ namespace Vadit
             int turtleneckSum = 0;
             int scoliosisSum = 0;
             int herniationsSum = 0;
+
             if (_pictureInfoList.Count == 0)
             {
                 Label noDataLabel = new Label();
@@ -93,9 +100,6 @@ namespace Vadit
                 herniationsSum += pictureInfo.Herniations;
 
                 _panel_imageFlowLayout.Controls.Add(pictureBox);
-            }
-            if (_pictureInfoList.Count == 0)
-            {
             }
 
             UpdateLabels(turtleneckSum, scoliosisSum, herniationsSum);

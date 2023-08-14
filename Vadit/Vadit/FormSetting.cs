@@ -13,9 +13,12 @@ namespace Vadit
 {
     public partial class FormSetting : Form
     {
+        Data _data;
         public FormSetting()
         {
             InitializeComponent();
+
+            _data = new Data();
 
             pb3.Click += ChangeNotificationLayout;
             pb2.Click += ChangeNotificationLayout;
@@ -55,6 +58,8 @@ namespace Vadit
             AppConf.ConfigSet.CamFrame = trackBarFrame.Value;
             AppConf.ConfigSet.SaveingPeriod = cboPicterm.SelectedIndex;
             AppConf.Save();
+
+            _data.DeleteOldData();
         }
 
         private void FormSetting_Load(object sender, EventArgs e)

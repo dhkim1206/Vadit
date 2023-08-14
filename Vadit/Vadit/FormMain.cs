@@ -59,7 +59,6 @@ namespace Vadit
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             _formManager.CloseCurrentForm();
-
             _vdtManager.Dispose();
         }
 

@@ -4,21 +4,25 @@ using System;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
+using System.Xml;
 
 namespace Vadit
 {
     public class Data
     {
+        public delegate void DeleteOldDataDelegate();
+
+        private readonly string _configFilePath = "data.xml";
         private readonly string _dbPath = "data_table.db";
         private readonly string _cs;
         private readonly string _imageDirectory;
 
         private SQLiteConnection _con;
 
-        public Data(string startupPath)
+        public Data()
         {
-            _cs = $"URI=file:{Path.Combine(startupPath, _dbPath)}";
-            _imageDirectory = Path.Combine(startupPath, "image_data");
+            _cs = $"URI=file:{Path.Combine(Application.StartupPath, _dbPath)}";
+            _imageDirectory = Path.Combine(Application.StartupPath, "image_data");
 
             CreateDatabase();
         }
@@ -154,33 +158,85 @@ namespace Vadit
             }
         }
 
-        public void DeleteOldImages()
+
+        public int GetDeleteThreshold()
         {
-            DateTime oneWeekAgo = DateTime.Today.AddDays(-7);
-
-            using (var cmd = new SQLiteCommand(_con))
+            try
             {
-                cmd.CommandText = "SELECT ImagePath FROM ImageData WHERE Date < @OneWeekAgo";
-                cmd.Parameters.AddWithValue("@OneWeekAgo", oneWeekAgo);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(_configFilePath);
 
-                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                XmlNode saveingPeriodNode = doc.SelectSingleNode("//SaveingPeriod");
+                if (saveingPeriodNode != null)
                 {
-                    while (reader.Read())
+                    int saveingPeriodValue = Convert.ToInt32(saveingPeriodNode.InnerText);
+                    switch (saveingPeriodValue)
                     {
-                        string imagePath = reader.GetString(0);
-                        if (File.Exists(imagePath))
-                        {
-                            File.Delete(imagePath);
-                            Debug.WriteLine($"Deleted image: {imagePath}");
-                        }
+                        case 0:
+                            return 15;
+                        case 1:
+                            return 30;
+                        case 2:
+                            return 90;
+                        default:
+                            return -1; // Invalid value
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                // Handle XML reading error
+                Console.WriteLine("Error reading config file: " + ex.Message);
+            }
 
-                cmd.CommandText = "DELETE FROM ImageData WHERE Date < @OneWeekAgo";
-                cmd.ExecuteNonQuery();
-                Debug.WriteLine("Delete Old Images");
+            return -1; // Default value
+        }
+        public void DeleteOldData()
+        {
+            int deleteThreshold = GetDeleteThreshold();
+            if (deleteThreshold < 0)
+            {
+                Debug.WriteLine("Invalid delete threshold value.");
+                return;
+            }
+
+            DateTime deleteDate = DateTime.Today.AddDays(-deleteThreshold);
+
+            using (SQLiteConnection con = new SQLiteConnection(@"Data Source=data_table.db"))
+            {
+                con.Open();
+                using (var transaction = con.BeginTransaction())
+                {
+                    try
+                    {
+                        using (var cmd = new SQLiteCommand(con))
+                        {
+                            cmd.CommandText = "DELETE FROM ImageData WHERE Date < @DeleteDate";
+                            cmd.Parameters.AddWithValue("@DeleteDate", deleteDate);
+                            int deletedImageCount = cmd.ExecuteNonQuery();
+                            Debug.WriteLine($"Deleted {deletedImageCount} images.");
+
+                            cmd.CommandText = "DELETE FROM BadPose WHERE Date < @DeleteDate";
+                            cmd.ExecuteNonQuery();
+
+                            cmd.CommandText = "DELETE FROM Score WHERE Date < @DeleteDate";
+                            cmd.ExecuteNonQuery();
+
+                            transaction.Commit(); // 커밋하여 트랜잭션 완료
+                            Debug.WriteLine("Delete Old Data completed.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback(); // 롤백하여 트랜잭션 취소
+                        Debug.WriteLine("Error deleting old data: " + ex.Message);
+                    }
+                }
             }
         }
+
+
+
         public void UpdateGoodPoseCnt_Score(DateTime date)
         {
             UpdatePoseCount("GoodPoseCnt", date);
