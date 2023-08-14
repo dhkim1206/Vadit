@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             PictureFlowLayout = new FlowLayoutPanel();
             lb_NoData = new Label();
@@ -39,6 +39,7 @@
             label2 = new Label();
             label3 = new Label();
             pn_Nodata = new Panel();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             pn_Nodata.SuspendLayout();
             SuspendLayout();
@@ -47,24 +48,24 @@
             // 
             chart1.BackColor = Color.FromArgb(38, 38, 38);
             chart1.BackgroundImageLayout = ImageLayout.None;
-            chartArea2.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea1);
             chart1.Location = new Point(24, 12);
             chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.Name = "Series1";
-            series4.ChartArea = "ChartArea1";
-            series4.Name = "Series2";
-            chart1.Series.Add(series3);
-            chart1.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Series2";
+            chart1.Series.Add(series1);
+            chart1.Series.Add(series2);
             chart1.Size = new Size(774, 300);
             chart1.TabIndex = 0;
             chart1.Text = "chart1";
-            title2.Font = new Font("함초롬돋움", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            title2.ForeColor = Color.White;
-            title2.Name = "Title1";
-            title2.Text = "좋은 자세 비율";
-            chart1.Titles.Add(title2);
+            title1.Font = new Font("함초롬돋움", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            title1.ForeColor = Color.White;
+            title1.Name = "Title1";
+            title1.Text = "좋은 자세 비율";
+            chart1.Titles.Add(title1);
             // 
             // PictureFlowLayout
             // 
@@ -88,7 +89,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(24, 313);
+            label1.Location = new Point(139, 313);
             label1.Name = "label1";
             label1.Size = new Size(54, 15);
             label1.TabIndex = 3;
@@ -98,7 +99,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(100, 313);
+            label2.Location = new Point(215, 313);
             label2.Name = "label2";
             label2.Size = new Size(82, 15);
             label2.TabIndex = 4;
@@ -108,7 +109,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.White;
-            label3.Location = new Point(206, 314);
+            label3.Location = new Point(321, 314);
             label3.Name = "label3";
             label3.Size = new Size(82, 15);
             label3.TabIndex = 5;
@@ -122,12 +123,23 @@
             pn_Nodata.Size = new Size(774, 123);
             pn_Nodata.TabIndex = 6;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(36, 313);
+            label4.Name = "label4";
+            label4.Size = new Size(82, 15);
+            label4.TabIndex = 7;
+            label4.Text = "검출된 자세 : ";
+            // 
             // FormStatistics
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(38, 38, 38);
             ClientSize = new Size(812, 475);
+            Controls.Add(label4);
             Controls.Add(pn_Nodata);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -153,5 +165,6 @@
         private Label label3;
         private Label lb_NoData;
         private Panel pn_Nodata;
+        private Label label4;
     }
 }

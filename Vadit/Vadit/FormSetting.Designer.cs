@@ -31,6 +31,7 @@
             button1 = new Button();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            label1 = new Label();
             checkAlarm = new CheckBox();
             label13 = new Label();
             cboPicterm = new ComboBox();
@@ -52,7 +53,6 @@
             checkLongPlay = new CheckBox();
             checkPose = new CheckBox();
             tabPage2 = new TabPage();
-            label1 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarFrame).BeginInit();
@@ -114,6 +114,17 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "기본설정";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(419, 33);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(45, 19);
+            label1.TabIndex = 42;
+            label1.Text = "label1";
             // 
             // checkAlarm
             // 
@@ -218,9 +229,9 @@
             label12.Location = new Point(5, 286);
             label12.Margin = new Padding(3);
             label12.Name = "label12";
-            label12.Size = new Size(98, 19);
+            label12.Size = new Size(84, 19);
             label12.TabIndex = 36;
-            label12.Text = "자세분석 주기";
+            label12.Text = "알림창 주기";
             // 
             // pnNoti
             // 
@@ -358,17 +369,6 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "바른자세 설정";
             tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(419, 33);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(45, 19);
-            label1.TabIndex = 42;
-            label1.Text = "label1";
             // 
             // FormSetting
             // 

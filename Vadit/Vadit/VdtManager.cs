@@ -253,14 +253,6 @@ namespace Vadit
                 {
                     _infoInputCorrectPose.setInfo(img, _points);
                     AppGlobal.CorrectPose.setInfo(img, _points);
-                    Debug.WriteLine("17번:[" + _infoInputCorrectPose._point[17].X + "," + _infoInputCorrectPose._point[17].Y + "]");
-                    Debug.WriteLine("15번:[" + _infoInputCorrectPose._point[15].X + "," + _infoInputCorrectPose._point[15].Y + "]");
-                    Debug.WriteLine("0번:[" + _infoInputCorrectPose._point[0].X + "," + _infoInputCorrectPose._point[0].Y + "]");
-                    Debug.WriteLine("16번:[" + _infoInputCorrectPose._point[16].X + "," + _infoInputCorrectPose._point[16].Y + "]");
-                    Debug.WriteLine("18번:[" + _infoInputCorrectPose._point[18].X + "," + _infoInputCorrectPose._point[18].Y + "]");
-                    Debug.WriteLine("2번:[" + _infoInputCorrectPose._point[2].X + "," + _infoInputCorrectPose._point[2].Y + "]");
-                    Debug.WriteLine("5번:[" + _infoInputCorrectPose._point[5].X + "," + _infoInputCorrectPose._point[5].Y + "]");
-                    Debug.WriteLine("1번:[" + _infoInputCorrectPose._point[1].X + "," + _infoInputCorrectPose._point[1].Y + "]");
                 }
                 else if (!_isInputCorrrctPose)
                 {
@@ -315,19 +307,28 @@ namespace Vadit
             Debug.WriteLine($"올바른 자세: {AppGlobal.CorrectPose._ratio:F3}");
             Debug.WriteLine($"현재측정: {_ratio:F3}");
 
+            Debug.WriteLine($"코: {points[0].X},{points[0].Y}");
+            Debug.WriteLine($"목: {points[1].X},{points[1].Y}");
+            Debug.WriteLine($"왼쪽 어깨: {points[2].X},{points[2].Y}");
+            Debug.WriteLine($"오른쪽 어깨: {points[5].X},{points[5].Y}");
+            Debug.WriteLine($"왼쪽 귀: {points[17].X},{points[17].Y}");
+            Debug.WriteLine($"오른쪽 귀: {points[18].X},{points[18].Y}");
+            Debug.WriteLine($"왼쪽 눈 : {points[15].X},{points[15].Y}");
+            Debug.WriteLine($"오른쪽 눈: {points[16].X},{points[16].Y}");
 
-            if (Math.Abs(_points[2].Y - _points[5].Y) > 20)
+
+            if (Math.Abs(_points[2].Y - _points[5].Y) > 15)
             {
                 _analyzeData.Result += "척추 측만증,";
                 conditionMet = true;
             }
-            if (_ratio > AppGlobal.CorrectPose._ratio + 0.6)
+            if (_ratio > AppGlobal.CorrectPose._ratio + 0.3)
             {
                 _analyzeData.Result += " 거북목,";
                 conditionMet = true;
 
             }
-            if (_ratio < AppGlobal.CorrectPose._ratio + 3)
+            if (_ratio < AppGlobal.CorrectPose._ratio + 2)
             {
                 _analyzeData.Result += "추간판 탈출,";
                 conditionMet = true;

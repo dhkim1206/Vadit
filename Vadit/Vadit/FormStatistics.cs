@@ -21,7 +21,7 @@ namespace Vadit
         public FormStatistics()
         {
             InitializeComponent();
-            _flowPanelManager = new DashBoardManager(pn_Nodata, PictureFlowLayout, DateTime.Now.Date, label1, label2, label3);
+            _flowPanelManager = new DashBoardManager(pn_Nodata, PictureFlowLayout, DateTime.Now.Date, label4, label1, label2, label3);
             _chartManager = new ChartManager(_flowPanelManager);
         }
 
