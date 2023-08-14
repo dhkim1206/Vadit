@@ -174,10 +174,10 @@ namespace Vadit
                 con.Open();
 
                 // 이미지와 관련 정보 조회하는 쿼리
-                string imageQuery = @"SELECT ImagePath, Category, Date FROM ImageData WHERE strftime('%Y-%m-%d', Date) = strftime('%Y-%m-%d', @SelectedDate)";
+                string imageQuery = @"SELECT ImagePath, Category FROM ImageData WHERE strftime('%Y-%m-%d', Date) = strftime('%Y-%m-%d', @SelectedDate)";
 
                 // BadPose 정보 조회하는 쿼리
-                string badPoseQuery = @"SELECT TurtleNeck, Scoliosis, Herniations FROM BadPose WHERE strftime('%Y-%m-%d', Date) = strftime('%Y-%m-%d', @SelectedDate)";
+                string badPoseQuery = @"SELECT Date, TurtleNeck, Scoliosis, Herniations FROM BadPose WHERE strftime('%Y-%m-%d', Date) = strftime('%Y-%m-%d', @SelectedDate)";
 
                 // SQLiteCommand 개체를 생성하고 쿼리와 데이터베이스 연결을 연결
                 using (SQLiteCommand cmd = new SQLiteCommand(imageQuery, con))
@@ -193,7 +193,7 @@ namespace Vadit
                             // 각 열의 데이터를 추출
                             string imagePath = reader.GetString(0);
                             string category = reader.GetString(1);
-                            DateTime date = reader.GetDateTime(2);
+                            DateTime date = DateTime.MinValue;
                             int turtleneck = 0;
                             int scoliosis = 0;
                             int herniations = 0;
@@ -206,9 +206,10 @@ namespace Vadit
                                 {
                                     if (badPoseReader.Read())
                                     {
-                                        turtleneck = badPoseReader.GetInt32(0);
-                                        scoliosis = badPoseReader.GetInt32(1);
-                                        herniations = badPoseReader.GetInt32(2);
+                                        date = badPoseReader.GetDateTime(0);
+                                        turtleneck = badPoseReader.GetInt32(1);
+                                        scoliosis = badPoseReader.GetInt32(2);
+                                        herniations = badPoseReader.GetInt32(3);
                                     }
                                 }
                             }
