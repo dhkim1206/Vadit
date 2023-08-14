@@ -14,7 +14,7 @@ namespace Vadit
     public partial class FormPopUp : Form
     {
         int _second;
-
+        string _soundPath = Path.Combine(Application.StartupPath, "/sound_data");
         public FormPopUp()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace Vadit
         private void SetLayout(EnumNotificationLayout layout) // 팝업 생성시 자동 
         {
             CommentButton.FlatAppearance.BorderSize = 0;
-            SoundPlayer defaultsound = new SoundPlayer("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/DefaultSound.wav");
+            SoundPlayer defaultsound = new SoundPlayer(_soundPath+"/DefaultSound.wav");
             defaultsound.Play();
 
             if (layout == EnumNotificationLayout.Standard)
