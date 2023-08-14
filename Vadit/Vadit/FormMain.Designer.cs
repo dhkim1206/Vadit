@@ -30,12 +30,12 @@
         {
             this.btn_ProgramExplain = new System.Windows.Forms.Button();
             this.categoryPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btn_FormSetting = new System.Windows.Forms.Button();
             this.btn_statisticsForm = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.categoryPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +69,16 @@
             this.categoryPanel.Name = "categoryPanel";
             this.categoryPanel.Size = new System.Drawing.Size(188, 643);
             this.categoryPanel.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(0, 313);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(188, 29);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "팝업버튼";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_FormSetting
             // 
@@ -141,16 +151,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "X";
             this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(76, 404);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // FormMain
             // 
