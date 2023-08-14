@@ -1,18 +1,12 @@
-<<<<<<< Updated upstream
-=======
 ﻿using Emgu.CV.Ocl;
->>>>>>> Stashed changes
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection.Emit;
 using System.Threading;
 using System.Windows.Forms;
-<<<<<<< Updated upstream
-=======
 using static Vadit.AppBase;
 using Timer = System.Threading.Timer;
->>>>>>> Stashed changes
 
 namespace Vadit
 {
@@ -20,17 +14,16 @@ namespace Vadit
     {
         AppBase.FormManager _formManager;
 
+        FormPopUp _formPopUp;
+
         public VdtManager _vdtManager;
         public FormMain()
         {
             InitializeComponent();
             _formManager = new AppBase.FormManager(mainPanel);
-<<<<<<< Updated upstream
-=======
             AppBase.AppConf = new AppConfig("data.xml");
             _formPopUp = new FormPopUp();
             AppGlobal.StartTimer();
->>>>>>> Stashed changes
 
         }
 
@@ -57,6 +50,7 @@ namespace Vadit
 
         private void btn_ProgramExplain_Click(object sender, EventArgs e)
         {
+
         }
 
         private void btn_statisticsForm_Click(object sender, EventArgs e)
@@ -71,6 +65,8 @@ namespace Vadit
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _formManager.CloseCurrentForm();
+
             _vdtManager.Dispose();
         }
 
@@ -79,14 +75,11 @@ namespace Vadit
             this.Close();
             this.Dispose();
         }
-<<<<<<< Updated upstream
-=======
 
         private void button1_Click(object sender, EventArgs e)
         {
             _formPopUp.Show();
         }
 
->>>>>>> Stashed changes
     }
 }

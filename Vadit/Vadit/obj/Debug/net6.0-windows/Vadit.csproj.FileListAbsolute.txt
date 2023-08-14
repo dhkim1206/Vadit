@@ -232,8 +232,6 @@ C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\WinForms.DataVisualization.Utiliti
 C:\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\WinForms.DataVisualization.dll
 C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.Properties.Resources.resources
 C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormBigImage.resources
-<<<<<<< Updated upstream
-=======
 C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Vadit.exe
 C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Vadit.deps.json
 C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\bin\Debug\net6.0-windows\Vadit.runtimeconfig.json
@@ -300,4 +298,3 @@ C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.
 C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\ref\Vadit.dll
 C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormPopUp.resources
 C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormPopUp.resources
->>>>>>> Stashed changes

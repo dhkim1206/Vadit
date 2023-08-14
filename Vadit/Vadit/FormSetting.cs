@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Vadit.AppBase;
 
 namespace Vadit
 {
@@ -15,6 +16,24 @@ namespace Vadit
         public FormSetting()
         {
             InitializeComponent();
+
+            pb3.Click += ChangeNotificationLayout;
+            pb2.Click += ChangeNotificationLayout;
+            pb1.Click += ChangeNotificationLayout;
+        }
+
+        private void ChangeNotificationLayout(object sender, EventArgs e)
+        {
+            pnNoti.Tag = (sender as PictureBox).Tag;
+
+            AppConf.ConfigSet.NotificationLayout = (EnumNotificationLayout)Convert.ToInt32(pnNoti.Tag);
+
+            for (int i = 0; i < pnNoti.Controls.Count; i++)
+            {
+                if (i == Convert.ToInt32(pnNoti.Tag)) pnNoti.Controls[i].BackColor = Color.Gray;
+                else pnNoti.Controls[i].BackColor = Color.WhiteSmoke;
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -26,8 +45,6 @@ namespace Vadit
             subForm1.Show();
 
         }
-<<<<<<< Updated upstream
-=======
 
         private void FormSetting_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -67,6 +84,5 @@ namespace Vadit
             FormCamera Fc = new FormCamera();
             Fc.ShowDialog();
         }
->>>>>>> Stashed changes
     }
 }

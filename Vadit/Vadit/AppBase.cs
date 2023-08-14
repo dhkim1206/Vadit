@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using static Vadit.AppBase;
 
 namespace Vadit
 {
     public class AppBase
     {
+        static public AppConfig AppConf = null;
 
         // 그룹 박스로 라디오 버튼 컨트롤
         public static string GetRadioBox(GroupBox gb){
@@ -17,7 +20,6 @@ namespace Vadit
             else
                 return null;
         }
-
         // 문자 입력만 가능
         public static void AllowOnlyLetterInput(object sender)
         {
@@ -106,9 +108,6 @@ namespace Vadit
             if ((!Char.IsDigit(e.KeyChar)) && (e.KeyChar != '\b')) e.Handled = true;
         }
 
-
-
-
         //--------- Form Manager Class ------------//
         public class FormManager
         {
@@ -136,6 +135,53 @@ namespace Vadit
                 _curForm.Parent = _parentPanel;
                 _curForm.Dock = DockStyle.Fill; // 가득 찬 화면
                 _curForm.Show();
+            }
+            public void CloseCurrentForm()
+            {
+                if (_curForm != null) _curForm.Close();
+            }
+        }            
+        //---------------------------------------------------------------------------
+        public class AppConfig
+        //---------------------------------------------------------------------------
+        {
+            // 폼 로드시 파일이 Xml 파일여부 확인 후 없을시 초기값 설정
+
+            public AppConfigClass ConfigSet;
+            private XmlSerializer _xmlSeializer;
+
+            public AppConfig(string fileName)
+            {
+
+                ConfigSet = new AppConfigClass();
+
+                _xmlSeializer = new XmlSerializer(typeof(AppConfigClass));
+
+                FileInfo fi = new FileInfo("data.xml");
+
+                if (fi.Exists) // Xml파일이있을시 불러오기
+                {
+                    using (StreamReader reader = new StreamReader("data.xml")) // 불러 오기
+                    {
+                        ConfigSet = (AppConfigClass)_xmlSeializer.Deserialize(reader); // 형식 지정
+                    }
+                }
+            }
+            public bool Save() // 입력된 값을 Xml에 저장
+            {
+                try
+                {
+                    using (StreamWriter writer = new StreamWriter("data.xml"))
+                    {
+                        _xmlSeializer.Serialize(writer, ConfigSet);
+                    }
+
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             }
         }
     }

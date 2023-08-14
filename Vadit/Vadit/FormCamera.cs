@@ -24,7 +24,6 @@ namespace Vadit
             if (AppGlobal.VM != null)
                 AppGlobal.VM._bgw.CancelAsync();
             AppGlobal.isinputmode = true;
-            
             delayTimer = new System.Windows.Forms.Timer();
             delayTimer.Interval = 1000;
             delayTimer.Tick += new EventHandler(OnDelayTimerTick);
@@ -32,7 +31,6 @@ namespace Vadit
         private void OnDelayTimerTick(object sender, EventArgs e)
         {
             delayTimer.Stop();
-
             AppGlobal.VM = new VdtManager(OnProgressing);
             AppGlobal.VM.StartSettingCorrectPose();
         }
@@ -62,11 +60,7 @@ namespace Vadit
             await Task.Delay(500);
             AppGlobal.VM.InputCorrectPose();
             pictureBox2.Image = AppGlobal.VM._infoInputCorrectPose._img.ToBitmap();
-<<<<<<< Updated upstream
-            if (AppGlobal.VM.AskSettingPose())
-=======
             if (AppGlobal.VM.AskSettingPose())    //여기 안에서 생성된 VM의 inputfo가 제대로된 값이면 트루.
->>>>>>> Stashed changes
             {
                 AppGlobal.VM.HandleSettingMessage();
                 this.Close();
@@ -76,7 +70,7 @@ namespace Vadit
                 pnWait.Visible = false;
                 pictureBox2.Image = AppGlobal.VM._infoInputCorrectPose._img.ToBitmap();
             }
-        }
 
+        }
     }
 }

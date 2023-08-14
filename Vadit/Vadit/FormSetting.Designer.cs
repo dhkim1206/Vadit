@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             button1 = new Button();
-<<<<<<< Updated upstream
-=======
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             label1 = new Label();
@@ -65,21 +63,10 @@
             ((System.ComponentModel.ISupportInitialize)pb2).BeginInit();
             panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pb3).BeginInit();
->>>>>>> Stashed changes
             SuspendLayout();
             // 
             // button1
             // 
-<<<<<<< Updated upstream
-            button1.Font = new Font("맑은 고딕", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.Location = new Point(475, 323);
-            button1.Name = "button1";
-            button1.Size = new Size(313, 78);
-            button1.TabIndex = 1;
-            button1.Text = "자세 재설정 하기";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-=======
             button1.BackColor = Color.Gainsboro;
             button1.FlatAppearance.BorderColor = Color.Red;
             button1.FlatAppearance.BorderSize = 5;
@@ -385,19 +372,12 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "바른자세 설정";
             tabPage2.UseVisualStyleBackColor = true;
->>>>>>> Stashed changes
             // 
             // FormSetting
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-<<<<<<< Updated upstream
-            ClientSize = new Size(800, 450);
-            Controls.Add(button1);
-            Name = "FormSetting";
-            Text = "FormSetting";
-=======
             ClientSize = new Size(788, 447);
             Controls.Add(tabControl1);
             Name = "FormSetting";
@@ -415,12 +395,35 @@
             ((System.ComponentModel.ISupportInitialize)pb2).EndInit();
             panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pb3).EndInit();
->>>>>>> Stashed changes
             ResumeLayout(false);
         }
 
         #endregion
 
         private Button button1;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private Label label1;
+        private CheckBox checkAlarm;
+        private Label label13;
+        private ComboBox cboPicterm;
+        private Label label8;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private TrackBar trackBarFrame;
+        private Label label12;
+        private Panel pnNoti;
+        private Panel panel4;
+        private PictureBox pb1;
+        private Panel panel6;
+        private PictureBox pb2;
+        private Panel panel7;
+        private PictureBox pb3;
+        private Label label7;
+        private CheckBox checkWindows;
+        private CheckBox checkLongPlay;
+        private CheckBox checkPose;
+        private TabPage tabPage2;
     }
 }

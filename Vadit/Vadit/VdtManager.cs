@@ -402,7 +402,6 @@ namespace Vadit
             {
                 _frame = new Mat();
                 _cap.Read(_frame);
-                var fram = _frame;
                 var img = _frame.ToImage<Bgr, byte>();
                 _infoInputCorrectPose._img = img;
                 return _infoInputCorrectPose._img.ToBitmap();
@@ -413,10 +412,6 @@ namespace Vadit
         }
 
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         public void InputCorrectPose()  //자세 캡쳐 버튼 누르면 실행됨. 올바른 자세인지 아닌지 더불어 창닫기까지.
         {
             DrawSkeleton(_infoInputCorrectPose._img, _bgw);
@@ -453,10 +448,6 @@ namespace Vadit
             AppGlobal.VM._isInputCorrrctPose = false;
             AppGlobal.VM._bgw.CancelAsync();
         }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         public void EndPoseSetting()        //입력모드 끄고 백그라운드 종료
         {
             _isInputCorrrctPose = false;
