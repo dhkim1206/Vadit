@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -30,8 +31,8 @@ namespace Vadit
             _lb_TrutleNeck = trutleNeck;
             _lb_scoliosis = scoliosis;
             _lb_herniations = herniations;
-            _panel_imageFlowLayout.AutoScroll = true; // AutoScroll 속성을 False로 설정
-            _pictureInfoList = LoadDataFromDatabase(selectedDate);
+            _panel_imageFlowLayout.AutoScroll = true; 
+            _pictureInfoList = LoadDataFromDatabase(selectedDate.Date);
             UpdateDashBoard();
         }
 
@@ -39,10 +40,7 @@ namespace Vadit
         {
             pictureBox.Click += (sender, e) =>
             {
-                if (_selectedPictureBox != null)
-                {
-                    _selectedPictureBox.BackColor = Color.Transparent;
-                }
+                if (_selectedPictureBox != null) _selectedPictureBox.BackColor = Color.Transparent;
 
                 _selectedPictureBox = (PictureBox)sender;
                 _selectedPictureBox.BackColor = Color.Red;
@@ -82,6 +80,7 @@ namespace Vadit
             _panel.Hide();
             ClearLabel();
             _panel_imageFlowLayout.Controls.Clear();
+
             int turtleneckSum = 0;
             int scoliosisSum = 0;
             int herniationsSum = 0;
@@ -100,6 +99,7 @@ namespace Vadit
             }
             foreach (var pictureInfo in _pictureInfoList)
             {
+                Debug.WriteLine(pictureInfo);
                 PictureBox pictureBox = CreatePictureBox(pictureInfo, _pictureInfoList.Count);
                 ConfigurePictureBoxClickEvent(pictureBox);
 
@@ -141,7 +141,7 @@ namespace Vadit
                     float textX = (pictureBox.Width - textSize.Width) / 2 + 280;
                     float textY = pictureBox.Height - textSize.Height + 350;
                     g.DrawString(categoryText, font, Brushes.Yellow, new PointF(textX, textY));
-                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(95, 5));
+                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(140, 5));
                     using (Font font1 = new Font(FontFamily.GenericSansSerif, 70, FontStyle.Bold, GraphicsUnit.Pixel))
                     {
                         if (_current < count+1)
@@ -160,41 +160,82 @@ namespace Vadit
 
         private List<(string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations)> LoadDataFromDatabase(DateTime selectedDate)
         {
+            // 이전 데이터를 제거
+            if (_pictureInfoList != null)
+                _pictureInfoList.Clear();
+
+            // 데이터를 저장할 리스트를 생성
             List<(string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations)> pictureInfoList = new List<(string, string, DateTime, int, int, int)>();
 
+            // SQLite 데이터베이스 연결을 생성
             using (SQLiteConnection con = new SQLiteConnection(@"Data Source=" + path))
             {
+                // 데이터베이스 연결
                 con.Open();
 
-                string query = @"SELECT ImageData.ImagePath, ImageData.Category, BadPose.Date, BadPose.TurtleNeck, BadPose.Scoliosis, BadPose.Herniations
-                                FROM ImageData
-                                LEFT JOIN BadPose ON strftime('%Y-%m-%d', ImageData.Date) = strftime('%Y-%m-%d', BadPose.Date)
-                                WHERE strftime('%Y-%m-%d', BadPose.Date) = strftime('%Y-%m-%d', @SelectedDate)";
-                using (SQLiteCommand cmd = new SQLiteCommand(query, con))
+                // 이미지와 관련 정보 조회하는 쿼리
+                string imageQuery = @"SELECT ImagePath, Category, Date FROM ImageData WHERE strftime('%Y-%m-%d', Date) = strftime('%Y-%m-%d', @SelectedDate)";
+
+                // BadPose 정보 조회하는 쿼리
+                string badPoseQuery = @"SELECT TurtleNeck, Scoliosis, Herniations FROM BadPose WHERE strftime('%Y-%m-%d', Date) = strftime('%Y-%m-%d', @SelectedDate)";
+
+                // SQLiteCommand 개체를 생성하고 쿼리와 데이터베이스 연결을 연결
+                using (SQLiteCommand cmd = new SQLiteCommand(imageQuery, con))
                 {
+                    // 쿼리 매개변수를 설정합니다.
                     cmd.Parameters.AddWithValue("@SelectedDate", selectedDate.Date);
+
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
+                        // 결과를 한 줄씩 리드
                         while (reader.Read())
                         {
+                            // 각 열의 데이터를 추출
                             string imagePath = reader.GetString(0);
                             string category = reader.GetString(1);
                             DateTime date = reader.GetDateTime(2);
-                            int turtleneck = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
-                            int scoliosis = reader.IsDBNull(4) ? 0 : reader.GetInt32(4);
-                            int herniations = reader.IsDBNull(5) ? 0 : reader.GetInt32(5);
+                            int turtleneck = 0;
+                            int scoliosis = 0;
+                            int herniations = 0;
+
+                            // BadPose 정보 조회
+                            using (SQLiteCommand badPoseCmd = new SQLiteCommand(badPoseQuery, con))
+                            {
+                                badPoseCmd.Parameters.AddWithValue("@SelectedDate", selectedDate.Date);
+                                using (SQLiteDataReader badPoseReader = badPoseCmd.ExecuteReader())
+                                {
+                                    if (badPoseReader.Read())
+                                    {
+                                        turtleneck = badPoseReader.GetInt32(0);
+                                        scoliosis = badPoseReader.GetInt32(1);
+                                        herniations = badPoseReader.GetInt32(2);
+                                    }
+                                }
+                            }
+
+                            // 추출한 데이터를 pictureInfoList에 추가
                             pictureInfoList.Add((imagePath, category, date, turtleneck, scoliosis, herniations));
+
+                            Debug.WriteLine(imagePath);
                         }
                     }
+
+                    // 와일 루프가 끝난 후에 이미지 데이터 개수를 출력
+                    Debug.WriteLine("Total image count: " + pictureInfoList.Count);
                 }
             }
 
+            // 로드한 데이터가 담긴 리스트를 반환합니다.
             return pictureInfoList;
         }
 
+
+
         public void ShowImagesForSelectedDate(DateTime selectedDate)
         {
-            _pictureInfoList = LoadDataFromDatabase(selectedDate);
+            _pictureInfoList.Clear();
+            _pictureInfoList = LoadDataFromDatabase(selectedDate.Date);
+            Debug.WriteLine(_pictureInfoList.Count);
             UpdateDashBoard();
         }
     }
