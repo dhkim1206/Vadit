@@ -1,4 +1,5 @@
-﻿using Emgu.CV.Ocl;
+
+using Emgu.CV.Ocl;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -7,7 +8,6 @@ using System.Threading;
 using System.Windows.Forms;
 using static Vadit.AppBase;
 using Timer = System.Threading.Timer;
-
 namespace Vadit
 {
     public partial class FormMain : Form
@@ -15,6 +15,7 @@ namespace Vadit
         AppBase.FormManager _formManager;
 
         FormPopUp _formPopUp;
+        public VdtManager _vdtManager;
 
         public VdtManager _vdtManager;
         public FormMain()
@@ -25,13 +26,12 @@ namespace Vadit
             _formPopUp = new FormPopUp();
             AppGlobal.StartTimer();
 
+            AppBase.AppConf = new AppConfig("data.xml");
+
+            _formPopUp = new FormPopUp();
+
         }
 
-        /*        public void PreventLongUseTimer_Tick(object sender, EventArgs e)
-                {
-                    Debug.WriteLine("1ksdjfkjdfngjkdfbjkbnsfdgsfgvdabdsabsdbsdfb시간 경과");
-                }
-        */
         public void StartDetect()
         {
             AppGlobal.VM = new VdtManager(OnProgressing);
@@ -80,6 +80,5 @@ namespace Vadit
         {
             _formPopUp.Show();
         }
-
     }
 }

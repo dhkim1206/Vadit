@@ -28,145 +28,149 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            btn_ProgramExplain = new Button();
-            categoryPanel = new Panel();
-            button1 = new Button();
-            btn_FormSetting = new Button();
-            btn_statisticsForm = new Button();
-            mainPanel = new Panel();
-            panel1 = new Panel();
-            button2 = new Button();
-            PreventLongUseTimer = new System.Windows.Forms.Timer(components);
-            categoryPanel.SuspendLayout();
-            panel1.SuspendLayout();
-            SuspendLayout();
+            this.btn_ProgramExplain = new System.Windows.Forms.Button();
+            this.categoryPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btn_FormSetting = new System.Windows.Forms.Button();
+            this.btn_statisticsForm = new System.Windows.Forms.Button();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.categoryPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // btn_ProgramExplain
             // 
-            btn_ProgramExplain.BackColor = Color.FromArgb(38, 38, 38);
-            btn_ProgramExplain.BackgroundImageLayout = ImageLayout.None;
-            btn_ProgramExplain.FlatAppearance.BorderSize = 0;
-            btn_ProgramExplain.FlatStyle = FlatStyle.Flat;
-            btn_ProgramExplain.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_ProgramExplain.ForeColor = SystemColors.ButtonShadow;
-            btn_ProgramExplain.Location = new Point(0, 5);
-            btn_ProgramExplain.Name = "btn_ProgramExplain";
-            btn_ProgramExplain.RightToLeft = RightToLeft.Yes;
-            btn_ProgramExplain.Size = new Size(146, 50);
-            btn_ProgramExplain.TabIndex = 3;
-            btn_ProgramExplain.Text = "프로그램 설명";
-            btn_ProgramExplain.UseVisualStyleBackColor = false;
+            this.btn_ProgramExplain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btn_ProgramExplain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_ProgramExplain.FlatAppearance.BorderSize = 0;
+            this.btn_ProgramExplain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_ProgramExplain.Font = new System.Drawing.Font("함초롬돋움", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_ProgramExplain.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btn_ProgramExplain.Location = new System.Drawing.Point(0, 7);
+            this.btn_ProgramExplain.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_ProgramExplain.Name = "btn_ProgramExplain";
+            this.btn_ProgramExplain.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btn_ProgramExplain.Size = new System.Drawing.Size(188, 67);
+            this.btn_ProgramExplain.TabIndex = 3;
+            this.btn_ProgramExplain.Text = "프로그램 설명";
+            this.btn_ProgramExplain.UseVisualStyleBackColor = false;
             // 
             // categoryPanel
             // 
-            categoryPanel.BackColor = Color.FromArgb(58, 58, 58);
-            categoryPanel.Controls.Add(button1);
-            categoryPanel.Controls.Add(btn_ProgramExplain);
-            categoryPanel.Controls.Add(btn_FormSetting);
-            categoryPanel.Controls.Add(btn_statisticsForm);
-            categoryPanel.Location = new Point(0, 37);
-            categoryPanel.Name = "categoryPanel";
-            categoryPanel.Size = new Size(146, 482);
-            categoryPanel.TabIndex = 3;
+            this.categoryPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.categoryPanel.Controls.Add(this.button1);
+            this.categoryPanel.Controls.Add(this.btn_ProgramExplain);
+            this.categoryPanel.Controls.Add(this.btn_FormSetting);
+            this.categoryPanel.Controls.Add(this.btn_statisticsForm);
+            this.categoryPanel.Location = new System.Drawing.Point(0, 49);
+            this.categoryPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.categoryPanel.Name = "categoryPanel";
+            this.categoryPanel.Size = new System.Drawing.Size(188, 643);
+            this.categoryPanel.TabIndex = 3;
             // 
             // button1
             // 
-            button1.Location = new Point(59, 303);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(73, 22);
-            button1.TabIndex = 4;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            this.button1.Location = new System.Drawing.Point(0, 313);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(188, 29);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "팝업버튼";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_FormSetting
             // 
-            btn_FormSetting.BackColor = Color.FromArgb(38, 38, 38);
-            btn_FormSetting.BackgroundImageLayout = ImageLayout.None;
-            btn_FormSetting.FlatAppearance.BorderSize = 0;
-            btn_FormSetting.FlatStyle = FlatStyle.Flat;
-            btn_FormSetting.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_FormSetting.ForeColor = SystemColors.ButtonShadow;
-            btn_FormSetting.Location = new Point(0, 115);
-            btn_FormSetting.Name = "btn_FormSetting";
-            btn_FormSetting.RightToLeft = RightToLeft.Yes;
-            btn_FormSetting.Size = new Size(146, 50);
-            btn_FormSetting.TabIndex = 2;
-            btn_FormSetting.Text = "설정";
-            btn_FormSetting.UseVisualStyleBackColor = false;
-            btn_FormSetting.Click += btn_FormSetting_Click;
+            this.btn_FormSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btn_FormSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_FormSetting.FlatAppearance.BorderSize = 0;
+            this.btn_FormSetting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_FormSetting.Font = new System.Drawing.Font("함초롬돋움", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_FormSetting.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btn_FormSetting.Location = new System.Drawing.Point(0, 153);
+            this.btn_FormSetting.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_FormSetting.Name = "btn_FormSetting";
+            this.btn_FormSetting.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btn_FormSetting.Size = new System.Drawing.Size(188, 67);
+            this.btn_FormSetting.TabIndex = 2;
+            this.btn_FormSetting.Text = "설정";
+            this.btn_FormSetting.UseVisualStyleBackColor = false;
+            this.btn_FormSetting.Click += new System.EventHandler(this.btn_FormSetting_Click);
             // 
             // btn_statisticsForm
             // 
-            btn_statisticsForm.BackColor = Color.FromArgb(38, 38, 38);
-            btn_statisticsForm.BackgroundImageLayout = ImageLayout.None;
-            btn_statisticsForm.FlatAppearance.BorderSize = 0;
-            btn_statisticsForm.FlatStyle = FlatStyle.Flat;
-            btn_statisticsForm.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_statisticsForm.ForeColor = SystemColors.ButtonShadow;
-            btn_statisticsForm.Location = new Point(0, 60);
-            btn_statisticsForm.Name = "btn_statisticsForm";
-            btn_statisticsForm.RightToLeft = RightToLeft.Yes;
-            btn_statisticsForm.Size = new Size(146, 50);
-            btn_statisticsForm.TabIndex = 1;
-            btn_statisticsForm.Text = "통계";
-            btn_statisticsForm.UseVisualStyleBackColor = false;
-            btn_statisticsForm.Click += btn_statisticsForm_Click;
+            this.btn_statisticsForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.btn_statisticsForm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_statisticsForm.FlatAppearance.BorderSize = 0;
+            this.btn_statisticsForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_statisticsForm.Font = new System.Drawing.Font("함초롬돋움", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_statisticsForm.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btn_statisticsForm.Location = new System.Drawing.Point(0, 80);
+            this.btn_statisticsForm.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_statisticsForm.Name = "btn_statisticsForm";
+            this.btn_statisticsForm.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btn_statisticsForm.Size = new System.Drawing.Size(188, 67);
+            this.btn_statisticsForm.TabIndex = 1;
+            this.btn_statisticsForm.Text = "통계";
+            this.btn_statisticsForm.UseVisualStyleBackColor = false;
+            this.btn_statisticsForm.Click += new System.EventHandler(this.btn_statisticsForm_Click);
             // 
             // mainPanel
             // 
-            mainPanel.BackColor = Color.FromArgb(38, 38, 38);
-            mainPanel.Location = new Point(146, 37);
-            mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(802, 482);
-            mainPanel.TabIndex = 4;
+            this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.mainPanel.Location = new System.Drawing.Point(188, 49);
+            this.mainPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(1031, 643);
+            this.mainPanel.TabIndex = 4;
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(25, 25, 25);
-            panel1.Controls.Add(button2);
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(948, 40);
-            panel1.TabIndex = 0;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1219, 53);
+            this.panel1.TabIndex = 0;
             // 
             // button2
             // 
-            button2.BackColor = Color.FromArgb(25, 25, 25);
-            button2.BackgroundImageLayout = ImageLayout.None;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.ForeColor = SystemColors.ButtonShadow;
-            button2.Location = new Point(908, 6);
-            button2.Name = "button2";
-            button2.RightToLeft = RightToLeft.Yes;
-            button2.Size = new Size(34, 28);
-            button2.TabIndex = 4;
-            button2.Text = "X";
-            button2.UseVisualStyleBackColor = false;
-            // 
-            // PreventLongUseTimer
-            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button2.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.button2.Location = new System.Drawing.Point(1167, 8);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button2.Size = new System.Drawing.Size(44, 37);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "X";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // FormMain
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(948, 519);
-            Controls.Add(panel1);
-            Controls.Add(mainPanel);
-            Controls.Add(categoryPanel);
-            FormBorderStyle = FormBorderStyle.None;
-            Name = "FormMain";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
-            FormClosing += FormMain_FormClosing;
-            categoryPanel.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1219, 692);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.mainPanel);
+            this.Controls.Add(this.categoryPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.categoryPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -179,6 +183,5 @@
         private Panel panel1;
         private Button button2;
         private Button button1;
-        private System.Windows.Forms.Timer PreventLongUseTimer;
     }
 }

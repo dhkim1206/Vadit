@@ -17,7 +17,7 @@ namespace Vadit
     {
         string path = "data_table.db";
         string cs = @"URI=file:" + Application.StartupPath + "\\data_table.db";
-        string imageDirectory = Path.Combine(Application.StartupPath, "image_data");
+        public string imageDirectory = Path.Combine(Application.StartupPath, "image_data");
 
         public SQLiteConnection _con;
         public SQLiteCommand _cmd;
