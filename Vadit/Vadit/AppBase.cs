@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 using static Vadit.AppBase;
 
@@ -33,7 +37,6 @@ namespace Vadit
 
 
             textbox.KeyPress += input2_KeyPress;
-
         }
 
         // 숫자만 입력
@@ -187,50 +190,6 @@ namespace Vadit
                 }
             }
 
-            public void AutoStart()
-            {
-                // 프로그램 실행 파일의 경로
-                string programPath = Application.StartupPath; // 예: MyApp.exe (윈도우), MyApp (맥 OS, 리눅스, 유닉스)
-                string startupFolderPath = "";
-
-                // 운영체제 확인
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT) // 윈도우인 경우
-                {
-                    startupFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "YourProgram"); // 예: C:\Users\Username\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\MyApp.lnk
-                }
-                else if (Environment.OSVersion.Platform == PlatformID.Unix) // 리눅스 또는 유닉스인 경우
-                {
-                    startupFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "YourProgram"); // 예: ~/.config/autostart/MyApp.desktop
-                }
-                else if (Environment.OSVersion.Platform == PlatformID.MacOSX) // 맥 OS인 경우
-                {
-                    string homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // 사용자의 홈 디렉토리 경로를 가져옵니다.
-                    startupFolderPath = Path.Combine(homeDirectory, "Library", "LaunchAgents", "YourProgram.plist"); // 예: ~/Library/LaunchAgents/MyApp.plist
-                }
-                else
-                {
-                    Console.WriteLine("지원되지 않는 운영체제입니다.");
-                    return;
-                }
-
-                // 프로그램을 자동 시작 폴더로 복사
-                if (File.Exists(programPath))
-                {
-                    string startupPath = Path.Combine(startupFolderPath, Path.GetFileName(programPath));
-
-                    // 프로그램을 자동 시작 폴더로 복사
-                    File.Copy(programPath, startupPath, true);
-
-                    Console.WriteLine("프로그램이 자동 시작 프로그램으로 등록되었습니다.");
-                }
-                else
-                {
-                    Console.WriteLine("프로그램 파일을 찾을 수 없습니다.");
-                }
-
-                Console.ReadLine();
-            }
         }
     }
-
 }

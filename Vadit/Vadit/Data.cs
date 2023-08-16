@@ -40,14 +40,14 @@ namespace Vadit
                 {
                     cmd.CommandText = "CREATE TABLE Score ( Date DATE PRIMARY KEY, GoodPoseCnt INT, BadPoseCnt INT)";
                     cmd.ExecuteNonQuery();
-                    Debug.WriteLine("Create Score Table");
+                    //Debug.WriteLine("Create Score Table");
 
                     cmd.CommandText = "CREATE TABLE ImageData (Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE, Category TEXT, ImagePath TEXT)";
                     cmd.ExecuteNonQuery();
-                    Debug.WriteLine("Create ImageData Table");
+                    //Debug.WriteLine("Create ImageData Table");
 
                     cmd.CommandText = "CREATE TABLE BadPose ( Date DATE PRIMARY KEY, TurtleNeck INT, Scoliosis INT, Herniations INT)";
-                    Debug.WriteLine("Create BadPose Table");
+                    //Debug.WriteLine("Create BadPose Table");
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -55,7 +55,7 @@ namespace Vadit
             {
                 _con = new SQLiteConnection(_cs);
                 _con.Open();
-                Debug.WriteLine("Database already exists.");
+                //Debug.WriteLine("Database already exists.");
             }
         }
 
@@ -78,11 +78,11 @@ namespace Vadit
 
                 File.WriteAllBytes(imagePath, imageData);
                 InsertImageToDatabase(date, category, imagePath);
-                Debug.WriteLine("Image Save & Insert into DB");
+                //Debug.WriteLine("Image Save & Insert into DB");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error saving image: " + ex.Message);
+                //Debug.WriteLine("Error saving image: " + ex.Message);
             }
         }
 
@@ -107,7 +107,7 @@ namespace Vadit
                     }
                     else
                     {
-                        Debug.WriteLine("SelectPoseCount : " + reader.GetInt32(0));
+                        //Debug.WriteLine("SelectPoseCount : " + reader.GetInt32(0));
                         return reader.GetInt32(0);
                     }
                 }
@@ -121,7 +121,7 @@ namespace Vadit
                 cmd.Parameters.AddWithValue("@Date", date.Date);
                 cmd.Parameters.AddWithValue("@GoodPoseCount", 0);
                 cmd.Parameters.AddWithValue("@BadPoseCount", 0);
-                Debug.WriteLine("Insert Zero Pose Count : ", date.Date + "," + 0 + "," + 0);
+                //Debug.WriteLine("Insert Zero Pose Count : ", date.Date + "," + 0 + "," + 0);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -136,11 +136,12 @@ namespace Vadit
                 updateCmd.Parameters.AddWithValue("@NewCount", (updateValue + 1));
                 updateCmd.Parameters.AddWithValue("@Date", date.Date);
                 int rowsAffected = updateCmd.ExecuteNonQuery();
-
+                /*
                 if (rowsAffected > 0)
                     Debug.WriteLine("PoseCount " + rowsAffected + " updated successfully.");
                 else
-                    Debug.WriteLine("Failed to update Count value.");
+                   Debug.WriteLine("Failed to update Count value.");
+                */
             }
         }
 
@@ -154,7 +155,7 @@ namespace Vadit
                 cmd.Parameters.AddWithValue("@ImagePath", imagePath);
 
                 cmd.ExecuteNonQuery();
-                Debug.WriteLine("Insert Image To Database");
+                //Debug.WriteLine("Insert Image To Database");
             }
         }
 
@@ -196,7 +197,7 @@ namespace Vadit
             int deleteThreshold = GetDeleteThreshold();
             if (deleteThreshold < 0)
             {
-                Debug.WriteLine("Invalid delete threshold value.");
+                //Debug.WriteLine("Invalid delete threshold value.");
                 return;
             }
 
@@ -214,7 +215,7 @@ namespace Vadit
                             cmd.CommandText = "DELETE FROM ImageData WHERE Date < @DeleteDate";
                             cmd.Parameters.AddWithValue("@DeleteDate", deleteDate);
                             int deletedImageCount = cmd.ExecuteNonQuery();
-                            Debug.WriteLine($"Deleted {deletedImageCount} images.");
+                            //Debug.WriteLine($"Deleted {deletedImageCount} images.");
 
                             cmd.CommandText = "DELETE FROM BadPose WHERE Date < @DeleteDate";
                             cmd.ExecuteNonQuery();
@@ -223,13 +224,13 @@ namespace Vadit
                             cmd.ExecuteNonQuery();
 
                             transaction.Commit(); // 커밋하여 트랜잭션 완료
-                            Debug.WriteLine("Delete Old Data completed.");
+                            //Debug.WriteLine("Delete Old Data completed.");
                         }
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback(); // 롤백하여 트랜잭션 취소
-                        Debug.WriteLine("Error deleting old data: " + ex.Message);
+                        //Debug.WriteLine("Error deleting old data: " + ex.Message);
                     }
                 }
             }
@@ -282,7 +283,7 @@ namespace Vadit
 
                 cmd.ExecuteNonQuery();
 
-                Debug.WriteLine("InsertDB_BadPose");
+                //.WriteLine("InsertDB_BadPose");
             }
         }
     }

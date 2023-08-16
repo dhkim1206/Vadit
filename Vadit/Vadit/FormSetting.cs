@@ -57,8 +57,10 @@ namespace Vadit
             AppConf.ConfigSet.AlarmSound = checkAlarm.Checked;
             AppConf.ConfigSet.CamFrame = trackBarFrame.Value;
             AppConf.ConfigSet.SaveingPeriod = cboPicterm.SelectedIndex;
-            AppConf.Save();
 
+            AppConf.Save();
+            AutoStartManager autoStartManager = new AutoStartManager();
+            autoStartManager.Run();
             _data.DeleteOldData();
         }
 

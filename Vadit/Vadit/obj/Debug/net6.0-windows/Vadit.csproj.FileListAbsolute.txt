@@ -363,3 +363,5 @@ C:\Vadit_Main\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.csproj.CopyComple
 C:\Vadit_Main\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.genruntimeconfig.cache
 C:\Vadit_Main\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\ref\Vadit.dll
 C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormPopUp.resources
+C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Interop.IWshRuntimeLibrary.dll
+C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.csproj.ResolveComReference.cache

@@ -99,7 +99,7 @@ namespace Vadit
             }
             foreach (var pictureInfo in _pictureInfoList)
             {
-                Debug.WriteLine(pictureInfo);
+                //Debug.WriteLine(pictureInfo);
                 PictureBox pictureBox = CreatePictureBox(pictureInfo, _pictureInfoList.Count);
                 ConfigurePictureBoxClickEvent(pictureBox);
 
@@ -217,12 +217,12 @@ namespace Vadit
                             // 추출한 데이터를 pictureInfoList에 추가
                             pictureInfoList.Add((imagePath, category, date, turtleneck, scoliosis, herniations));
 
-                            Debug.WriteLine(imagePath);
+                            //Debug.WriteLine(imagePath);
                         }
                     }
 
                     // 와일 루프가 끝난 후에 이미지 데이터 개수를 출력
-                    Debug.WriteLine("Total image count: " + pictureInfoList.Count);
+                    //Debug.WriteLine("Total image count: " + pictureInfoList.Count);
                 }
             }
 
@@ -236,7 +236,7 @@ namespace Vadit
         {
             _pictureInfoList.Clear();
             _pictureInfoList = LoadDataFromDatabase(selectedDate.Date);
-            Debug.WriteLine(_pictureInfoList.Count);
+            //Debug.WriteLine(_pictureInfoList.Count);
             UpdateDashBoard();
         }
     }

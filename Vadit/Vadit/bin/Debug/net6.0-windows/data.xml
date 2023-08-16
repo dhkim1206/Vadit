@@ -6,5 +6,5 @@
   <AlarmSound>true</AlarmSound>
   <SaveingPeriod>0</SaveingPeriod>
   <CamFrame>3</CamFrame>
-  <NotificationLayout>Standard</NotificationLayout>
+  <NotificationLayout>OnlyUser</NotificationLayout>
 </AppConfigClass>
