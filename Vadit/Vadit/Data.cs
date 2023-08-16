@@ -42,6 +42,7 @@ namespace Vadit
         public Data()
         {
             Create_db();
+
         }
 
         //분류된 이미지 파일 저장
@@ -121,6 +122,61 @@ namespace Vadit
             }
         }
 
+
+        /*
+        // 좋은 포즈 횟수 카운트 또는 나쁜 포즈 횟수 카운트 뽑아오기
+        public int SelectPoseCnt_Score(string isGoodPose)
+        {
+            string columnName = isGoodPose ? "GoodPoseCnt" : "BadPoseCnt";
+            string selectCountQuery = $"SELECT {columnName} FROM Score";
+
+            using (var selectCmd = new SQLiteCommand(selectCountQuery, _con))
+            {
+                // Execute the query and read the result
+                using (SQLiteDataReader reader = selectCmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                    {
+                        string insertZeroCountQuery = "INSERT INTO Score (Rank, GoodPoseCnt, BadPoseCnt) VALUES (@Rank, @GoodPoseCount, @BadPoseCount)";
+                        using (var insertZeroCmd = new SQLiteCommand(insertZeroCountQuery, _con))
+                        {
+                            insertZeroCmd.Parameters.AddWithValue("@Rank", "B");
+                            insertZeroCmd.Parameters.AddWithValue("@GoodPoseCount", 0);
+                            insertZeroCmd.Parameters.AddWithValue("@BadPoseCount", 0);
+
+                            insertZeroCmd.ExecuteNonQuery();
+                        }
+                        return 0;
+                    }
+                    else
+                    {
+                        int currentCount = reader.GetInt32(0); // Get the Count value from the first (and only) column
+                        return currentCount;
+                    }
+                }
+            }
+        }
+
+        // 좋은 포즈 카운트 업데이트 또는 나쁜 포즈 카운트 업데이트 (parameter 'isGoodPose' to differentiate)
+        public void UpdatePoseCnt_Score(string isGoodPose)
+        {
+            int updateValue = SelectPoseCnt_Score(isGoodPose);
+
+            string columnName = isGoodPose ? "GoodPoseCnt" : "BadPoseCnt";
+            string updateCountQuery = $"UPDATE Score SET {columnName} = @NewCount";
+
+            using (var updateCmd = new SQLiteCommand(updateCountQuery, _con))
+            {
+                updateCmd.Parameters.AddWithValue("@NewCount", (updateValue + 1));
+                int rowsAffected = updateCmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                    Debug.WriteLine("Count value updated successfully.");
+                else
+                    Debug.WriteLine("Failed to update Count value.");
+            }
+        }
+        */
 
         // 좋은 포즈 횟수 카운트
         public int SelectGoodPoseCnt_Score(DateTime date)
@@ -245,7 +301,7 @@ namespace Vadit
             int scoliosis = 0;
             int herniations = 0;
 
-            if (category.Contains("거북   목"))
+            if (category.Contains("거북목"))
             {
                 turtleNeck++;
             }

@@ -1,3 +1,4 @@
+
 using Emgu.CV.Ocl;
 using System;
 using System.ComponentModel;
@@ -6,7 +7,7 @@ using System.Reflection.Emit;
 using System.Threading;
 using System.Windows.Forms;
 using static Vadit.AppBase;
-
+using Timer = System.Threading.Timer;
 namespace Vadit
 {
     public partial class FormMain : Form
@@ -14,23 +15,22 @@ namespace Vadit
         AppBase.FormManager _formManager;
 
         FormPopUp _formPopUp;
-
         public VdtManager _vdtManager;
 
         public FormMain()
         {
-
             InitializeComponent();
             _formManager = new AppBase.FormManager(mainPanel);
+            AppBase.AppConf = new AppConfig("data.xml");
+            _formPopUp = new FormPopUp();
+            AppGlobal.StartTimer();
 
             AppBase.AppConf = new AppConfig("data.xml");
 
             _formPopUp = new FormPopUp();
 
-            //메인 화면에 상시 등장하는 폼
-            //_formManager.ChangeForm(typeof(DashForm));
-
         }
+
         public void StartDetect()
         {
             AppGlobal.VM = new VdtManager(OnProgressing);
@@ -42,9 +42,10 @@ namespace Vadit
         }
         private void btn_poseForm_Click(object sender, EventArgs e)
         {
-            _formManager.ChangeForm(typeof(FormCamera));
 
+            _formManager.ChangeForm(typeof(FormCamera));
         }
+
 
         private void btn_ProgramExplain_Click(object sender, EventArgs e)
         {
@@ -65,8 +66,7 @@ namespace Vadit
         {
             _formManager.CloseCurrentForm();
 
-            // 오류 발생하므로 일단 빼둠
-            //_vdtManager.Dispose();
+            _vdtManager.Dispose();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -75,7 +75,6 @@ namespace Vadit
             this.Dispose();
         }
 
-        //안좋은자세 감지시 이벤트 핸들러 이동으로 변경
         private void button1_Click(object sender, EventArgs e)
         {
             _formPopUp.Show();

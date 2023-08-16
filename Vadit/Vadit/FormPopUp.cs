@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Media;
@@ -17,21 +18,22 @@ namespace Vadit
         int _DefaultSecond;
         SoundPlayer _DefaultSound;
         SoundPlayer _LongplaySound;
-        Data _Data;
+        string _Path = Path.Combine(Application.StartupPath, "sound_data");
 
+        Data _Data;
+        string _FileName;
         public FormPopUp()
         {
             InitializeComponent();
-
             _Data = new Data();
 
         }
         // 폼이 실행될때
-        private void FormPopUp_Shown(object sender, EventArgs e)
+        private void FormPopUp_Shown(object sender, EventArgs e)//나쁜자세 알림 팝업
         {
             SetAudio(AppBase.AppConf.ConfigSet.AlarmSound);
 
-            if (AppBase.AppConf.ConfigSet.aaaaaaaaaaaaa == true)// 안좋은 자세 감지시
+            if (true)// 안좋은 자세 감지시
             {
                 SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
                 OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
@@ -41,17 +43,20 @@ namespace Vadit
                 LongPalyPopUp();
             }
         }
+
+
+
         private void SetAudio(bool soundon)
         {
             if (soundon == true)
             {
-                _DefaultSound = new SoundPlayer("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/DefaultSound.wav");
-                _LongplaySound = new SoundPlayer("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/LongPalySound.wav");
+                _DefaultSound = new SoundPlayer(Path.Combine(_Path, "DefaultSound.wav"));
+                _LongplaySound = new SoundPlayer(Path.Combine(_Path, "LongPalySound.wav"));
             }
             else
             {
-                _DefaultSound = new SoundPlayer("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/NoneSound.wav");
-                _LongplaySound = new SoundPlayer("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/NoneSound.wav");
+                _DefaultSound = new SoundPlayer(Path.Combine(_Path, "NoneSound.wav"));
+                _LongplaySound = new SoundPlayer(Path.Combine(_Path, "NoneSound.wav"));
             }
         }
         private void FormPopUp_VisibleChanged(object sender, EventArgs e)//폼이 화면에서 감지될때
@@ -154,7 +159,7 @@ namespace Vadit
                 _DefaultSecond = 0;
                 this.Hide();
             }
-        }
 
+        }
     }
 }
