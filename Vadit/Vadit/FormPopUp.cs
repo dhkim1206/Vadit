@@ -29,11 +29,11 @@ namespace Vadit
 
         }
         // 폼이 실행될때
-        private void FormPopUp_Shown(object sender, EventArgs e)
+        private void FormPopUp_Shown(object sender, EventArgs e)//나쁜자세 알림 팝업
         {
             SetAudio(AppBase.AppConf.ConfigSet.AlarmSound);
 
-            if (AppBase.AppConf.ConfigSet.aaaaaaaaaaaaa == true)// 안좋은 자세 감지시
+            if (true)// 안좋은 자세 감지시
             {
                 SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
                 OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
@@ -43,6 +43,9 @@ namespace Vadit
                 LongPalyPopUp();
             }
         }
+
+
+
         private void SetAudio(bool soundon)
         {
             if (soundon == true)
