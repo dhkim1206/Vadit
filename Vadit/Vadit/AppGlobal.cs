@@ -15,11 +15,12 @@ namespace Vadit
         static public InfoInputCorrectPose CorrectPose = new InfoInputCorrectPose();
         static public Timer TM;
         private static bool _isRunning = false;
+      //  private static FormPopUp _fp = new FormPopUp();
         public static void StartTimer()
         {
             if (!_isRunning)
             {
-                TM = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(600));
+                TM = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(10));
                 _isRunning = true;
                 Debug.WriteLine("Timer started.");
             }
@@ -36,6 +37,7 @@ namespace Vadit
         {
             // 8초마다 실행되는 코드
             Debug.WriteLine("장시간 이용 검출" + DateTime.Now);
+  //          _fp.LongUseWarning();
         }
     }
 }

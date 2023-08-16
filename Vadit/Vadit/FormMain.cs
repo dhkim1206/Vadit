@@ -17,7 +17,6 @@ namespace Vadit
         FormPopUp _formPopUp;
         public VdtManager _vdtManager;
 
-        public VdtManager _vdtManager;
         public FormMain()
         {
             InitializeComponent();

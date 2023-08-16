@@ -80,7 +80,7 @@ namespace Vadit
             checkAlarm.Checked = AppConf.ConfigSet.AlarmSound;
             trackBarFrame.Value = AppConf.ConfigSet.CamFrame;
 
-            cboPicterm.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
+            cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
         }
 
         private void button1_Click_1(object sender, EventArgs e)

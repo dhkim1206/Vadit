@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Media;
@@ -17,6 +18,7 @@ namespace Vadit
         int _DefaultSecond;
         SoundPlayer _DefaultSound;
         SoundPlayer _LongplaySound;
+        string _Path = Path.Combine(Application.StartupPath, "sound_data");
 
         Data _Data;
         string _FileName;
@@ -24,7 +26,6 @@ namespace Vadit
         public FormPopUp()
         {
             InitializeComponent();
-
             _Data = new Data();
         }
         private void LoadImage(string[] ImagePath)
@@ -35,13 +36,14 @@ namespace Vadit
             if (!this.Visible) return;
             if (AppBase.AppConf.ConfigSet.AlarmSound)
             {
-                _DefaultSound = new SoundPlayer("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/DefaultSound.wav");
-                _LongplaySound = new SoundPlayer("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/LongPalySound.wav");
+                _DefaultSound = new SoundPlayer(Path.Combine(_Path, "DefaultSound.wav"));
+                
+                _LongplaySound = new SoundPlayer(Path.Combine(_Path, "LongPalySound.wav"));
             }
             else
             {
-                _DefaultSound = new SoundPlayer("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/NoneSound.wav");
-                _LongplaySound = new SoundPlayer("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/NoneSound.wav");
+                _DefaultSound = new SoundPlayer(Path.Combine(_Path, "NoneSound.wav"));
+                _LongplaySound = new SoundPlayer(Path.Combine(_Path, "NoneSound.wav"));
 
             }
             SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
@@ -70,9 +72,9 @@ namespace Vadit
                 CommentPanel.Visible = true;
                 this.Size = new Size(350, 440);
                 this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 440);
-                UserPosePicBox.Load("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/ExamplePose.png");
+                UserPosePicBox.Load(Path.Combine(_Path, "ExamplePose.png"));
                 UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                ExamplePosePicBox.Load("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/ExamplePose.png");
+                ExamplePosePicBox.Load(Path.Combine(_Path, "ExamplePose.png"));
                 ExamplePosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
                 CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
@@ -84,7 +86,7 @@ namespace Vadit
                 CommentPanel.Visible = true;
                 this.Size = new Size(350, 265);
                 this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 265);
-                UserPosePicBox.Load("/Users/Uesr/Documents/GitHub/Vadit/Vadit/Vadit/bin/Debug/net6.0-windows/sound_data/ExamplePose.png");
+                UserPosePicBox.Load(Application.StartupPath + "ExamplePose.png");
                 UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
             }
@@ -120,6 +122,25 @@ namespace Vadit
                 this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
                 CommentButton.Text = "현재 N시간 동안 앉아 있었습니다.\n잠시 의자에서 일어나 휴식을 취해 주십시오.";
             }
+        }
+        public void ClosePupup()
+        {
+            if (_DefaultSecond == 10)
+            {
+                DefaultTimer.Stop();
+                _DefaultSecond = 0;
+                this.Hide();
+            }
+        }
+        public void LongUseWarning()
+        {
+            _LongplaySound.Play();
+            UserPanel.Visible = false;
+            ExamplePosePanel.Visible = false;
+            CommentPanel.Visible = true;
+            this.Size = new Size(350, 90);
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
+            CommentButton.Text = "현재 1시간 동안 앉아 있었습니다.\n잠시 의자에서 일어나 휴식을 취해 주십시오.";
         }
     }
 }
