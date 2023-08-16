@@ -345,6 +345,7 @@ namespace Vadit
             }
 
             _data.SaveImageToFile(time, img, _analyzeData.Result);
+
             _data.InsertDB_BadPose(time, _analyzeData.Result);
             //_data.UpdatePoseCnt_Score(analyzeData.Result);
 

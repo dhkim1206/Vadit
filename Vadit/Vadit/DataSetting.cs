@@ -16,13 +16,14 @@ namespace Vadit
     [Serializable]
     public class AppConfigClass
     {
+        public bool aaaaaaaaaaaaa = false;
         public bool Pose;
         public bool LongPlay;
         public bool WindowSameExecute;
         public bool AlarmSound;
         public int CamFrame;
-        public int SaveingPeriod; // 위에서 부터 1, 2, 3 ...
-        public EnumNotificationLayout NotificationLayout; //Convert.ToInt32(AppConf.ConfigSet.NotificationLayout);
+        public int SaveingPeriod;
+        public EnumNotificationLayout NotificationLayout;
 
 
     }

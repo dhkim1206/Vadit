@@ -75,6 +75,7 @@ namespace Vadit
             this.Dispose();
         }
 
+        //안좋은자세 감지시 이벤트 핸들러 이동으로 변경
         private void button1_Click(object sender, EventArgs e)
         {
             _formPopUp.Show();
