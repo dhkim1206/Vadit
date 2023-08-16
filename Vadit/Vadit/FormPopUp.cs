@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -20,11 +21,14 @@ namespace Vadit
         SoundPlayer _LongplaySound;
         string _Path = Path.Combine(Application.StartupPath, "sound_data");
 
+
         Data _Data;
         string _FileName;
         public FormPopUp()
         {
             InitializeComponent();
+            _DefaultSound = new SoundPlayer(Path.Combine(_Path, "DefaultSound.wav"));
+            _LongplaySound = new SoundPlayer(Path.Combine(_Path, "LongPalySound.wav"));
             _Data = new Data();
 
         }
@@ -70,7 +74,7 @@ namespace Vadit
             _DefaultSecond++;
             Execution_UserSettingValue();
         }
-        private void LongPalyPopUp()
+        public void LongPalyPopUp()
         {
             UserPanel.Visible = false;
             ExamplePosePanel.Visible = false;

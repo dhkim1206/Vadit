@@ -51,6 +51,7 @@ namespace Vadit
             AppGlobal.isinputmode = false;
             FormMain fm = new FormMain();
             fm.StartDetect();
+            AppGlobal.StartTimer();
         }
         private async void btnResetPose_Click(object sender, EventArgs e)
         {
