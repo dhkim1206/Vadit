@@ -12,7 +12,7 @@ namespace Vadit
     {
         static public bool isinputmode = false;
         static public VdtManager VM = null;
-        static public InfoInputCorrectPose CorrectPose = new InfoInputCorrectPose();
+        static public InfoInputCorrectPose CorrectPose =new InfoInputCorrectPose();
         static public Timer TM;
         private static bool _isRunning = false;
         private static FormPopUp _fp = new FormPopUp();
@@ -20,7 +20,7 @@ namespace Vadit
         {
             if (!_isRunning)
             {
-                TM = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(10));
+                TM = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(600));
                 _isRunning = true;
                 Debug.WriteLine("Timer started.");
             }

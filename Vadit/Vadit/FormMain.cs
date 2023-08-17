@@ -20,10 +20,12 @@ namespace Vadit
         public FormMain()
         {
             InitializeComponent();
+            if (AppGlobal.CorrectPose._img != null)
+                StartDetect();
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
             _formPopUp = new FormPopUp();
-         //   AppGlobal.StartTimer();
+            AppGlobal.StartTimer();
 
             AppBase.AppConf = new AppConfig("data.xml");
 
