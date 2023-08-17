@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Reflection.Emit;
 
 namespace Vadit
 {
@@ -30,6 +31,5 @@ namespace Vadit
             _chartManager.LoadChartData();
             _chartManager.BindChartData(chart1);
         }
-
     }
 }

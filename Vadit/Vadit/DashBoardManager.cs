@@ -23,7 +23,7 @@ namespace Vadit
 
         int _current = 1;
 
-        public DashBoardManager(Panel panel, FlowLayoutPanel imageFlowLayout, DateTime selectedDate,Label badPoseCnt, Label trutleNeck, Label scoliosis, Label herniations)
+        public DashBoardManager(Panel panel, FlowLayoutPanel imageFlowLayout, DateTime selectedDate, Label badPoseCnt, Label trutleNeck, Label scoliosis, Label herniations)
         {
             _panel = panel;
             _panel_imageFlowLayout = imageFlowLayout;
@@ -31,7 +31,7 @@ namespace Vadit
             _lb_TrutleNeck = trutleNeck;
             _lb_scoliosis = scoliosis;
             _lb_herniations = herniations;
-            _panel_imageFlowLayout.AutoScroll = true; 
+            _panel_imageFlowLayout.AutoScroll = true;
             _pictureInfoList = LoadDataFromDatabase(selectedDate.Date);
             UpdateDashBoard();
         }
@@ -145,7 +145,7 @@ namespace Vadit
 
                     using (Font font1 = new Font(FontFamily.GenericSansSerif, 70, FontStyle.Bold, GraphicsUnit.Pixel))
                     {
-                        if (_current < count+1)
+                        if (_current < count + 1)
                         {
                             g.DrawString(_current.ToString() + ".", font1, Brushes.Yellow, new PointF(0, 0));
                             _current++;

@@ -1,74 +1,65 @@
 ﻿using Emgu.CV.Structure;
 using Emgu.CV;
 using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Diagnostics;
-using System.IO;
-using System.Xml;
+using System.Drawing;
+using System.Data;
+using static Vadit.Data;
 
 namespace Vadit
 {
     public class Data
     {
-        public delegate void DeleteOldDataDelegate();
+        string path = "data_table.db";
+        string cs = @"URI=file:" + Application.StartupPath + "\\data_table.db";
+        public string imageDirectory = Path.Combine(Application.StartupPath, "image_data");
 
-        private readonly string _configFilePath = "data.xml";
-        private readonly string _dbPath = "data_table.db";
-        private readonly string _cs;
-        private readonly string _imageDirectory;
+        public SQLiteConnection _con;
+        public SQLiteCommand _cmd;
+        public SQLiteDataReader _dr;
 
-        private SQLiteConnection _con;
+        public class BadPoseData
+        {
+            public DateTime Date { get; private set; }
+            public int TurtleNeck { get; private set; }
+            public int Scoliosis { get; private set; }
+            public int TurtleNeck_Scoliosis { get; private set; }
+
+            public BadPoseData(DateTime date, int turtleNeck, int scoliosis, int turtleNeck_Scoliosis)
+            {
+                Date = date;
+                TurtleNeck = turtleNeck;
+                Scoliosis = scoliosis;
+                TurtleNeck_Scoliosis = turtleNeck_Scoliosis;
+            }
+        }
 
         public Data()
         {
-            _cs = $"URI=file:{Path.Combine(Application.StartupPath, _dbPath)}";
-            _imageDirectory = Path.Combine(Application.StartupPath, "image_data");
+            Create_db();
 
-            CreateDatabase();
         }
 
-        private void CreateDatabase()
-        {
-            if (!File.Exists(_dbPath))
-            {
-                SQLiteConnection.CreateFile(_dbPath);
-
-                _con = new SQLiteConnection(_cs);
-                _con.Open();
-
-                using (var cmd = new SQLiteCommand(_con))
-                {
-                    cmd.CommandText = "CREATE TABLE Score ( Date DATE PRIMARY KEY, GoodPoseCnt INT, BadPoseCnt INT)";
-                    cmd.ExecuteNonQuery();
-                    //Debug.WriteLine("Create Score Table");
-
-                    cmd.CommandText = "CREATE TABLE ImageData (Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE, Category TEXT, ImagePath TEXT)";
-                    cmd.ExecuteNonQuery();
-                    //Debug.WriteLine("Create ImageData Table");
-
-                    cmd.CommandText = "CREATE TABLE BadPose ( Date DATE PRIMARY KEY, TurtleNeck INT, Scoliosis INT, Herniations INT)";
-                    //Debug.WriteLine("Create BadPose Table");
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            else
-            {
-                _con = new SQLiteConnection(_cs);
-                _con.Open();
-                //Debug.WriteLine("Database already exists.");
-            }
-        }
-
+        //분류된 이미지 파일 저장
         public void SaveImageToFile(DateTime date, Image<Bgr, byte> image, string category)
         {
-            CreateImageDirectory();
+            Create_ImageFile();
 
             try
             {
                 string timestamp = date.ToString("yyyyMMddHHmmssff");
-                string imageName = $"{timestamp}.jpg";
-                string imagePath = Path.Combine(_imageDirectory, imageName);
 
+                // 이미지 이름
+                string imageName = $"{timestamp}.jpg";
+
+                string imagePath = Path.Combine(imageDirectory, imageName);
+
+                // EMGY.CV.Image -> 바이트 배열 변환
                 byte[] imageData;
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -77,75 +68,219 @@ namespace Vadit
                 }
 
                 File.WriteAllBytes(imagePath, imageData);
-                InsertImageToDatabase(date, category, imagePath);
-                //Debug.WriteLine("Image Save & Insert into DB");
+                InsertDB_Image(date, category, imagePath);
             }
             catch (Exception ex)
             {
-                //Debug.WriteLine("Error saving image: " + ex.Message);
+                Debug.WriteLine("Error saving image: " + ex.Message);
+            }
+
+        }
+        // 이미지 파일 생성
+        public void Create_ImageFile()
+        {
+            if (!Directory.Exists(imageDirectory)) Directory.CreateDirectory(imageDirectory);
+        }
+
+        private void Create_db()
+        {
+            if (!System.IO.File.Exists(path))
+            {
+                SQLiteConnection.CreateFile(path);
+
+                // Use cs variable to open the connection
+                _con = new SQLiteConnection(cs);
+                _con.Open();
+
+                // Create Score table (move it to the beginning)
+                string totlaScore = "CREATE TABLE Score ( Date DATE PRIMARY KEY, GoodPoseCnt INT, BadPoseCnt INT)";
+                using (var totlaScoretCmd = new SQLiteCommand(totlaScore, _con))
+                {
+                    totlaScoretCmd.ExecuteNonQuery();
+                }
+
+                // Create ImageData table
+                string imageDataTableSql = "CREATE TABLE ImageData (Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE, Category TEXT, ImagePath TEXT)";
+                using (var imageDataCmd = new SQLiteCommand(imageDataTableSql, _con))
+                {
+                    imageDataCmd.ExecuteNonQuery();
+                }
+
+                // Create BadPose table
+                string BadPoseTableSql = "CREATE TABLE BadPose ( Date DATE PRIMARY KEY, TurtleNeck INT, Scoliosis INT, Herniations INT)";
+                using (var BadPoseCmd = new SQLiteCommand(BadPoseTableSql, _con))
+                {
+                    BadPoseCmd.ExecuteNonQuery();
+                }
+            }
+            else
+            {
+                _con = new SQLiteConnection(cs);
+                _con.Open();
+                Debug.WriteLine("Database cannot be created because it already exists.");
+                return;
             }
         }
 
-        private void CreateImageDirectory()
-        {
-            if (!Directory.Exists(_imageDirectory)) Directory.CreateDirectory(_imageDirectory);
-        }
 
-        public int SelectPoseCount(string columnName, DateTime date)
+        /*
+        // 좋은 포즈 횟수 카운트 또는 나쁜 포즈 횟수 카운트 뽑아오기
+        public int SelectPoseCnt_Score(string isGoodPose)
         {
-            string selectCountQuery = $"SELECT {columnName} FROM Score WHERE Date = @Date";
+            string columnName = isGoodPose ? "GoodPoseCnt" : "BadPoseCnt";
+            string selectCountQuery = $"SELECT {columnName} FROM Score";
+
             using (var selectCmd = new SQLiteCommand(selectCountQuery, _con))
             {
-                selectCmd.Parameters.AddWithValue("@Date", date);
-
+                // Execute the query and read the result
                 using (SQLiteDataReader reader = selectCmd.ExecuteReader())
                 {
                     if (!reader.Read())
                     {
-                        InsertZeroPoseCount(date);
+                        string insertZeroCountQuery = "INSERT INTO Score (Rank, GoodPoseCnt, BadPoseCnt) VALUES (@Rank, @GoodPoseCount, @BadPoseCount)";
+                        using (var insertZeroCmd = new SQLiteCommand(insertZeroCountQuery, _con))
+                        {
+                            insertZeroCmd.Parameters.AddWithValue("@Rank", "B");
+                            insertZeroCmd.Parameters.AddWithValue("@GoodPoseCount", 0);
+                            insertZeroCmd.Parameters.AddWithValue("@BadPoseCount", 0);
+
+                            insertZeroCmd.ExecuteNonQuery();
+                        }
                         return 0;
                     }
                     else
                     {
-                        //Debug.WriteLine("SelectPoseCount : " + reader.GetInt32(0));
-                        return reader.GetInt32(0);
+                        int currentCount = reader.GetInt32(0); // Get the Count value from the first (and only) column
+                        return currentCount;
                     }
                 }
             }
         }
-        private void InsertZeroPoseCount(DateTime date)
+
+        // 좋은 포즈 카운트 업데이트 또는 나쁜 포즈 카운트 업데이트 (parameter 'isGoodPose' to differentiate)
+        public void UpdatePoseCnt_Score(string isGoodPose)
         {
-            using (var cmd = new SQLiteCommand(_con))
+            int updateValue = SelectPoseCnt_Score(isGoodPose);
+
+            string columnName = isGoodPose ? "GoodPoseCnt" : "BadPoseCnt";
+            string updateCountQuery = $"UPDATE Score SET {columnName} = @NewCount";
+
+            using (var updateCmd = new SQLiteCommand(updateCountQuery, _con))
             {
-                cmd.CommandText = "INSERT INTO Score (Date, GoodPoseCnt, BadPoseCnt) VALUES (@Date, @GoodPoseCount, @BadPoseCount)";
-                cmd.Parameters.AddWithValue("@Date", date.Date);
-                cmd.Parameters.AddWithValue("@GoodPoseCount", 0);
-                cmd.Parameters.AddWithValue("@BadPoseCount", 0);
-                //Debug.WriteLine("Insert Zero Pose Count : ", date.Date + "," + 0 + "," + 0);
-                cmd.ExecuteNonQuery();
+                updateCmd.Parameters.AddWithValue("@NewCount", (updateValue + 1));
+                int rowsAffected = updateCmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                    Debug.WriteLine("Count value updated successfully.");
+                else
+                    Debug.WriteLine("Failed to update Count value.");
             }
         }
+        */
 
-        public void UpdatePoseCount(string columnName, DateTime date)
+        // 좋은 포즈 횟수 카운트
+        public int SelectGoodPoseCnt_Score(DateTime date)
         {
-            int updateValue = SelectPoseCount(columnName, date);
+            string selectCountQuery = "SELECT GoodPoseCnt FROM Score WHERE Date = @Date";
+            using (var selectCmd = new SQLiteCommand(selectCountQuery, _con))
+            {
+                selectCmd.Parameters.AddWithValue("@Date", date);
+                // Execute the query and read the result
+                using (SQLiteDataReader reader = selectCmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                    {
+                        string insertZeroCountQuery = "INSERT INTO Score (Date, GoodPoseCnt, BadPoseCnt) VALUES (@Date, @GoodPoseCount, @BadPoseCount)";
+                        using (var insertZeroCmd = new SQLiteCommand(insertZeroCountQuery, _con))
+                        {
+                            insertZeroCmd.Parameters.AddWithValue("@Date", date);
+                            insertZeroCmd.Parameters.AddWithValue("@GoodPoseCount", 0);
+                            insertZeroCmd.Parameters.AddWithValue("@BadPoseCount", 0);
 
-            string updateCountQuery = $"UPDATE Score SET {columnName} = @NewCount WHERE Date = @Date";
+                            insertZeroCmd.ExecuteNonQuery();
+                        }
+                        return 0;
+                    }
+                    else
+                    {
+                        int currentCount = reader.GetInt32(0); // Get the Count value from the first (and only) column
+                        return currentCount;
+                    }
+                }
+            }
+
+        }
+
+        // 좋은 포즈 카운트 업데이트
+        public void UpdateGoodPoseCnt_Score(DateTime date)
+        {
+            int updateValue = SelectGoodPoseCnt_Score(date);
+
+            string updateCountQuery = "UPDATE Score SET GoodPoseCnt = @NewCount WHERE Date = @Date";
             using (var updateCmd = new SQLiteCommand(updateCountQuery, _con))
             {
                 updateCmd.Parameters.AddWithValue("@NewCount", (updateValue + 1));
                 updateCmd.Parameters.AddWithValue("@Date", date.Date);
                 int rowsAffected = updateCmd.ExecuteNonQuery();
-                /*
+
                 if (rowsAffected > 0)
-                    Debug.WriteLine("PoseCount " + rowsAffected + " updated successfully.");
+                    Debug.WriteLine("Count value updated successfully.");
                 else
-                   Debug.WriteLine("Failed to update Count value.");
-                */
+                    Debug.WriteLine("Failed to update Count value.");
+            }
+        }
+        // 좋은 포즈 카운트 뽑아오기
+        public int SelectBadPoseCnt_Score(DateTime date)
+        {
+            string selectCountQuery = "SELECT BadPoseCnt FROM Score WHERE Date = @Date";
+            using (var selectCmd = new SQLiteCommand(selectCountQuery, _con))
+            {
+                selectCmd.Parameters.AddWithValue("@Date", date);
+                // Execute the query and read the result
+                using (SQLiteDataReader reader = selectCmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                    {
+                        string insertZeroCountQuery = "INSERT INTO Score (Date, GoodPoseCnt, BadPoseCnt) VALUES (@Date, @GoodPoseCount, @BadPoseCount)";
+                        using (var insertZeroCmd = new SQLiteCommand(insertZeroCountQuery, _con))
+                        {
+                            insertZeroCmd.Parameters.AddWithValue("@Date", date);
+                            insertZeroCmd.Parameters.AddWithValue("@GoodPoseCount", 0);
+                            insertZeroCmd.Parameters.AddWithValue("@BadPoseCount", 0);
+
+                            insertZeroCmd.ExecuteNonQuery();
+                        }
+                        return 0;
+                    }
+                    else
+                    {
+                        int currentCount = reader.GetInt32(0); // Get the Count value from the first (and only) column
+                        return currentCount;
+                    }
+                }
+            }
+
+        }
+        public void UpdateBadPoseCnt_Score(DateTime date)
+        {
+            int updateValue = SelectBadPoseCnt_Score(date);
+
+            string updateCountQuery = "UPDATE Score SET BadPoseCnt = @NewCount WHERE Date = @Date";
+            using (var updateCmd = new SQLiteCommand(updateCountQuery, _con))
+            {
+                updateCmd.Parameters.AddWithValue("@NewCount", (updateValue + 1));
+                updateCmd.Parameters.AddWithValue("@Date", date.Date);
+                int rowsAffected = updateCmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                    Debug.WriteLine("Count value updated successfully.");
+                else
+                    Debug.WriteLine("Failed to update Count value.");
             }
         }
 
-        public void InsertImageToDatabase(DateTime date, string category, string imagePath)
+        // 이미지 테이블 Insert
+        public void InsertDB_Image(DateTime date, string category, string imagePath)
         {
             using (var cmd = new SQLiteCommand(_con))
             {
@@ -155,105 +290,12 @@ namespace Vadit
                 cmd.Parameters.AddWithValue("@ImagePath", imagePath);
 
                 cmd.ExecuteNonQuery();
-                //Debug.WriteLine("Insert Image To Database");
             }
         }
 
 
-        public int GetDeleteThreshold()
-        {
-            try
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(_configFilePath);
-
-                XmlNode saveingPeriodNode = doc.SelectSingleNode("//SaveingPeriod");
-                if (saveingPeriodNode != null)
-                {
-                    int saveingPeriodValue = Convert.ToInt32(saveingPeriodNode.InnerText);
-                    switch (saveingPeriodValue)
-                    {
-                        case 0:
-                            return 15;
-                        case 1:
-                            return 30;
-                        case 2:
-                            return 90;
-                        default:
-                            return -1; // Invalid value
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle XML reading error
-                Console.WriteLine("Error reading config file: " + ex.Message);
-            }
-
-            return -1; // Default value
-        }
-        public void DeleteOldData()
-        {
-            int deleteThreshold = GetDeleteThreshold();
-            if (deleteThreshold < 0)
-            {
-                //Debug.WriteLine("Invalid delete threshold value.");
-                return;
-            }
-
-            DateTime deleteDate = DateTime.Today.AddDays(-deleteThreshold);
-
-            using (SQLiteConnection con = new SQLiteConnection(@"Data Source=data_table.db"))
-            {
-                con.Open();
-                using (var transaction = con.BeginTransaction())
-                {
-                    try
-                    {
-                        using (var cmd = new SQLiteCommand(con))
-                        {
-                            cmd.CommandText = "DELETE FROM ImageData WHERE Date < @DeleteDate";
-                            cmd.Parameters.AddWithValue("@DeleteDate", deleteDate);
-                            int deletedImageCount = cmd.ExecuteNonQuery();
-                            //Debug.WriteLine($"Deleted {deletedImageCount} images.");
-
-                            cmd.CommandText = "DELETE FROM BadPose WHERE Date < @DeleteDate";
-                            cmd.ExecuteNonQuery();
-
-                            cmd.CommandText = "DELETE FROM Score WHERE Date < @DeleteDate";
-                            cmd.ExecuteNonQuery();
-
-                            transaction.Commit(); // 커밋하여 트랜잭션 완료
-                            //Debug.WriteLine("Delete Old Data completed.");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback(); // 롤백하여 트랜잭션 취소
-                        //Debug.WriteLine("Error deleting old data: " + ex.Message);
-                    }
-                }
-            }
-        }
-
-
-
-        public void UpdateGoodPoseCnt_Score(DateTime date)
-        {
-            UpdatePoseCount("GoodPoseCnt", date);
-        }
-
-        public void UpdateBadPoseCnt_Score(DateTime date)
-        {
-            UpdatePoseCount("BadPoseCnt", date);
-        }
 
         public void InsertDB_BadPose(DateTime date, string category)
-        {
-            InsertBadPose(date, category);
-        }
-
-        public void InsertBadPose(DateTime date, string category)
         {
             int turtleNeck = 0;
             int scoliosis = 0;
@@ -272,6 +314,7 @@ namespace Vadit
                 herniations++;
             }
 
+
             using (var cmd = new SQLiteCommand(_con))
             {
                 cmd.CommandText = "INSERT INTO BadPose (Date, TurtleNeck, Scoliosis, Herniations) VALUES (@Date, @TurtleNeck, @Scoliosis, @Herniations)";
@@ -283,8 +326,9 @@ namespace Vadit
 
                 cmd.ExecuteNonQuery();
 
-                //.WriteLine("InsertDB_BadPose");
+                Debug.WriteLine("InsertDB_BadPose");
             }
         }
+
     }
 }

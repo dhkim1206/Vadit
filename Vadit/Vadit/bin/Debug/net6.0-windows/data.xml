@@ -3,8 +3,8 @@
   <Pose>true</Pose>
   <LongPlay>true</LongPlay>
   <WindowSameExecute>false</WindowSameExecute>
-  <AlarmSound>true</AlarmSound>
-  <SaveingPeriod>0</SaveingPeriod>
-  <CamFrame>3</CamFrame>
-  <NotificationLayout>OnlyUser</NotificationLayout>
+  <AlarmSound>false</AlarmSound>
+  <CamFrame>0</CamFrame>
+  <SaveingPeriod>-1</SaveingPeriod>
+  <NotificationLayout>Standard</NotificationLayout>
 </AppConfigClass>
