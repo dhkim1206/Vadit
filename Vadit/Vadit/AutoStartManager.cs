@@ -23,20 +23,22 @@ namespace Vadit
             // 프로그램 실행 파일의 경로
             //string programPath = Assembly.GetExecutingAssembly().Location;
 
-            string programPath = Path.Combine(Application.StartupPath, "Vadit"); // 사운드 파일 경로를 저장할 변수
+            string programPath = Path.Combine(Application.StartupPath, "Vadit.exe"); // 사운드 파일 경로를 저장할 변수
             Debug.WriteLine("프로그램 실행 파일의 경로 : " + programPath);
             // 시작 프로그램 폴더 경로 설정
-            string startupFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit.lnk");
+            string startupFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit.exe");
             Debug.WriteLine("시작 프로그램 폴더 : " + startupFolderPath);
-            // 프로그램 실행 파일을 시작 프로그램 폴더에 복사
-            System.IO.File.Copy(programPath, startupFolderPath, true);
 
-            /*
+                // 프로그램 실행 파일을 시작 프로그램 폴더에 복사
+               // System.IO.File.Copy(programPath, startupFolderPath, true);
+            
+
+            
             // 바로 가기 파일 생성 및 설정
-            string shortcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "VaditShortcut.lnk");
+            string shortcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit바로가기.lnk");
             Debug.WriteLine("바로가기 파일 경로 " + shortcutPath);
             CreateShortcut(programPath, shortcutPath);
-            Debug.WriteLine("프로그램이 윈도우 자동 시작 프로그램으로 등록되었습니다.");*/
+            Debug.WriteLine("프로그램이 윈도우 자동 시작 프로그램으로 등록되었습니다.");
         }
 
 
@@ -47,7 +49,7 @@ namespace Vadit
 
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)  // Windows인 경우
             {
-                string startupFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit.lnk");
+                string startupFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit.exe");
                 if (System.IO.File.Exists(startupFolderPath))
                 {
                     System.IO.File.Delete(startupFolderPath);  // 시작 프로그램 폴더에 있는 바로 가기 파일 삭제
