@@ -87,10 +87,10 @@ namespace Vadit
         }
         private void OpenUserImage(EnumNotificationLayout layout) 
         {
-            if (Directory.Exists(_Data.imageDirectory))
+            if (Directory.Exists(_Data._imageDirectory))
             {
                 string filenameExtension = "*.JPG"; // 파일 확장자에 따라 변경
-                string[] files = Directory.GetFiles(_Data.imageDirectory, filenameExtension);
+                string[] files = Directory.GetFiles(_Data._imageDirectory, filenameExtension);
 
                 double highestName = -1;
                 string highestNumberFileName = "";

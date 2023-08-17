@@ -2,9 +2,9 @@
 <AppConfigClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Pose>true</Pose>
   <LongPlay>true</LongPlay>
-  <WindowSameExecute>false</WindowSameExecute>
+  <WindowSameExecute>true</WindowSameExecute>
   <AlarmSound>true</AlarmSound>
-  <SaveingPeriod>0</SaveingPeriod>
   <CamFrame>3</CamFrame>
+  <SaveingPeriod>0</SaveingPeriod>
   <NotificationLayout>OnlyUser</NotificationLayout>
 </AppConfigClass>
