@@ -15,16 +15,7 @@ namespace Vadit
         static public InfoInputCorrectPose CorrectPose = new InfoInputCorrectPose();
         static public Timer TM;
         private static bool _isRunning = false;
-
-        private static FormPopUp _fp = new FormPopUp();
-        public static bool LongPlayPopUp = false;
-
-        public static void StartLongPlayPopUp()
-        {
-                StartTimer();
-                _fp.Show();
-        }
-
+      //  private static FormPopUp _fp = new FormPopUp();
         public static void StartTimer()
         {
             if (!_isRunning)

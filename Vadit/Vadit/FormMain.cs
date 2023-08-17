@@ -22,6 +22,10 @@ namespace Vadit
             InitializeComponent();
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
+            _formPopUp = new FormPopUp();
+            AppGlobal.StartTimer();
+
+            AppBase.AppConf = new AppConfig("data.xml");
 
             _formPopUp = new FormPopUp();
 
