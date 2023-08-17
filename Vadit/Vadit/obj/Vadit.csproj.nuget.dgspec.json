@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
         "projectName": "Vadit",
         "projectPath": "C:\\Vadit\\Vadit\\Vadit\\Vadit.csproj",
-        "packagesPath": "C:\\Users\\kdh12\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\kmjkt\\.nuget\\packages\\",
         "outputPath": "C:\\Vadit\\Vadit\\Vadit\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kdh12\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kmjkt\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
