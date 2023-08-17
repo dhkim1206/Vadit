@@ -21,7 +21,6 @@ namespace Vadit
         public Image<Bgr, byte> _img = null;
         public List<Point> _point = null;
         public double _ratio = 0;
-        public int _dt17to18 = 0;
         int[] _indexes;
         public bool _isPointNotNull = false;
         public void setInfo(Image<Bgr, byte> img, List<Point> points)
@@ -30,7 +29,7 @@ namespace Vadit
             this._point = points;
             if (Math.Abs(points[0].Y - points[1].Y) != 0)
                 this._ratio = (double)Math.Abs(points[2].X - points[5].X) / (double)Math.Abs(points[0].Y - points[1].Y);
-            this._dt17to18 = points[18].X - points[17].X;
+
             this.IsPointNotNull();
             Debug.WriteLine($"설정된 자세: {_ratio:F3}");
             Debug.WriteLine($"어깨 길이: {Math.Abs(points[2].X - points[5].X):F3}");
@@ -103,7 +102,7 @@ namespace Vadit
                         Debug.WriteLine("쓰레드 중단");
                         return;
                     }
-                    else if (_isInputCorrrctPose == true)
+                    if (_isInputCorrrctPose == true)
                     {
 
                         Debug.WriteLine("사진 입력받는중");
@@ -254,7 +253,6 @@ namespace Vadit
                 {
                     _infoInputCorrectPose.setInfo(img, _points);
                     AppGlobal.CorrectPose.setInfo(img, _points);
-
                 }
                 else if (!_isInputCorrrctPose)
                 {
@@ -291,72 +289,54 @@ namespace Vadit
             double _ratio = 0;
             int[] _indexes;
             int c = 0;
-            int dt17to18 = points[18].X - points[17].X;
 
             _indexes = new int[] { 0, 1, 2, 5, 15, 16, 17, 18 };
             foreach (int i in _indexes)
             {
                 if (_points[i].X == 0 || _points[i].Y == 0)
-                {
                     c++;
-                }
             }
             if (c > 0)
-            {
-                if (c > 4)  //빈점이 4개 초과일때 자리비움으로 인정.
-                {
-                    AppGlobal.StopTimer(); //타이머 일시정지.
-                }
-                Debug.WriteLine("17번:[" + _points[17].X + "," + _points[17].Y + "]");
-                Debug.WriteLine("15번:[" + _points[15].X + "," + _points[15].Y + "]");
-                Debug.WriteLine("0번:[" + _points[0].X + "," + _points[0].Y + "]");
-                Debug.WriteLine("16번:[" + _points[16].X + "," + _points[16].Y + "]");
-                Debug.WriteLine("18번:[" + _points[18].X + "," + _points[18].Y + "]");
-                Debug.WriteLine("2번:[" + _points[2].X + "," + _points[2].Y + "]");
-                Debug.WriteLine("5번:[" + _points[5].X + "," + _points[5].Y + "]");
-                Debug.WriteLine("1번:[" + _points[1].X + "," + _points[1].Y + "]");
                 return;
-            }
 
             if (AppGlobal.CorrectPose._isPointNotNull && (Math.Abs(_points[0].X - _points[1].X) != 0))
                 _ratio = ((double)Math.Abs(_points[2].X - _points[5].X)) / ((double)Math.Abs(_points[0].Y - _points[1].Y));
             if (_ratio == 0)
-            {
-                Debug.WriteLine("실시간 누락 point로 인해 현재사진값 버림");
                 return;
-            }
 
             Debug.WriteLine($"올바른 자세: {AppGlobal.CorrectPose._ratio:F3}");
             Debug.WriteLine($"현재측정: {_ratio:F3}");
-            Debug.WriteLine("검출된 17to18길이는 ="+dt17to18);
-            Debug.WriteLine("설정된 17to18길이는 ="+ AppGlobal.CorrectPose._dt17to18);
 
-            if (Math.Abs(_points[2].Y - _points[5].Y) > 40)
+            Debug.WriteLine($"코: {points[0].X},{points[0].Y}");
+            Debug.WriteLine($"목: {points[1].X},{points[1].Y}");
+            Debug.WriteLine($"왼쪽 어깨: {points[2].X},{points[2].Y}");
+            Debug.WriteLine($"오른쪽 어깨: {points[5].X},{points[5].Y}");
+            Debug.WriteLine($"왼쪽 귀: {points[17].X},{points[17].Y}");
+            Debug.WriteLine($"오른쪽 귀: {points[18].X},{points[18].Y}");
+            Debug.WriteLine($"왼쪽 눈 : {points[15].X},{points[15].Y}");
+            Debug.WriteLine($"오른쪽 눈: {points[16].X},{points[16].Y}");
+
+
+            if (Math.Abs(_points[2].Y - _points[5].Y) > 15)
             {
                 _analyzeData.Result += "척추 측만증,";
-                Debug.WriteLine("측만증 검출");
+                conditionMet = true;
+            }
+            if (_ratio > AppGlobal.CorrectPose._ratio + 0.3)
+            {
+                _analyzeData.Result += " 거북목,";
+                conditionMet = true;
+
+            }
+            if (_ratio < AppGlobal.CorrectPose._ratio + 2)
+            {
+                _analyzeData.Result += "추간판 탈출,";
                 conditionMet = true;
             }
 
-            if (0.6 > Math.Abs(_ratio - AppGlobal.CorrectPose._ratio))
-            {
-                if(dt17to18 >= AppGlobal.CorrectPose._dt17to18 + 10)    //표준보다 10만큼 커지면
-                {
-                    _analyzeData.Result += " 거북목,";
-                    Debug.WriteLine("거북목 검출");
-                    conditionMet = true;
-                }
-                else if(dt17to18 < AppGlobal.CorrectPose._dt17to18 - 20)    //표준보다 20만큼 짧아지면~
-                {
-                    _analyzeData.Result += "추간판 탈출,";
-                    Debug.WriteLine("추간판 탈출 검출");
-                    conditionMet = true;
-                }
-            }
             if (!conditionMet)
             {
                 _analyzeData.Result = "정상";
-                Debug.WriteLine("정상 검출");
                 _data.UpdateGoodPoseCnt_Score(date);
             }
             else
@@ -367,7 +347,6 @@ namespace Vadit
 
             _data.SaveImageToFile(time, img, _analyzeData.Result);
             _data.InsertDB_BadPose(time, _analyzeData.Result);
-            AppGlobal.StartTimer();      //점들이 정상적으로 찍혔다면 타이머 다시 돌리기.
             //_data.UpdatePoseCnt_Score(analyzeData.Result);
 
             _analyzeData.AnalyzedImage = img.ToBitmap();
@@ -390,7 +369,7 @@ namespace Vadit
                 _bgw.RunWorkerAsync();
             }
         }
-        public async Task<Bitmap> OnclikBtnResetPose() //사진을 찍어주는 메서드 이 객체 안에있는 올바른자세 정보에 사진을 넣음.
+        public Bitmap OnclikBtnResetPose() //사진을 찍어주는 메서드 이 객체 안에있는 올바른자세 정보에 사진을 넣음.
         {
             if (_cap.IsOpened)
             {
@@ -406,14 +385,11 @@ namespace Vadit
         }
 
 
-        public void InputCorrectPose()  //자세 캡쳐 버튼 누르면 실행됨. 올바른 자세인지 아닌지 더불어 창닫기까지.
+
+        public bool InputCorrectPose()  //자세 캡쳐 버튼 누르면 실행됨. 올바른 자세인지 아닌지 더불어 창닫기까지.
         {
             DrawSkeleton(_infoInputCorrectPose._img, _bgw);
             _infoInputCorrectPose.IsPointNotNull();
-
-        }
-        public bool AskSettingPose()
-        {
             if (!_infoInputCorrectPose._isPointNotNull)
             {
                 MessageBox.Show("자세가 제대로 인식되지 않았습니다. 바른자세를 다시 입력해주세요.");
@@ -432,15 +408,6 @@ namespace Vadit
                     return false;
                 }
             }
-        }
-        public void HandleSettingMessage()
-        {
-            AppGlobal.CorrectPose.setInfo(AppGlobal.VM._infoInputCorrectPose._img,
-            AppGlobal.VM._infoInputCorrectPose._point);
-
-            AppGlobal.CorrectPose.IsPointNotNull();
-            AppGlobal.VM._isInputCorrrctPose = false;
-            AppGlobal.VM._bgw.CancelAsync();
         }
         public void EndPoseSetting()        //입력모드 끄고 백그라운드 종료
         {
