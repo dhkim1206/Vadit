@@ -35,7 +35,7 @@ namespace Vadit
 
             
             // 바로 가기 파일 생성 및 설정
-            string shortcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit바로가기.lnk");
+            string shortcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit.lnk");
             Debug.WriteLine("바로가기 파일 경로 " + shortcutPath);
             CreateShortcut(programPath, shortcutPath);
             Debug.WriteLine("프로그램이 윈도우 자동 시작 프로그램으로 등록되었습니다.");
@@ -46,10 +46,12 @@ namespace Vadit
         public void Cancel_AutoStart()
         {
             string programPath = Assembly.GetExecutingAssembly().Location;
-
+            Debug.WriteLine(programPath);
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)  // Windows인 경우
             {
                 string startupFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit.exe");
+
+                Debug.WriteLine(startupFolderPath);
                 if (System.IO.File.Exists(startupFolderPath))
                 {
                     System.IO.File.Delete(startupFolderPath);  // 시작 프로그램 폴더에 있는 바로 가기 파일 삭제
