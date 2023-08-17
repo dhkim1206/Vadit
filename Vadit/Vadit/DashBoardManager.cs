@@ -142,7 +142,6 @@ namespace Vadit
                     float textY = pictureBox.Height - textSize.Height + 350;
                     g.DrawString(categoryText, font, Brushes.Yellow, new PointF(textX, textY));
                     g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(140, 5));
-
                     using (Font font1 = new Font(FontFamily.GenericSansSerif, 70, FontStyle.Bold, GraphicsUnit.Pixel))
                     {
                         if (_current < count+1)
