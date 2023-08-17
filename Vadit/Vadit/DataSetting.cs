@@ -20,10 +20,9 @@ namespace Vadit
         public bool LongPlay;
         public bool WindowSameExecute;
         public bool AlarmSound;
+        public int SaveingPeriod;
         public int CamFrame;
-        public int SaveingPeriod; // 위에서 부터 1, 2, 3 ...
-        public EnumNotificationLayout NotificationLayout; //Convert.ToInt32(AppConf.ConfigSet.NotificationLayout);
-
+        public EnumNotificationLayout NotificationLayout;
 
     }
 }

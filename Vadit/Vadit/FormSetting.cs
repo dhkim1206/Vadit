@@ -18,6 +18,8 @@ namespace Vadit
         {
             InitializeComponent();
 
+            _data = new Data();
+
             pb3.Click += ChangeNotificationLayout;
             pb2.Click += ChangeNotificationLayout;
             pb1.Click += ChangeNotificationLayout;
@@ -60,7 +62,6 @@ namespace Vadit
             AutoStartManager autoStartManager = new AutoStartManager();
             autoStartManager.Run();
             _data.DeleteOldData();
-
         }
 
         private void FormSetting_Load(object sender, EventArgs e)
@@ -82,13 +83,7 @@ namespace Vadit
             checkWindows.Checked = AppConf.ConfigSet.WindowSameExecute;
             checkAlarm.Checked = AppConf.ConfigSet.AlarmSound;
             trackBarFrame.Value = AppConf.ConfigSet.CamFrame;
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            FormCamera Fc = new FormCamera();
-            Fc.ShowDialog();
-            cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
+            cboPicterm.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
         }
     }
 }
