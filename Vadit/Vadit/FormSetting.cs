@@ -13,12 +13,9 @@ namespace Vadit
 {
     public partial class FormSetting : Form
     {
-        Data _data;
         public FormSetting()
         {
             InitializeComponent();
-
-            _data = new Data();
 
             pb3.Click += ChangeNotificationLayout;
             pb2.Click += ChangeNotificationLayout;
@@ -53,15 +50,12 @@ namespace Vadit
         {
             AppConf.ConfigSet.Pose = checkPose.Checked;
             AppConf.ConfigSet.LongPlay = checkLongPlay.Checked;
-            AppConf.ConfigSet.WindowSameExecute = checkWindows.Checked;
+            //기능 구현후 최종 테스트 전까지는 미사용하는 코드
+            //AppConf.ConfigSet.WindowSameExecute = checkWindows.Checked;
             AppConf.ConfigSet.AlarmSound = checkAlarm.Checked;
             AppConf.ConfigSet.CamFrame = trackBarFrame.Value;
-            AppConf.ConfigSet.SaveingPeriod = cboPicterm.SelectedIndex;
-
+            AppConf.ConfigSet.SaveingPeriod = cboPicSaving.SelectedIndex;
             AppConf.Save();
-            AutoStartManager autoStartManager = new AutoStartManager();
-            autoStartManager.Run();
-            _data.DeleteOldData();
         }
 
         private void FormSetting_Load(object sender, EventArgs e)
@@ -83,7 +77,13 @@ namespace Vadit
             checkWindows.Checked = AppConf.ConfigSet.WindowSameExecute;
             checkAlarm.Checked = AppConf.ConfigSet.AlarmSound;
             trackBarFrame.Value = AppConf.ConfigSet.CamFrame;
-            cboPicterm.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FormCamera Fc = new FormCamera();
+            Fc.ShowDialog();
+            cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
         }
     }
 }
