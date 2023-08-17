@@ -12,10 +12,10 @@ namespace Vadit
     {
         public delegate void DeleteOldDataDelegate();
 
-        public  string _configFilePath = "data.xml";
-        public string _dbPath = "data_table.db";
-        public string _cs;
-        public string _imageDirectory;
+        private readonly string _configFilePath = "data.xml";
+        private readonly string _dbPath = "data_table.db";
+        private readonly string _cs;
+        private readonly string _imageDirectory;
 
         private SQLiteConnection _con;
 

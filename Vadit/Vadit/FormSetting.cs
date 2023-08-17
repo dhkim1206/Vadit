@@ -21,7 +21,6 @@ namespace Vadit
             pb3.Click += ChangeNotificationLayout;
             pb2.Click += ChangeNotificationLayout;
             pb1.Click += ChangeNotificationLayout;
-            _data = new Data();
         }
 
         private void ChangeNotificationLayout(object sender, EventArgs e)
@@ -55,7 +54,7 @@ namespace Vadit
             AppConf.ConfigSet.WindowSameExecute = checkWindows.Checked;
             AppConf.ConfigSet.AlarmSound = checkAlarm.Checked;
             AppConf.ConfigSet.CamFrame = trackBarFrame.Value;
-            AppConf.ConfigSet.SaveingPeriod = cboPicSaving.SelectedIndex;
+            AppConf.ConfigSet.SaveingPeriod = cboPicterm.SelectedIndex;
 
             AppConf.Save();
             AutoStartManager autoStartManager = new AutoStartManager();
