@@ -21,30 +21,16 @@ namespace Vadit
         string _Path = Path.Combine(Application.StartupPath, "sound_data");
 
         Data _Data;
+        VdtManager _VdtManager;
         string _FileName;
+
+
         public FormPopUp()
         {
             InitializeComponent();
             _Data = new Data();
 
         }
-        // 폼이 실행될때
-        private void FormPopUp_Shown(object sender, EventArgs e)//나쁜자세 알림 팝업
-        {
-            SetAudio(AppBase.AppConf.ConfigSet.AlarmSound);
-
-            if (true)// 안좋은 자세 감지시
-            {
-                SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
-                OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
-            }
-            else if (true) // 장시간 이용시
-            {
-                LongPalyPopUp();
-            }
-        }
-
-
 
         private void SetAudio(bool soundon)
         {
@@ -59,10 +45,26 @@ namespace Vadit
                 _LongplaySound = new SoundPlayer(Path.Combine(_Path, "NoneSound.wav"));
             }
         }
+
         private void FormPopUp_VisibleChanged(object sender, EventArgs e)//폼이 화면에서 감지될때
         {
             if (!this.Visible) return;
             DefaultTimer.Start();
+
+            SetAudio(AppBase.AppConf.ConfigSet.AlarmSound);
+            /*
+            if (AppGlobal.LongPlayPopUp == true) // 장시간 이용시 실행 
+            {
+                AppGlobal.StartLongPlayPopUp();
+                LongPalyPopUp();
+            }
+            */
+            if(true)  // 나쁜 자세 감지 실행 
+            {
+                SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
+                OpenBadPoseImage(AppBase.AppConf.ConfigSet.NotificationLayout);
+            }
+
         }
         private void DefaultTimer_Tick(object sender, EventArgs e)
         {
@@ -70,18 +72,57 @@ namespace Vadit
             _DefaultSecond++;
             Execution_UserSettingValue();
         }
-        private void LongPalyPopUp()
+        public void LongPalyPopUp()
         {
+            _LongplaySound.Play();
             UserPanel.Visible = false;
             ExamplePosePanel.Visible = false;
             CommentPanel.Visible = true;
             this.Size = new Size(350, 90);
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
             CommentButton.Text = "현재 N시간 동안 앉아 있었습니다.\n잠시 의자에서 일어나 휴식을 취해 주십시오.";
-            _LongplaySound.Play();
+            AppGlobal.StopTimer();
+            _LongplaySound.Stop();
         }
-        private void OpenUserImage(EnumNotificationLayout layout) 
+
+        private void OpenBadPoseImage(EnumNotificationLayout layout)
         {
+            bool a = true;
+            bool b = true;
+            bool c = true;
+
+            string ExampleImageName = "";
+            string LocalPath = (Path.Combine(Application.StartupPath, "GuideImage_data"));
+            string imagePath = "";
+            if (a == true) // 받아온 bool이 true 일경우
+            {
+                ExampleImageName = "ExampleA.PNG";
+            }
+            else if (b == false)
+            {
+                ExampleImageName = "ExampleB.PNG";
+            }
+            else if (c == false)
+            {
+                ExampleImageName = "ExampleC.PNG";
+            }
+            /*
+            if (_VdtManager.PainA == true) // 받아온 bool이 true 일경우
+            {
+                ExampleImageName = "ExampleA.PNG";
+            }
+            else if(_VdtManager.PainB == true)
+            {
+                ExampleImageName = "ExampleB.PNG";
+            }
+            else if(_VdtManager.PainC == true)
+            {
+                ExampleImageName = "ExampleC.PNG";
+            }
+            */
+            imagePath = Path.Combine(LocalPath, ExampleImageName);
+            
+
             if (Directory.Exists(_Data.imageDirectory))
             {
                 string filenameExtension = "*.JPG"; // 파일 확장자에 따라 변경
@@ -110,6 +151,8 @@ namespace Vadit
                 {
                     UserPosePicBox.Load(highestNumberFileName);
                     UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                    ExamplePosePicBox.Load(imagePath);
+                    ExamplePosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 else if (layout == EnumNotificationLayout.OnlyUser)
                 {
@@ -147,8 +190,11 @@ namespace Vadit
             {
                 UserPanel.Visible = false;
                 ExamplePosePanel.Visible = false;
-                CommentPanel.Visible = true;
+                CommentPanel.Visible = true; 
+                this.Size = new Size(350, 90);
+                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
             }
+            _DefaultSound.Stop();
         }
         public void Execution_UserSettingValue()
         {

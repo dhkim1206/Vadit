@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.DefaultTimer = new System.Windows.Forms.Timer(this.components);
             this.UserPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.UserPosePicBox = new System.Windows.Forms.PictureBox();
             this.ExamplePosePanel = new System.Windows.Forms.Panel();
             this.ExamplePosePicBox = new System.Windows.Forms.PictureBox();
@@ -55,8 +53,6 @@
             // UserPanel
             // 
             this.UserPanel.BackColor = System.Drawing.Color.Gray;
-            this.UserPanel.Controls.Add(this.label1);
-            this.UserPanel.Controls.Add(this.label2);
             this.UserPanel.Controls.Add(this.UserPosePicBox);
             this.UserPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.UserPanel.Location = new System.Drawing.Point(13, 13);
@@ -64,24 +60,6 @@
             this.UserPanel.Name = "UserPanel";
             this.UserPanel.Size = new System.Drawing.Size(424, 233);
             this.UserPanel.TabIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(64, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 20);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
             // 
             // UserPosePicBox
             // 
@@ -168,10 +146,8 @@
             this.Padding = new System.Windows.Forms.Padding(13);
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormPopUp";
-            this.Shown += new System.EventHandler(this.FormPopUp_Shown);
             this.VisibleChanged += new System.EventHandler(this.FormPopUp_VisibleChanged);
             this.UserPanel.ResumeLayout(false);
-            this.UserPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserPosePicBox)).EndInit();
             this.ExamplePosePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ExamplePosePicBox)).EndInit();
@@ -185,14 +161,12 @@
 
         private System.Windows.Forms.Timer DefaultTimer;
         private Panel UserPanel;
-        private Label label2;
         private PictureBox UserPosePicBox;
         private Panel ExamplePosePanel;
         private PictureBox ExamplePosePicBox;
         private Panel CommentPanel;
         private Button CommentButton;
         private Label CommentLabel;
-        private Label label1;
         private System.Windows.Forms.Timer LongTimer;
     }
 }

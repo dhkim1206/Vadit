@@ -75,6 +75,10 @@ namespace Vadit
         private List<Point> _points;
         Data _data;
 
+        //public int BadPoseCnt = 0;
+        //public bool PainA, PainB, PainC = false; 
+        //FormPopUp _formPopUp;
+        
         public VdtManager(ProgressChangedEventHandler OnProgressing)
         {
             _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
@@ -342,6 +346,8 @@ namespace Vadit
                 _analyzeData.Result += "척추 측만증,";
                 Debug.WriteLine("측만증 검출");
                 conditionMet = true;
+
+                //PainA = true;
             }
 
             if (_ratio < AppGlobal.CorrectPose._ratio + 0.6)
@@ -351,12 +357,16 @@ namespace Vadit
                     _analyzeData.Result += " 거북목,";
                     Debug.WriteLine("거북목 검출");
                     conditionMet = true;
+                    
+                    //PainB = true;
                 }
                 else if(dt17to18 < AppGlobal.CorrectPose._dt17to18 + 5)
                 {
                     _analyzeData.Result += "추간판 탈출,";
                     Debug.WriteLine("추간판 탈출");
                     conditionMet = true;
+                    
+                    //PainC = true;
                 }
             }
             if (!conditionMet)
@@ -368,7 +378,14 @@ namespace Vadit
             else
             {
                 _data.UpdateBadPoseCnt_Score(date);
-
+                /*
+                BadPoseCnt++;
+                if (BadPoseCnt == 4)
+                {
+                    _formPopUp.Show();
+                    PainA = PainB = PainC = false;
+                }
+                */
             }
 
             _data.SaveImageToFile(time, img, _analyzeData.Result);
