@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 using static Vadit.AppBase;
 
@@ -13,7 +17,8 @@ namespace Vadit
         static public AppConfig AppConf = null;
 
         // 그룹 박스로 라디오 버튼 컨트롤
-        public static string GetRadioBox(GroupBox gb){
+        public static string GetRadioBox(GroupBox gb)
+        {
             RadioButton radio_Button = gb.Controls.OfType<RadioButton>().FirstOrDefault(rb => rb.Checked);
             if (radio_Button != null)
                 return radio_Button.Tag.ToString();
@@ -32,7 +37,6 @@ namespace Vadit
 
 
             textbox.KeyPress += input2_KeyPress;
-
         }
 
         // 숫자만 입력
@@ -142,18 +146,6 @@ namespace Vadit
             }
         }
         //---------------------------------------------------------------------------
-        /*
-        public class ImageLoad
-        {
-            public Data _data;
-
-            public ImageLoad(string filePath)
-            {
-
-            }
-
-        }*/
-        //---------------------------------------------------------------------------
         public class AppConfig
         //---------------------------------------------------------------------------
         {
@@ -178,6 +170,8 @@ namespace Vadit
                         ConfigSet = (AppConfigClass)_xmlSeializer.Deserialize(reader); // 형식 지정
                     }
                 }
+
+
             }
             public bool Save() // 입력된 값을 Xml에 저장
             {
@@ -195,6 +189,7 @@ namespace Vadit
                     return false;
                 }
             }
+
         }
     }
 }

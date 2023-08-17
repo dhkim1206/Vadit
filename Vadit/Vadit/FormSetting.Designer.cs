@@ -28,392 +28,381 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.SettingtabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkAlarm = new System.Windows.Forms.CheckBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.cboPicSaving = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.trackBarFrame = new System.Windows.Forms.TrackBar();
-            this.label12 = new System.Windows.Forms.Label();
-            this.pnNoti = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.pb1 = new System.Windows.Forms.PictureBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.pb2 = new System.Windows.Forms.PictureBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.pb3 = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.checkWindows = new System.Windows.Forms.CheckBox();
-            this.checkLongPlay = new System.Windows.Forms.CheckBox();
-            this.checkPose = new System.Windows.Forms.CheckBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.SettingtabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarFrame)).BeginInit();
-            this.pnNoti.SuspendLayout();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb2)).BeginInit();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb3)).BeginInit();
-            this.SuspendLayout();
+            button1 = new Button();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            label1 = new Label();
+            checkAlarm = new CheckBox();
+            label13 = new Label();
+            cboPicterm = new ComboBox();
+            label8 = new Label();
+            label9 = new Label();
+            label10 = new Label();
+            label11 = new Label();
+            trackBarFrame = new TrackBar();
+            label12 = new Label();
+            pnNoti = new Panel();
+            panel4 = new Panel();
+            pb1 = new PictureBox();
+            panel6 = new Panel();
+            pb2 = new PictureBox();
+            panel7 = new Panel();
+            pb3 = new PictureBox();
+            label7 = new Label();
+            checkWindows = new CheckBox();
+            checkLongPlay = new CheckBox();
+            checkPose = new CheckBox();
+            tabPage2 = new TabPage();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBarFrame).BeginInit();
+            pnNoti.SuspendLayout();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pb1).BeginInit();
+            panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pb2).BeginInit();
+            panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pb3).BeginInit();
+            SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("맑은 고딕", 13.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(767, 477);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(199, 55);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "자세 재설정 하기";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Font = new Font("맑은 고딕", 13.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Location = new Point(597, 358);
+            button1.Name = "button1";
+            button1.Size = new Size(155, 41);
+            button1.TabIndex = 1;
+            button1.Text = "자세 재설정 하기";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
-            // SettingtabControl
+            // tabControl1
             // 
-            this.SettingtabControl.Controls.Add(this.tabPage1);
-            this.SettingtabControl.Controls.Add(this.tabPage2);
-            this.SettingtabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SettingtabControl.Location = new System.Drawing.Point(0, -41);
-            this.SettingtabControl.Margin = new System.Windows.Forms.Padding(2);
-            this.SettingtabControl.Name = "SettingtabControl";
-            this.SettingtabControl.SelectedIndex = 0;
-            this.SettingtabControl.Size = new System.Drawing.Size(1013, 637);
-            this.SettingtabControl.TabIndex = 39;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Dock = DockStyle.Fill;
+            tabControl1.Location = new Point(0, 0);
+            tabControl1.Margin = new Padding(2);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(788, 447);
+            tabControl1.TabIndex = 39;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.checkAlarm);
-            this.tabPage1.Controls.Add(this.label13);
-            this.tabPage1.Controls.Add(this.cboPicSaving);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.trackBarFrame);
-            this.tabPage1.Controls.Add(this.label12);
-            this.tabPage1.Controls.Add(this.pnNoti);
-            this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Controls.Add(this.checkWindows);
-            this.tabPage1.Controls.Add(this.checkLongPlay);
-            this.tabPage1.Controls.Add(this.checkPose);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(1005, 604);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "기본설정";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Controls.Add(button1);
+            tabPage1.Controls.Add(label1);
+            tabPage1.Controls.Add(checkAlarm);
+            tabPage1.Controls.Add(label13);
+            tabPage1.Controls.Add(cboPicterm);
+            tabPage1.Controls.Add(label8);
+            tabPage1.Controls.Add(label9);
+            tabPage1.Controls.Add(label10);
+            tabPage1.Controls.Add(label11);
+            tabPage1.Controls.Add(trackBarFrame);
+            tabPage1.Controls.Add(label12);
+            tabPage1.Controls.Add(pnNoti);
+            tabPage1.Controls.Add(label7);
+            tabPage1.Controls.Add(checkWindows);
+            tabPage1.Controls.Add(checkLongPlay);
+            tabPage1.Controls.Add(checkPose);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Margin = new Padding(2);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(2);
+            tabPage1.Size = new Size(780, 419);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "기본설정";
+            tabPage1.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(539, 44);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 23);
-            this.label1.TabIndex = 42;
-            this.label1.Text = "label1";
+            label1.AutoSize = true;
+            label1.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(419, 33);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(45, 19);
+            label1.TabIndex = 42;
+            label1.Text = "label1";
             // 
             // checkAlarm
             // 
-            this.checkAlarm.AutoSize = true;
-            this.checkAlarm.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkAlarm.Location = new System.Drawing.Point(12, 82);
-            this.checkAlarm.Margin = new System.Windows.Forms.Padding(4);
-            this.checkAlarm.Name = "checkAlarm";
-            this.checkAlarm.Size = new System.Drawing.Size(123, 27);
-            this.checkAlarm.TabIndex = 41;
-            this.checkAlarm.Text = "알림음 사용";
-            this.checkAlarm.UseVisualStyleBackColor = true;
+            checkAlarm.AutoSize = true;
+            checkAlarm.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            checkAlarm.Location = new Point(9, 62);
+            checkAlarm.Name = "checkAlarm";
+            checkAlarm.Size = new Size(103, 23);
+            checkAlarm.TabIndex = 41;
+            checkAlarm.Text = "알림음 사용";
+            checkAlarm.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(12, 495);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(118, 23);
-            this.label13.TabIndex = 39;
-            this.label13.Text = "사진 저장기한";
+            label13.AutoSize = true;
+            label13.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.Location = new Point(9, 371);
+            label13.Margin = new Padding(2, 0, 2, 0);
+            label13.Name = "label13";
+            label13.Size = new Size(98, 19);
+            label13.TabIndex = 39;
+            label13.Text = "사진 저장기한";
             // 
-            // cboPicSaving
+            // cboPicterm
             // 
-            this.cboPicSaving.FormattingEnabled = true;
-            this.cboPicSaving.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.cboPicSaving.Items.AddRange(new object[] {
-            "15일동안 저장",
-            "30일동안 저장",
-            "90일동안 저장"});
-            this.cboPicSaving.Location = new System.Drawing.Point(134, 495);
-            this.cboPicSaving.Margin = new System.Windows.Forms.Padding(2);
-            this.cboPicSaving.Name = "cboPicSaving";
-            this.cboPicSaving.Size = new System.Drawing.Size(142, 28);
-            this.cboPicSaving.TabIndex = 38;
+            cboPicterm.FormattingEnabled = true;
+            cboPicterm.ImeMode = ImeMode.Off;
+            cboPicterm.Items.AddRange(new object[] { "15일동안 저장", "30일동안 저장", "90일동안 저장" });
+            cboPicterm.Location = new Point(104, 371);
+            cboPicterm.Margin = new Padding(2);
+            cboPicterm.Name = "cboPicterm";
+            cboPicterm.Size = new Size(111, 23);
+            cboPicterm.TabIndex = 38;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(408, 451);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label8.Size = new System.Drawing.Size(60, 20);
-            this.label8.TabIndex = 34;
-            this.label8.Text = "5분 1회";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label8.AutoSize = true;
+            label8.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(317, 338);
+            label8.Margin = new Padding(2, 0, 2, 0);
+            label8.Name = "label8";
+            label8.RightToLeft = RightToLeft.Yes;
+            label8.Size = new Size(49, 15);
+            label8.TabIndex = 34;
+            label8.Text = "5분 1회";
+            label8.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(200, 451);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label9.Size = new System.Drawing.Size(60, 20);
-            this.label9.TabIndex = 33;
-            this.label9.Text = "3분 1회";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label9.AutoSize = true;
+            label9.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(156, 338);
+            label9.Margin = new Padding(2, 0, 2, 0);
+            label9.Name = "label9";
+            label9.RightToLeft = RightToLeft.Yes;
+            label9.Size = new Size(49, 15);
+            label9.TabIndex = 33;
+            label9.Text = "3분 1회";
+            label9.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(2, 451);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label10.Size = new System.Drawing.Size(60, 20);
-            this.label10.TabIndex = 32;
-            this.label10.Text = "1분 1회";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label10.AutoSize = true;
+            label10.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Location = new Point(2, 338);
+            label10.Margin = new Padding(2, 0, 2, 0);
+            label10.Name = "label10";
+            label10.RightToLeft = RightToLeft.Yes;
+            label10.Size = new Size(49, 15);
+            label10.TabIndex = 32;
+            label10.Text = "1분 1회";
+            label10.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(604, 451);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label11.Size = new System.Drawing.Size(68, 20);
-            this.label11.TabIndex = 35;
-            this.label11.Text = "10분 1회";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label11.AutoSize = true;
+            label11.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Location = new Point(470, 338);
+            label11.Margin = new Padding(2, 0, 2, 0);
+            label11.Name = "label11";
+            label11.RightToLeft = RightToLeft.Yes;
+            label11.Size = new Size(56, 15);
+            label11.TabIndex = 35;
+            label11.Text = "10분 1회";
+            label11.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // trackBarFrame
             // 
-            this.trackBarFrame.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBarFrame.LargeChange = 1;
-            this.trackBarFrame.Location = new System.Drawing.Point(12, 415);
-            this.trackBarFrame.Margin = new System.Windows.Forms.Padding(2);
-            this.trackBarFrame.Maximum = 3;
-            this.trackBarFrame.Name = "trackBarFrame";
-            this.trackBarFrame.Size = new System.Drawing.Size(645, 56);
-            this.trackBarFrame.TabIndex = 31;
+            trackBarFrame.BackColor = SystemColors.ButtonHighlight;
+            trackBarFrame.LargeChange = 1;
+            trackBarFrame.Location = new Point(9, 311);
+            trackBarFrame.Margin = new Padding(2);
+            trackBarFrame.Maximum = 3;
+            trackBarFrame.Name = "trackBarFrame";
+            trackBarFrame.Size = new Size(502, 45);
+            trackBarFrame.TabIndex = 31;
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(7, 382);
-            this.label12.Margin = new System.Windows.Forms.Padding(4);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(118, 23);
-            this.label12.TabIndex = 36;
-            this.label12.Text = "자세분석 주기";
+            label12.AutoSize = true;
+            label12.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Location = new Point(5, 286);
+            label12.Margin = new Padding(3);
+            label12.Name = "label12";
+            label12.Size = new Size(84, 19);
+            label12.TabIndex = 36;
+            label12.Text = "알림창 주기";
             // 
             // pnNoti
             // 
-            this.pnNoti.Controls.Add(this.panel4);
-            this.pnNoti.Controls.Add(this.panel6);
-            this.pnNoti.Controls.Add(this.panel7);
-            this.pnNoti.Location = new System.Drawing.Point(7, 189);
-            this.pnNoti.Margin = new System.Windows.Forms.Padding(2);
-            this.pnNoti.Name = "pnNoti";
-            this.pnNoti.Padding = new System.Windows.Forms.Padding(8);
-            this.pnNoti.Size = new System.Drawing.Size(665, 170);
-            this.pnNoti.TabIndex = 24;
-            this.pnNoti.Tag = "0";
+            pnNoti.Controls.Add(panel4);
+            pnNoti.Controls.Add(panel6);
+            pnNoti.Controls.Add(panel7);
+            pnNoti.Location = new Point(5, 142);
+            pnNoti.Margin = new Padding(2);
+            pnNoti.Name = "pnNoti";
+            pnNoti.Padding = new Padding(6);
+            pnNoti.Size = new Size(517, 128);
+            pnNoti.TabIndex = 24;
+            pnNoti.Tag = "0";
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel4.Controls.Add(this.pb1);
-            this.panel4.Location = new System.Drawing.Point(16, 12);
-            this.panel4.Margin = new System.Windows.Forms.Padding(8);
-            this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(4);
-            this.panel4.Size = new System.Drawing.Size(200, 145);
-            this.panel4.TabIndex = 2;
+            panel4.BackColor = Color.WhiteSmoke;
+            panel4.Controls.Add(pb1);
+            panel4.Location = new Point(12, 9);
+            panel4.Margin = new Padding(6);
+            panel4.Name = "panel4";
+            panel4.Padding = new Padding(3);
+            panel4.Size = new Size(156, 109);
+            panel4.TabIndex = 2;
             // 
             // pb1
             // 
-            this.pb1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pb1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pb1.Location = new System.Drawing.Point(4, 4);
-            this.pb1.Margin = new System.Windows.Forms.Padding(2);
-            this.pb1.Name = "pb1";
-            this.pb1.Size = new System.Drawing.Size(192, 137);
-            this.pb1.TabIndex = 9;
-            this.pb1.TabStop = false;
-            this.pb1.Tag = "0";
+            pb1.BackColor = SystemColors.ButtonHighlight;
+            pb1.Dock = DockStyle.Fill;
+            pb1.Location = new Point(3, 3);
+            pb1.Margin = new Padding(2);
+            pb1.Name = "pb1";
+            pb1.Size = new Size(150, 103);
+            pb1.TabIndex = 9;
+            pb1.TabStop = false;
+            pb1.Tag = "0";
             // 
             // panel6
             // 
-            this.panel6.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel6.Controls.Add(this.pb2);
-            this.panel6.Location = new System.Drawing.Point(232, 12);
-            this.panel6.Margin = new System.Windows.Forms.Padding(8);
-            this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(4);
-            this.panel6.Size = new System.Drawing.Size(200, 145);
-            this.panel6.TabIndex = 1;
+            panel6.BackColor = Color.WhiteSmoke;
+            panel6.Controls.Add(pb2);
+            panel6.Location = new Point(180, 9);
+            panel6.Margin = new Padding(6);
+            panel6.Name = "panel6";
+            panel6.Padding = new Padding(3);
+            panel6.Size = new Size(156, 109);
+            panel6.TabIndex = 1;
             // 
             // pb2
             // 
-            this.pb2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pb2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pb2.Location = new System.Drawing.Point(4, 4);
-            this.pb2.Margin = new System.Windows.Forms.Padding(2);
-            this.pb2.Name = "pb2";
-            this.pb2.Size = new System.Drawing.Size(192, 137);
-            this.pb2.TabIndex = 9;
-            this.pb2.TabStop = false;
-            this.pb2.Tag = "1";
+            pb2.BackColor = SystemColors.ButtonHighlight;
+            pb2.Dock = DockStyle.Fill;
+            pb2.Location = new Point(3, 3);
+            pb2.Margin = new Padding(2);
+            pb2.Name = "pb2";
+            pb2.Size = new Size(150, 103);
+            pb2.TabIndex = 9;
+            pb2.TabStop = false;
+            pb2.Tag = "1";
             // 
             // panel7
             // 
-            this.panel7.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel7.Controls.Add(this.pb3);
-            this.panel7.Location = new System.Drawing.Point(448, 12);
-            this.panel7.Margin = new System.Windows.Forms.Padding(5);
-            this.panel7.Name = "panel7";
-            this.panel7.Padding = new System.Windows.Forms.Padding(4);
-            this.panel7.Size = new System.Drawing.Size(200, 145);
-            this.panel7.TabIndex = 0;
-            this.panel7.Tag = "";
+            panel7.BackColor = Color.WhiteSmoke;
+            panel7.Controls.Add(pb3);
+            panel7.Location = new Point(348, 9);
+            panel7.Margin = new Padding(4);
+            panel7.Name = "panel7";
+            panel7.Padding = new Padding(3);
+            panel7.Size = new Size(156, 109);
+            panel7.TabIndex = 0;
+            panel7.Tag = "";
             // 
             // pb3
             // 
-            this.pb3.BackColor = System.Drawing.Color.White;
-            this.pb3.Location = new System.Drawing.Point(4, 4);
-            this.pb3.Margin = new System.Windows.Forms.Padding(0);
-            this.pb3.Name = "pb3";
-            this.pb3.Size = new System.Drawing.Size(192, 137);
-            this.pb3.TabIndex = 9;
-            this.pb3.TabStop = false;
-            this.pb3.Tag = "2";
+            pb3.BackColor = Color.White;
+            pb3.Location = new Point(3, 3);
+            pb3.Margin = new Padding(0);
+            pb3.Name = "pb3";
+            pb3.Size = new Size(149, 103);
+            pb3.TabIndex = 9;
+            pb3.TabStop = false;
+            pb3.Tag = "2";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(6, 160);
-            this.label7.Margin = new System.Windows.Forms.Padding(4);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(175, 23);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "알림창 레이아웃 선택";
+            label7.AutoSize = true;
+            label7.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(5, 120);
+            label7.Margin = new Padding(3);
+            label7.Name = "label7";
+            label7.Size = new Size(145, 19);
+            label7.TabIndex = 23;
+            label7.Text = "알림창 레이아웃 선택";
             // 
             // checkWindows
             // 
-            this.checkWindows.AutoSize = true;
-            this.checkWindows.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkWindows.Location = new System.Drawing.Point(12, 47);
-            this.checkWindows.Margin = new System.Windows.Forms.Padding(4);
-            this.checkWindows.Name = "checkWindows";
-            this.checkWindows.Size = new System.Drawing.Size(294, 27);
-            this.checkWindows.TabIndex = 14;
-            this.checkWindows.Text = "윈도우 시작시 프로그램 자동 실행";
-            this.checkWindows.UseVisualStyleBackColor = true;
+            checkWindows.AutoSize = true;
+            checkWindows.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            checkWindows.Location = new Point(9, 35);
+            checkWindows.Name = "checkWindows";
+            checkWindows.Size = new Size(244, 23);
+            checkWindows.TabIndex = 14;
+            checkWindows.Text = "윈도우 시작시 프로그램 자동 실행";
+            checkWindows.UseVisualStyleBackColor = true;
             // 
             // checkLongPlay
             // 
-            this.checkLongPlay.AutoSize = true;
-            this.checkLongPlay.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkLongPlay.Location = new System.Drawing.Point(12, 12);
-            this.checkLongPlay.Margin = new System.Windows.Forms.Padding(4);
-            this.checkLongPlay.Name = "checkLongPlay";
-            this.checkLongPlay.Size = new System.Drawing.Size(197, 27);
-            this.checkLongPlay.TabIndex = 13;
-            this.checkLongPlay.Text = "장시간 이용안내 알림";
-            this.checkLongPlay.UseVisualStyleBackColor = true;
+            checkLongPlay.AutoSize = true;
+            checkLongPlay.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            checkLongPlay.Location = new Point(9, 9);
+            checkLongPlay.Name = "checkLongPlay";
+            checkLongPlay.Size = new Size(164, 23);
+            checkLongPlay.TabIndex = 13;
+            checkLongPlay.Text = "장시간 이용안내 알림";
+            checkLongPlay.UseVisualStyleBackColor = true;
             // 
             // checkPose
             // 
-            this.checkPose.AutoSize = true;
-            this.checkPose.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkPose.Location = new System.Drawing.Point(12, 117);
-            this.checkPose.Margin = new System.Windows.Forms.Padding(4);
-            this.checkPose.Name = "checkPose";
-            this.checkPose.Size = new System.Drawing.Size(146, 27);
-            this.checkPose.TabIndex = 12;
-            this.checkPose.Text = "전날 자세 알림";
-            this.checkPose.UseVisualStyleBackColor = true;
+            checkPose.AutoSize = true;
+            checkPose.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            checkPose.Location = new Point(9, 88);
+            checkPose.Name = "checkPose";
+            checkPose.Size = new Size(122, 23);
+            checkPose.TabIndex = 12;
+            checkPose.Text = "전날 자세 알림";
+            checkPose.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(1005, 534);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "바른자세 설정";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Margin = new Padding(2);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(2);
+            tabPage2.Size = new Size(780, 419);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "바른자세 설정";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // FormSetting
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1013, 596);
-            this.Controls.Add(this.SettingtabControl);
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "FormSetting";
-            this.Text = "FormSetting";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSetting_FormClosing);
-            this.Load += new System.EventHandler(this.FormSetting_Load);
-            this.SettingtabControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarFrame)).EndInit();
-            this.pnNoti.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb1)).EndInit();
-            this.panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb2)).EndInit();
-            this.panel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb3)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            ClientSize = new Size(788, 447);
+            Controls.Add(tabControl1);
+            Name = "FormSetting";
+            Text = "FormSetting";
+            FormClosing += FormSetting_FormClosing;
+            Load += FormSetting_Load;
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBarFrame).EndInit();
+            pnNoti.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pb1).EndInit();
+            panel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pb2).EndInit();
+            panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pb3).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
 
         private Button button1;
-        private TabControl SettingtabControl;
+        private TabControl tabControl1;
         private TabPage tabPage1;
-        private Label label1;
         private CheckBox checkAlarm;
         private Label label13;
-        private ComboBox cboPicSaving;
+        private ComboBox cboPicterm;
         private Label label8;
         private Label label9;
         private Label label10;
@@ -432,5 +421,6 @@
         private CheckBox checkLongPlay;
         private CheckBox checkPose;
         private TabPage tabPage2;
+        private Label label1;
     }
 }
