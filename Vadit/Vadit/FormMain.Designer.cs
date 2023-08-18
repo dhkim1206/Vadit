@@ -164,9 +164,9 @@
             button2.BackgroundImageLayout = ImageLayout.None;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.Font = new Font("Calibri", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             button2.ForeColor = SystemColors.ButtonShadow;
-            button2.Location = new Point(969, 6);
+            button2.Location = new Point(974, 3);
             button2.Name = "button2";
             button2.RightToLeft = RightToLeft.Yes;
             button2.Size = new Size(34, 28);

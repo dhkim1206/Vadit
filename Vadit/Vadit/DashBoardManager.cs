@@ -132,18 +132,18 @@ namespace Vadit
 
                 using (Graphics g = Graphics.FromImage(imageWithText))
                 {
-                    using (Brush backgroundBrush = new SolidBrush(Color.Black))
+                    using (Brush backgroundBrush = new SolidBrush(Color.FromArgb(32, 33, 36)))
                     {
-                        g.FillRectangle(backgroundBrush, 0, 0, 650, 70);
+                        g.FillRectangle(backgroundBrush, 0, 0, 650, 77);
                     }
 
                     SizeF textSize = g.MeasureString(categoryText, font);
                     float textX = (pictureBox.Width - textSize.Width) / 2 + 280;
                     float textY = pictureBox.Height - textSize.Height + 350;
                     g.DrawString(categoryText, font, Brushes.Yellow, new PointF(textX, textY));
-                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(140, 5));
+                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(100, 8));
 
-                    using (Font font1 = new Font(FontFamily.GenericSansSerif, 70, FontStyle.Bold, GraphicsUnit.Pixel))
+                    using (Font font1 = new Font(FontFamily.GenericSansSerif, 68, FontStyle.Bold, GraphicsUnit.Pixel))
                     {
                         if (_current < count + 1)
                         {
