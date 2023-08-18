@@ -63,9 +63,149 @@ namespace Vadit.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ExplainImage {
+            get {
+                object obj = ResourceManager.GetObject("ExplainImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExplainImage1 {
+            get {
+                object obj = ResourceManager.GetObject("ExplainImage1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap file_lines_regular {
+            get {
+                object obj = ResourceManager.GetObject("file-lines-regular", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap free_icon_document_2661454 {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-document-2661454", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap free_icon_document_607924 {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-document-607924", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap free_icon_font_subtitles_3916836 {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-font-subtitles-3916836", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap free_icon_programming_8750773__2_ {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-programming-8750773 (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap free_icon_programming_8750773__3_ {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-programming-8750773 (3)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap free_icon_programming_8750773__4_ {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-programming-8750773 (4)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap x_Icon {
             get {
                 object obj = ResourceManager.GetObject("x_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 제목_없음 {
+            get {
+                object obj = ResourceManager.GetObject("제목 없음", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 제목_없음__1___1_ {
+            get {
+                object obj = ResourceManager.GetObject("제목 없음 (1) (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 제목_없음__1___1___1_ {
+            get {
+                object obj = ResourceManager.GetObject("제목 없음 (1) (1) (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 화면_캡처_2023_08_18_103007__1___2_ {
+            get {
+                object obj = ResourceManager.GetObject("화면 캡처 2023-08-18 103007 (1) (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 화면_캡처_2023_08_18_103007__1___2___1___1_ {
+            get {
+                object obj = ResourceManager.GetObject("화면 캡처 2023-08-18 103007 (1) (2) (1) (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

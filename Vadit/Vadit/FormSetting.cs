@@ -77,6 +77,7 @@ namespace Vadit
             checkWindows.Checked = AppConf.ConfigSet.WindowSameExecute;
             checkAlarm.Checked = AppConf.ConfigSet.AlarmSound;
             trackBarFrame.Value = AppConf.ConfigSet.CamFrame;
+            cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
         }
 
         private void button1_Click_1(object sender, EventArgs e)

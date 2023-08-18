@@ -254,14 +254,6 @@ namespace Vadit
                 {
                     _infoInputCorrectPose.setInfo(img, _points);
                     AppGlobal.CorrectPose.setInfo(img, _points);
-                    Debug.WriteLine("17번:[" + _infoInputCorrectPose._point[17].X + "," + _infoInputCorrectPose._point[17].Y + "]");
-                    Debug.WriteLine("15번:[" + _infoInputCorrectPose._point[15].X + "," + _infoInputCorrectPose._point[15].Y + "]");
-                    Debug.WriteLine("0번:[" + _infoInputCorrectPose._point[0].X + "," + _infoInputCorrectPose._point[0].Y + "]");
-                    Debug.WriteLine("16번:[" + _infoInputCorrectPose._point[16].X + "," + _infoInputCorrectPose._point[16].Y + "]");
-                    Debug.WriteLine("18번:[" + _infoInputCorrectPose._point[18].X + "," + _infoInputCorrectPose._point[18].Y + "]");
-                    Debug.WriteLine("2번:[" + _infoInputCorrectPose._point[2].X + "," + _infoInputCorrectPose._point[2].Y + "]");
-                    Debug.WriteLine("5번:[" + _infoInputCorrectPose._point[5].X + "," + _infoInputCorrectPose._point[5].Y + "]");
-                    Debug.WriteLine("1번:[" + _infoInputCorrectPose._point[1].X + "," + _infoInputCorrectPose._point[1].Y + "]");
                 }
                 else if (!_isInputCorrrctPose)
                 {
@@ -335,35 +327,37 @@ namespace Vadit
 
             Debug.WriteLine($"올바른 자세: {AppGlobal.CorrectPose._ratio:F3}");
             Debug.WriteLine($"현재측정: {_ratio:F3}");
+            Debug.WriteLine("검출된 17to18길이는 =" + dt17to18);
+            Debug.WriteLine("설정된 17to18길이는 =" + AppGlobal.CorrectPose._dt17to18);
 
-
-            if (Math.Abs(_points[2].Y - _points[5].Y) > 20)
+            if (Math.Abs(_points[2].Y - _points[5].Y) > 40)
             {
                 _analyzeData.Result += "척추 측만증,";
                 Debug.WriteLine("측만증 검출");
                 conditionMet = true;
             }
 
-            if (_ratio < AppGlobal.CorrectPose._ratio + 0.6)
+            if (0.6 > Math.Abs(_ratio - AppGlobal.CorrectPose._ratio))
             {
-                if(dt17to18 >= AppGlobal.CorrectPose._dt17to18 + 5)
+                if (dt17to18 >= AppGlobal.CorrectPose._dt17to18 + 10)    //표준보다 10만큼 커지면
                 {
                     _analyzeData.Result += " 거북목,";
                     Debug.WriteLine("거북목 검출");
                     conditionMet = true;
                 }
-                else if(dt17to18 < AppGlobal.CorrectPose._dt17to18 + 5)
+                else if (dt17to18 < AppGlobal.CorrectPose._dt17to18 - 20)
                 {
                     _analyzeData.Result += "추간판 탈출,";
-                    Debug.WriteLine("추간판 탈출");
+                    Debug.WriteLine("추간판 탈출 검출");
                     conditionMet = true;
                 }
             }
             if (!conditionMet)
             {
                 _analyzeData.Result = "정상";
-                Debug.WriteLine("정상");
+                Debug.WriteLine("정상 검출");
                 _data.UpdateGoodPoseCnt_Score(date);
+                return;
             }
             else
             {

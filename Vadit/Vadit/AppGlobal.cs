@@ -20,7 +20,7 @@ namespace Vadit
         {
             if (!_isRunning)
             {
-                TM = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(10));
+                TM = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(600));
                 _isRunning = true;
                 Debug.WriteLine("Timer started.");
             }
