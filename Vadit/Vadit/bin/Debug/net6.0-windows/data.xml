@@ -5,6 +5,6 @@
   <WindowSameExecute>false</WindowSameExecute>
   <AlarmSound>false</AlarmSound>
   <CamFrame>0</CamFrame>
-  <SaveingPeriod>1</SaveingPeriod>
+  <SaveingPeriod>-1</SaveingPeriod>
   <NotificationLayout>Standard</NotificationLayout>
 </AppConfigClass>

@@ -1,4 +1,4 @@
-namespace Vadit
+﻿namespace Vadit
 {
     internal static class Program
     {
@@ -8,9 +8,12 @@ namespace Vadit
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+
+            SplashScreen splash = new SplashScreen();
+            splash.ShowDialog();
+
+
             Application.Run(new FormMain());
         }
     }

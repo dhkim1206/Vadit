@@ -151,6 +151,7 @@
             ClientSize = new Size(810, 447);
             Controls.Add(tabControl1);
             Name = "FormCamera";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormCamera";
             FormClosing += FormCamera_FormClosing;
             Load += FormCamera_Load;

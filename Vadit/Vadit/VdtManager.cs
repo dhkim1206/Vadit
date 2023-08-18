@@ -280,7 +280,6 @@ namespace Vadit
             //비율로 디텍트하는 메서드. 길이랑 비교하는 메서드랑 비교 후 삭제.
             DateTime time = DateTime.Now;
             DateTime date = time.Date;
-
             AnalyzeData _analyzeData = new AnalyzeData();
             _analyzeData.Result = null;
             var _img = img;
@@ -304,8 +303,13 @@ namespace Vadit
             {
                 if (c > 4)  //빈점이 4개 초과일때 자리비움으로 인정.
                 {
-                    AppGlobal.StopTimer(); //타이머 일시정지.
+                    AppGlobal.TM.StopTimer(); //타이머 일시정지.
                 }
+                else
+                {
+                    AppGlobal.TM.StartTimer();
+                }
+
                 Debug.WriteLine("17번:[" + _points[17].X + "," + _points[17].Y + "]");
                 Debug.WriteLine("15번:[" + _points[15].X + "," + _points[15].Y + "]");
                 Debug.WriteLine("0번:[" + _points[0].X + "," + _points[0].Y + "]");
@@ -357,16 +361,17 @@ namespace Vadit
                 _analyzeData.Result = "정상";
                 Debug.WriteLine("정상 검출");
                 _data.UpdateGoodPoseCnt_Score(date);
+                return;
             }
             else
             {
                 _data.UpdateBadPoseCnt_Score(date);
-
+                AppGlobal.TM.ShowPoseAlrarm();
             }
 
             _data.SaveImageToFile(time, img, _analyzeData.Result);
             _data.InsertDB_BadPose(time, _analyzeData.Result);
-            AppGlobal.StartTimer();      //점들이 정상적으로 찍혔다면 타이머 다시 돌리기.
+            AppGlobal.TM.StartTimer();      //점들이 정상적으로 찍혔다면 타이머 다시 돌리기.
             //_data.UpdatePoseCnt_Score(analyzeData.Result);
 
             _analyzeData.AnalyzedImage = img.ToBitmap();
