@@ -24,15 +24,14 @@ namespace Vadit
             LoadSplashImage();
 
             _timer = new Timer();
-            _timer.Interval = 1000; 
+            _timer.Interval = 5000; 
             _timer.Tick += Timer_Tick;
             _timer.Start();
 
         }
         private void LoadSplashImage()
         {
-            string imagePath = Path.Combine(_Path, "splash.gif");   //리소스에 넣을것.
-            Image splashImage = Image.FromFile(imagePath);
+            Image splashImage = Properties.Resources.SplashImage;
             PbSplash.Image = splashImage;
 
         }
