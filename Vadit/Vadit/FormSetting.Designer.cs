@@ -31,7 +31,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.SettingtabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
             this.checkAlarm = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.cboPicSaving = new System.Windows.Forms.ComboBox();
@@ -92,7 +91,6 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.checkAlarm);
             this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.cboPicSaving);
@@ -115,17 +113,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "기본설정";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(539, 44);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 23);
-            this.label1.TabIndex = 42;
-            this.label1.Text = "label1";
             // 
             // checkAlarm
             // 
@@ -373,7 +360,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(1005, 534);
+            this.tabPage2.Size = new System.Drawing.Size(1005, 604);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "바른자세 설정";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -410,7 +397,6 @@
         private Button button1;
         private TabControl SettingtabControl;
         private TabPage tabPage1;
-        private Label label1;
         private CheckBox checkAlarm;
         private Label label13;
         private ComboBox cboPicSaving;

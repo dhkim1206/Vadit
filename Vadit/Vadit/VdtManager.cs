@@ -75,6 +75,9 @@ namespace Vadit
         private List<Point> _points;
         Data _data;
 
+        public int BadPoseCnt = 0;
+        FormPopUp _formPopUp = new FormPopUp();
+
         public VdtManager(ProgressChangedEventHandler OnProgressing)
         {
             _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
@@ -281,7 +284,6 @@ namespace Vadit
             string modelPath = Path.Combine(Application.StartupPath, "pose_iter_584000.caffemodel");
             return DnnInvoke.ReadNetFromCaffe(prototxt, modelPath);
         }
-
         // Caffe 형식의 OpenPose 딥러닝 모델을 로드하여 반환
         public void DetectPoseByRatio(Image<Bgr, byte> img, List<Point> points, BackgroundWorker backgroundWorker)
         {
@@ -342,6 +344,7 @@ namespace Vadit
                 _analyzeData.Result += "척추 측만증,";
                 Debug.WriteLine("측만증 검출");
                 conditionMet = true;
+                
             }
 
             if (_ratio < AppGlobal.CorrectPose._ratio + 0.6)
@@ -351,12 +354,15 @@ namespace Vadit
                     _analyzeData.Result += " 거북목,";
                     Debug.WriteLine("거북목 검출");
                     conditionMet = true;
+
+
                 }
                 else if(dt17to18 < AppGlobal.CorrectPose._dt17to18 + 5)
                 {
                     _analyzeData.Result += "추간판 탈출,";
                     Debug.WriteLine("추간판 탈출");
                     conditionMet = true;
+
                 }
             }
             if (!conditionMet)
@@ -368,7 +374,20 @@ namespace Vadit
             else
             {
                 _data.UpdateBadPoseCnt_Score(date);
+                
+                BadPoseCnt++;
+                AppGlobal.LongPlayPopUp = true;
+                Debug.WriteLine("나쁜자세 감지");
+                Debug.WriteLine("나쁜자세 감지" + BadPoseCnt.ToString() + "번");
+                Debug.WriteLine("4번감지되지 않았을시의 bool값" + AppGlobal.LongPlayPopUp.ToString());
 
+                if (BadPoseCnt == 4)
+                {
+                    AppGlobal.LongPlayPopUp = false;
+                    _formPopUp.Show();
+                    Debug.WriteLine("나쁜자세 폼이 열리기전 bool값" + AppGlobal.LongPlayPopUp.ToString());
+                    //Debug.WriteLine("나쁜자세 감지 4번되서 팝업열림");
+                }
             }
 
             _data.SaveImageToFile(time, img, _analyzeData.Result);

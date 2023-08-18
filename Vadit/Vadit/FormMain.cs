@@ -23,12 +23,6 @@ namespace Vadit
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
             _formPopUp = new FormPopUp();
-            AppGlobal.StartTimer();
-
-            AppBase.AppConf = new AppConfig("data.xml");
-
-            _formPopUp = new FormPopUp();
-
         }
 
         public void StartDetect()
@@ -66,7 +60,7 @@ namespace Vadit
         {
             _formManager.CloseCurrentForm();
 
-            _vdtManager.Dispose();
+            if(_vdtManager != null)_vdtManager.Dispose();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -78,6 +72,7 @@ namespace Vadit
         private void button1_Click(object sender, EventArgs e)
         {
             _formPopUp.Show();
+
         }
     }
 }

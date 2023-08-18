@@ -18,33 +18,17 @@ namespace Vadit
         int _DefaultSecond;
         SoundPlayer _DefaultSound;
         SoundPlayer _LongplaySound;
+
         string _Path = Path.Combine(Application.StartupPath, "sound_data");
 
         Data _Data;
         string _FileName;
+
         public FormPopUp()
         {
             InitializeComponent();
             _Data = new Data();
-
         }
-        // 폼이 실행될때
-        private void FormPopUp_Shown(object sender, EventArgs e)//나쁜자세 알림 팝업
-        {
-            SetAudio(AppBase.AppConf.ConfigSet.AlarmSound);
-
-            if (true)// 안좋은 자세 감지시
-            {
-                SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
-                OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
-            }
-            else if (true) // 장시간 이용시
-            {
-                LongPalyPopUp();
-            }
-        }
-
-
 
         private void SetAudio(bool soundon)
         {
@@ -63,6 +47,18 @@ namespace Vadit
         {
             if (!this.Visible) return;
             DefaultTimer.Start();
+
+            SetAudio(AppBase.AppConf.ConfigSet.AlarmSound);
+
+            if (AppGlobal.LongPlayPopUp == true) // 장시간 이용시 실행 
+            {
+                LongPalyPopUp();
+            }
+            else  // 나쁜 자세 감지 실행 
+            {
+                SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
+                OpenBadPoseImage(AppBase.AppConf.ConfigSet.NotificationLayout);
+            }
         }
         private void DefaultTimer_Tick(object sender, EventArgs e)
         {
@@ -70,18 +66,56 @@ namespace Vadit
             _DefaultSecond++;
             Execution_UserSettingValue();
         }
-        private void LongPalyPopUp()
+
+        public void LongPalyPopUp()
         {
+            _DefaultSound = new SoundPlayer(Path.Combine(_Path, "DefaultSound.wav"));
+            _LongplaySound = new SoundPlayer(Path.Combine(_Path, "LongPalySound.wav"));
+
+            _LongplaySound.Play();
             UserPanel.Visible = false;
             ExamplePosePanel.Visible = false;
             CommentPanel.Visible = true;
             this.Size = new Size(350, 90);
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
             CommentButton.Text = "현재 N시간 동안 앉아 있었습니다.\n잠시 의자에서 일어나 휴식을 취해 주십시오.";
-            _LongplaySound.Play();
+            
+            Debug.WriteLine("현재 올라온 레이아웃은 장시간입니다.");
         }
-        private void OpenUserImage(EnumNotificationLayout layout) 
+        private void OpenBadPoseImage(EnumNotificationLayout layout)
         {
+            string ExampleImageName = "";
+            string LocalPath = (Path.Combine(Application.StartupPath, "GuideImage_data"));
+            string imagePath = "";
+            
+            int turtle = _Data.PoseTurtle;
+            int scoli = _Data.PoseScoli;
+            int hernia = _Data.Posehernia;
+                
+            if ((turtle == 1 && scoli == 0 && hernia == 0) || 
+                (turtle == 0 && scoli == 1 && hernia == 0) || 
+                (turtle == 1 && scoli == 1 && hernia == 0))
+            {
+                ExampleImageName = "ExampleA.PNG";
+                CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
+            }
+            else if ((turtle == 1 && scoli == 0 && hernia == 1) ||
+                    (turtle == 0 && scoli == 1 && hernia == 1))
+            {
+                ExampleImageName = "ExampleB.PNG";
+                CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
+
+            }
+            else if (turtle == 0 && scoli == 0 && hernia == 1)
+            {
+                ExampleImageName = "ExampleC.PNG";
+                CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
+            }
+
+            imagePath = Path.Combine(LocalPath, ExampleImageName);
+            
+            
+
             if (Directory.Exists(_Data.imageDirectory))
             {
                 string filenameExtension = "*.JPG"; // 파일 확장자에 따라 변경
@@ -110,6 +144,8 @@ namespace Vadit
                 {
                     UserPosePicBox.Load(highestNumberFileName);
                     UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                    //ExamplePosePicBox.Load(imagePath);
+                    ExamplePosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 else if (layout == EnumNotificationLayout.OnlyUser)
                 {
@@ -120,13 +156,13 @@ namespace Vadit
                 {
                     CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
                 }
-            }
+            }  
         }
         private void SetLayout(EnumNotificationLayout layout) // 팝업 생성시 자동 
         {
             CommentButton.FlatAppearance.BorderSize = 0;
             _DefaultSound.Play();
-
+            Debug.WriteLine("잘못된 자세를 반복해서 팝업열림");
             if (layout == EnumNotificationLayout.Standard)
             {
                 UserPanel.Visible = true;
@@ -147,8 +183,11 @@ namespace Vadit
             {
                 UserPanel.Visible = false;
                 ExamplePosePanel.Visible = false;
-                CommentPanel.Visible = true;
+                CommentPanel.Visible = true; 
+                this.Size = new Size(350, 90);
+                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
             }
+            Debug.WriteLine("현재 올라온 레이아웃은 나쁜자세 입니다.");
         }
         public void Execution_UserSettingValue()
         {
@@ -158,6 +197,8 @@ namespace Vadit
                 DefaultTimer.Stop();
                 _DefaultSecond = 0;
                 this.Hide();
+                _DefaultSound.Stop();
+                _LongplaySound.Stop();
             }
 
         }

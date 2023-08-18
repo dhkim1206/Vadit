@@ -66,7 +66,6 @@ namespace Vadit
                 if (i == Convert.ToInt32(AppConf.ConfigSet.NotificationLayout)) // 반환되는 값이 ENUM과 일치시 색상변환
                 {
                     pnNoti.Controls[i].BackColor = Color.Gray;
-                    label1.Text = AppConf.ConfigSet.NotificationLayout.ToString();
                 }
                 else pnNoti.Controls[i].BackColor = Color.WhiteSmoke;
 

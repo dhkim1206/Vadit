@@ -23,6 +23,8 @@ namespace Vadit
         public SQLiteCommand _cmd;
         public SQLiteDataReader _dr;
 
+        public int PoseTurtle, PoseScoli, Posehernia;
+
         public class BadPoseData
         {
             public DateTime Date { get; private set; }
@@ -304,17 +306,23 @@ namespace Vadit
             if (category.Contains("거북목"))
             {
                 turtleNeck++;
+
+                PoseTurtle = turtleNeck;
             }
             if (category.Contains("척추 측만증"))
             {
                 scoliosis++;
+
+                PoseScoli = scoliosis;
             }
             if (category.Contains("추간판 탈출"))
             {
                 herniations++;
+
+                Posehernia = herniations;
             }
-
-
+            
+           
             using (var cmd = new SQLiteCommand(_con))
             {
                 cmd.CommandText = "INSERT INTO BadPose (Date, TurtleNeck, Scoliosis, Herniations) VALUES (@Date, @TurtleNeck, @Scoliosis, @Herniations)";
@@ -327,6 +335,7 @@ namespace Vadit
                 cmd.ExecuteNonQuery();
 
                 Debug.WriteLine("InsertDB_BadPose");
+                Debug.WriteLine("DB값" + turtleNeck + "거북목\n" + scoliosis + "척추측만\n" + herniations +"추간판");
             }
         }
 

@@ -30,7 +30,6 @@
         {
             this.btn_ProgramExplain = new System.Windows.Forms.Button();
             this.categoryPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.btn_FormSetting = new System.Windows.Forms.Button();
             this.btn_statisticsForm = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
@@ -60,7 +59,6 @@
             // categoryPanel
             // 
             this.categoryPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.categoryPanel.Controls.Add(this.button1);
             this.categoryPanel.Controls.Add(this.btn_ProgramExplain);
             this.categoryPanel.Controls.Add(this.btn_FormSetting);
             this.categoryPanel.Controls.Add(this.btn_statisticsForm);
@@ -69,16 +67,6 @@
             this.categoryPanel.Name = "categoryPanel";
             this.categoryPanel.Size = new System.Drawing.Size(188, 643);
             this.categoryPanel.TabIndex = 3;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(0, 313);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(188, 29);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "팝업버튼";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_FormSetting
             // 
@@ -182,6 +170,5 @@
         private Panel mainPanel;
         private Panel panel1;
         private Button button2;
-        private Button button1;
     }
 }
