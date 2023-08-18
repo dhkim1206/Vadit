@@ -7,7 +7,12 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <ApplicationIcon>Resources\Vadit_Icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Vadit_Icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Emgu.CV" Version="4.7.0.5276" />
@@ -27,7 +32,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

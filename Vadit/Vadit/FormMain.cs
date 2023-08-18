@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Reflection.Emit;
 using System.Threading;
 using System.Windows.Forms;
+using Vadit.Properties;
 using static Vadit.AppBase;
 using Timer = System.Threading.Timer;
 namespace Vadit
@@ -13,7 +14,7 @@ namespace Vadit
     public partial class FormMain : Form
     {
         AppBase.FormManager _formManager;
-
+        private NotifyIcon notifyIcon;
         FormPopUp _formPopUp;
         public VdtManager _vdtManager;
 
@@ -27,6 +28,17 @@ namespace Vadit
         public FormMain()
         {
             InitializeComponent();
+
+            // 트레이 아이콘 초기화
+            notifyIcon = new NotifyIcon();
+            notifyIcon.Icon = Properties.Resources.Vadit_Icon;
+            notifyIcon.Text = "Vadit";
+            notifyIcon.Visible = true;
+
+            // 트레이 아이콘을 클릭하면 폼을 보이게 함
+            notifyIcon.MouseClick += NotifyIcon_MouseClick;
+
+
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
             _formPopUp = new FormPopUp();
@@ -80,7 +92,6 @@ namespace Vadit
             timerSliding.Start();
 
             _formManager.ChangeForm(typeof(FormStatistics));
-
         }
 
         private async void btn_FormSetting_Click(object sender, EventArgs e)
@@ -104,14 +115,10 @@ namespace Vadit
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             _formManager.CloseCurrentForm();
-
-            _vdtManager.Dispose();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
-            this.Dispose();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -119,18 +126,34 @@ namespace Vadit
             _formPopUp.Show();
         }
 
+        private void btn_end_Click(object sender, EventArgs e)
+        {
+            // 종료 메뉴 아이템 클릭 시 프로그램 종료
+            notifyIcon.Dispose();
+            this.Dispose();
+        }
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            // 사용자가 닫을 때 폼 숨기고 트레이 아이콘 표시
+            this.Hide();
+        }
+        private void NotifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                // 트레이 아이콘 클릭 시 폼을 보이게 함
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
         private void categoryPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pn_Scroll_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }

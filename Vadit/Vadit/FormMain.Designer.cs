@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             btn_ProgramExplain = new Button();
             categoryPanel = new Panel();
+            btn_end = new Button();
             panel3 = new Panel();
             pn_Scroll = new Panel();
-            button1 = new Button();
             btn_FormSetting = new Button();
             btn_statisticsForm = new Button();
             mainPanel = new Panel();
             panel1 = new Panel();
-            button2 = new Button();
+            btn_exit = new Button();
             timerSliding = new System.Windows.Forms.Timer(components);
             categoryPanel.SuspendLayout();
             panel1.SuspendLayout();
@@ -50,24 +51,25 @@
             btn_ProgramExplain.BackgroundImageLayout = ImageLayout.None;
             btn_ProgramExplain.FlatAppearance.BorderSize = 0;
             btn_ProgramExplain.FlatStyle = FlatStyle.Flat;
-            btn_ProgramExplain.Font = new Font("굴림", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_ProgramExplain.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_ProgramExplain.ForeColor = Color.White;
+            btn_ProgramExplain.Image = Properties.Resources.free_icon_file_2274790__1___1___1_;
             btn_ProgramExplain.ImageAlign = ContentAlignment.MiddleRight;
-            btn_ProgramExplain.Location = new Point(1, 290);
+            btn_ProgramExplain.Location = new Point(26, 256);
             btn_ProgramExplain.Name = "btn_ProgramExplain";
             btn_ProgramExplain.RightToLeft = RightToLeft.Yes;
-            btn_ProgramExplain.Size = new Size(184, 75);
+            btn_ProgramExplain.Size = new Size(210, 75);
             btn_ProgramExplain.TabIndex = 3;
-            btn_ProgramExplain.Text = "프로그램 설명";
+            btn_ProgramExplain.Text = "설명";
             btn_ProgramExplain.UseVisualStyleBackColor = false;
             btn_ProgramExplain.Click += btn_ProgramExplain_Click_1;
             // 
             // categoryPanel
             // 
             categoryPanel.BackColor = Color.FromArgb(32, 33, 36);
+            categoryPanel.Controls.Add(btn_end);
             categoryPanel.Controls.Add(panel3);
             categoryPanel.Controls.Add(pn_Scroll);
-            categoryPanel.Controls.Add(button1);
             categoryPanel.Controls.Add(btn_ProgramExplain);
             categoryPanel.Controls.Add(btn_FormSetting);
             categoryPanel.Controls.Add(btn_statisticsForm);
@@ -75,35 +77,41 @@
             categoryPanel.Name = "categoryPanel";
             categoryPanel.Size = new Size(202, 504);
             categoryPanel.TabIndex = 3;
-            categoryPanel.Paint += categoryPanel_Paint;
+            // 
+            // btn_end
+            // 
+            btn_end.BackColor = Color.FromArgb(32, 33, 36);
+            btn_end.BackgroundImageLayout = ImageLayout.None;
+            btn_end.FlatAppearance.BorderSize = 0;
+            btn_end.FlatStyle = FlatStyle.Flat;
+            btn_end.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_end.ForeColor = Color.White;
+            btn_end.Image = Properties.Resources.system_shutdown_icon_180898;
+            btn_end.ImageAlign = ContentAlignment.MiddleRight;
+            btn_end.Location = new Point(25, 408);
+            btn_end.Name = "btn_end";
+            btn_end.RightToLeft = RightToLeft.Yes;
+            btn_end.Size = new Size(210, 75);
+            btn_end.TabIndex = 7;
+            btn_end.Text = "종료";
+            btn_end.UseVisualStyleBackColor = false;
+            btn_end.Click += btn_end_Click;
             // 
             // panel3
             // 
-            panel3.BackColor = Color.DarkGray;
-            panel3.Location = new Point(191, 5);
+            panel3.BackColor = Color.Gray;
+            panel3.Location = new Point(181, 69);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1, 475);
+            panel3.Size = new Size(1, 300);
             panel3.TabIndex = 6;
             // 
             // pn_Scroll
             // 
             pn_Scroll.BackColor = Color.Teal;
-            pn_Scroll.Location = new Point(188, 310);
+            pn_Scroll.Location = new Point(178, 310);
             pn_Scroll.Name = "pn_Scroll";
             pn_Scroll.Size = new Size(8, 40);
             pn_Scroll.TabIndex = 5;
-            pn_Scroll.Paint += pn_Scroll_Paint;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(13, 454);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(146, 22);
-            button1.TabIndex = 4;
-            button1.Text = "팝업버튼";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // btn_FormSetting
             // 
@@ -111,13 +119,14 @@
             btn_FormSetting.BackgroundImageLayout = ImageLayout.None;
             btn_FormSetting.FlatAppearance.BorderSize = 0;
             btn_FormSetting.FlatStyle = FlatStyle.Flat;
-            btn_FormSetting.Font = new Font("굴림", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_FormSetting.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_FormSetting.ForeColor = Color.White;
-            btn_FormSetting.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_FormSetting.Location = new Point(3, 210);
+            btn_FormSetting.Image = (Image)resources.GetObject("btn_FormSetting.Image");
+            btn_FormSetting.ImageAlign = ContentAlignment.MiddleRight;
+            btn_FormSetting.Location = new Point(25, 175);
             btn_FormSetting.Name = "btn_FormSetting";
             btn_FormSetting.RightToLeft = RightToLeft.Yes;
-            btn_FormSetting.Size = new Size(181, 75);
+            btn_FormSetting.Size = new Size(210, 75);
             btn_FormSetting.TabIndex = 2;
             btn_FormSetting.Text = "설정";
             btn_FormSetting.UseVisualStyleBackColor = false;
@@ -129,14 +138,16 @@
             btn_statisticsForm.BackgroundImageLayout = ImageLayout.None;
             btn_statisticsForm.FlatAppearance.BorderSize = 0;
             btn_statisticsForm.FlatStyle = FlatStyle.Flat;
-            btn_statisticsForm.Font = new Font("굴림", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_statisticsForm.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_statisticsForm.ForeColor = Color.White;
-            btn_statisticsForm.Location = new Point(1, 120);
+            btn_statisticsForm.Image = Properties.Resources.free_icon_line_chart_5277215__1___1___1_;
+            btn_statisticsForm.ImageAlign = ContentAlignment.MiddleRight;
+            btn_statisticsForm.Location = new Point(25, 94);
             btn_statisticsForm.Name = "btn_statisticsForm";
             btn_statisticsForm.RightToLeft = RightToLeft.Yes;
-            btn_statisticsForm.Size = new Size(184, 75);
+            btn_statisticsForm.Size = new Size(210, 75);
             btn_statisticsForm.TabIndex = 1;
-            btn_statisticsForm.Text = "통계";
+            btn_statisticsForm.Text = "분석";
             btn_statisticsForm.UseVisualStyleBackColor = false;
             btn_statisticsForm.Click += btn_statisticsForm_Click;
             // 
@@ -145,35 +156,36 @@
             mainPanel.BackColor = Color.FromArgb(38, 38, 40);
             mainPanel.Location = new Point(208, 40);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(805, 482);
+            mainPanel.Size = new Size(805, 501);
             mainPanel.TabIndex = 4;
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(32, 33, 36);
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(btn_exit);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1013, 40);
             panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint;
             // 
-            // button2
+            // btn_exit
             // 
-            button2.BackColor = Color.FromArgb(32, 33, 36);
-            button2.BackgroundImageLayout = ImageLayout.None;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Calibri", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.ForeColor = SystemColors.ButtonShadow;
-            button2.Location = new Point(974, 3);
-            button2.Name = "button2";
-            button2.RightToLeft = RightToLeft.Yes;
-            button2.Size = new Size(34, 28);
-            button2.TabIndex = 4;
-            button2.Text = "X";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            btn_exit.BackColor = Color.FromArgb(32, 33, 36);
+            btn_exit.BackgroundImageLayout = ImageLayout.None;
+            btn_exit.FlatAppearance.BorderSize = 0;
+            btn_exit.FlatStyle = FlatStyle.Flat;
+            btn_exit.Font = new Font("Calibri", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_exit.ForeColor = SystemColors.ButtonShadow;
+            btn_exit.Location = new Point(974, 3);
+            btn_exit.Name = "btn_exit";
+            btn_exit.RightToLeft = RightToLeft.Yes;
+            btn_exit.Size = new Size(34, 28);
+            btn_exit.TabIndex = 4;
+            btn_exit.Text = "X";
+            btn_exit.UseVisualStyleBackColor = false;
+            btn_exit.Click += btn_exit_Click;
             // 
             // timerSliding
             // 
@@ -190,6 +202,7 @@
             Controls.Add(mainPanel);
             Controls.Add(categoryPanel);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
@@ -207,10 +220,10 @@
         private Button btn_statisticsForm;
         private Panel mainPanel;
         private Panel panel1;
-        private Button button2;
-        private Button button1;
-        private Panel pn_Scroll;
-        private Panel panel3;
+        private Button btn_exit;
         private System.Windows.Forms.Timer timerSliding;
+        private Button btn_end;
+        private Panel panel3;
+        private Panel pn_Scroll;
     }
 }
