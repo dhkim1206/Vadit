@@ -18,5 +18,6 @@ namespace Vadit
         static public VdtManager VM = null;
         static public InfoInputCorrectPose CorrectPose = new InfoInputCorrectPose();
         static public TimerManager TM = null;
+        static public VideoCapture Cap = null;
     }
 }

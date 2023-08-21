@@ -69,7 +69,7 @@ namespace Vadit
     {
         public BackgroundWorker _bgw = null;
         public InfoInputCorrectPose _infoInputCorrectPose = new InfoInputCorrectPose();
-        private VideoCapture _cap = null;
+        private VideoCapture _cap = AppGlobal.Cap;
         private Mat _frame = null;
         public bool _isInputCorrrctPose = false;//드로우 스켈레톤에서 이게 올바른자세 입력한 이미지인지 아닌지 판별하기위해
         private Net _poseNet = null;
@@ -92,7 +92,6 @@ namespace Vadit
         }
         private void OnDoWork(object sender, DoWorkEventArgs e)
         {
-            _cap = new VideoCapture(0);
             while (true)
             {
                 if (_cap != null)
@@ -127,7 +126,6 @@ namespace Vadit
         // 프레임 캡처하고 스켈레톤을 탐지하고 그리기 위한 메서드 (비동기 작업을 위해 BackgroundWorker를 매개변수로 받음)
         public void ProcessFrameAndDrawSkeleton(BackgroundWorker worker)
         {
-            _cap = new VideoCapture(0);
             if (_cap != null)
 
             {

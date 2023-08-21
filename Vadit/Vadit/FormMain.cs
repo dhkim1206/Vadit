@@ -1,5 +1,9 @@
 
 using Emgu.CV.Ocl;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Dnn;
+using Emgu.CV.Structure;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -20,6 +24,7 @@ namespace Vadit
             InitializeComponent();
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
+            AppGlobal.Cap = new VideoCapture(0);
         }
         public void StartDetect()
         {
