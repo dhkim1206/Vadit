@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using Button = System.Windows.Forms.Button;
 
 namespace Vadit
 {
@@ -68,7 +69,7 @@ namespace Vadit
     {
         public BackgroundWorker _bgw = null;
         public InfoInputCorrectPose _infoInputCorrectPose = new InfoInputCorrectPose();
-        private VideoCapture _cap = null;
+        private VideoCapture _cap = AppGlobal.Cap;
         private Mat _frame = null;
         public bool _isInputCorrrctPose = false;//드로우 스켈레톤에서 이게 올바른자세 입력한 이미지인지 아닌지 판별하기위해
         private Net _poseNet = null;
@@ -91,7 +92,6 @@ namespace Vadit
         }
         private void OnDoWork(object sender, DoWorkEventArgs e)
         {
-            _cap = new VideoCapture(0);
             while (true)
             {
                 if (_cap != null)
@@ -126,7 +126,6 @@ namespace Vadit
         // 프레임 캡처하고 스켈레톤을 탐지하고 그리기 위한 메서드 (비동기 작업을 위해 BackgroundWorker를 매개변수로 받음)
         public void ProcessFrameAndDrawSkeleton(BackgroundWorker worker)
         {
-            _cap = new VideoCapture(0);
             if (_cap != null)
 
             {
@@ -280,7 +279,6 @@ namespace Vadit
             //비율로 디텍트하는 메서드. 길이랑 비교하는 메서드랑 비교 후 삭제.
             DateTime time = DateTime.Now;
             DateTime date = time.Date;
-
             AnalyzeData _analyzeData = new AnalyzeData();
             _analyzeData.Result = null;
             var _img = img;
@@ -304,8 +302,13 @@ namespace Vadit
             {
                 if (c > 4)  //빈점이 4개 초과일때 자리비움으로 인정.
                 {
-                    AppGlobal.StopTimer(); //타이머 일시정지.
+                    AppGlobal.TM.StopTimer(); //타이머 일시정지.
                 }
+                else
+                {
+                    AppGlobal.TM.StartTimer();
+                }
+
                 Debug.WriteLine("17번:[" + _points[17].X + "," + _points[17].Y + "]");
                 Debug.WriteLine("15번:[" + _points[15].X + "," + _points[15].Y + "]");
                 Debug.WriteLine("0번:[" + _points[0].X + "," + _points[0].Y + "]");
@@ -362,12 +365,12 @@ namespace Vadit
             else
             {
                 _data.UpdateBadPoseCnt_Score(date);
-
+                AppGlobal.TM.ShowPoseAlrarm();
             }
 
             _data.SaveImageToFile(time, img, _analyzeData.Result);
             _data.InsertDB_BadPose(time, _analyzeData.Result);
-            AppGlobal.StartTimer();      //점들이 정상적으로 찍혔다면 타이머 다시 돌리기.
+            AppGlobal.TM.StartTimer();      //점들이 정상적으로 찍혔다면 타이머 다시 돌리기.
             //_data.UpdatePoseCnt_Score(analyzeData.Result);
 
             _analyzeData.AnalyzedImage = img.ToBitmap();
@@ -404,7 +407,10 @@ namespace Vadit
                 OnclikBtnResetPose();
             return _infoInputCorrectPose._img.ToBitmap();
         }
+        public void PreventButtonClick(Button button)
+        {
 
+        }
 
         public void InputCorrectPose()  //자세 캡쳐 버튼 누르면 실행됨. 올바른 자세인지 아닌지 더불어 창닫기까지.
         {

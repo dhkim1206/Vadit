@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             btn_ProgramExplain = new Button();
             categoryPanel = new Panel();
@@ -40,8 +39,6 @@
             mainPanel = new Panel();
             panel1 = new Panel();
             btn_exit = new Button();
-            timerSliding = new System.Windows.Forms.Timer(components);
-            contextMenuStrip1 = new ContextMenuStrip(components);
             categoryPanel.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -52,7 +49,7 @@
             btn_ProgramExplain.BackgroundImageLayout = ImageLayout.None;
             btn_ProgramExplain.FlatAppearance.BorderSize = 0;
             btn_ProgramExplain.FlatStyle = FlatStyle.Flat;
-            btn_ProgramExplain.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_ProgramExplain.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_ProgramExplain.ForeColor = Color.White;
             btn_ProgramExplain.Image = Properties.Resources.free_icon_window_display_5581930_1_;
             btn_ProgramExplain.ImageAlign = ContentAlignment.MiddleRight;
@@ -93,7 +90,7 @@
             btn_end.BackgroundImageLayout = ImageLayout.None;
             btn_end.FlatAppearance.BorderSize = 0;
             btn_end.FlatStyle = FlatStyle.Flat;
-            btn_end.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_end.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_end.ForeColor = Color.White;
             btn_end.Image = Properties.Resources.KakaoTalk_20230821_112406611;
             btn_end.ImageAlign = ContentAlignment.MiddleRight;
@@ -112,7 +109,7 @@
             btn_FormSetting.BackgroundImageLayout = ImageLayout.None;
             btn_FormSetting.FlatAppearance.BorderSize = 0;
             btn_FormSetting.FlatStyle = FlatStyle.Flat;
-            btn_FormSetting.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_FormSetting.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_FormSetting.ForeColor = Color.White;
             btn_FormSetting.Image = Properties.Resources.KakaoTalk_20230821_104715043;
             btn_FormSetting.ImageAlign = ContentAlignment.MiddleRight;
@@ -131,7 +128,7 @@
             btn_statisticsForm.BackgroundImageLayout = ImageLayout.None;
             btn_statisticsForm.FlatAppearance.BorderSize = 0;
             btn_statisticsForm.FlatStyle = FlatStyle.Flat;
-            btn_statisticsForm.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_statisticsForm.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_statisticsForm.ForeColor = Color.White;
             btn_statisticsForm.Image = Properties.Resources.KakaoTalk_20230821_111614469;
             btn_statisticsForm.ImageAlign = ContentAlignment.MiddleRight;
@@ -150,7 +147,7 @@
             btn_producer.BackgroundImageLayout = ImageLayout.None;
             btn_producer.FlatAppearance.BorderSize = 0;
             btn_producer.FlatStyle = FlatStyle.Flat;
-            btn_producer.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_producer.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_producer.ForeColor = Color.White;
             btn_producer.Image = Properties.Resources.KakaoTalk_20230821_104347268;
             btn_producer.ImageAlign = ContentAlignment.MiddleRight;
@@ -198,16 +195,6 @@
             btn_exit.UseVisualStyleBackColor = false;
             btn_exit.Click += btn_exit_Click;
             // 
-            // timerSliding
-            // 
-            timerSliding.Interval = 3;
-            timerSliding.Tick += timerSliding_Tick;
-            // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
-            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -237,11 +224,9 @@
         private Panel mainPanel;
         private Panel panel1;
         private Button btn_exit;
-        private System.Windows.Forms.Timer timerSliding;
         private Button btn_end;
         private Panel pn_Scroll;
         private Button btn_producer;
         private RadioButton radioButton1;
-        private ContextMenuStrip contextMenuStrip1;
     }
 }

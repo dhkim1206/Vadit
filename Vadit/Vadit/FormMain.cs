@@ -1,9 +1,13 @@
-
-using Emgu.CV.Ocl;
+Ôªøusing Emgu.CV.Ocl;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Dnn;
+using Emgu.CV.Structure;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using Vadit.Properties;
@@ -15,168 +19,95 @@ namespace Vadit
     {
         AppBase.FormManager _formManager;
         private NotifyIcon notifyIcon;
-        FormPopUp _formPopUp;
         public VdtManager _vdtManager;
 
-        //∏Ò«•¡ˆ¡°
-        int Current_Y;
-        //«ˆ¿Á¡ˆ¡°
-        int Target_Y;
-        //ΩΩ∂Û¿ÃµÂ º”µµ ¡∂¿˝
-        int STEP_SLIDING;
 
         public FormMain()
         {
             InitializeComponent();
 
-            // ∆Æ∑π¿Ã æ∆¿Ãƒ‹ √ ±‚»≠
+            // Ìä∏Î†àÏù¥ ÏïÑÏù¥ÏΩò Ï¥àÍ∏∞Ìôî
             notifyIcon = new NotifyIcon();
             notifyIcon.Icon = Properties.Resources.Vadit_Icon;
             notifyIcon.Text = "Vadit";
             notifyIcon.Visible = true;
-
-            // ∆Æ∑π¿Ã æ∆¿Ãƒ‹¿ª ≈¨∏Ø«œ∏È ∆˚¿ª ∫∏¿Ã∞‘ «‘
+            // Ìä∏Î†àÏù¥ ÏïÑÏù¥ÏΩòÏùÑ ÌÅ¥Î¶≠ÌïòÎ©¥ ÌèºÏùÑ Î≥¥Ïù¥Í≤å Ìï®
             notifyIcon.MouseClick += NotifyIcon_MouseClick;
-
-
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
-            _formPopUp = new FormPopUp();
-            AppGlobal.StartTimer();
-
-            AppBase.AppConf = new AppConfig("data.xml");
-
-            _formPopUp = new FormPopUp();
-
-        }
-
-        private void timerSliding_Tick(object sender, EventArgs e)
-        {
-            if (Current_Y < Target_Y)
-            {
-                int y = Current_Y += STEP_SLIDING;
-                pn_Scroll.Location = new Point(pn_Scroll.Location.X, y);
-                if (y >= Target_Y)
-                {
-                    timerSliding.Stop();
-                }
-            }
-            else
-            {
-                int y = Current_Y -= STEP_SLIDING;
-                pn_Scroll.Location = new Point(pn_Scroll.Location.X, y);
-                if (y <= Target_Y)
-                {
-                    timerSliding.Stop();
-                }
-            }
-            if (STEP_SLIDING > 59)
-            {
-                STEP_SLIDING -= 30;
-            }
+            AppGlobal.Cap = new VideoCapture(0);
         }
         public void StartDetect()
         {
             AppGlobal.VM = new VdtManager(OnProgressing);
             AppGlobal.VM._bgw.RunWorkerAsync();
+            AppGlobal.TM = new TimerManager(AppGlobal.Timer);
         }
         private void OnProgressing(object sender, ProgressChangedEventArgs e)
         {
             AnalyzeData obj = e.UserState as AnalyzeData;
         }
 
-
         private async void btn_statisticsForm_Click(object sender, EventArgs e)
         {
-            /*
-            Current_Y = pn_Scroll.Location.Y;
-            Target_Y = btn_statisticsForm.Location.Y + 10;
-            STEP_SLIDING = Math.Abs(Current_Y - Target_Y) / 64 * 20;
-            Debug.WriteLine(Math.Abs(Current_Y - Target_Y));
-            Debug.WriteLine(STEP_SLIDING);
-            timerSliding.Start();
-
-            _formManager.ChangeForm(typeof(FormStatistics));
-            */
-            {
-
-                pn_Scroll.Location = new Point(pn_Scroll.Location.X, btn_statisticsForm.Location.Y + 20);
-                pn_Scroll.Height = 30;
-                await Task.Delay(80); // æ÷¥œ∏ﬁ¿Ãº« ∞£∞›
-
-                /*
-                pn_Scroll.Location = new Point(pn_Scroll.Location.X, btn_statisticsForm.Location.Y + 15);
-                pn_Scroll.Height = 45;
-                await Task.Delay(70); // æ÷¥œ∏ﬁ¿Ãº« ∞£∞›
-                */
-                pn_Scroll.Location = new Point(pn_Scroll.Location.X, btn_statisticsForm.Location.Y + 10);
-                pn_Scroll.Height = 60;
-            }
+            await AnimatePanel(pn_Scroll, btn_statisticsForm, typeof(FormStatistics));
         }
 
         private async void btn_FormSetting_Click(object sender, EventArgs e)
         {
-            Current_Y = pn_Scroll.Location.Y;
-            Target_Y = btn_FormSetting.Location.Y + 10;
-            STEP_SLIDING = Math.Abs(Current_Y - Target_Y) / 64 * 20;
-            timerSliding.Start();
-
-            _formManager.ChangeForm(typeof(FormSetting));
-
+            await AnimatePanel(pn_Scroll, btn_FormSetting, typeof(FormSetting));
         }
 
         private async void btn_ProgramExplain_Click_1(object sender, EventArgs e)
         {
-            Current_Y = pn_Scroll.Location.Y;
-            Target_Y = btn_ProgramExplain.Location.Y + 10;
-            STEP_SLIDING = Math.Abs(Current_Y - Target_Y) / 64 * 20;
-            timerSliding.Start();
+            await AnimatePanel(pn_Scroll, btn_ProgramExplain, typeof(FormSetting) /* No form change for this button */);
         }
-
-
-        private void btn_producer_Click(object sender, EventArgs e)
+        private async void btn_producer_Click(object sender, EventArgs e)
         {
-            Current_Y = pn_Scroll.Location.Y;
-            Target_Y = btn_producer.Location.Y + 10;
-            STEP_SLIDING = Math.Abs(Current_Y - Target_Y) / 64 * 20;
-            timerSliding.Start();
+            await AnimatePanel(pn_Scroll, btn_producer, typeof(FormSetting) /* No form change for this button */);
+
         }
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             _formManager.CloseCurrentForm();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            _formPopUp.Show();
-        }
-
         private void btn_end_Click(object sender, EventArgs e)
         {
-            // ¡æ∑· ∏ﬁ¥∫ æ∆¿Ã≈€ ≈¨∏Ø Ω√ «¡∑Œ±◊∑• ¡æ∑·
+            // Ï¢ÖÎ£å Î©îÎâ¥ ÏïÑÏù¥ÌÖú ÌÅ¥Î¶≠ Ïãú ÌîÑÎ°úÍ∑∏Îû® Ï¢ÖÎ£å
             notifyIcon.Dispose();
             this.Dispose();
         }
 
         private void btn_exit_Click(object sender, EventArgs e)
         {
-            // ªÁøÎ¿⁄∞° ¥›¿ª ∂ß ∆˚ º˚±‚∞Ì ∆Æ∑π¿Ã æ∆¿Ãƒ‹ «•Ω√
+            // ÏÇ¨Ïö©ÏûêÍ∞Ä Îã´ÏùÑ Îïå Ìèº Ïà®Í∏∞Í≥† Ìä∏Î†àÏù¥ ÏïÑÏù¥ÏΩò ÌëúÏãú
             this.Hide();
         }
         private void NotifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                // ∆Æ∑π¿Ã æ∆¿Ãƒ‹ ≈¨∏Ø Ω√ ∆˚¿ª ∫∏¿Ã∞‘ «‘
+                // Ìä∏Î†àÏù¥ ÏïÑÏù¥ÏΩò ÌÅ¥Î¶≠ Ïãú ÌèºÏùÑ Î≥¥Ïù¥Í≤å Ìï®
                 this.Show();
                 this.WindowState = FormWindowState.Normal;
             }
         }
 
+        private async Task AnimatePanel(Control panel, Control button, Type formType)
+        {
+            panel.Location = new Point(panel.Location.X, button.Location.Y + 20);
+            panel.Height = 30;
+            await Task.Delay(40);
 
+            panel.Location = new Point(panel.Location.X, button.Location.Y + 17);
+            panel.Height = 39;
+            await Task.Delay(40);
+
+            panel.Location = new Point(panel.Location.X, button.Location.Y + 15);
+            panel.Height = 45;
+
+            _formManager.ChangeForm(formType);
+        }
     }
 }

@@ -168,8 +168,8 @@
             this.Padding = new System.Windows.Forms.Padding(13);
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormPopUp";
-            this.Shown += new System.EventHandler(this.FormPopUp_Shown);
-            this.VisibleChanged += new System.EventHandler(this.FormPopUp_VisibleChanged);
+/*            this.Shown += new System.EventHandler(this.FormPopUp_Shown);
+            this.VisibleChanged += new System.EventHandler(this.FormPopUp_VisibleChanged);*/
             this.UserPanel.ResumeLayout(false);
             this.UserPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserPosePicBox)).EndInit();

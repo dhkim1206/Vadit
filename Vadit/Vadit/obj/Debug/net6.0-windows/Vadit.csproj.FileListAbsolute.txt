@@ -298,3 +298,4 @@ C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.
 C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\ref\Vadit.dll
 C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormPopUp.resources
 C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormPopUp.resources
+C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.SplashScreen.resources
