@@ -34,7 +34,6 @@
             categoryPanel = new Panel();
             pn_Scroll = new Panel();
             btn_end = new Button();
-            panel3 = new Panel();
             btn_FormSetting = new Button();
             btn_statisticsForm = new Button();
             btn_producer = new Button();
@@ -42,6 +41,7 @@
             panel1 = new Panel();
             btn_exit = new Button();
             timerSliding = new System.Windows.Forms.Timer(components);
+            contextMenuStrip1 = new ContextMenuStrip(components);
             categoryPanel.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -56,7 +56,7 @@
             btn_ProgramExplain.ForeColor = Color.White;
             btn_ProgramExplain.Image = Properties.Resources.free_icon_window_display_5581930_1_;
             btn_ProgramExplain.ImageAlign = ContentAlignment.MiddleRight;
-            btn_ProgramExplain.Location = new Point(26, 219);
+            btn_ProgramExplain.Location = new Point(26, 215);
             btn_ProgramExplain.Name = "btn_ProgramExplain";
             btn_ProgramExplain.RightToLeft = RightToLeft.Yes;
             btn_ProgramExplain.Size = new Size(210, 75);
@@ -70,7 +70,6 @@
             categoryPanel.BackColor = Color.FromArgb(32, 33, 36);
             categoryPanel.Controls.Add(pn_Scroll);
             categoryPanel.Controls.Add(btn_end);
-            categoryPanel.Controls.Add(panel3);
             categoryPanel.Controls.Add(btn_ProgramExplain);
             categoryPanel.Controls.Add(btn_FormSetting);
             categoryPanel.Controls.Add(btn_statisticsForm);
@@ -83,9 +82,9 @@
             // pn_Scroll
             // 
             pn_Scroll.BackColor = Color.White;
-            pn_Scroll.Location = new Point(178, 310);
+            pn_Scroll.Location = new Point(178, 69);
             pn_Scroll.Name = "pn_Scroll";
-            pn_Scroll.Size = new Size(8, 60);
+            pn_Scroll.Size = new Size(6, 45);
             pn_Scroll.TabIndex = 5;
             // 
             // btn_end
@@ -107,14 +106,6 @@
             btn_end.UseVisualStyleBackColor = false;
             btn_end.Click += btn_end_Click;
             // 
-            // panel3
-            // 
-            panel3.BackColor = Color.DarkGray;
-            panel3.Location = new Point(181, 36);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1, 370);
-            panel3.TabIndex = 6;
-            // 
             // btn_FormSetting
             // 
             btn_FormSetting.BackColor = Color.FromArgb(32, 33, 36);
@@ -125,7 +116,7 @@
             btn_FormSetting.ForeColor = Color.White;
             btn_FormSetting.Image = Properties.Resources.KakaoTalk_20230821_104715043;
             btn_FormSetting.ImageAlign = ContentAlignment.MiddleRight;
-            btn_FormSetting.Location = new Point(25, 138);
+            btn_FormSetting.Location = new Point(25, 135);
             btn_FormSetting.Name = "btn_FormSetting";
             btn_FormSetting.RightToLeft = RightToLeft.Yes;
             btn_FormSetting.Size = new Size(210, 75);
@@ -144,7 +135,7 @@
             btn_statisticsForm.ForeColor = Color.White;
             btn_statisticsForm.Image = Properties.Resources.KakaoTalk_20230821_111614469;
             btn_statisticsForm.ImageAlign = ContentAlignment.MiddleRight;
-            btn_statisticsForm.Location = new Point(25, 57);
+            btn_statisticsForm.Location = new Point(25, 55);
             btn_statisticsForm.Name = "btn_statisticsForm";
             btn_statisticsForm.RightToLeft = RightToLeft.Yes;
             btn_statisticsForm.Size = new Size(210, 75);
@@ -163,7 +154,7 @@
             btn_producer.ForeColor = Color.White;
             btn_producer.Image = Properties.Resources.KakaoTalk_20230821_104347268;
             btn_producer.ImageAlign = ContentAlignment.MiddleRight;
-            btn_producer.Location = new Point(25, 300);
+            btn_producer.Location = new Point(25, 290);
             btn_producer.Name = "btn_producer";
             btn_producer.RightToLeft = RightToLeft.Yes;
             btn_producer.Size = new Size(210, 75);
@@ -212,6 +203,11 @@
             timerSliding.Interval = 3;
             timerSliding.Tick += timerSliding_Tick;
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(61, 4);
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -243,8 +239,9 @@
         private Button btn_exit;
         private System.Windows.Forms.Timer timerSliding;
         private Button btn_end;
-        private Panel panel3;
         private Panel pn_Scroll;
         private Button btn_producer;
+        private RadioButton radioButton1;
+        private ContextMenuStrip contextMenuStrip1;
     }
 }

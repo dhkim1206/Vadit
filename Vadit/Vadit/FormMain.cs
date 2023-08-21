@@ -88,20 +88,36 @@ namespace Vadit
 
         private async void btn_statisticsForm_Click(object sender, EventArgs e)
         {
+            /*
             Current_Y = pn_Scroll.Location.Y;
-            Target_Y = btn_statisticsForm.Location.Y + 20;
+            Target_Y = btn_statisticsForm.Location.Y + 10;
             STEP_SLIDING = Math.Abs(Current_Y - Target_Y) / 64 * 20;
             Debug.WriteLine(Math.Abs(Current_Y - Target_Y));
             Debug.WriteLine(STEP_SLIDING);
             timerSliding.Start();
 
             _formManager.ChangeForm(typeof(FormStatistics));
+            */
+            {
+
+                pn_Scroll.Location = new Point(pn_Scroll.Location.X, btn_statisticsForm.Location.Y + 20);
+                pn_Scroll.Height = 30;
+                await Task.Delay(80); // 애니메이션 간격
+
+                /*
+                pn_Scroll.Location = new Point(pn_Scroll.Location.X, btn_statisticsForm.Location.Y + 15);
+                pn_Scroll.Height = 45;
+                await Task.Delay(70); // 애니메이션 간격
+                */
+                pn_Scroll.Location = new Point(pn_Scroll.Location.X, btn_statisticsForm.Location.Y + 10);
+                pn_Scroll.Height = 60;
+            }
         }
 
         private async void btn_FormSetting_Click(object sender, EventArgs e)
         {
             Current_Y = pn_Scroll.Location.Y;
-            Target_Y = btn_FormSetting.Location.Y + 20;
+            Target_Y = btn_FormSetting.Location.Y + 10;
             STEP_SLIDING = Math.Abs(Current_Y - Target_Y) / 64 * 20;
             timerSliding.Start();
 
@@ -112,7 +128,16 @@ namespace Vadit
         private async void btn_ProgramExplain_Click_1(object sender, EventArgs e)
         {
             Current_Y = pn_Scroll.Location.Y;
-            Target_Y = btn_ProgramExplain.Location.Y + 20;
+            Target_Y = btn_ProgramExplain.Location.Y + 10;
+            STEP_SLIDING = Math.Abs(Current_Y - Target_Y) / 64 * 20;
+            timerSliding.Start();
+        }
+
+
+        private void btn_producer_Click(object sender, EventArgs e)
+        {
+            Current_Y = pn_Scroll.Location.Y;
+            Target_Y = btn_producer.Location.Y + 10;
             STEP_SLIDING = Math.Abs(Current_Y - Target_Y) / 64 * 20;
             timerSliding.Start();
         }
@@ -153,13 +178,5 @@ namespace Vadit
         }
 
 
-        private void btn_producer_Click(object sender, EventArgs e)
-        {
-
-            Current_Y = pn_Scroll.Location.Y;
-            Target_Y = btn_producer.Location.Y + 20;
-            STEP_SLIDING = Math.Abs(Current_Y - Target_Y) / 64 * 20;
-            timerSliding.Start();
-        }
     }
 }

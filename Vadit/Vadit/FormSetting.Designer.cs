@@ -218,7 +218,7 @@
             label11.AutoSize = true;
             label11.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(569, 346);
+            label11.Location = new Point(509, 344);
             label11.Margin = new Padding(2, 0, 2, 0);
             label11.Name = "label11";
             label11.RightToLeft = RightToLeft.Yes;
@@ -332,6 +332,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(38, 38, 38);
             ClientSize = new Size(640, 551);
+            Controls.Add(label11);
             Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(checkLongPlay);
@@ -347,7 +348,6 @@
             Controls.Add(label12);
             Controls.Add(label10);
             Controls.Add(trackBarFrame);
-            Controls.Add(label11);
             Name = "FormSetting";
             Text = "FormSetting";
             FormClosing += FormSetting_FormClosing;
