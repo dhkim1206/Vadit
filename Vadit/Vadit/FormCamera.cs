@@ -19,6 +19,7 @@ namespace Vadit
         public FormCamera()
         {
             InitializeComponent();
+            btnResetPose.Enabled = false;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             if (AppGlobal.VM != null)
@@ -33,6 +34,7 @@ namespace Vadit
             delayTimer.Stop();
             AppGlobal.VM = new VdtManager(OnProgressing);
             AppGlobal.VM.StartSettingCorrectPose();
+            btnResetPose.Enabled = true;
         }
         // 전달 받을 것들
         private void OnProgressing(object sender, ProgressChangedEventArgs e)

@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using Button = System.Windows.Forms.Button;
 
 namespace Vadit
 {
@@ -408,7 +409,10 @@ namespace Vadit
                 OnclikBtnResetPose();
             return _infoInputCorrectPose._img.ToBitmap();
         }
-
+        public void PreventButtonClick(Button button)
+        {
+            
+        }
 
         public void InputCorrectPose()  //자세 캡쳐 버튼 누르면 실행됨. 올바른 자세인지 아닌지 더불어 창닫기까지.
         {

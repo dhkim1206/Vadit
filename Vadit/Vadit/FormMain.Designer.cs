@@ -30,7 +30,6 @@
         {
             btn_ProgramExplain = new Button();
             categoryPanel = new Panel();
-            button1 = new Button();
             btn_FormSetting = new Button();
             btn_statisticsForm = new Button();
             mainPanel = new Panel();
@@ -59,7 +58,6 @@
             // categoryPanel
             // 
             categoryPanel.BackColor = Color.FromArgb(58, 58, 58);
-            categoryPanel.Controls.Add(button1);
             categoryPanel.Controls.Add(btn_ProgramExplain);
             categoryPanel.Controls.Add(btn_FormSetting);
             categoryPanel.Controls.Add(btn_statisticsForm);
@@ -67,17 +65,6 @@
             categoryPanel.Name = "categoryPanel";
             categoryPanel.Size = new Size(146, 482);
             categoryPanel.TabIndex = 3;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(0, 235);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(146, 22);
-            button1.TabIndex = 4;
-            button1.Text = "팝업버튼";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // btn_FormSetting
             // 
@@ -174,6 +161,5 @@
         private Panel mainPanel;
         private Panel panel1;
         private Button button2;
-        private Button button1;
     }
 }

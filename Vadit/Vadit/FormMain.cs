@@ -57,7 +57,6 @@ namespace Vadit
         {
             _formManager.CloseCurrentForm();
 
-            _vdtManager.Dispose();
         }
 
         private void button2_Click(object sender, EventArgs e)
