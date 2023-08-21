@@ -70,6 +70,10 @@ namespace Vadit
                     timerSliding.Stop();
                 }
             }
+            if (STEP_SLIDING > 59)
+            {
+                STEP_SLIDING -= 30;
+            }
         }
         public void StartDetect()
         {
@@ -148,14 +152,14 @@ namespace Vadit
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+
+        private void btn_producer_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void categoryPanel_Paint(object sender, PaintEventArgs e)
-        {
-
+            Current_Y = pn_Scroll.Location.Y;
+            Target_Y = btn_producer.Location.Y + 20;
+            STEP_SLIDING = Math.Abs(Current_Y - Target_Y) / 64 * 20;
+            timerSliding.Start();
         }
     }
 }

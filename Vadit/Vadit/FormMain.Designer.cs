@@ -32,11 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             btn_ProgramExplain = new Button();
             categoryPanel = new Panel();
+            pn_Scroll = new Panel();
             btn_end = new Button();
             panel3 = new Panel();
-            pn_Scroll = new Panel();
             btn_FormSetting = new Button();
             btn_statisticsForm = new Button();
+            btn_producer = new Button();
             mainPanel = new Panel();
             panel1 = new Panel();
             btn_exit = new Button();
@@ -53,9 +54,9 @@
             btn_ProgramExplain.FlatStyle = FlatStyle.Flat;
             btn_ProgramExplain.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_ProgramExplain.ForeColor = Color.White;
-            btn_ProgramExplain.Image = Properties.Resources.free_icon_file_2274790__1___1___1_;
+            btn_ProgramExplain.Image = Properties.Resources.free_icon_window_display_5581930_1_;
             btn_ProgramExplain.ImageAlign = ContentAlignment.MiddleRight;
-            btn_ProgramExplain.Location = new Point(26, 256);
+            btn_ProgramExplain.Location = new Point(26, 219);
             btn_ProgramExplain.Name = "btn_ProgramExplain";
             btn_ProgramExplain.RightToLeft = RightToLeft.Yes;
             btn_ProgramExplain.Size = new Size(210, 75);
@@ -67,16 +68,25 @@
             // categoryPanel
             // 
             categoryPanel.BackColor = Color.FromArgb(32, 33, 36);
+            categoryPanel.Controls.Add(pn_Scroll);
             categoryPanel.Controls.Add(btn_end);
             categoryPanel.Controls.Add(panel3);
-            categoryPanel.Controls.Add(pn_Scroll);
             categoryPanel.Controls.Add(btn_ProgramExplain);
             categoryPanel.Controls.Add(btn_FormSetting);
             categoryPanel.Controls.Add(btn_statisticsForm);
+            categoryPanel.Controls.Add(btn_producer);
             categoryPanel.Location = new Point(0, 37);
             categoryPanel.Name = "categoryPanel";
             categoryPanel.Size = new Size(202, 504);
             categoryPanel.TabIndex = 3;
+            // 
+            // pn_Scroll
+            // 
+            pn_Scroll.BackColor = Color.White;
+            pn_Scroll.Location = new Point(178, 310);
+            pn_Scroll.Name = "pn_Scroll";
+            pn_Scroll.Size = new Size(8, 60);
+            pn_Scroll.TabIndex = 5;
             // 
             // btn_end
             // 
@@ -86,9 +96,9 @@
             btn_end.FlatStyle = FlatStyle.Flat;
             btn_end.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_end.ForeColor = Color.White;
-            btn_end.Image = Properties.Resources.system_shutdown_icon_180898;
+            btn_end.Image = Properties.Resources.KakaoTalk_20230821_112406611;
             btn_end.ImageAlign = ContentAlignment.MiddleRight;
-            btn_end.Location = new Point(25, 408);
+            btn_end.Location = new Point(25, 416);
             btn_end.Name = "btn_end";
             btn_end.RightToLeft = RightToLeft.Yes;
             btn_end.Size = new Size(210, 75);
@@ -99,19 +109,11 @@
             // 
             // panel3
             // 
-            panel3.BackColor = Color.Gray;
-            panel3.Location = new Point(181, 69);
+            panel3.BackColor = Color.DarkGray;
+            panel3.Location = new Point(181, 36);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1, 300);
+            panel3.Size = new Size(1, 370);
             panel3.TabIndex = 6;
-            // 
-            // pn_Scroll
-            // 
-            pn_Scroll.BackColor = Color.Teal;
-            pn_Scroll.Location = new Point(178, 310);
-            pn_Scroll.Name = "pn_Scroll";
-            pn_Scroll.Size = new Size(8, 40);
-            pn_Scroll.TabIndex = 5;
             // 
             // btn_FormSetting
             // 
@@ -121,9 +123,9 @@
             btn_FormSetting.FlatStyle = FlatStyle.Flat;
             btn_FormSetting.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_FormSetting.ForeColor = Color.White;
-            btn_FormSetting.Image = (Image)resources.GetObject("btn_FormSetting.Image");
+            btn_FormSetting.Image = Properties.Resources.KakaoTalk_20230821_104715043;
             btn_FormSetting.ImageAlign = ContentAlignment.MiddleRight;
-            btn_FormSetting.Location = new Point(25, 175);
+            btn_FormSetting.Location = new Point(25, 138);
             btn_FormSetting.Name = "btn_FormSetting";
             btn_FormSetting.RightToLeft = RightToLeft.Yes;
             btn_FormSetting.Size = new Size(210, 75);
@@ -140,9 +142,9 @@
             btn_statisticsForm.FlatStyle = FlatStyle.Flat;
             btn_statisticsForm.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_statisticsForm.ForeColor = Color.White;
-            btn_statisticsForm.Image = Properties.Resources.free_icon_line_chart_5277215__1___1___1_;
+            btn_statisticsForm.Image = Properties.Resources.KakaoTalk_20230821_111614469;
             btn_statisticsForm.ImageAlign = ContentAlignment.MiddleRight;
-            btn_statisticsForm.Location = new Point(25, 94);
+            btn_statisticsForm.Location = new Point(25, 57);
             btn_statisticsForm.Name = "btn_statisticsForm";
             btn_statisticsForm.RightToLeft = RightToLeft.Yes;
             btn_statisticsForm.Size = new Size(210, 75);
@@ -150,6 +152,25 @@
             btn_statisticsForm.Text = "분석";
             btn_statisticsForm.UseVisualStyleBackColor = false;
             btn_statisticsForm.Click += btn_statisticsForm_Click;
+            // 
+            // btn_producer
+            // 
+            btn_producer.BackColor = Color.FromArgb(32, 33, 36);
+            btn_producer.BackgroundImageLayout = ImageLayout.None;
+            btn_producer.FlatAppearance.BorderSize = 0;
+            btn_producer.FlatStyle = FlatStyle.Flat;
+            btn_producer.Font = new Font("굴림", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_producer.ForeColor = Color.White;
+            btn_producer.Image = Properties.Resources.KakaoTalk_20230821_104347268;
+            btn_producer.ImageAlign = ContentAlignment.MiddleRight;
+            btn_producer.Location = new Point(25, 300);
+            btn_producer.Name = "btn_producer";
+            btn_producer.RightToLeft = RightToLeft.Yes;
+            btn_producer.Size = new Size(210, 75);
+            btn_producer.TabIndex = 8;
+            btn_producer.Text = "제작자";
+            btn_producer.UseVisualStyleBackColor = false;
+            btn_producer.Click += btn_producer_Click;
             // 
             // mainPanel
             // 
@@ -168,7 +189,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1013, 40);
             panel1.TabIndex = 0;
-            panel1.Paint += panel1_Paint;
             // 
             // btn_exit
             // 
@@ -225,5 +245,6 @@
         private Button btn_end;
         private Panel panel3;
         private Panel pn_Scroll;
+        private Button btn_producer;
     }
 }
