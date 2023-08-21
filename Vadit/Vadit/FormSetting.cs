@@ -51,7 +51,7 @@ namespace Vadit
             AppConf.ConfigSet.Pose = checkPose.Checked;
             AppConf.ConfigSet.LongPlay = checkLongPlay.Checked;
             //기능 구현후 최종 테스트 전까지는 미사용하는 코드
-            //AppConf.ConfigSet.WindowSameExecute = checkWindows.Checked;
+            AppConf.ConfigSet.WindowSameExecute = checkWindows.Checked;
             AppConf.ConfigSet.AlarmSound = checkAlarm.Checked;
             AppConf.ConfigSet.CamFrame = trackBarFrame.Value;
             AppConf.ConfigSet.SaveingPeriod = cboPicSaving.SelectedIndex;
@@ -86,5 +86,6 @@ namespace Vadit
             Fc.ShowDialog();
             cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
         }
+
     }
 }
