@@ -10,11 +10,13 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Data;
 using static Vadit.Data;
+using System.Xml;
 
 namespace Vadit
 {
     public class Data
     {
+        private string _configFilePath = "data.xml";
         string path = "data_table.db";
         string cs = @"URI=file:" + Application.StartupPath + "\\data_table.db";
         public string imageDirectory = Path.Combine(Application.StartupPath, "image_data");
@@ -43,6 +45,81 @@ namespace Vadit
         {
             Create_db();
 
+        }
+        public int GetDeleteThreshold()
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(_configFilePath);
+
+                XmlNode saveingPeriodNode = doc.SelectSingleNode("//SaveingPeriod");
+                if (saveingPeriodNode != null)
+                {
+                    int saveingPeriodValue = Convert.ToInt32(saveingPeriodNode.InnerText);
+                    switch (saveingPeriodValue)
+                    {
+                        case 0:
+                            return 15;
+                        case 1:
+                            return 30;
+                        case 2:
+                            return 90;
+                        default:
+                            return -1; // Invalid value
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle XML reading error
+                Console.WriteLine("Error reading config file: " + ex.Message);
+            }
+
+            return -1; // Default value
+        }
+        public void DeleteOldData()
+        {
+            int deleteThreshold = GetDeleteThreshold();
+            if (deleteThreshold < 0)
+            {
+                //Debug.WriteLine("Invalid delete threshold value.");
+                return;
+            }
+
+            DateTime deleteDate = DateTime.Today.AddDays(-deleteThreshold);
+
+            using (SQLiteConnection con = new SQLiteConnection(@"Data Source=data_table.db"))
+            {
+                con.Open();
+                using (var transaction = con.BeginTransaction())
+                {
+                    try
+                    {
+                        using (var cmd = new SQLiteCommand(con))
+                        {
+                            cmd.CommandText = "DELETE FROM ImageData WHERE Date < @DeleteDate";
+                            cmd.Parameters.AddWithValue("@DeleteDate", deleteDate);
+                            int deletedImageCount = cmd.ExecuteNonQuery();
+                            //Debug.WriteLine($"Deleted {deletedImageCount} images.");
+
+                            cmd.CommandText = "DELETE FROM BadPose WHERE Date < @DeleteDate";
+                            cmd.ExecuteNonQuery();
+
+                            cmd.CommandText = "DELETE FROM Score WHERE Date < @DeleteDate";
+                            cmd.ExecuteNonQuery();
+
+                            transaction.Commit(); // 커밋하여 트랜잭션 완료
+                            //Debug.WriteLine("Delete Old Data completed.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback(); // 롤백하여 트랜잭션 취소
+                        //Debug.WriteLine("Error deleting old data: " + ex.Message);
+                    }
+                }
+            }
         }
 
         //분류된 이미지 파일 저장

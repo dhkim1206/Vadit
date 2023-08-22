@@ -299,3 +299,5 @@ C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\ref\Va
 C:\Users\Uesr\Documents\GitHub\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormPopUp.resources
 C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.FormPopUp.resources
 C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.SplashScreen.resources
+C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Interop.IWshRuntimeLibrary.dll
+C:\Vadit\Vadit\Vadit\obj\Debug\net6.0-windows\Vadit.csproj.ResolveComReference.cache

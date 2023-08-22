@@ -7,19 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static Vadit.AppBase;
 
 namespace Vadit
 {
     public partial class FormSetting : Form
     {
+        Data _data;
         public FormSetting()
         {
             InitializeComponent();
 
             pb3.Click += ChangeNotificationLayout;
             pb2.Click += ChangeNotificationLayout;
-            pb1.Click += ChangeNotificationLayout;
+            pb1.Click += ChangeNotificationLayout; 
+            _data = new Data();
         }
 
         private void ChangeNotificationLayout(object sender, EventArgs e)
@@ -56,6 +59,11 @@ namespace Vadit
             AppConf.ConfigSet.CamFrame = trackBarFrame.Value;
             AppConf.ConfigSet.SaveingPeriod = cboPicSaving.SelectedIndex;
             AppConf.Save();
+
+            AutoStartManager autoStartManager = new AutoStartManager();
+            autoStartManager.Run(); 
+
+            _data.DeleteOldData();
         }
 
         private void FormSetting_Load(object sender, EventArgs e)

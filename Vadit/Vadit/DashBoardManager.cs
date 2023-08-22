@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 
 namespace Vadit
 {
@@ -126,7 +127,7 @@ namespace Vadit
             string categoryText = pictureInfo.Category;
             string fullDateTimeText = pictureInfo.Date.ToString("yyyy-MM-dd HH:mm:ss");
 
-            using (Font font = new Font(FontFamily.GenericSansSerif, 50, FontStyle.Regular, GraphicsUnit.Pixel))
+            using (Font font = new Font(FontFamily.GenericSansSerif, 40, FontStyle.Regular, GraphicsUnit.Pixel))
             {
                 Bitmap imageWithText = new Bitmap(pictureBox.Image);
 
@@ -134,14 +135,14 @@ namespace Vadit
                 {
                     using (Brush backgroundBrush = new SolidBrush(Color.FromArgb(32, 33, 36)))
                     {
-                        g.FillRectangle(backgroundBrush, 0, 0, 650, 77);
+                        g.FillRectangle(backgroundBrush, 0, 0, 650, 70);
                     }
 
                     SizeF textSize = g.MeasureString(categoryText, font);
                     float textX = (pictureBox.Width - textSize.Width) / 2 + 280;
                     float textY = pictureBox.Height - textSize.Height + 350;
                     g.DrawString(categoryText, font, Brushes.Yellow, new PointF(textX, textY));
-                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(100, 8));
+                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(130, 13));
 
                     using (Font font1 = new Font(FontFamily.GenericSansSerif, 68, FontStyle.Bold, GraphicsUnit.Pixel))
                     {

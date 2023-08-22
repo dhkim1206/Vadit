@@ -39,6 +39,7 @@
             mainPanel = new Panel();
             panel1 = new Panel();
             btn_exit = new Button();
+            label1 = new Label();
             categoryPanel.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -81,7 +82,7 @@
             pn_Scroll.BackColor = Color.White;
             pn_Scroll.Location = new Point(178, 69);
             pn_Scroll.Name = "pn_Scroll";
-            pn_Scroll.Size = new Size(6, 45);
+            pn_Scroll.Size = new Size(4, 45);
             pn_Scroll.TabIndex = 5;
             // 
             // btn_end
@@ -170,7 +171,8 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(32, 33, 36);
+            panel1.BackColor = Color.FromArgb(44, 46, 49);
+            panel1.Controls.Add(label1);
             panel1.Controls.Add(btn_exit);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
@@ -180,7 +182,7 @@
             // 
             // btn_exit
             // 
-            btn_exit.BackColor = Color.FromArgb(32, 33, 36);
+            btn_exit.BackColor = Color.FromArgb(44, 46, 49);
             btn_exit.BackgroundImageLayout = ImageLayout.None;
             btn_exit.FlatAppearance.BorderSize = 0;
             btn_exit.FlatStyle = FlatStyle.Flat;
@@ -194,6 +196,17 @@
             btn_exit.Text = "X";
             btn_exit.UseVisualStyleBackColor = false;
             btn_exit.Click += btn_exit_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("맑은 고딕", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.Gold;
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(57, 25);
+            label1.TabIndex = 0;
+            label1.Text = "Vadit";
             // 
             // FormMain
             // 
@@ -212,6 +225,7 @@
             FormClosing += FormMain_FormClosing;
             categoryPanel.ResumeLayout(false);
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -228,5 +242,6 @@
         private Panel pn_Scroll;
         private Button btn_producer;
         private RadioButton radioButton1;
+        private Label label1;
     }
 }
