@@ -13,7 +13,7 @@ namespace Vadit
     {
         static public int BadPoseCt = 0;
         static public bool _TimerIsRunning = false;
-        static public Timer Timer;
+        static public Timer Timer = null;
         static public bool isinputmode = false;
         static public VdtManager VM = null;
         static public InfoInputCorrectPose CorrectPose = new InfoInputCorrectPose();

@@ -15,19 +15,21 @@ namespace Vadit
         public TimerManager(Timer timer)
         {
             _timer = timer;
+
         }
         public void StartTimer()
         {
             if (!AppGlobal._TimerIsRunning)
-            {
+            {            
                 _timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(60));
                 Debug.WriteLine("Timer started.");
                 AppGlobal._TimerIsRunning = true;
+                
             }
         }
         public void StopTimer()
         {
-            if (AppGlobal._TimerIsRunning)
+            if (AppGlobal._TimerIsRunning && AppGlobal.Timer != null)
             {
                 _timer.Dispose();
                 AppGlobal._TimerIsRunning = false;

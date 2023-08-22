@@ -19,10 +19,11 @@ namespace Vadit
     {
         AppBase.FormManager _formManager;
         private NotifyIcon notifyIcon;
-      //  public VdtManager _vdtManager;
+
         public FormMain()
         { 
             InitializeComponent();
+
             // 트레이 아이콘 초기화
             notifyIcon = new NotifyIcon();
             notifyIcon.Icon = Properties.Resources.Vadit_Icon;
@@ -30,6 +31,8 @@ namespace Vadit
             notifyIcon.Visible = true;
             // 트레이 아이콘을 클릭하면 폼을 보이게 함
             notifyIcon.MouseClick += NotifyIcon_MouseClick;
+            if (AppGlobal.CorrectPose._img != null)
+                StartDetect();
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
         }
@@ -37,7 +40,7 @@ namespace Vadit
         {
             AppGlobal.VM = new VdtManager(OnProgressing);
             AppGlobal.VM._bgw.RunWorkerAsync();
-            AppGlobal.TM = new TimerManager(AppGlobal.Timer);
+         //   AppGlobal.TM = new TimerManager(AppGlobal.Timer); 스플래쉬로 이동
         }
         private void OnProgressing(object sender, ProgressChangedEventArgs e)
         {

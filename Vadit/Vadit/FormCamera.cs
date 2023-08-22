@@ -70,14 +70,21 @@ namespace Vadit
         }
         private void FormCamera_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FormMain fm = null;
             if (AppGlobal.VM._bgw.IsBusy)
+            {
                 AppGlobal.VM._bgw.CancelAsync();
+                Thread.Sleep(1000);
+            }
             AppGlobal.isinputmode = false;
+
+        }
+
+        private void FormCamera_FormClosed(object sender, FormClosedEventArgs e)
+        {
             if (AppGlobal.CorrectPose._isPointNotNull)
             {
-                fm = new FormMain();
-                fm.StartDetect();
+                if (!AppGlobal.VM._bgw.IsBusy)
+                    AppGlobal.VM._bgw.RunWorkerAsync();
             }
         }
     }

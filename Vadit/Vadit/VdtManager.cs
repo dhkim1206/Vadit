@@ -96,7 +96,7 @@ namespace Vadit
             {
                 if (_cap != null)
                 {
-                 //   Debug.WriteLine("무한루프 시작");
+                    Debug.WriteLine("무한루프 시작");
                     if (_bgw.CancellationPending)
                     {
                         e.Cancel = true;

@@ -24,6 +24,7 @@ namespace Vadit
             PbSplash.SizeMode = PictureBoxSizeMode.StretchImage;
             LoadSplashImage();
             AppGlobal.Cap = new VideoCapture(0);
+            AppGlobal.TM = new TimerManager(AppGlobal.Timer);
             _timer = new Timer();
             _timer.Interval = 5000;
             _timer.Tick += Timer_Tick;
