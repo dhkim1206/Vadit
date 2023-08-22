@@ -20,79 +20,47 @@ namespace Vadit
         AppBase.FormManager _formManager;
         private Control selectedButton; // 선택된 버튼을 저장할 변수
         private NotifyIcon notifyIcon;
-        public VdtManager _vdtManager;
 
 
         public FormMain()
         {
             InitializeComponent();
+            InitializeTrayIcon();
+            InitializeAppComponents();
+        }
 
-            // 트레이 아이콘 초기화
+        //트레이 아이콘 초기화
+        private void InitializeTrayIcon()
+        {
             notifyIcon = new NotifyIcon();
             notifyIcon.Icon = Properties.Resources.Vadit_Icon;
             notifyIcon.Text = "Vadit";
             notifyIcon.Visible = true;
-            // 트레이 아이콘을 클릭하면 폼을 보이게 함
             notifyIcon.MouseClick += NotifyIcon_MouseClick;
+        }
+        // 앱 설정 초기화
+        private void InitializeAppComponents()
+        {
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
             AppGlobal.Cap = new VideoCapture(0);
         }
+
         public void StartDetect()
         {
             AppGlobal.VM = new VdtManager(OnProgressing);
             AppGlobal.VM._bgw.RunWorkerAsync();
             AppGlobal.TM = new TimerManager(AppGlobal.Timer);
         }
+
         private void OnProgressing(object sender, ProgressChangedEventArgs e)
         {
             AnalyzeData obj = e.UserState as AnalyzeData;
         }
 
-        private async void btn_statisticsForm_Click(object sender, EventArgs e)
-        {
-            await AnimatePanel(btn_statisticsForm, typeof(FormStatistics));
-        }
-
-        private async void btn_FormSetting_Click(object sender, EventArgs e)
-        {
-            await AnimatePanel(btn_FormSetting, typeof(FormSetting));
-        }
-
-        private async void btn_ProgramExplain_Click_1(object sender, EventArgs e)
-        {
-            await AnimatePanel(btn_ProgramExplain, typeof(FormSetting) /* No form change for this button */);
-        }
-        private async void btn_producer_Click(object sender, EventArgs e)
-        {
-            await AnimatePanel(btn_producer, typeof(FormSetting) /* No form change for this button */);
-
-        }
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             _formManager.CloseCurrentForm();
-        }
-
-        private void btn_end_Click(object sender, EventArgs e)
-        {
-            // 종료 메뉴 아이템 클릭 시 프로그램 종료
-            notifyIcon.Dispose();
-            this.Dispose();
-        }
-
-        private void btn_exit_Click(object sender, EventArgs e)
-        {
-            // 사용자가 닫을 때 폼 숨기고 트레이 아이콘 표시
-            this.Hide();
-        }
-        private void NotifyIcon_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                // 트레이 아이콘 클릭 시 폼을 보이게 함
-                this.Show();
-                this.WindowState = FormWindowState.Normal;
-            }
         }
 
         private async Task AnimatePanel(Control button, Type formType)
@@ -119,8 +87,49 @@ namespace Vadit
 
             panel.Location = new Point(panel.Location.X, button.Location.Y + 20);
             panel.Height = 20;
+        }
+
+        private async void btn_statisticsForm_Click(object sender, EventArgs e)
+        {
+            await AnimatePanel(btn_statisticsForm, typeof(FormStatistics));
+        }
+
+        private async void btn_FormSetting_Click(object sender, EventArgs e)
+        {
+            await AnimatePanel(btn_FormSetting, typeof(FormSetting));
+        }
+
+        private async void btn_ProgramExplain_Click_1(object sender, EventArgs e)
+        {
+            await AnimatePanel(btn_ProgramExplain, typeof(FormSetting) /* No form change for this button */);
+        }
+        private async void btn_producer_Click(object sender, EventArgs e)
+        {
+            await AnimatePanel(btn_producer, typeof(FormSetting) /* No form change for this button */);
 
         }
+        private void btn_end_Click(object sender, EventArgs e)
+        {
+            // 종료 메뉴 아이템 클릭 시 프로그램 종료
+            notifyIcon.Dispose();
+            this.Dispose();
+        }
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            // 사용자가 닫을 때 폼 숨기고 트레이 아이콘 표시
+            this.Hide();
+        }
+        private void NotifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                // 트레이 아이콘 클릭 시 폼을 보이게 함
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
         private void btn_FormSetting_MouseEnter(object sender, EventArgs e)
         {
             pn_cursor.Show();
