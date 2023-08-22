@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emgu.CV;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
@@ -112,7 +113,6 @@ namespace Vadit
             }
 
             UpdateLabels(_pictureInfoList.Count, turtleneckSum, scoliosisSum, herniationsSum);
-
         }
 
         private PictureBox CreatePictureBox((string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations) pictureInfo, int count)

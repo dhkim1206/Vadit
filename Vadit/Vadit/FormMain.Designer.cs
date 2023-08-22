@@ -31,15 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             btn_ProgramExplain = new Button();
             categoryPanel = new Panel();
-            pn_Scroll = new Panel();
+            pn_cursor = new Panel();
             btn_end = new Button();
             btn_FormSetting = new Button();
             btn_statisticsForm = new Button();
             btn_producer = new Button();
             mainPanel = new Panel();
             panel1 = new Panel();
-            btn_exit = new Button();
             label1 = new Label();
+            btn_exit = new Button();
             categoryPanel.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -57,16 +57,18 @@
             btn_ProgramExplain.Location = new Point(26, 215);
             btn_ProgramExplain.Name = "btn_ProgramExplain";
             btn_ProgramExplain.RightToLeft = RightToLeft.Yes;
-            btn_ProgramExplain.Size = new Size(210, 75);
+            btn_ProgramExplain.Size = new Size(210, 65);
             btn_ProgramExplain.TabIndex = 3;
             btn_ProgramExplain.Text = "설명";
             btn_ProgramExplain.UseVisualStyleBackColor = false;
             btn_ProgramExplain.Click += btn_ProgramExplain_Click_1;
+            btn_ProgramExplain.MouseEnter += btn_ProgramExplain_MouseEnter;
+            btn_ProgramExplain.MouseLeave += btn_ProgramExplain_MouseLeave;
             // 
             // categoryPanel
             // 
             categoryPanel.BackColor = Color.FromArgb(32, 33, 36);
-            categoryPanel.Controls.Add(pn_Scroll);
+            categoryPanel.Controls.Add(pn_cursor);
             categoryPanel.Controls.Add(btn_end);
             categoryPanel.Controls.Add(btn_ProgramExplain);
             categoryPanel.Controls.Add(btn_FormSetting);
@@ -77,13 +79,13 @@
             categoryPanel.Size = new Size(202, 504);
             categoryPanel.TabIndex = 3;
             // 
-            // pn_Scroll
+            // pn_cursor
             // 
-            pn_Scroll.BackColor = Color.White;
-            pn_Scroll.Location = new Point(178, 69);
-            pn_Scroll.Name = "pn_Scroll";
-            pn_Scroll.Size = new Size(4, 45);
-            pn_Scroll.TabIndex = 5;
+            pn_cursor.BackColor = Color.White;
+            pn_cursor.Location = new Point(178, 160);
+            pn_cursor.Name = "pn_cursor";
+            pn_cursor.Size = new Size(4, 10);
+            pn_cursor.TabIndex = 6;
             // 
             // btn_end
             // 
@@ -98,11 +100,13 @@
             btn_end.Location = new Point(25, 416);
             btn_end.Name = "btn_end";
             btn_end.RightToLeft = RightToLeft.Yes;
-            btn_end.Size = new Size(210, 75);
+            btn_end.Size = new Size(210, 65);
             btn_end.TabIndex = 7;
             btn_end.Text = "종료";
             btn_end.UseVisualStyleBackColor = false;
             btn_end.Click += btn_end_Click;
+            btn_end.MouseEnter += btn_end_MouseEnter;
+            btn_end.MouseLeave += btn_end_MouseLeave;
             // 
             // btn_FormSetting
             // 
@@ -117,11 +121,13 @@
             btn_FormSetting.Location = new Point(25, 135);
             btn_FormSetting.Name = "btn_FormSetting";
             btn_FormSetting.RightToLeft = RightToLeft.Yes;
-            btn_FormSetting.Size = new Size(210, 75);
+            btn_FormSetting.Size = new Size(210, 65);
             btn_FormSetting.TabIndex = 2;
             btn_FormSetting.Text = "설정";
             btn_FormSetting.UseVisualStyleBackColor = false;
             btn_FormSetting.Click += btn_FormSetting_Click;
+            btn_FormSetting.MouseEnter += btn_FormSetting_MouseEnter;
+            btn_FormSetting.MouseLeave += btn_FormSetting_MouseLeave;
             // 
             // btn_statisticsForm
             // 
@@ -133,14 +139,16 @@
             btn_statisticsForm.ForeColor = Color.White;
             btn_statisticsForm.Image = Properties.Resources.KakaoTalk_20230821_111614469;
             btn_statisticsForm.ImageAlign = ContentAlignment.MiddleRight;
-            btn_statisticsForm.Location = new Point(25, 55);
+            btn_statisticsForm.Location = new Point(26, 55);
             btn_statisticsForm.Name = "btn_statisticsForm";
             btn_statisticsForm.RightToLeft = RightToLeft.Yes;
-            btn_statisticsForm.Size = new Size(210, 75);
+            btn_statisticsForm.Size = new Size(210, 65);
             btn_statisticsForm.TabIndex = 1;
             btn_statisticsForm.Text = "분석";
             btn_statisticsForm.UseVisualStyleBackColor = false;
             btn_statisticsForm.Click += btn_statisticsForm_Click;
+            btn_statisticsForm.MouseEnter += btn_statisticsForm_MouseEnter;
+            btn_statisticsForm.MouseLeave += btn_statisticsForm_MouseLeave;
             // 
             // btn_producer
             // 
@@ -152,14 +160,16 @@
             btn_producer.ForeColor = Color.White;
             btn_producer.Image = Properties.Resources.KakaoTalk_20230821_104347268;
             btn_producer.ImageAlign = ContentAlignment.MiddleRight;
-            btn_producer.Location = new Point(25, 290);
+            btn_producer.Location = new Point(25, 292);
             btn_producer.Name = "btn_producer";
             btn_producer.RightToLeft = RightToLeft.Yes;
-            btn_producer.Size = new Size(210, 75);
+            btn_producer.Size = new Size(210, 65);
             btn_producer.TabIndex = 8;
             btn_producer.Text = "제작자";
             btn_producer.UseVisualStyleBackColor = false;
             btn_producer.Click += btn_producer_Click;
+            btn_producer.MouseEnter += btn_producer_MouseEnter;
+            btn_producer.MouseLeave += btn_producer_MouseLeave;
             // 
             // mainPanel
             // 
@@ -180,6 +190,17 @@
             panel1.Size = new Size(1013, 40);
             panel1.TabIndex = 0;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Silver;
+            label1.Location = new Point(10, 10);
+            label1.Name = "label1";
+            label1.Size = new Size(46, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Vadit";
+            // 
             // btn_exit
             // 
             btn_exit.BackColor = Color.FromArgb(44, 46, 49);
@@ -196,17 +217,6 @@
             btn_exit.Text = "X";
             btn_exit.UseVisualStyleBackColor = false;
             btn_exit.Click += btn_exit_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("맑은 고딕", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.Gold;
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(57, 25);
-            label1.TabIndex = 0;
-            label1.Text = "Vadit";
             // 
             // FormMain
             // 
@@ -239,9 +249,9 @@
         private Panel panel1;
         private Button btn_exit;
         private Button btn_end;
-        private Panel pn_Scroll;
         private Button btn_producer;
         private RadioButton radioButton1;
         private Label label1;
+        private Panel pn_cursor;
     }
 }

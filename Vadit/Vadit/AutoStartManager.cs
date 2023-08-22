@@ -36,7 +36,6 @@ namespace Vadit
             Debug.WriteLine("프로그램이 윈도우 자동 시작 프로그램으로 등록되었습니다.");
         }
 
-
         // 자동 시작 해제
         public void Cancel_AutoStart()
         {

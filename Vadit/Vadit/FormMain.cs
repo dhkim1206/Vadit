@@ -18,6 +18,7 @@ namespace Vadit
     public partial class FormMain : Form
     {
         AppBase.FormManager _formManager;
+        private Control selectedButton; // 선택된 버튼을 저장할 변수
         private NotifyIcon notifyIcon;
         public VdtManager _vdtManager;
 
@@ -50,21 +51,21 @@ namespace Vadit
 
         private async void btn_statisticsForm_Click(object sender, EventArgs e)
         {
-            await AnimatePanel(pn_Scroll, btn_statisticsForm, typeof(FormStatistics));
+            await AnimatePanel(btn_statisticsForm, typeof(FormStatistics));
         }
 
         private async void btn_FormSetting_Click(object sender, EventArgs e)
         {
-            await AnimatePanel(pn_Scroll, btn_FormSetting, typeof(FormSetting));
+            await AnimatePanel(btn_FormSetting, typeof(FormSetting));
         }
 
         private async void btn_ProgramExplain_Click_1(object sender, EventArgs e)
         {
-            await AnimatePanel(pn_Scroll, btn_ProgramExplain, typeof(FormSetting) /* No form change for this button */);
+            await AnimatePanel(btn_ProgramExplain, typeof(FormSetting) /* No form change for this button */);
         }
         private async void btn_producer_Click(object sender, EventArgs e)
         {
-            await AnimatePanel(pn_Scroll, btn_producer, typeof(FormSetting) /* No form change for this button */);
+            await AnimatePanel(btn_producer, typeof(FormSetting) /* No form change for this button */);
 
         }
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -94,20 +95,85 @@ namespace Vadit
             }
         }
 
-        private async Task AnimatePanel(Control panel, Control button, Type formType)
+        private async Task AnimatePanel(Control button, Type formType)
         {
-            panel.Location = new Point(panel.Location.X, button.Location.Y + 20);
-            panel.Height = 30;
-            await Task.Delay(40);
+            // 이전에 선택된 버튼이 있다면 원래 색으로 복원
+            if (selectedButton != null) selectedButton.BackColor = Color.FromArgb(32, 33, 36);
 
-            panel.Location = new Point(panel.Location.X, button.Location.Y + 17);
-            panel.Height = 39;
-            await Task.Delay(40);
-
-            panel.Location = new Point(panel.Location.X, button.Location.Y + 15);
-            panel.Height = 45;
+            // 현재 선택된 버튼 배경 색 설정
+            selectedButton = button;
+            selectedButton.BackColor = Color.FromArgb(42, 43, 46); // 클릭된 배경 색
 
             _formManager.ChangeForm(formType);
+        }
+
+        private async Task AnimateCursorOnButton(Control panel, Control button)
+        {
+            panel.Location = new Point(panel.Location.X, button.Location.Y + 25);
+            panel.Height = 10;
+            await Task.Delay(60);
+
+            panel.Location = new Point(panel.Location.X, button.Location.Y + 22);
+            panel.Height = 15;
+            await Task.Delay(60);
+
+            panel.Location = new Point(panel.Location.X, button.Location.Y + 20);
+            panel.Height = 20;
+
+        }
+        private void btn_FormSetting_MouseEnter(object sender, EventArgs e)
+        {
+            pn_cursor.Show();
+            AnimateCursorOnButton(pn_cursor, btn_FormSetting);
+        }
+
+        private void btn_FormSetting_MouseLeave(object sender, EventArgs e)
+        {
+            pn_cursor.Hide();
+        }
+
+        private void btn_ProgramExplain_MouseEnter(object sender, EventArgs e)
+        {
+            pn_cursor.Show();
+            AnimateCursorOnButton(pn_cursor, btn_ProgramExplain);
+        }
+
+        private void btn_ProgramExplain_MouseLeave(object sender, EventArgs e)
+        {
+            pn_cursor.Hide();
+        }
+
+        private void btn_producer_MouseEnter(object sender, EventArgs e)
+        {
+            pn_cursor.Show();
+            AnimateCursorOnButton(pn_cursor, btn_producer);
+        }
+
+        private void btn_producer_MouseLeave(object sender, EventArgs e)
+        {
+            pn_cursor.Hide();
+        }
+
+        private void btn_statisticsForm_MouseEnter(object sender, EventArgs e)
+        {
+            pn_cursor.Show();
+            AnimateCursorOnButton(pn_cursor, btn_statisticsForm);
+        }
+
+        private void btn_statisticsForm_MouseLeave(object sender, EventArgs e)
+        {
+            pn_cursor.Hide();
+        }
+
+        private void btn_end_MouseEnter(object sender, EventArgs e)
+        {
+            pn_cursor.Show();
+            AnimateCursorOnButton(pn_cursor, btn_end);
+        }
+
+        private void btn_end_MouseLeave(object sender, EventArgs e)
+        {
+            pn_cursor.Hide();
         }
     }
 }
