@@ -63,10 +63,70 @@ namespace Vadit.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        public static System.Drawing.Bitmap free_icon_window_display_5581930_1_ {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-window-display-5581930(1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Bitmap KakaoTalk_20230821_104347268 {
+            get {
+                object obj = ResourceManager.GetObject("KakaoTalk_20230821_104347268", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Bitmap KakaoTalk_20230821_104715043 {
+            get {
+                object obj = ResourceManager.GetObject("KakaoTalk_20230821_104715043", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Bitmap KakaoTalk_20230821_111614469 {
+            get {
+                object obj = ResourceManager.GetObject("KakaoTalk_20230821_111614469", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Bitmap KakaoTalk_20230821_112406611 {
+            get {
+                object obj = ResourceManager.GetObject("KakaoTalk_20230821_112406611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         public static System.Drawing.Bitmap SplashImage {
             get {
                 object obj = ResourceManager.GetObject("SplashImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   (Icon)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Icon Vadit_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Vadit_Icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

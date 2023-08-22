@@ -1,4 +1,4 @@
-﻿namespace Vadit
+namespace Vadit
 {
     internal static class Program
     {

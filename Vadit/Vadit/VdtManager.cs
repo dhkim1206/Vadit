@@ -96,7 +96,7 @@ namespace Vadit
             {
                 if (_cap != null)
                 {
-                    Debug.WriteLine("무한루프 시작");
+                 //   Debug.WriteLine("무한루프 시작");
                     if (_bgw.CancellationPending)
                     {
                         e.Cancel = true;
@@ -252,7 +252,7 @@ namespace Vadit
                 if (_isInputCorrrctPose)  //만약 이게 입력한 바른자세 이미지라면~
                 {
                     _infoInputCorrectPose.setInfo(img, _points);
-                    AppGlobal.CorrectPose.setInfo(img, _points);
+             //       AppGlobal.CorrectPose.setInfo(img, _points);
                 }
                 else if (!_isInputCorrrctPose)
                 {
@@ -409,7 +409,7 @@ namespace Vadit
         }
         public void PreventButtonClick(Button button)
         {
-            
+
         }
 
         public void InputCorrectPose()  //자세 캡쳐 버튼 누르면 실행됨. 올바른 자세인지 아닌지 더불어 창닫기까지.
@@ -431,6 +431,7 @@ namespace Vadit
 
                 if (confirmResult == DialogResult.Yes)
                 {
+                    AppGlobal.CorrectPose.setInfo(_infoInputCorrectPose._img, _infoInputCorrectPose._point);
                     return true;
                 }
                 else

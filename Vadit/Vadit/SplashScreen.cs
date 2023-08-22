@@ -1,4 +1,5 @@
-﻿using Emgu.CV.ImgHash;
+﻿using Emgu.CV;
+using Emgu.CV.ImgHash;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace Vadit
 {
     public partial class SplashScreen : Form
     {
-        
+
         private Timer _timer;
         string _Path = Path.Combine(Application.StartupPath, "sound_data");
         public SplashScreen()
@@ -22,13 +23,14 @@ namespace Vadit
             InitializeComponent();
             PbSplash.SizeMode = PictureBoxSizeMode.StretchImage;
             LoadSplashImage();
-
+            AppGlobal.Cap = new VideoCapture(0);
             _timer = new Timer();
-            _timer.Interval = 5000; 
+            _timer.Interval = 5000;
             _timer.Tick += Timer_Tick;
             _timer.Start();
 
         }
+
         private void LoadSplashImage()
         {
             Image splashImage = Properties.Resources.SplashImage;
@@ -39,8 +41,12 @@ namespace Vadit
         {
             _timer.Stop(); // 타이머 중지
             _timer.Dispose(); // 타이머 해제
+            this.Close();
+        }
 
-            Close(); // 폼 닫기
+        private void SplashScreen_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }

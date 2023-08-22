@@ -12,7 +12,7 @@ namespace Vadit
     public class TimerManager
     {
         Timer _timer;
-        public TimerManager(Timer timer) 
+        public TimerManager(Timer timer)
         {
             _timer = timer;
         }
@@ -35,18 +35,18 @@ namespace Vadit
         }
         public void ShowPoseAlrarm()
         {
-            if(AppGlobal.BadPoseCt > 3)
+            if (AppGlobal.BadPoseCt > 3)
             {
-            FormPopUp _formpup = new FormPopUp();
-            _formpup.Show();
-            _formpup.OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
-            _formpup.SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
-            Application.DoEvents();
-            Thread.Sleep(3000);
-            _formpup.Close();
+                FormPopUp _formpup = new FormPopUp();
+                _formpup.Show();
+                _formpup.OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
+                _formpup.SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
+                Application.DoEvents();
+                Thread.Sleep(3000);
+                _formpup.Close();
                 Debug.WriteLine("나쁜자세 4회 이상 적발. 알림 후 초기화");
-            AppGlobal.BadPoseCt = 0;
-            return;
+                AppGlobal.BadPoseCt = 0;
+                return;
             }
             AppGlobal.BadPoseCt++;
             Debug.WriteLine("나쁜자세 누적 횟수:" + AppGlobal.BadPoseCt);

@@ -32,21 +32,21 @@ namespace Vadit
 
         }
         // 폼이 실행될때
-/*        private void FormPopUp_Shown(object sender, EventArgs e)//나쁜자세 알림 팝업
-        {
-            SetAudio(AppBase.AppConf.ConfigSet.AlarmSound);
+        /*        private void FormPopUp_Shown(object sender, EventArgs e)//나쁜자세 알림 팝업
+                {
+                    SetAudio(AppBase.AppConf.ConfigSet.AlarmSound);
 
-            if (false)// 안좋은 자세 감지시
-            {
-                SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
-                OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
-            }
-            if (false) // 장시간 이용시
-            {
-                LongPalyPopUp();
-            }
-        }
-*/
+                    if (false)// 안좋은 자세 감지시
+                    {
+                        SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
+                        OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
+                    }
+                    if (false) // 장시간 이용시
+                    {
+                        LongPalyPopUp();
+                    }
+                }
+        */
         private void SetAudio(bool soundon)
         {
             if (soundon == true)
@@ -60,11 +60,11 @@ namespace Vadit
                 _LongplaySound = new SoundPlayer(Path.Combine(_Path, "NoneSound.wav"));
             }
         }
-/*        private void FormPopUp_VisibleChanged(object sender, EventArgs e)//폼이 화면에서 감지될때
-        {
-            if (!this.Visible) return;
-            DefaultTimer.Start();
-        }*/
+        /*        private void FormPopUp_VisibleChanged(object sender, EventArgs e)//폼이 화면에서 감지될때
+                {
+                    if (!this.Visible) return;
+                    DefaultTimer.Start();
+                }*/
         private void DefaultTimer_Tick(object sender, EventArgs e)
         {
             // 초시계
@@ -88,7 +88,7 @@ namespace Vadit
 
         }
         private void Timer_Tick(object sender, EventArgs e)
-        {           
+        {
 
             _timer.Stop(); // 타이머 중지
             _timer.Dispose(); // 타이머 해제
@@ -99,7 +99,7 @@ namespace Vadit
             this.Close();
             Close();
         }
-        public void OpenUserImage(EnumNotificationLayout layout) 
+        public void OpenUserImage(EnumNotificationLayout layout)
         {
             if (Directory.Exists(_Data.imageDirectory))
             {

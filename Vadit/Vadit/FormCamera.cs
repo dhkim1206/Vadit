@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Reflection.Emit;
 using System.Threading;
+using System.Threading.Channels;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -19,22 +20,24 @@ namespace Vadit
         public FormCamera()
         {
             InitializeComponent();
-            btnResetPose.Enabled = false;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             if (AppGlobal.VM != null)
                 AppGlobal.VM._bgw.CancelAsync();
             AppGlobal.isinputmode = true;
             delayTimer = new System.Windows.Forms.Timer();
-            delayTimer.Interval = 1000;
+            delayTimer.Interval = 500;
             delayTimer.Tick += new EventHandler(OnDelayTimerTick);
+        }
+        private void FormCamera_Load(object sender, EventArgs e)
+        {
+            delayTimer.Start();
         }
         private void OnDelayTimerTick(object sender, EventArgs e)
         {
             delayTimer.Stop();
             AppGlobal.VM = new VdtManager(OnProgressing);
             AppGlobal.VM.StartSettingCorrectPose();
-            btnResetPose.Enabled = true;
         }
         // 전달 받을 것들
         private void OnProgressing(object sender, ProgressChangedEventArgs e)
@@ -43,19 +46,10 @@ namespace Vadit
             pictureBox1.Image = obj.AnalyzedImage;
             tbtesttext.Text = obj.Result.ToString();
         }
-        private void FormCamera_Load(object sender, EventArgs e)
-        {
-            delayTimer.Start();
-
-        }
-        private void FormCamera_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            AppGlobal.isinputmode = false;
-            FormMain fm = new FormMain();
-            fm.StartDetect();
-        }
         private async void btnResetPose_Click(object sender, EventArgs e)
         {
+            btnResetPose.Enabled = false;
+            Debug.WriteLine("눌림티비~");
             pnWait.Visible = true;
             await Task.Delay(300);
             pictureBox2.Image = await AppGlobal.VM.OnclikBtnResetPose();  // await 추가
@@ -71,8 +65,20 @@ namespace Vadit
             {
                 pnWait.Visible = false;
                 pictureBox2.Image = AppGlobal.VM._infoInputCorrectPose._img.ToBitmap();
+                btnResetPose.Enabled = true;
             }
-
+        }
+        private void FormCamera_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FormMain fm = null;
+            if (AppGlobal.VM._bgw.IsBusy)
+                AppGlobal.VM._bgw.CancelAsync();
+            AppGlobal.isinputmode = false;
+            if (AppGlobal.CorrectPose._isPointNotNull)
+            {
+                fm = new FormMain();
+                fm.StartDetect();
+            }
         }
     }
 }
