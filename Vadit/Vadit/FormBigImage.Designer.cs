@@ -41,7 +41,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Calibri", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = SystemColors.ButtonShadow;
-            button1.Location = new Point(407, 13);
+            button1.Location = new Point(408, 7);
             button1.Name = "button1";
             button1.RightToLeft = RightToLeft.Yes;
             button1.Size = new Size(30, 28);
@@ -52,7 +52,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackColor = Color.FromArgb(32, 33, 36);
+            pictureBox1.BackColor = Color.FromArgb(49, 51, 56);
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";

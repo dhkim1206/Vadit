@@ -37,10 +37,15 @@
             btn_statisticsForm = new Button();
             btn_producer = new Button();
             mainPanel = new Panel();
-            panel1 = new Panel();
-            label1 = new Label();
+            pictureBox1 = new PictureBox();
+            panel2 = new Panel();
+            label2 = new Label();
             btn_exit = new Button();
+            label1 = new Label();
+            panel1 = new Panel();
             categoryPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel2.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -76,7 +81,7 @@
             categoryPanel.Controls.Add(btn_producer);
             categoryPanel.Location = new Point(0, 37);
             categoryPanel.Name = "categoryPanel";
-            categoryPanel.Size = new Size(202, 504);
+            categoryPanel.Size = new Size(189, 522);
             categoryPanel.TabIndex = 3;
             // 
             // pn_cursor
@@ -173,33 +178,43 @@
             // 
             // mainPanel
             // 
-            mainPanel.BackColor = Color.FromArgb(38, 38, 40);
+            mainPanel.BackColor = Color.FromArgb(49, 51, 56);
             mainPanel.Location = new Point(208, 40);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(805, 501);
+            mainPanel.Size = new Size(805, 464);
             mainPanel.TabIndex = 4;
             // 
-            // panel1
+            // pictureBox1
             // 
-            panel1.BackColor = Color.FromArgb(44, 46, 49);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(btn_exit);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1013, 40);
-            panel1.TabIndex = 0;
+            pictureBox1.Image = Properties.Resources.KakaoTalk_20230822_155142195;
+            pictureBox1.Location = new Point(246, 8);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(32, 31);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
             // 
-            // label1
+            // panel2
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.Silver;
-            label1.Location = new Point(10, 10);
-            label1.Name = "label1";
-            label1.Size = new Size(46, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Vadit";
+            panel2.BackColor = Color.FromArgb(49, 51, 56);
+            panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(label2);
+            panel2.Location = new Point(208, 510);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(807, 49);
+            panel2.TabIndex = 0;
+            panel2.Paint += panel2_Paint;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("함초롬돋움", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(285, 14);
+            label2.Name = "label2";
+            label2.Size = new Size(278, 19);
+            label2.TabIndex = 2;
+            label2.Text = "백그라운드에서 자세분석 실행중입니다.";
             // 
             // btn_exit
             // 
@@ -218,12 +233,35 @@
             btn_exit.UseVisualStyleBackColor = false;
             btn_exit.Click += btn_exit_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Silver;
+            label1.Location = new Point(10, 10);
+            label1.Name = "label1";
+            label1.Size = new Size(46, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Vadit";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(32, 33, 36);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(btn_exit);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1015, 40);
+            panel1.TabIndex = 0;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(38, 38, 40);
-            ClientSize = new Size(1013, 542);
+            ClientSize = new Size(1015, 560);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(mainPanel);
             Controls.Add(categoryPanel);
@@ -234,6 +272,9 @@
             Text = "Form1";
             FormClosing += FormMain_FormClosing;
             categoryPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -246,12 +287,15 @@
         private Button btn_FormSetting;
         private Button btn_statisticsForm;
         private Panel mainPanel;
-        private Panel panel1;
-        private Button btn_exit;
         private Button btn_end;
         private Button btn_producer;
         private RadioButton radioButton1;
-        private Label label1;
         private Panel pn_cursor;
+        private Panel panel2;
+        private Button btn_exit;
+        private Label label1;
+        private Panel panel1;
+        private Label label2;
+        private PictureBox pictureBox1;
     }
 }

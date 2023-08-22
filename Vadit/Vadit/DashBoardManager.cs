@@ -25,14 +25,11 @@ namespace Vadit
 
         int _current = 1;
 
-        public DashBoardManager(Panel panel, FlowLayoutPanel imageFlowLayout, DateTime selectedDate, Label badPoseCnt, Label trutleNeck, Label scoliosis, Label herniations)
+        public DashBoardManager(Panel panel, FlowLayoutPanel imageFlowLayout, DateTime selectedDate, Label badPoseCnt)
         {
             _panel = panel;
             _panel_imageFlowLayout = imageFlowLayout;
             _lb_BadPoseCnt = badPoseCnt;
-            _lb_TrutleNeck = trutleNeck;
-            _lb_scoliosis = scoliosis;
-            _lb_herniations = herniations;
             _panel_imageFlowLayout.AutoScroll = true;
             _pictureInfoList = LoadDataFromDatabase(selectedDate.Date);
             UpdateDashBoard();
@@ -54,26 +51,17 @@ namespace Vadit
 
         private void UpdateLabels(int sum, int turtleneckSum, int scoliosisSum, int herniationsSum)
         {
-            _lb_BadPoseCnt.Text = "안 좋은 자세 : " + sum.ToString();
-            _lb_TrutleNeck.Text = "거북목 : " + turtleneckSum.ToString();
-            _lb_scoliosis.Text = "척추 측만증 : " + scoliosisSum.ToString();
-            _lb_herniations.Text = "추간판 탈출 : " + herniationsSum.ToString();
+            _lb_BadPoseCnt.Text = " 검출된 자세 : " + sum.ToString() + " ,    거북목 : " + turtleneckSum.ToString() + " ,    척추 측만증 : " + scoliosisSum.ToString() + " ,    추간판 탈출 : " + herniationsSum.ToString();
 
             if ((turtleneckSum + scoliosisSum + herniationsSum) == 0)
             {
                 _lb_BadPoseCnt.Text = "";
-                _lb_TrutleNeck.Text = "";
-                _lb_scoliosis.Text = "";
-                _lb_herniations.Text = "";
             }
 
         }
         private void ClearLabel()
         {
             _lb_BadPoseCnt.Text = "";
-            _lb_herniations.Text = "";
-            _lb_TrutleNeck.Text = "";
-            _lb_scoliosis.Text = "";
         }
 
         private void UpdateDashBoard()
@@ -125,9 +113,13 @@ namespace Vadit
             pictureBox.Image = Image.FromFile(pictureInfo.ImagePath);
 
             string categoryText = pictureInfo.Category;
+            if (categoryText.EndsWith(","))
+            {
+                categoryText = categoryText.Substring(0, categoryText.Length - 1);
+            }
             string fullDateTimeText = pictureInfo.Date.ToString("yyyy-MM-dd HH:mm:ss");
 
-            using (Font font = new Font(FontFamily.GenericSansSerif, 40, FontStyle.Regular, GraphicsUnit.Pixel))
+            using (Font font = new Font(FontFamily.GenericSansSerif, 35, FontStyle.Regular, GraphicsUnit.Pixel))
             {
                 Bitmap imageWithText = new Bitmap(pictureBox.Image);
 
@@ -135,16 +127,24 @@ namespace Vadit
                 {
                     using (Brush backgroundBrush = new SolidBrush(Color.FromArgb(32, 33, 36)))
                     {
-                        g.FillRectangle(backgroundBrush, 0, 0, 650, 70);
+                        g.FillRectangle(backgroundBrush, 0, 0, 650, 60);
+                    }
+                    using (Brush backgroundBrush = new SolidBrush(Color.FromArgb(32, 33, 36)))
+                    {
+                        g.FillRectangle(backgroundBrush, 0, 445, 330, 40);
                     }
 
-                    SizeF textSize = g.MeasureString(categoryText, font);
-                    float textX = (pictureBox.Width - textSize.Width) / 2 + 280;
-                    float textY = pictureBox.Height - textSize.Height + 350;
-                    g.DrawString(categoryText, font, Brushes.Yellow, new PointF(textX, textY));
-                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(130, 13));
+                    Debug.WriteLine(categoryText.Length);
 
-                    using (Font font1 = new Font(FontFamily.GenericSansSerif, 68, FontStyle.Bold, GraphicsUnit.Pixel))
+                    if (categoryText.Length >= 13) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(120, 13));
+                    else if (10 <= categoryText.Length && categoryText.Length < 12) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(135, 13));
+                    else {
+                        g.DrawString(categoryText, font, Brushes.Yellow, new PointF(210, 13));
+                    }
+
+                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(0, 445));
+
+                    using (Font font1 = new Font(FontFamily.GenericSansSerif, 60, FontStyle.Bold, GraphicsUnit.Pixel))
                     {
                         if (_current < count + 1)
                         {

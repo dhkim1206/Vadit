@@ -66,6 +66,7 @@
             // 
             btnResetPose.BackColor = Color.FromArgb(38, 38, 38);
             btnResetPose.BackgroundImageLayout = ImageLayout.None;
+            btnResetPose.FlatAppearance.BorderSize = 0;
             btnResetPose.FlatStyle = FlatStyle.Flat;
             btnResetPose.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
             btnResetPose.ForeColor = Color.White;
@@ -79,7 +80,7 @@
             // 
             // tbtesttext
             // 
-            tbtesttext.BackColor = Color.FromArgb(38, 38, 38);
+            tbtesttext.BackColor = Color.FromArgb(49, 51, 56);
             tbtesttext.ForeColor = Color.White;
             tbtesttext.Location = new Point(416, 440);
             tbtesttext.Name = "tbtesttext";
@@ -157,7 +158,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(38, 38, 38);
+            BackColor = Color.FromArgb(49, 51, 56);
             ClientSize = new Size(812, 490);
             Controls.Add(panel1);
             Controls.Add(tbtesttext);

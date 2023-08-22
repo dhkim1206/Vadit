@@ -101,11 +101,11 @@ namespace Vadit
 
         private async void btn_ProgramExplain_Click_1(object sender, EventArgs e)
         {
-            await AnimatePanel(btn_ProgramExplain, typeof(FormSetting) /* No form change for this button */);
+            await AnimatePanel(btn_ProgramExplain, typeof(FormExplain));
         }
         private async void btn_producer_Click(object sender, EventArgs e)
         {
-            await AnimatePanel(btn_producer, typeof(FormSetting) /* No form change for this button */);
+            await AnimatePanel(btn_producer, typeof(FormProducer));
 
         }
         private void btn_end_Click(object sender, EventArgs e)
@@ -183,6 +183,11 @@ namespace Vadit
         private void btn_end_MouseLeave(object sender, EventArgs e)
         {
             pn_cursor.Hide();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
