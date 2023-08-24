@@ -24,6 +24,5 @@ namespace Vadit
         public int SaveingPeriod; // 위에서 부터 1, 2, 3 ...
         public EnumNotificationLayout NotificationLayout; //Convert.ToInt32(AppConf.ConfigSet.NotificationLayout);
 
-
     }
 }

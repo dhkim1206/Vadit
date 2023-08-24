@@ -13,15 +13,14 @@ namespace Vadit
     {
         private PictureBox _selectedPictureBox; // 현재 선택된 PictureBox를 저장하는 변수
 
-
         private Panel _panel;
         private string path = "data_table.db";
         private FlowLayoutPanel _panel_imageFlowLayout;
         private Label _lb_BadPoseCnt;
-        private Label _lb_TrutleNeck;
-        private Label _lb_scoliosis;
-        private Label _lb_herniations;
-        private List<(string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations)> _pictureInfoList;
+
+
+        private List<(string ImagePath, string Category)> _imageinfoList;
+        private List<(DateTime Date, int Turtleneck, int Scoliosis, int Herniations)> _badPoseInfoList;
 
         int _current = 1;
 
@@ -31,7 +30,12 @@ namespace Vadit
             _panel_imageFlowLayout = imageFlowLayout;
             _lb_BadPoseCnt = badPoseCnt;
             _panel_imageFlowLayout.AutoScroll = true;
-            _pictureInfoList = LoadDataFromDatabase(selectedDate.Date);
+
+            // Initialize the lists
+            _imageinfoList = new List<(string ImagePath, string Category)>();
+            _badPoseInfoList = new List<(DateTime Date, int Turtleneck, int Scoliosis, int Herniations)>();
+
+            LoadDataFromDB(selectedDate.Date);
             UpdateDashBoard();
         }
 
@@ -75,7 +79,7 @@ namespace Vadit
             int scoliosisSum = 0;
             int herniationsSum = 0;
 
-            if (_pictureInfoList.Count == 0)
+            if (_badPoseInfoList.Count == 0)
             {
                 Label noDataLabel = new Label();
                 noDataLabel.Text = "데이터가 없음";
@@ -87,37 +91,45 @@ namespace Vadit
                 _panel_imageFlowLayout.Controls.Add(noDataLabel);
                 _panel.Show();
             }
-            foreach (var pictureInfo in _pictureInfoList)
+            for (int i = 0; i < _badPoseInfoList.Count; i++)
             {
-                //Debug.WriteLine(pictureInfo);
-                PictureBox pictureBox = CreatePictureBox(pictureInfo, _pictureInfoList.Count);
+                var badposeInfo = _badPoseInfoList[i];
+                var imageInfo = _imageinfoList[i];
+
+                Debug.WriteLine(" 픽쳐 인포 : " + badposeInfo);
+                PictureBox pictureBox = CreatePictureBox(imageInfo, badposeInfo, _badPoseInfoList.Count);
                 ConfigurePictureBoxClickEvent(pictureBox);
 
-                turtleneckSum += pictureInfo.Turtleneck;
-                scoliosisSum += pictureInfo.Scoliosis;
-                herniationsSum += pictureInfo.Herniations;
+                turtleneckSum += badposeInfo.Turtleneck;
+                Debug.WriteLine(" 거북목 : " + turtleneckSum);
+
+                scoliosisSum += badposeInfo.Scoliosis;
+                Debug.WriteLine(" 척추 측만증 : " + scoliosisSum);
+
+                herniationsSum += badposeInfo.Herniations;
+                Debug.WriteLine(" 추가판 탈출 : " + herniationsSum);
 
                 _panel_imageFlowLayout.Controls.Add(pictureBox);
             }
 
-            UpdateLabels(_pictureInfoList.Count, turtleneckSum, scoliosisSum, herniationsSum);
-        }
+            UpdateLabels(_badPoseInfoList.Count, turtleneckSum, scoliosisSum, herniationsSum);
 
-        private PictureBox CreatePictureBox((string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations) pictureInfo, int count)
+        }
+        private PictureBox CreatePictureBox((string ImagePath, string Category) ImageInfo, (DateTime Date, int Turtleneck, int Scoliosis, int Herniations) badposeInfo, int count)
         {
             PictureBox pictureBox = new PictureBox();
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.Width = _panel_imageFlowLayout.Height;
             pictureBox.Height = _panel_imageFlowLayout.Height;
             pictureBox.Padding = new Padding(5);
-            pictureBox.Image = Image.FromFile(pictureInfo.ImagePath);
+            pictureBox.Image = Image.FromFile(ImageInfo.ImagePath);
 
-            string categoryText = pictureInfo.Category;
+            string categoryText = ImageInfo.Category;
             if (categoryText.EndsWith(","))
             {
                 categoryText = categoryText.Substring(0, categoryText.Length - 1);
             }
-            string fullDateTimeText = pictureInfo.Date.ToString("yyyy-MM-dd HH:mm:ss");
+            string fullDateTimeText = badposeInfo.Date.ToString("yyyy-MM-dd HH:mm:ss");
 
             using (Font font = new Font(FontFamily.GenericSansSerif, 35, FontStyle.Regular, GraphicsUnit.Pixel))
             {
@@ -134,12 +146,11 @@ namespace Vadit
                         g.FillRectangle(backgroundBrush, 0, 445, 350, 40);
                     }
 
-                    Debug.WriteLine(categoryText.Length);
-
                     if (categoryText.Length >= 13) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(120, 13));
                     else if (10 <= categoryText.Length && categoryText.Length < 12) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(135, 13));
                     else if (categoryText.Length < 5) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(240, 13));
-                    else {
+                    else
+                    {
                         g.DrawString(categoryText, font, Brushes.Yellow, new PointF(210, 13));
                     }
 
@@ -161,14 +172,12 @@ namespace Vadit
             return pictureBox;
         }
 
-        private List<(string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations)> LoadDataFromDatabase(DateTime selectedDate)
+        //List<(string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations)>
+        private void LoadDataFromDB(DateTime selectedDate)
         {
             // 이전 데이터를 제거
-            if (_pictureInfoList != null)
-                _pictureInfoList.Clear();
-
-            // 데이터를 저장할 리스트를 생성
-            List<(string ImagePath, string Category, DateTime Date, int Turtleneck, int Scoliosis, int Herniations)> pictureInfoList = new List<(string, string, DateTime, int, int, int)>();
+            _badPoseInfoList?.Clear();
+            _imageinfoList?.Clear();
 
             // SQLite 데이터베이스 연결을 생성
             using (SQLiteConnection con = new SQLiteConnection(@"Data Source=" + path))
@@ -196,49 +205,37 @@ namespace Vadit
                             // 각 열의 데이터를 추출
                             string imagePath = reader.GetString(0);
                             string category = reader.GetString(1);
-                            DateTime date = DateTime.MinValue;
-                            int turtleneck = 0;
-                            int scoliosis = 0;
-                            int herniations = 0;
-
-                            // BadPose 정보 조회
-                            using (SQLiteCommand badPoseCmd = new SQLiteCommand(badPoseQuery, con))
-                            {
-                                badPoseCmd.Parameters.AddWithValue("@SelectedDate", selectedDate.Date);
-                                using (SQLiteDataReader badPoseReader = badPoseCmd.ExecuteReader())
-                                {
-                                    if (badPoseReader.Read())
-                                    {
-                                        date = badPoseReader.GetDateTime(0);
-                                        turtleneck = badPoseReader.GetInt32(1);
-                                        scoliosis = badPoseReader.GetInt32(2);
-                                        herniations = badPoseReader.GetInt32(3);
-                                    }
-                                }
-                            }
 
                             // 추출한 데이터를 pictureInfoList에 추가
-                            pictureInfoList.Add((imagePath, category, date, turtleneck, scoliosis, herniations));
-
-                            //Debug.WriteLine(imagePath);
+                            _imageinfoList.Add((imagePath, category));
                         }
                     }
+                }
 
-                    // 와일 루프가 끝난 후에 이미지 데이터 개수를 출력
-                    //Debug.WriteLine("Total image count: " + pictureInfoList.Count);
+                // BadPose 정보 조회
+                using (SQLiteCommand badPoseCmd = new SQLiteCommand(badPoseQuery, con))
+                {
+                    badPoseCmd.Parameters.AddWithValue("@SelectedDate", selectedDate.Date);
+                    using (SQLiteDataReader badPoseReader = badPoseCmd.ExecuteReader())
+                    {
+                        while (badPoseReader.Read())
+                        {
+                            DateTime date = badPoseReader.GetDateTime(0);
+                            int turtleneck = badPoseReader.GetInt32(1);
+                            int scoliosis = badPoseReader.GetInt32(2);
+                            int herniations = badPoseReader.GetInt32(3);
+
+                            // 추출한 데이터를 badPoseInfoList에 추가
+                            _badPoseInfoList.Add((date, turtleneck, scoliosis, herniations));
+                        }
+                    }
                 }
             }
-
-            // 로드한 데이터가 담긴 리스트를 반환합니다.
-            return pictureInfoList;
         }
-
-
-
         public void ShowImagesForSelectedDate(DateTime selectedDate)
         {
-            _pictureInfoList.Clear();
-            _pictureInfoList = LoadDataFromDatabase(selectedDate.Date);
+            _badPoseInfoList.Clear();
+            LoadDataFromDB(selectedDate.Date);
             //Debug.WriteLine(_pictureInfoList.Count);
             UpdateDashBoard();
         }

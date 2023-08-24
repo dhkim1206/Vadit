@@ -21,13 +21,11 @@ namespace Vadit
         private Control selectedButton; // 선택된 버튼을 저장할 변수
         private NotifyIcon notifyIcon;
 
-
         public FormMain()
         {
             InitializeComponent();
             InitializeTrayIcon();
             InitializeAppComponents();
-
         }
 
         //트레이 아이콘 초기화
