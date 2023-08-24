@@ -27,6 +27,7 @@ namespace Vadit
             InitializeComponent();
             InitializeTrayIcon();
             InitializeAppComponents();
+
         }
 
         //트레이 아이콘 초기화
@@ -48,22 +49,16 @@ namespace Vadit
 
         public void StartDetect()
         {
-            panel2.Hide();
-            /*
             pn_warningMessage.Hide();
             pn_processingMessage.BringToFront();
-            Application.DoEvents();*/
 
             AppGlobal.VM = new VdtManager(OnProgressing);
             AppGlobal.VM._bgw.RunWorkerAsync();
-
         }
 
         private void OnProgressing(object sender, ProgressChangedEventArgs e)
         {
             AnalyzeData obj = e.UserState as AnalyzeData;
-
-
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -193,5 +188,10 @@ namespace Vadit
             pn_cursor.Hide();
         }
 
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            if (AppGlobal.CorrectPose._img != null)
+                StartDetect();
+        }
     }
 }

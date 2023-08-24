@@ -39,10 +39,10 @@
             mainPanel = new Panel();
             pictureBox1 = new PictureBox();
             pn_processingMessage = new Panel();
+            label2 = new Label();
             pn_warningMessage = new Panel();
             pictureBox_warning = new PictureBox();
             lb_warning = new Label();
-            label2 = new Label();
             btn_exit = new Button();
             label1 = new Label();
             panel1 = new Panel();
@@ -202,7 +202,6 @@
             // pn_processingMessage
             // 
             pn_processingMessage.BackColor = Color.FromArgb(49, 51, 56);
-            pn_processingMessage.Controls.Add(pn_warningMessage);
             pn_processingMessage.Controls.Add(pictureBox1);
             pn_processingMessage.Controls.Add(label2);
             pn_processingMessage.Location = new Point(208, 510);
@@ -210,12 +209,23 @@
             pn_processingMessage.Size = new Size(807, 49);
             pn_processingMessage.TabIndex = 0;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("함초롬돋움", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(285, 14);
+            label2.Name = "label2";
+            label2.Size = new Size(278, 19);
+            label2.TabIndex = 2;
+            label2.Text = "백그라운드에서 자세분석 실행중입니다.";
+            // 
             // pn_warningMessage
             // 
             pn_warningMessage.BackColor = Color.FromArgb(49, 51, 56);
             pn_warningMessage.Controls.Add(pictureBox_warning);
             pn_warningMessage.Controls.Add(lb_warning);
-            pn_warningMessage.Location = new Point(0, 0);
+            pn_warningMessage.Location = new Point(208, 507);
             pn_warningMessage.Name = "pn_warningMessage";
             pn_warningMessage.Size = new Size(807, 49);
             pn_warningMessage.TabIndex = 4;
@@ -240,17 +250,6 @@
             lb_warning.Size = new Size(179, 19);
             lb_warning.TabIndex = 2;
             lb_warning.Text = "바른자세를 입력해주세요";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("함초롬돋움", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(285, 14);
-            label2.Name = "label2";
-            label2.Size = new Size(278, 19);
-            label2.TabIndex = 2;
-            label2.Text = "백그라운드에서 자세분석 실행중입니다.";
             // 
             // btn_exit
             // 
@@ -297,6 +296,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(38, 38, 40);
             ClientSize = new Size(1015, 560);
+            Controls.Add(pn_warningMessage);
             Controls.Add(pn_processingMessage);
             Controls.Add(panel1);
             Controls.Add(mainPanel);
@@ -307,6 +307,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             FormClosing += FormMain_FormClosing;
+            Load += FormMain_Load;
             categoryPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pn_processingMessage.ResumeLayout(false);

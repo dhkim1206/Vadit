@@ -44,7 +44,7 @@ namespace Vadit
                 Application.DoEvents();
                 Thread.Sleep(3000);
                 _formpup.Close();
-                Debug.WriteLine("나쁜자세 4회 이상 적발. 알림 후 초기화");
+                Debug.WriteLine("나쁜자세 5회 이상 적발. 알림 후 초기화");
                 AppGlobal.BadPoseCt = 0;
                 return;
             }

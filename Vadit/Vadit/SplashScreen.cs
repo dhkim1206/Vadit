@@ -44,7 +44,7 @@ namespace Vadit
             _timer.Stop(); // 타이머 중지
             _timer.Dispose(); // 타이머 해제
 
-            Close(); // 폼 닫기
+            this.Close(); // 폼 닫기
         }
     }
 }

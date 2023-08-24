@@ -2,6 +2,7 @@
 using Emgu.CV.CvEnum;
 using Emgu.CV.Dnn;
 using Emgu.CV.Structure;
+using Emgu.CV.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,9 +34,12 @@ namespace Vadit
                 this._ratio = (double)Math.Abs(points[2].X - points[5].X) / (double)Math.Abs(points[0].Y - points[1].Y);
             this._dt17to18 = points[18].X - points[17].X;
             this.IsPointNotNull();
-            Debug.WriteLine($"설정된 자세: {_ratio:F3}");
+
             Debug.WriteLine($"어깨 길이: {Math.Abs(points[2].X - points[5].X):F3}");
-            Debug.WriteLine($"목길이: {Math.Abs(points[0].X - points[1].X):F3}");
+            Debug.WriteLine($"목길이: {Math.Abs(points[0].Y - points[1].Y):F3}");
+            Debug.WriteLine($"머리폭 길이: {this._dt17to18:F3}");
+            Debug.WriteLine($"어깨 높이차이: {Math.Abs(points[2].Y - points[5].Y):F3}");
+            Debug.WriteLine($"결과 비율: {_ratio:F3}");
 
         }
         public void IsPointNotNull()
@@ -96,7 +100,8 @@ namespace Vadit
             {
                 if (_cap != null)
                 {
-                    Debug.WriteLine("무한루프 시작");
+                    //         Debug.WriteLine("무한루프 시작");
+
                     if (_bgw.CancellationPending)
                     {
                         e.Cancel = true;
@@ -106,7 +111,7 @@ namespace Vadit
                     else if (_isInputCorrrctPose == true)
                     {
 
-                        Debug.WriteLine("사진 입력받는중");
+                   //     Debug.WriteLine("사진 입력받는중");
                         _frame = new Mat();
                         AnalyzeData _analyzeData = new AnalyzeData();
                         _cap.Read(_frame);
@@ -114,7 +119,6 @@ namespace Vadit
                         _analyzeData.Result = "바른 자세를 입력하고있습니다.";
                         _analyzeData.AnalyzedImage = _frame.ToBitmap();
                         _bgw.ReportProgress(0, _analyzeData);
-                        //판넬 숨기기
 
                     }
                     else
@@ -150,7 +154,6 @@ namespace Vadit
         // 스켈레톤 탐지하고 그리기 위한 메서드
         private void DrawSkeleton(Image<Bgr, byte> img, BackgroundWorker backgroundWorker)
         {
-
             try
             {
                 // 이미지 처리를 위한 초기 설정
@@ -250,10 +253,11 @@ namespace Vadit
                 }
 
 
+
                 if (_isInputCorrrctPose)  //만약 이게 입력한 바른자세 이미지라면~
                 {
                     _infoInputCorrectPose.setInfo(img, _points);
-                    AppGlobal.CorrectPose.setInfo(img, _points);
+                //    AppGlobal.CorrectPose.setInfo(img, _points);
                 }
                 else if (!_isInputCorrrctPose)
                 {
@@ -325,41 +329,48 @@ namespace Vadit
                 _ratio = ((double)Math.Abs(_points[2].X - _points[5].X)) / ((double)Math.Abs(_points[0].Y - _points[1].Y));
             if (_ratio == 0)
             {
-                Debug.WriteLine("실시간 누락 point로 인해 현재사진값 버림");
+         //       Debug.WriteLine("실시간 누락 point로 인해 현재사진값 버림");
                 return;
             }
 
             Debug.WriteLine($"올바른 자세: {AppGlobal.CorrectPose._ratio:F3}");
             Debug.WriteLine($"현재측정: {_ratio:F3}");
-            Debug.WriteLine("검출된 17to18길이는 =" + dt17to18);
-            Debug.WriteLine("설정된 17to18길이는 =" + AppGlobal.CorrectPose._dt17to18);
+       //     Debug.WriteLine("검출된 17to18길이는 =" + dt17to18);
+        //    Debug.WriteLine("설정된 17to18길이는 =" + AppGlobal.CorrectPose._dt17to18);
 
-            if (Math.Abs(_points[2].Y - _points[5].Y) > 40)
+            if (Math.Abs(_points[2].Y - _points[5].Y) > 30)
             {
                 _analyzeData.Result += "척추 측만증,";
-                Debug.WriteLine("측만증 검출");
+                Debug.WriteLine("******측만증 검출******");
                 conditionMet = true;
             }
 
-            if (0.6 > Math.Abs(_ratio - AppGlobal.CorrectPose._ratio))
+            if (0.25 < Math.Abs(_ratio - AppGlobal.CorrectPose._ratio))
             {
-                if (dt17to18 >= AppGlobal.CorrectPose._dt17to18 + 10)    //표준보다 10만큼 커지면
+                if (dt17to18 >= AppGlobal.CorrectPose._dt17to18)    //표준보다 10만큼 커지면
                 {
                     _analyzeData.Result += " 거북목,";
-                    Debug.WriteLine("거북목 검출");
+                    Debug.WriteLine("******거북목 검출******");
                     conditionMet = true;
                 }
-                else if (dt17to18 < AppGlobal.CorrectPose._dt17to18 - 20)
+                else if (dt17to18 + 8 < AppGlobal.CorrectPose._dt17to18)
                 {
                     _analyzeData.Result += "추간판 탈출,";
-                    Debug.WriteLine("추간판 탈출 검출");
+                    Debug.WriteLine("******추간판 탈출 검출******");
                     conditionMet = true;
                 }
             }
+            else if ((_ratio > AppGlobal.CorrectPose._ratio + 0.2) && (dt17to18 + 8 < AppGlobal.CorrectPose._dt17to18))
+            {
+                _analyzeData.Result += "추간판 탈출,";
+                Debug.WriteLine("******추간판 탈출 검출******");
+                conditionMet = true;
+            }
+
             if (!conditionMet)
             {
                 _analyzeData.Result = "정상";
-                Debug.WriteLine("정상 검출");
+                Debug.WriteLine("******정상 검출******");
                 _data.UpdateGoodPoseCnt_Score(date);
                 return;
             }
@@ -417,7 +428,6 @@ namespace Vadit
         {
             DrawSkeleton(_infoInputCorrectPose._img, _bgw);
             _infoInputCorrectPose.IsPointNotNull();
-
         }
         public bool AskSettingPose()
         {
@@ -432,6 +442,8 @@ namespace Vadit
 
                 if (confirmResult == DialogResult.Yes)
                 {
+                    AppGlobal.CorrectPose.setInfo(_infoInputCorrectPose._img
+                        , _infoInputCorrectPose._point );
                     return true;
                 }
                 else
@@ -467,6 +479,7 @@ namespace Vadit
             _poseNet?.Dispose();
             _bgw?.Dispose();
         }
+
         //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑바른 자세입력에 관한 코드↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 
