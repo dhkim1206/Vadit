@@ -32,8 +32,7 @@ namespace Vadit
         private void FormCamera_Load(object sender, EventArgs e)
         {
             delayTimer.Start();
-        }
-        private void OnDelayTimerTick(object sender, EventArgs e)
+        }        private void OnDelayTimerTick(object sender, EventArgs e)
         {
             delayTimer.Stop();
             AppGlobal.VM = new VdtManager(OnProgressing);
@@ -74,9 +73,16 @@ namespace Vadit
             {
                 AppGlobal.VM._bgw.CancelAsync();
                 Thread.Sleep(1000);
+                AppGlobal.PN.Hide();
+
             }
             AppGlobal.isinputmode = false;
+        }
 
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void FormCamera_FormClosed(object sender, FormClosedEventArgs e)
@@ -84,7 +90,10 @@ namespace Vadit
             if (AppGlobal.CorrectPose._isPointNotNull)
             {
                 if (!AppGlobal.VM._bgw.IsBusy)
+                {
                     AppGlobal.VM._bgw.RunWorkerAsync();
+
+                }
             }
         }
     }

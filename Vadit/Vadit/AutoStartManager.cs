@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -29,18 +29,12 @@ namespace Vadit
             string startupFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit.exe");
             Debug.WriteLine("시작 프로그램 폴더 : " + startupFolderPath);
 
-            // 프로그램 실행 파일을 시작 프로그램 폴더에 복사
-            // System.IO.File.Copy(programPath, startupFolderPath, true);
-
-
-
             // 바로 가기 파일 생성 및 설정
             string shortcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit.lnk");
             Debug.WriteLine("바로가기 파일 경로 " + shortcutPath);
             CreateShortcut(programPath, shortcutPath);
             Debug.WriteLine("프로그램이 윈도우 자동 시작 프로그램으로 등록되었습니다.");
         }
-
 
         // 자동 시작 해제
         public void Cancel_AutoStart()
@@ -49,7 +43,7 @@ namespace Vadit
             Debug.WriteLine(programPath);
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)  // Windows인 경우
             {
-                string startupFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit.exe");
+                string startupFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Vadit.lnk");
 
                 Debug.WriteLine(startupFolderPath);
                 if (System.IO.File.Exists(startupFolderPath))

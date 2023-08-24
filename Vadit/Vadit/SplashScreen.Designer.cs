@@ -53,7 +53,6 @@
             Name = "SplashScreen";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SplashScreen";
-            FormClosed += SplashScreen_FormClosed;
             ((System.ComponentModel.ISupportInitialize)PbSplash).EndInit();
             ResumeLayout(false);
             PerformLayout();

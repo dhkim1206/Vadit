@@ -22,7 +22,7 @@ namespace Vadit
         public FormStatistics()
         {
             InitializeComponent();
-            _DashBoardManager = new DashBoardManager(pn_Nodata, PictureFlowLayout, DateTime.Now.Date, label4, label1, label2, label3);
+            _DashBoardManager = new DashBoardManager(pn_Nodata, PictureFlowLayout, DateTime.Now.Date, label4);
             _chartManager = new ChartManager(_DashBoardManager);
         }
 

@@ -15,21 +15,19 @@ namespace Vadit
         public TimerManager(Timer timer)
         {
             _timer = timer;
-
         }
         public void StartTimer()
         {
             if (!AppGlobal._TimerIsRunning)
-            {            
+            {
                 _timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(60));
                 Debug.WriteLine("Timer started.");
                 AppGlobal._TimerIsRunning = true;
-                
             }
         }
         public void StopTimer()
         {
-            if (AppGlobal._TimerIsRunning && AppGlobal.Timer != null)
+            if (AppGlobal._TimerIsRunning)
             {
                 _timer.Dispose();
                 AppGlobal._TimerIsRunning = false;
@@ -46,7 +44,7 @@ namespace Vadit
                 Application.DoEvents();
                 Thread.Sleep(3000);
                 _formpup.Close();
-                Debug.WriteLine("나쁜자세 4회 이상 적발. 알림 후 초기화");
+                Debug.WriteLine("나쁜자세 5회 이상 적발. 알림 후 초기화");
                 AppGlobal.BadPoseCt = 0;
                 return;
             }
