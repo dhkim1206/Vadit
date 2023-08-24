@@ -114,6 +114,7 @@ namespace Vadit
                         _analyzeData.Result = "바른 자세를 입력하고있습니다.";
                         _analyzeData.AnalyzedImage = _frame.ToBitmap();
                         _bgw.ReportProgress(0, _analyzeData);
+                        //판넬 숨기기
 
                     }
                     else
@@ -149,6 +150,7 @@ namespace Vadit
         // 스켈레톤 탐지하고 그리기 위한 메서드
         private void DrawSkeleton(Image<Bgr, byte> img, BackgroundWorker backgroundWorker)
         {
+
             try
             {
                 // 이미지 처리를 위한 초기 설정
@@ -246,7 +248,6 @@ namespace Vadit
                             CvInvoke.Line(img, _points[startIndex], _points[endIndex], new MCvScalar(255, 0, 0), 2); // 선으로 스켈레톤 그리기
                     }
                 }
-
 
 
                 if (_isInputCorrrctPose)  //만약 이게 입력한 바른자세 이미지라면~

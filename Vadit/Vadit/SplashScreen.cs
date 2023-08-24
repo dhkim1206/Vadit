@@ -1,4 +1,5 @@
-﻿using Emgu.CV.ImgHash;
+﻿using Emgu.CV;
+using Emgu.CV.ImgHash;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,9 @@ namespace Vadit
             InitializeComponent();
             PbSplash.SizeMode = PictureBoxSizeMode.StretchImage;
             LoadSplashImage();
+
+            AppGlobal.Cap = new VideoCapture(0);
+            AppGlobal.TM = new TimerManager(AppGlobal.Timer);
 
             _timer = new Timer();
             _timer.Interval = 5000; 

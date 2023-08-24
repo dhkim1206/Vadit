@@ -43,19 +43,27 @@ namespace Vadit
         {
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
-            AppGlobal.Cap = new VideoCapture(0);
+            AppGlobal.PN = pn_warningMessage;
         }
 
         public void StartDetect()
         {
+            panel2.Hide();
+            /*
+            pn_warningMessage.Hide();
+            pn_processingMessage.BringToFront();
+            Application.DoEvents();*/
+
             AppGlobal.VM = new VdtManager(OnProgressing);
             AppGlobal.VM._bgw.RunWorkerAsync();
-            AppGlobal.TM = new TimerManager(AppGlobal.Timer);
+
         }
 
         private void OnProgressing(object sender, ProgressChangedEventArgs e)
         {
             AnalyzeData obj = e.UserState as AnalyzeData;
+
+
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -185,9 +193,5 @@ namespace Vadit
             pn_cursor.Hide();
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

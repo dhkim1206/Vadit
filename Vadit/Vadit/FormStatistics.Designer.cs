@@ -37,8 +37,10 @@
             pn_Nodata = new Panel();
             lb_NoData = new Label();
             label4 = new Label();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             pn_Nodata.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // chart1
@@ -104,12 +106,23 @@
             label4.TabIndex = 8;
             label4.Text = "검출된 자세 : ";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.AdobeStock_618703898_Preview;
+            pictureBox1.Location = new Point(746, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(40, 33);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
+            // 
             // FormStatistics
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(49, 51, 56);
             ClientSize = new Size(798, 464);
+            Controls.Add(pictureBox1);
             Controls.Add(label4);
             Controls.Add(pn_Nodata);
             Controls.Add(PictureFlowLayout);
@@ -120,6 +133,7 @@
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             pn_Nodata.ResumeLayout(false);
             pn_Nodata.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -131,5 +145,6 @@
         private Panel pn_Nodata;
         private Label lb_NoData;
         private Label label4;
+        private PictureBox pictureBox1;
     }
 }

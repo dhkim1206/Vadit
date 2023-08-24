@@ -131,13 +131,14 @@ namespace Vadit
                     }
                     using (Brush backgroundBrush = new SolidBrush(Color.FromArgb(32, 33, 36)))
                     {
-                        g.FillRectangle(backgroundBrush, 0, 445, 330, 40);
+                        g.FillRectangle(backgroundBrush, 0, 445, 350, 40);
                     }
 
                     Debug.WriteLine(categoryText.Length);
 
                     if (categoryText.Length >= 13) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(120, 13));
                     else if (10 <= categoryText.Length && categoryText.Length < 12) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(135, 13));
+                    else if (categoryText.Length < 5) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(240, 13));
                     else {
                         g.DrawString(categoryText, font, Brushes.Yellow, new PointF(210, 13));
                     }

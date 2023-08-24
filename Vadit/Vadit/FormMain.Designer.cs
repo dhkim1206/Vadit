@@ -38,14 +38,19 @@
             btn_producer = new Button();
             mainPanel = new Panel();
             pictureBox1 = new PictureBox();
-            panel2 = new Panel();
+            pn_processingMessage = new Panel();
+            pn_warningMessage = new Panel();
+            pictureBox_warning = new PictureBox();
+            lb_warning = new Label();
             label2 = new Label();
             btn_exit = new Button();
             label1 = new Label();
             panel1 = new Panel();
             categoryPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            panel2.SuspendLayout();
+            pn_processingMessage.SuspendLayout();
+            pn_warningMessage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox_warning).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -194,16 +199,47 @@
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
             // 
-            // panel2
+            // pn_processingMessage
             // 
-            panel2.BackColor = Color.FromArgb(49, 51, 56);
-            panel2.Controls.Add(pictureBox1);
-            panel2.Controls.Add(label2);
-            panel2.Location = new Point(208, 510);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(807, 49);
-            panel2.TabIndex = 0;
-            panel2.Paint += panel2_Paint;
+            pn_processingMessage.BackColor = Color.FromArgb(49, 51, 56);
+            pn_processingMessage.Controls.Add(pn_warningMessage);
+            pn_processingMessage.Controls.Add(pictureBox1);
+            pn_processingMessage.Controls.Add(label2);
+            pn_processingMessage.Location = new Point(208, 510);
+            pn_processingMessage.Name = "pn_processingMessage";
+            pn_processingMessage.Size = new Size(807, 49);
+            pn_processingMessage.TabIndex = 0;
+            // 
+            // pn_warningMessage
+            // 
+            pn_warningMessage.BackColor = Color.FromArgb(49, 51, 56);
+            pn_warningMessage.Controls.Add(pictureBox_warning);
+            pn_warningMessage.Controls.Add(lb_warning);
+            pn_warningMessage.Location = new Point(0, 0);
+            pn_warningMessage.Name = "pn_warningMessage";
+            pn_warningMessage.Size = new Size(807, 49);
+            pn_warningMessage.TabIndex = 4;
+            // 
+            // pictureBox_warning
+            // 
+            pictureBox_warning.Image = Properties.Resources.KakaoTalk_20230824_093608718;
+            pictureBox_warning.Location = new Point(246, 9);
+            pictureBox_warning.Name = "pictureBox_warning";
+            pictureBox_warning.Size = new Size(32, 31);
+            pictureBox_warning.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox_warning.TabIndex = 3;
+            pictureBox_warning.TabStop = false;
+            // 
+            // lb_warning
+            // 
+            lb_warning.AutoSize = true;
+            lb_warning.Font = new Font("함초롬돋움", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_warning.ForeColor = Color.White;
+            lb_warning.Location = new Point(285, 14);
+            lb_warning.Name = "lb_warning";
+            lb_warning.Size = new Size(179, 19);
+            lb_warning.TabIndex = 2;
+            lb_warning.Text = "바른자세를 입력해주세요";
             // 
             // label2
             // 
@@ -218,7 +254,7 @@
             // 
             // btn_exit
             // 
-            btn_exit.BackColor = Color.FromArgb(44, 46, 49);
+            btn_exit.BackColor = Color.FromArgb(32, 33, 36);
             btn_exit.BackgroundImageLayout = ImageLayout.None;
             btn_exit.FlatAppearance.BorderSize = 0;
             btn_exit.FlatStyle = FlatStyle.Flat;
@@ -261,7 +297,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(38, 38, 40);
             ClientSize = new Size(1015, 560);
-            Controls.Add(panel2);
+            Controls.Add(pn_processingMessage);
             Controls.Add(panel1);
             Controls.Add(mainPanel);
             Controls.Add(categoryPanel);
@@ -273,8 +309,11 @@
             FormClosing += FormMain_FormClosing;
             categoryPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            pn_processingMessage.ResumeLayout(false);
+            pn_processingMessage.PerformLayout();
+            pn_warningMessage.ResumeLayout(false);
+            pn_warningMessage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox_warning).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -291,11 +330,14 @@
         private Button btn_producer;
         private RadioButton radioButton1;
         private Panel pn_cursor;
-        private Panel panel2;
+        private Panel pn_processingMessage;
         private Button btn_exit;
         private Label label1;
         private Panel panel1;
         private Label label2;
         private PictureBox pictureBox1;
+        private PictureBox pictureBox_warning;
+        private Label lb_warning;
+        private Panel pn_warningMessage;
     }
 }

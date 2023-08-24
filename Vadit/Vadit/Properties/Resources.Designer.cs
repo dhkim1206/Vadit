@@ -63,9 +63,29 @@ namespace Vadit.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        public static System.Drawing.Bitmap AdobeStock_618703898_Preview {
+            get {
+                object obj = ResourceManager.GetObject("AdobeStock_618703898_Preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         public static System.Drawing.Bitmap free_icon_computer_worker_7870360 {
             get {
                 object obj = ResourceManager.GetObject("free-icon-computer-worker-7870360", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Bitmap free_icon_question_5668097 {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-question-5668097", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,6 +206,26 @@ namespace Vadit.Properties {
         public static System.Drawing.Bitmap KakaoTalk_20230822_155142195 {
             get {
                 object obj = ResourceManager.GetObject("KakaoTalk_20230822_155142195", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Bitmap KakaoTalk_20230824_093608718 {
+            get {
+                object obj = ResourceManager.GetObject("KakaoTalk_20230824_093608718", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Bitmap KakaoTalk_20230824_095240156 {
+            get {
+                object obj = ResourceManager.GetObject("KakaoTalk_20230824_095240156", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
