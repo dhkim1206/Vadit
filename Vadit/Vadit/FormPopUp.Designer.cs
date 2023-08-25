@@ -31,13 +31,12 @@
             components = new System.ComponentModel.Container();
             DefaultTimer = new System.Windows.Forms.Timer(components);
             UserPanel = new Panel();
-            LbBadPoseName = new Label();
             UserPosePicBox = new PictureBox();
+            LbBadPoseName = new Label();
             ExamplePosePanel = new Panel();
             ExamplePosePicBox = new PictureBox();
             CommentPanel = new Panel();
-            CommentButton = new Button();
-            CommentLabel = new Label();
+            LbLongTime = new Label();
             LongTimer = new System.Windows.Forms.Timer(components);
             UserPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)UserPosePicBox).BeginInit();
@@ -54,24 +53,12 @@
             // UserPanel
             // 
             UserPanel.BackColor = Color.Gray;
-            UserPanel.Controls.Add(LbBadPoseName);
             UserPanel.Controls.Add(UserPosePicBox);
             UserPanel.Dock = DockStyle.Top;
             UserPanel.Location = new Point(10, 10);
             UserPanel.Name = "UserPanel";
             UserPanel.Size = new Size(330, 175);
             UserPanel.TabIndex = 6;
-            // 
-            // LbBadPoseName
-            // 
-            LbBadPoseName.AutoSize = true;
-            LbBadPoseName.Font = new Font("맑은 고딕", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            LbBadPoseName.Location = new Point(128, 9);
-            LbBadPoseName.Margin = new Padding(2, 0, 2, 0);
-            LbBadPoseName.Name = "LbBadPoseName";
-            LbBadPoseName.Size = new Size(50, 20);
-            LbBadPoseName.TabIndex = 1;
-            LbBadPoseName.Text = "label1";
             // 
             // UserPosePicBox
             // 
@@ -80,8 +67,19 @@
             UserPosePicBox.Name = "UserPosePicBox";
             UserPosePicBox.Padding = new Padding(5);
             UserPosePicBox.Size = new Size(330, 175);
+            UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
             UserPosePicBox.TabIndex = 0;
             UserPosePicBox.TabStop = false;
+            // 
+            // LbBadPoseName
+            // 
+            LbBadPoseName.AutoSize = true;
+            LbBadPoseName.Font = new Font("맑은 고딕", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            LbBadPoseName.Location = new Point(132, 26);
+            LbBadPoseName.Margin = new Padding(2, 0, 2, 0);
+            LbBadPoseName.Name = "LbBadPoseName";
+            LbBadPoseName.Size = new Size(0, 20);
+            LbBadPoseName.TabIndex = 1;
             // 
             // ExamplePosePanel
             // 
@@ -101,43 +99,30 @@
             ExamplePosePicBox.Name = "ExamplePosePicBox";
             ExamplePosePicBox.Padding = new Padding(5);
             ExamplePosePicBox.Size = new Size(330, 175);
+            ExamplePosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
             ExamplePosePicBox.TabIndex = 0;
             ExamplePosePicBox.TabStop = false;
             // 
             // CommentPanel
             // 
             CommentPanel.BackColor = Color.FromArgb(224, 224, 224);
-            CommentPanel.Controls.Add(CommentButton);
-            CommentPanel.Controls.Add(CommentLabel);
+            CommentPanel.Controls.Add(LbLongTime);
+            CommentPanel.Controls.Add(LbBadPoseName);
             CommentPanel.Dock = DockStyle.Top;
             CommentPanel.Location = new Point(10, 360);
             CommentPanel.Name = "CommentPanel";
             CommentPanel.Size = new Size(330, 70);
             CommentPanel.TabIndex = 3;
             // 
-            // CommentButton
+            // LbLongTime
             // 
-            CommentButton.BackColor = Color.FromArgb(0, 0, 0, 0);
-            CommentButton.FlatAppearance.BorderSize = 0;
-            CommentButton.FlatStyle = FlatStyle.Flat;
-            CommentButton.Font = new Font("맑은 고딕", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            CommentButton.Location = new Point(3, 3);
-            CommentButton.Name = "CommentButton";
-            CommentButton.Size = new Size(324, 64);
-            CommentButton.TabIndex = 1;
-            CommentButton.Text = "틀린자세 텍스트";
-            CommentButton.UseVisualStyleBackColor = false;
-            // 
-            // CommentLabel
-            // 
-            CommentLabel.AutoSize = true;
-            CommentLabel.Font = new Font("맑은 고딕", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            CommentLabel.Location = new Point(128, 27);
-            CommentLabel.Name = "CommentLabel";
-            CommentLabel.Size = new Size(78, 17);
-            CommentLabel.TabIndex = 0;
-            CommentLabel.Text = "택스트 위치";
-            CommentLabel.TextAlign = ContentAlignment.MiddleCenter;
+            LbLongTime.AutoSize = true;
+            LbLongTime.Font = new Font("맑은 고딕", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            LbLongTime.Location = new Point(21, 17);
+            LbLongTime.Margin = new Padding(2, 0, 2, 0);
+            LbLongTime.Name = "LbLongTime";
+            LbLongTime.Size = new Size(0, 20);
+            LbLongTime.TabIndex = 2;
             // 
             // FormPopUp
             // 
@@ -155,7 +140,6 @@
             StartPosition = FormStartPosition.Manual;
             Text = "FormPopUp";
             UserPanel.ResumeLayout(false);
-            UserPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)UserPosePicBox).EndInit();
             ExamplePosePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ExamplePosePicBox).EndInit();
@@ -172,9 +156,8 @@
         private Panel ExamplePosePanel;
         private PictureBox ExamplePosePicBox;
         private Panel CommentPanel;
-        private Button CommentButton;
-        private Label CommentLabel;
         private Label LbBadPoseName;
         private System.Windows.Forms.Timer LongTimer;
+        private Label LbLongTime;
     }
 }

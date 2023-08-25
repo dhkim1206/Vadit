@@ -21,6 +21,7 @@ namespace Vadit
         public bool WindowSameExecute;
         public bool AlarmSound;
         public int CamFrame;
+        public double poseScore;
         public int SaveingPeriod; // 위에서 부터 1, 2, 3 ...
         public EnumNotificationLayout NotificationLayout; //Convert.ToInt32(AppConf.ConfigSet.NotificationLayout);
 

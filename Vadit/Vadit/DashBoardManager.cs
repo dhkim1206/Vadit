@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using static System.Windows.Forms.LinkLabel;
-
+using static Vadit.AppBase;
 namespace Vadit
 {
     public class DashBoardManager
@@ -227,6 +227,7 @@ namespace Vadit
 
                             // 추출한 데이터를 badPoseInfoList에 추가
                             _badPoseInfoList.Add((date, turtleneck, scoliosis, herniations));
+
                         }
                     }
                 }
@@ -236,6 +237,7 @@ namespace Vadit
         {
             _badPoseInfoList.Clear();
             LoadDataFromDB(selectedDate.Date);
+            AppConf.ConfigSet.poseScore = 0;
             //Debug.WriteLine(_pictureInfoList.Count);
             UpdateDashBoard();
         }

@@ -363,14 +363,9 @@ namespace Vadit
                     Debug.WriteLine("******거북목 검출******");
                     conditionMet = true;
                 }
-                else if (dt17to18 + 8 < AppGlobal.CorrectPose._dt17to18)
-                {
-                    _analyzeData.Result += "추간판 탈출,";
-                    Debug.WriteLine("******추간판 탈출 검출******");
-                    conditionMet = true;
-                }
+
             }
-            else if ((_ratio > AppGlobal.CorrectPose._ratio + 0.2) && (dt17to18 + 8 < AppGlobal.CorrectPose._dt17to18))
+            if (dt17to18 + 10 < AppGlobal.CorrectPose._dt17to18)
             {
                 _analyzeData.Result += "추간판 탈출,";
                 Debug.WriteLine("******추간판 탈출 검출******");

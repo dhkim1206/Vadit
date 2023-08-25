@@ -83,7 +83,7 @@ namespace Vadit
 
             this.Size = new Size(350, 90);
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
-            CommentButton.Text = "현재 1시간 동안 앉아 있었습니다.\n잠시 의자에서 일어나 휴식을 취해 주십시오.";
+            LbLongTime.Text = "현재 1시간 동안 앉아 있었습니다.\n잠시 의자에서 일어나 휴식을 취해 주십시오.";
 
             _LongplaySound.Play();
             Application.DoEvents();
@@ -133,6 +133,12 @@ namespace Vadit
                     UserPosePicBox.Image = AppGlobal.BPI._img.ToBitmap();
                     LbBadPoseName.Text = AppGlobal.BPI._badPoseName;
                     UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                    if (AppGlobal.BPI._badPoseName == " 거북목," || AppGlobal.BPI._badPoseName == "척추 측만증, 거북목,")
+                        ExamplePosePicBox.Image = Properties.Resources.KakaoTalk_20230825_102950435;
+                    else if (AppGlobal.BPI._badPoseName == "추간판 탈출," || AppGlobal.BPI._badPoseName == "척추 측만증,추간판 탈출,")
+                        ExamplePosePicBox.Image = Properties.Resources.KakaoTalk_20230825_102950435_01;
+                    else if (AppGlobal.BPI._badPoseName == "척추 측만증,")
+                        ExamplePosePicBox.Image = Properties.Resources.KakaoTalk_20230825_102950435_02;
                 }
                 else if (layout == EnumNotificationLayout.OnlyUser)
                 {
@@ -142,7 +148,7 @@ namespace Vadit
                 }
                 else if (layout == EnumNotificationLayout.Text)
                 {
-                    CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
+                    //CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
                 }
             }
         }
@@ -150,7 +156,7 @@ namespace Vadit
         {
             SoundPlayer _DefaultSound = new SoundPlayer(Path.Combine(_Path, "DefaultSound.wav"));
             SoundPlayer _LongplaySound = new SoundPlayer(Path.Combine(_Path, "LongPalySound.wav"));
-            CommentButton.FlatAppearance.BorderSize = 0;
+            //      CommentButton.FlatAppearance.BorderSize = 0;
             _DefaultSound.Play();
 
             if (layout == EnumNotificationLayout.Standard)
