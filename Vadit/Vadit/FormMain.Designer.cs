@@ -64,7 +64,7 @@
             btn_ProgramExplain.ForeColor = Color.White;
             btn_ProgramExplain.Image = Properties.Resources.free_icon_window_display_5581930_1_;
             btn_ProgramExplain.ImageAlign = ContentAlignment.MiddleRight;
-            btn_ProgramExplain.Location = new Point(26, 215);
+            btn_ProgramExplain.Location = new Point(26, 248);
             btn_ProgramExplain.Name = "btn_ProgramExplain";
             btn_ProgramExplain.RightToLeft = RightToLeft.Yes;
             btn_ProgramExplain.Size = new Size(210, 65);
@@ -128,7 +128,7 @@
             btn_FormSetting.ForeColor = Color.White;
             btn_FormSetting.Image = Properties.Resources.KakaoTalk_20230821_104715043;
             btn_FormSetting.ImageAlign = ContentAlignment.MiddleRight;
-            btn_FormSetting.Location = new Point(25, 135);
+            btn_FormSetting.Location = new Point(25, 168);
             btn_FormSetting.Name = "btn_FormSetting";
             btn_FormSetting.RightToLeft = RightToLeft.Yes;
             btn_FormSetting.Size = new Size(210, 65);
@@ -149,7 +149,7 @@
             btn_statisticsForm.ForeColor = Color.White;
             btn_statisticsForm.Image = Properties.Resources.KakaoTalk_20230821_111614469;
             btn_statisticsForm.ImageAlign = ContentAlignment.MiddleRight;
-            btn_statisticsForm.Location = new Point(26, 55);
+            btn_statisticsForm.Location = new Point(26, 88);
             btn_statisticsForm.Name = "btn_statisticsForm";
             btn_statisticsForm.RightToLeft = RightToLeft.Yes;
             btn_statisticsForm.Size = new Size(210, 65);
@@ -170,7 +170,7 @@
             btn_producer.ForeColor = Color.White;
             btn_producer.Image = Properties.Resources.KakaoTalk_20230821_104347268;
             btn_producer.ImageAlign = ContentAlignment.MiddleRight;
-            btn_producer.Location = new Point(25, 292);
+            btn_producer.Location = new Point(25, 325);
             btn_producer.Name = "btn_producer";
             btn_producer.RightToLeft = RightToLeft.Yes;
             btn_producer.Size = new Size(210, 65);

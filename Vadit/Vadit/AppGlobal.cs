@@ -20,5 +20,6 @@ namespace Vadit
         static public TimerManager TM = null;
         static public VideoCapture Cap = null;
         static public Panel PN = null;
+        static public BadImageInfo BPI = new BadImageInfo();
     }
 }

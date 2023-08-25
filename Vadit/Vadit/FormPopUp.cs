@@ -1,4 +1,5 @@
 ﻿using System;
+using Emgu.CV;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,11 +25,12 @@ namespace Vadit
         SoundPlayer _LongplaySound;
         Data _Data;
         string _FileName;
+
         public FormPopUp()
         {
             InitializeComponent();
             _Data = new Data();
-
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
 
         }
         // 폼이 실행될때
@@ -102,6 +104,7 @@ namespace Vadit
         public void OpenUserImage(EnumNotificationLayout layout)
         {
             if (Directory.Exists(_Data.imageDirectory))
+
             {
                 string filenameExtension = "*.JPG"; // 파일 확장자에 따라 변경
                 string[] files = Directory.GetFiles(_Data.imageDirectory, filenameExtension);
@@ -127,12 +130,14 @@ namespace Vadit
                 // 레이아웃이 스탠다드 일시 예시 사진 출력하기
                 if (layout == EnumNotificationLayout.Standard)
                 {
-                    UserPosePicBox.Load(highestNumberFileName);
+                    UserPosePicBox.Image = AppGlobal.BPI._img.ToBitmap();
+                    LbBadPoseName.Text = AppGlobal.BPI._badPoseName;
                     UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 else if (layout == EnumNotificationLayout.OnlyUser)
                 {
-                    UserPosePicBox.Load(highestNumberFileName);
+                    UserPosePicBox.Image = AppGlobal.BPI._img.ToBitmap();
+                    LbBadPoseName.Text = AppGlobal.BPI._badPoseName;
                     UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 else if (layout == EnumNotificationLayout.Text)
@@ -141,7 +146,7 @@ namespace Vadit
                 }
             }
         }
-        public void SetLayout(EnumNotificationLayout layout) // 팝업 생성시 자동 
+        public void ShowLayout(EnumNotificationLayout layout) // 팝업 생성시 자동 
         {
             SoundPlayer _DefaultSound = new SoundPlayer(Path.Combine(_Path, "DefaultSound.wav"));
             SoundPlayer _LongplaySound = new SoundPlayer(Path.Combine(_Path, "LongPalySound.wav"));

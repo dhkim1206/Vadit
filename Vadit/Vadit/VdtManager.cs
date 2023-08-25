@@ -18,6 +18,16 @@ using Button = System.Windows.Forms.Button;
 
 namespace Vadit
 {
+    public class BadImageInfo
+    {
+        public Image<Bgr, byte> _img = null;
+        public string _badPoseName;
+        public void SetBadinfo(string badPoseName, Image<Bgr, byte> img)
+        {
+            _badPoseName = badPoseName;
+            _img = img;
+        }
+    }
     public class InfoInputCorrectPose   //입력받은 자세의 좌푯값
     {
         public Image<Bgr, byte> _img = null;
@@ -382,6 +392,7 @@ namespace Vadit
 
             _data.SaveImageToFile(time, img, _analyzeData.Result);
             _data.InsertDB_BadPose(time, _analyzeData.Result);
+            AppGlobal.BPI.SetBadinfo(_analyzeData.Result, img);
             AppGlobal.TM.StartTimer();      //점들이 정상적으로 찍혔다면 타이머 다시 돌리기.
             //_data.UpdatePoseCnt_Score(analyzeData.Result);
 

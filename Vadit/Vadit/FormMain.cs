@@ -40,6 +40,7 @@ namespace Vadit
         // 앱 설정 초기화
         private void InitializeAppComponents()
         {
+            btn_producer.Hide();
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
             AppGlobal.PN = pn_warningMessage;

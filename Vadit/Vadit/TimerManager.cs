@@ -20,7 +20,7 @@ namespace Vadit
         {
             if (!AppGlobal._TimerIsRunning)
             {
-                _timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(60));
+                _timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(3600));
                 Debug.WriteLine("Timer started.");
                 AppGlobal._TimerIsRunning = true;
             }
@@ -40,7 +40,7 @@ namespace Vadit
                 FormPopUp _formpup = new FormPopUp();
                 _formpup.Show();
                 _formpup.OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
-                _formpup.SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
+                _formpup.ShowLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
                 Application.DoEvents();
                 Thread.Sleep(3000);
                 _formpup.Close();

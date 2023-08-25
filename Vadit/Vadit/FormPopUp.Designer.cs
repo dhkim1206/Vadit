@@ -31,8 +31,7 @@
             components = new System.ComponentModel.Container();
             DefaultTimer = new System.Windows.Forms.Timer(components);
             UserPanel = new Panel();
-            label1 = new Label();
-            label2 = new Label();
+            LbBadPoseName = new Label();
             UserPosePicBox = new PictureBox();
             ExamplePosePanel = new Panel();
             ExamplePosePicBox = new PictureBox();
@@ -55,8 +54,7 @@
             // UserPanel
             // 
             UserPanel.BackColor = Color.Gray;
-            UserPanel.Controls.Add(label1);
-            UserPanel.Controls.Add(label2);
+            UserPanel.Controls.Add(LbBadPoseName);
             UserPanel.Controls.Add(UserPosePicBox);
             UserPanel.Dock = DockStyle.Top;
             UserPanel.Location = new Point(10, 10);
@@ -64,32 +62,23 @@
             UserPanel.Size = new Size(330, 175);
             UserPanel.TabIndex = 6;
             // 
-            // label1
+            // LbBadPoseName
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(6, 6);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(39, 15);
-            label1.TabIndex = 1;
-            label1.Text = "label1";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(50, 6);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(39, 15);
-            label2.TabIndex = 2;
-            label2.Text = "label2";
+            LbBadPoseName.AutoSize = true;
+            LbBadPoseName.Font = new Font("맑은 고딕", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            LbBadPoseName.Location = new Point(128, 9);
+            LbBadPoseName.Margin = new Padding(2, 0, 2, 0);
+            LbBadPoseName.Name = "LbBadPoseName";
+            LbBadPoseName.Size = new Size(50, 20);
+            LbBadPoseName.TabIndex = 1;
+            LbBadPoseName.Text = "label1";
             // 
             // UserPosePicBox
             // 
             UserPosePicBox.Dock = DockStyle.Fill;
             UserPosePicBox.Location = new Point(0, 0);
             UserPosePicBox.Name = "UserPosePicBox";
-            UserPosePicBox.Padding = new Padding(5, 5, 5, 5);
+            UserPosePicBox.Padding = new Padding(5);
             UserPosePicBox.Size = new Size(330, 175);
             UserPosePicBox.TabIndex = 0;
             UserPosePicBox.TabStop = false;
@@ -100,7 +89,7 @@
             ExamplePosePanel.Controls.Add(ExamplePosePicBox);
             ExamplePosePanel.Dock = DockStyle.Top;
             ExamplePosePanel.Location = new Point(10, 185);
-            ExamplePosePanel.Margin = new Padding(5, 5, 5, 5);
+            ExamplePosePanel.Margin = new Padding(5);
             ExamplePosePanel.Name = "ExamplePosePanel";
             ExamplePosePanel.Size = new Size(330, 175);
             ExamplePosePanel.TabIndex = 3;
@@ -110,7 +99,7 @@
             ExamplePosePicBox.Dock = DockStyle.Fill;
             ExamplePosePicBox.Location = new Point(0, 0);
             ExamplePosePicBox.Name = "ExamplePosePicBox";
-            ExamplePosePicBox.Padding = new Padding(5, 5, 5, 5);
+            ExamplePosePicBox.Padding = new Padding(5);
             ExamplePosePicBox.Size = new Size(330, 175);
             ExamplePosePicBox.TabIndex = 0;
             ExamplePosePicBox.TabStop = false;
@@ -160,9 +149,9 @@
             Controls.Add(ExamplePosePanel);
             Controls.Add(UserPanel);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "FormPopUp";
-            Padding = new Padding(10, 10, 10, 10);
+            Padding = new Padding(10);
             StartPosition = FormStartPosition.Manual;
             Text = "FormPopUp";
             UserPanel.ResumeLayout(false);
@@ -179,14 +168,13 @@
 
         private System.Windows.Forms.Timer DefaultTimer;
         private Panel UserPanel;
-        private Label label2;
         private PictureBox UserPosePicBox;
         private Panel ExamplePosePanel;
         private PictureBox ExamplePosePicBox;
         private Panel CommentPanel;
         private Button CommentButton;
         private Label CommentLabel;
-        private Label label1;
+        private Label LbBadPoseName;
         private System.Windows.Forms.Timer LongTimer;
     }
 }

@@ -73,6 +73,16 @@ namespace Vadit.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        public static System.Drawing.Bitmap free_icon_biotech_3055629 {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-biotech-3055629", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         public static System.Drawing.Bitmap free_icon_computer_worker_7870360 {
             get {
                 object obj = ResourceManager.GetObject("free-icon-computer-worker-7870360", resourceCulture);
