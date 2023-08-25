@@ -5,12 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Xml;
 using Timer = System.Threading.Timer;
 
 namespace Vadit
 {
     public class TimerManager
     {
+        private string _configFilePath = "data.xml";
         Timer _timer;
         public TimerManager(Timer timer)
         {
@@ -35,7 +37,39 @@ namespace Vadit
         }
         public void ShowPoseAlrarm()
         {
-            if (AppGlobal.BadPoseCt > 3)
+            int frequency = -1; // Default value in case of an error
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(_configFilePath);
+
+                XmlNode camFrame = doc.SelectSingleNode("//CamFrame");
+                if (camFrame != null)
+                {
+                    int camFrameValue = Convert.ToInt32(camFrame.InnerText);
+                    switch (camFrameValue)
+                    {
+                        case 0:
+                            frequency = 0;
+                            break;
+                        case 1:
+                            frequency = 1;
+                            break;
+                        case 2:
+                            frequency = 3;
+                            break;
+                        default:
+                            Debug.WriteLine("Invalid CamFrame value");
+                            return; // Invalid value
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle XML reading error
+                Console.WriteLine("Error reading config file: " + ex.Message);
+            }
+            if (AppGlobal.BadPoseCt > frequency)
             {
                 FormPopUp _formpup = new FormPopUp();
                 _formpup.Show();
@@ -45,6 +79,32 @@ namespace Vadit
                 Thread.Sleep(3000);
                 _formpup.Close();
                 Debug.WriteLine("나쁜자세 5회 이상 적발. 알림 후 초기화");
+                AppGlobal.BadPoseCt = 0;
+                return;
+            }
+            else if (AppGlobal.BadPoseCt > frequency)
+            {
+                FormPopUp _formpup = new FormPopUp();
+                _formpup.Show();
+                _formpup.OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
+                _formpup.ShowLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
+                Application.DoEvents();
+                Thread.Sleep(3000);
+                _formpup.Close();
+                Debug.WriteLine("나쁜자세 3회 이상 적발. 알림 후 초기화");
+                AppGlobal.BadPoseCt = 0;
+                return;
+            }
+            else if (AppGlobal.BadPoseCt > frequency)
+            {
+                FormPopUp _formpup = new FormPopUp();
+                _formpup.Show();
+                _formpup.OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
+                _formpup.ShowLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
+                Application.DoEvents();
+                Thread.Sleep(3000);
+                _formpup.Close();
+                Debug.WriteLine("나쁜자세 적발. 알림 후 초기화");
                 AppGlobal.BadPoseCt = 0;
                 return;
             }

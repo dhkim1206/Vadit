@@ -4,7 +4,7 @@
   <LongPlay>true</LongPlay>
   <WindowSameExecute>true</WindowSameExecute>
   <AlarmSound>true</AlarmSound>
-  <CamFrame>3</CamFrame>
+  <CamFrame>0</CamFrame>
   <SaveingPeriod>1</SaveingPeriod>
   <NotificationLayout>Standard</NotificationLayout>
 </AppConfigClass>

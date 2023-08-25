@@ -11,6 +11,7 @@ namespace Vadit
             ApplicationConfiguration.Initialize();
 
             SplashScreen splash = new SplashScreen();
+
             splash.ShowDialog();
 
 
