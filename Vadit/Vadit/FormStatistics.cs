@@ -31,5 +31,12 @@ namespace Vadit
             _chartManager.LoadChartData();
             _chartManager.BindChartData(chart1);
         }
+
+        private void pictureBox_help_MouseEnter(object sender, EventArgs e)
+        {
+            // PictureBox에 툴팁 설정
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(pictureBox_help, "자세 점수는 사용자의 전체 자세 중 좋은 자세의 비율을 나타내는 지표입니다");
+        }
     }
 }

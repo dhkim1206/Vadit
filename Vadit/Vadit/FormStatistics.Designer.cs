@@ -37,10 +37,10 @@
             pn_Nodata = new Panel();
             lb_NoData = new Label();
             label4 = new Label();
-            pictureBox1 = new PictureBox();
+            pictureBox_help = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             pn_Nodata.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox_help).BeginInit();
             SuspendLayout();
             // 
             // chart1
@@ -78,9 +78,9 @@
             // 
             pn_Nodata.BackColor = Color.FromArgb(43, 45, 49);
             pn_Nodata.Controls.Add(lb_NoData);
-            pn_Nodata.Location = new Point(24, 332);
+            pn_Nodata.Location = new Point(2, 332);
             pn_Nodata.Name = "pn_Nodata";
-            pn_Nodata.Size = new Size(756, 123);
+            pn_Nodata.Size = new Size(795, 123);
             pn_Nodata.TabIndex = 7;
             // 
             // lb_NoData
@@ -106,15 +106,17 @@
             label4.TabIndex = 8;
             label4.Text = "검출된 자세 : ";
             // 
-            // pictureBox1
+            // pictureBox_help
             // 
-            pictureBox1.Image = Properties.Resources.AdobeStock_618703898_Preview;
-            pictureBox1.Location = new Point(746, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(40, 33);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 9;
-            pictureBox1.TabStop = false;
+            pictureBox_help.BackColor = Color.FromArgb(43, 45, 49);
+            pictureBox_help.Image = Properties.Resources.AdobeStock_618703898_Preview;
+            pictureBox_help.Location = new Point(740, 12);
+            pictureBox_help.Name = "pictureBox_help";
+            pictureBox_help.Size = new Size(40, 33);
+            pictureBox_help.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox_help.TabIndex = 9;
+            pictureBox_help.TabStop = false;
+            pictureBox_help.MouseEnter += pictureBox_help_MouseEnter;
             // 
             // FormStatistics
             // 
@@ -122,7 +124,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(49, 51, 56);
             ClientSize = new Size(798, 464);
-            Controls.Add(pictureBox1);
+            Controls.Add(pictureBox_help);
             Controls.Add(label4);
             Controls.Add(pn_Nodata);
             Controls.Add(PictureFlowLayout);
@@ -133,7 +135,7 @@
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             pn_Nodata.ResumeLayout(false);
             pn_Nodata.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox_help).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -145,6 +147,6 @@
         private Panel pn_Nodata;
         private Label lb_NoData;
         private Label label4;
-        private PictureBox pictureBox1;
+        private PictureBox pictureBox_help;
     }
 }

@@ -225,7 +225,7 @@
             pn_warningMessage.BackColor = Color.FromArgb(49, 51, 56);
             pn_warningMessage.Controls.Add(pictureBox_warning);
             pn_warningMessage.Controls.Add(lb_warning);
-            pn_warningMessage.Location = new Point(208, 507);
+            pn_warningMessage.Location = new Point(208, 510);
             pn_warningMessage.Name = "pn_warningMessage";
             pn_warningMessage.Size = new Size(807, 49);
             pn_warningMessage.TabIndex = 4;
@@ -233,7 +233,7 @@
             // pictureBox_warning
             // 
             pictureBox_warning.Image = Properties.Resources.KakaoTalk_20230824_093608718;
-            pictureBox_warning.Location = new Point(246, 9);
+            pictureBox_warning.Location = new Point(279, 9);
             pictureBox_warning.Name = "pictureBox_warning";
             pictureBox_warning.Size = new Size(32, 31);
             pictureBox_warning.SizeMode = PictureBoxSizeMode.Zoom;
@@ -245,7 +245,7 @@
             lb_warning.AutoSize = true;
             lb_warning.Font = new Font("함초롬돋움", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             lb_warning.ForeColor = Color.White;
-            lb_warning.Location = new Point(285, 14);
+            lb_warning.Location = new Point(315, 14);
             lb_warning.Name = "lb_warning";
             lb_warning.Size = new Size(179, 19);
             lb_warning.TabIndex = 2;

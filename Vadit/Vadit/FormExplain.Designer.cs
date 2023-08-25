@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -38,9 +39,20 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(33, 25);
             label1.Name = "label1";
-            label1.Size = new Size(104, 19);
+            label1.Size = new Size(100, 19);
             label1.TabIndex = 0;
-            label1.Text = "프로그램 설명";
+            label1.Text = "Version 1.0.0";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("함초롬돋움", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(50, 61);
+            label2.Name = "label2";
+            label2.Size = new Size(100, 19);
+            label2.TabIndex = 1;
+            label2.Text = "Version 1.0.0";
             // 
             // FormExplain
             // 
@@ -48,6 +60,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(49, 51, 56);
             ClientSize = new Size(800, 450);
+            Controls.Add(label2);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormExplain";
@@ -59,5 +72,6 @@
         #endregion
 
         private Label label1;
+        private Label label2;
     }
 }

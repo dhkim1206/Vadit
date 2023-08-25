@@ -16,5 +16,10 @@ namespace Vadit
         {
             InitializeComponent();
         }
+
+        private void FormProducer_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -83,6 +83,26 @@ namespace Vadit.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        public static System.Drawing.Bitmap free_icon_exclamation_button_87980 {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-exclamation-button-87980", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Bitmap free_icon_exclamation_button_87980_1_ {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-exclamation-button-87980(1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         public static System.Drawing.Bitmap free_icon_question_5668097 {
             get {
                 object obj = ResourceManager.GetObject("free-icon-question-5668097", resourceCulture);
@@ -226,6 +246,16 @@ namespace Vadit.Properties {
         public static System.Drawing.Bitmap KakaoTalk_20230824_095240156 {
             get {
                 object obj = ResourceManager.GetObject("KakaoTalk_20230824_095240156", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Bitmap KakaoTalk_20230825_100104862 {
+            get {
+                object obj = ResourceManager.GetObject("KakaoTalk_20230825_100104862", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
