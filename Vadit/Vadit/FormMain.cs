@@ -40,7 +40,6 @@ namespace Vadit
         // 앱 설정 초기화
         private void InitializeAppComponents()
         {
-            btn_producer.Hide();
             _formManager = new AppBase.FormManager(mainPanel);
             AppBase.AppConf = new AppConfig("data.xml");
             AppGlobal.PN = pn_warningMessage;
@@ -105,11 +104,6 @@ namespace Vadit
         {
             await AnimatePanel(btn_ProgramExplain, typeof(FormExplain));
         }
-        private async void btn_producer_Click(object sender, EventArgs e)
-        {
-            await AnimatePanel(btn_producer, typeof(FormProducer));
-
-        }
         private void btn_end_Click(object sender, EventArgs e)
         {
             // 종료 메뉴 아이템 클릭 시 프로그램 종료
@@ -152,12 +146,6 @@ namespace Vadit
         private void btn_ProgramExplain_MouseLeave(object sender, EventArgs e)
         {
             pn_cursor.Hide();
-        }
-
-        private void btn_producer_MouseEnter(object sender, EventArgs e)
-        {
-            pn_cursor.Show();
-            AnimateCursorOnButton(pn_cursor, btn_producer);
         }
 
         private void btn_producer_MouseLeave(object sender, EventArgs e)

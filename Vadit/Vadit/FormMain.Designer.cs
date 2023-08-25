@@ -35,7 +35,6 @@
             btn_end = new Button();
             btn_FormSetting = new Button();
             btn_statisticsForm = new Button();
-            btn_producer = new Button();
             mainPanel = new Panel();
             pictureBox1 = new PictureBox();
             pn_processingMessage = new Panel();
@@ -83,7 +82,6 @@
             categoryPanel.Controls.Add(btn_ProgramExplain);
             categoryPanel.Controls.Add(btn_FormSetting);
             categoryPanel.Controls.Add(btn_statisticsForm);
-            categoryPanel.Controls.Add(btn_producer);
             categoryPanel.Location = new Point(0, 37);
             categoryPanel.Name = "categoryPanel";
             categoryPanel.Size = new Size(189, 522);
@@ -159,27 +157,6 @@
             btn_statisticsForm.Click += btn_statisticsForm_Click;
             btn_statisticsForm.MouseEnter += btn_statisticsForm_MouseEnter;
             btn_statisticsForm.MouseLeave += btn_statisticsForm_MouseLeave;
-            // 
-            // btn_producer
-            // 
-            btn_producer.BackColor = Color.FromArgb(32, 33, 36);
-            btn_producer.BackgroundImageLayout = ImageLayout.None;
-            btn_producer.FlatAppearance.BorderSize = 0;
-            btn_producer.FlatStyle = FlatStyle.Flat;
-            btn_producer.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_producer.ForeColor = Color.White;
-            btn_producer.Image = Properties.Resources.KakaoTalk_20230821_104347268;
-            btn_producer.ImageAlign = ContentAlignment.MiddleRight;
-            btn_producer.Location = new Point(25, 325);
-            btn_producer.Name = "btn_producer";
-            btn_producer.RightToLeft = RightToLeft.Yes;
-            btn_producer.Size = new Size(210, 65);
-            btn_producer.TabIndex = 8;
-            btn_producer.Text = "제작자";
-            btn_producer.UseVisualStyleBackColor = false;
-            btn_producer.Click += btn_producer_Click;
-            btn_producer.MouseEnter += btn_producer_MouseEnter;
-            btn_producer.MouseLeave += btn_producer_MouseLeave;
             // 
             // mainPanel
             // 
@@ -328,7 +305,6 @@
         private Button btn_statisticsForm;
         private Panel mainPanel;
         private Button btn_end;
-        private Button btn_producer;
         private RadioButton radioButton1;
         private Panel pn_cursor;
         private Panel pn_processingMessage;

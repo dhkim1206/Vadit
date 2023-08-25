@@ -246,7 +246,7 @@
             button1.ForeColor = Color.White;
             button1.Image = Properties.Resources.free_icon_computer_worker_7870360;
             button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(587, 409);
+            button1.Location = new Point(587, 400);
             button1.Name = "button1";
             button1.Size = new Size(194, 58);
             button1.TabIndex = 1;
@@ -264,7 +264,7 @@
             panel1.Controls.Add(checkWindows);
             panel1.Controls.Add(checkAlarm);
             panel1.Controls.Add(checkPose);
-            panel1.Location = new Point(40, 280);
+            panel1.Location = new Point(40, 277);
             panel1.Name = "panel1";
             panel1.Size = new Size(741, 96);
             panel1.TabIndex = 42;
@@ -275,7 +275,7 @@
             label8.BackColor = Color.FromArgb(35, 36, 40);
             label8.Font = new Font("함초롬돋움", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(474, 451);
+            label8.Location = new Point(474, 442);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
             label8.RightToLeft = RightToLeft.Yes;
@@ -290,7 +290,7 @@
             label9.BackColor = Color.FromArgb(35, 36, 40);
             label9.Font = new Font("함초롬돋움", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(256, 452);
+            label9.Location = new Point(256, 443);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
             label9.RightToLeft = RightToLeft.Yes;
@@ -305,7 +305,7 @@
             label10.BackColor = Color.FromArgb(35, 36, 40);
             label10.Font = new Font("함초롬돋움", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
             label10.ForeColor = Color.White;
-            label10.Location = new Point(45, 452);
+            label10.Location = new Point(45, 443);
             label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
             label10.RightToLeft = RightToLeft.Yes;
@@ -318,7 +318,7 @@
             // 
             trackBarFrame.BackColor = Color.FromArgb(35, 36, 40);
             trackBarFrame.LargeChange = 1;
-            trackBarFrame.Location = new Point(38, 422);
+            trackBarFrame.Location = new Point(38, 413);
             trackBarFrame.Margin = new Padding(2);
             trackBarFrame.Maximum = 2;
             trackBarFrame.Name = "trackBarFrame";
@@ -330,12 +330,12 @@
             label12.AutoSize = true;
             label12.Font = new Font("함초롬돋움", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label12.ForeColor = Color.White;
-            label12.Location = new Point(47, 396);
+            label12.Location = new Point(47, 387);
             label12.Margin = new Padding(3);
             label12.Name = "label12";
-            label12.Size = new Size(124, 17);
+            label12.Size = new Size(171, 17);
             label12.TabIndex = 48;
-            label12.Text = "나쁜 자세 알림 주기";
+            label12.Text = "나쁜 자세 검출 시 알림 주기";
             // 
             // FormSetting
             // 
