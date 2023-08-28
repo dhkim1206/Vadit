@@ -38,10 +38,10 @@
             mainPanel = new Panel();
             pictureBox1 = new PictureBox();
             pn_processingMessage = new Panel();
-            label2 = new Label();
             pn_warningMessage = new Panel();
             pictureBox_warning = new PictureBox();
             lb_warning = new Label();
+            label2 = new Label();
             btn_exit = new Button();
             label1 = new Label();
             panel1 = new Panel();
@@ -96,7 +96,7 @@
             pn_cursor.BackColor = Color.White;
             pn_cursor.Location = new Point(178, 160);
             pn_cursor.Name = "pn_cursor";
-            pn_cursor.Size = new Size(11, 10);
+            pn_cursor.Size = new Size(4, 10);
             pn_cursor.TabIndex = 6;
             // 
             // btn_end
@@ -193,17 +193,6 @@
             pn_processingMessage.Size = new Size(813, 49);
             pn_processingMessage.TabIndex = 0;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("함초롬돋움", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(285, 14);
-            label2.Name = "label2";
-            label2.Size = new Size(278, 19);
-            label2.TabIndex = 2;
-            label2.Text = "백그라운드에서 자세분석 실행중입니다.";
-            // 
             // pn_warningMessage
             // 
             pn_warningMessage.BackColor = Color.FromArgb(49, 51, 56);
@@ -234,6 +223,17 @@
             lb_warning.Size = new Size(179, 19);
             lb_warning.TabIndex = 2;
             lb_warning.Text = "바른자세를 입력해주세요";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("함초롬돋움", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(285, 14);
+            label2.Name = "label2";
+            label2.Size = new Size(278, 19);
+            label2.TabIndex = 2;
+            label2.Text = "백그라운드에서 자세분석 실행중입니다.";
             // 
             // btn_exit
             // 
