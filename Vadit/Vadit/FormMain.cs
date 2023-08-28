@@ -31,6 +31,8 @@ namespace Vadit
         //트레이 아이콘 초기화
         private void InitializeTrayIcon()
         {
+            
+            pn_cursor.Hide();
             notifyIcon = new NotifyIcon();
             notifyIcon.Icon = Properties.Resources.Vadit_Icon;
             notifyIcon.Text = "Vadit";

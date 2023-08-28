@@ -65,7 +65,7 @@
             checkPose.AutoSize = true;
             checkPose.Font = new Font("함초롬돋움", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             checkPose.ForeColor = Color.White;
-            checkPose.Location = new Point(31, 53);
+            checkPose.Location = new Point(292, 53);
             checkPose.Name = "checkPose";
             checkPose.Size = new Size(113, 21);
             checkPose.TabIndex = 12;
@@ -77,7 +77,7 @@
             checkLongPlay.AutoSize = true;
             checkLongPlay.Font = new Font("함초롬돋움", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             checkLongPlay.ForeColor = Color.White;
-            checkLongPlay.Location = new Point(253, 22);
+            checkLongPlay.Location = new Point(292, 22);
             checkLongPlay.Name = "checkLongPlay";
             checkLongPlay.Size = new Size(152, 21);
             checkLongPlay.TabIndex = 13;
@@ -89,7 +89,7 @@
             checkWindows.AutoSize = true;
             checkWindows.Font = new Font("함초롬돋움", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             checkWindows.ForeColor = Color.White;
-            checkWindows.Location = new Point(253, 53);
+            checkWindows.Location = new Point(31, 53);
             checkWindows.Name = "checkWindows";
             checkWindows.Size = new Size(225, 21);
             checkWindows.TabIndex = 14;
@@ -206,7 +206,7 @@
             cboPicSaving.FormattingEnabled = true;
             cboPicSaving.ImeMode = ImeMode.Off;
             cboPicSaving.Items.AddRange(new object[] { "15일", "30일", "90일" });
-            cboPicSaving.Location = new Point(576, 51);
+            cboPicSaving.Location = new Point(553, 51);
             cboPicSaving.Margin = new Padding(0);
             cboPicSaving.Name = "cboPicSaving";
             cboPicSaving.Size = new Size(111, 23);
@@ -217,7 +217,7 @@
             label13.AutoSize = true;
             label13.Font = new Font("함초롬돋움", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = Color.White;
-            label13.Location = new Point(576, 26);
+            label13.Location = new Point(550, 22);
             label13.Margin = new Padding(2, 0, 2, 0);
             label13.Name = "label13";
             label13.Size = new Size(90, 17);

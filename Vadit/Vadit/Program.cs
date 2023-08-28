@@ -11,7 +11,7 @@ namespace Vadit
         /// </summary>
         [STAThread]
         static void Main()
-        {        
+        {
             ApplicationConfiguration.Initialize();
 
             SplashScreen splash = new SplashScreen();

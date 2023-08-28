@@ -17,6 +17,7 @@ namespace Vadit
         Data _data;
         public FormSetting()
         {
+
             InitializeComponent();
 
             pb3.Click += ChangeNotificationLayout;
@@ -68,6 +69,7 @@ namespace Vadit
 
         private void FormSetting_Load(object sender, EventArgs e)
         {
+            checkPose.Hide();
             for (int i = 0; i < pnNoti.Controls.Count; i++)// 카운트(0,1,2,3)마다 일치여부 검사후  
             {
 

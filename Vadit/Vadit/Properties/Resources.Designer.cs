@@ -93,6 +93,16 @@ namespace Vadit.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        public static System.Drawing.Bitmap free_icon_easy_use_5695909 {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-easy-use-5695909", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         public static System.Drawing.Bitmap free_icon_exclamation_button_87980 {
             get {
                 object obj = ResourceManager.GetObject("free-icon-exclamation-button-87980", resourceCulture);
@@ -106,6 +116,16 @@ namespace Vadit.Properties {
         public static System.Drawing.Bitmap free_icon_exclamation_button_87980_1_ {
             get {
                 object obj = ResourceManager.GetObject("free-icon-exclamation-button-87980(1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        public static System.Drawing.Bitmap free_icon_innovation_5660840 {
+            get {
+                object obj = ResourceManager.GetObject("free-icon-innovation-5660840", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -188,9 +188,6 @@ namespace Vadit
                 // 이미지와 관련 정보 조회하는 쿼리
                 string imageQuery = @"SELECT ImagePath, Category FROM ImageData WHERE strftime('%Y-%m-%d', Date) = strftime('%Y-%m-%d', @SelectedDate)";
 
-                // BadPose 정보 조회하는 쿼리
-                string badPoseQuery = @"SELECT Date, TurtleNeck, Scoliosis, Herniations FROM BadPose WHERE strftime('%Y-%m-%d', Date) = strftime('%Y-%m-%d', @SelectedDate)";
-
                 // SQLiteCommand 개체를 생성하고 쿼리와 데이터베이스 연결을 연결
                 using (SQLiteCommand cmd = new SQLiteCommand(imageQuery, con))
                 {
@@ -211,6 +208,8 @@ namespace Vadit
                         }
                     }
                 }
+                // BadPose 정보 조회하는 쿼리
+                string badPoseQuery = @"SELECT Date, TurtleNeck, Scoliosis, Herniations FROM BadPose WHERE strftime('%Y-%m-%d', Date) = strftime('%Y-%m-%d', @SelectedDate)";
 
                 // BadPose 정보 조회
                 using (SQLiteCommand badPoseCmd = new SQLiteCommand(badPoseQuery, con))
@@ -227,7 +226,6 @@ namespace Vadit
 
                             // 추출한 데이터를 badPoseInfoList에 추가
                             _badPoseInfoList.Add((date, turtleneck, scoliosis, herniations));
-
                         }
                     }
                 }
