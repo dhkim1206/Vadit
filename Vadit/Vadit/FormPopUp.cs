@@ -18,6 +18,7 @@ namespace Vadit
         int _DefaultSecond;
         SoundPlayer _DefaultSound;
         SoundPlayer _LongplaySound;
+        public int clickCount;
 
         string _Path = Path.Combine(Application.StartupPath, "sound_data");
 
@@ -87,29 +88,49 @@ namespace Vadit
             string ExampleImageName = "";
             string LocalPath = (Path.Combine(Application.StartupPath, "GuideImage_data"));
             string imagePath = "";
-            
+
             int turtle = _Data.PoseTurtle;
             int scoli = _Data.PoseScoli;
             int hernia = _Data.Posehernia;
-                
-            if ((turtle == 1 && scoli == 0 && hernia == 0) || 
-                (turtle == 0 && scoli == 1 && hernia == 0) || 
-                (turtle == 1 && scoli == 1 && hernia == 0))
-            {
-                ExampleImageName = "ExampleA.PNG";
-                CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
-            }
-            else if ((turtle == 1 && scoli == 0 && hernia == 1) ||
-                    (turtle == 0 && scoli == 1 && hernia == 1))
-            {
-                ExampleImageName = "ExampleB.PNG";
-                CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
+             
+             if ((turtle == 1 && scoli == 0 && hernia == 0) || 
+                 (turtle == 0 && scoli == 1 && hernia == 0) || 
+                 (turtle == 1 && scoli == 1 && hernia == 0))
+             {
+                 ExampleImageName = "ExampleA.PNG";
+                 CommentButton.Text = "현재 거북목이 발견되었습니다.\n올바른 자세를 취해 주십시오.";
+             }
+             else if ((turtle == 1 && scoli == 0 && hernia == 1) ||
+                     (turtle == 0 && scoli == 1 && hernia == 1))
+             {
+                 ExampleImageName = "ExampleB.PNG";  
+                 CommentButton.Text = "현재 척추측만증이 발견되었습니다.\n올바른 자세를 취해 주십시오.";
 
-            }
-            else if (turtle == 0 && scoli == 0 && hernia == 1)
+             }
+             else if (turtle == 0 && scoli == 0 && hernia == 1)
+             {
+                 ExampleImageName = "ExampleC.PNG";
+                 CommentButton.Text = "현재 추간판 탈출이 발견되었습니다.\n올바른 자세를 취해 주십시오.";
+             }
+            
+            clickCount++;
+
+            if (clickCount == 1)
             {
-                ExampleImageName = "ExampleC.PNG";
-                CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
+                ExampleImageName = "TurtleNeck.PNG";
+                CommentButton.Text = "현재 거북목이 발견되었습니다.\n올바른 자세를 취해 주십시오.";
+            }
+
+            if (clickCount == 2)
+            {
+                ExampleImageName = "Herniations.PNG";
+                CommentButton.Text = "현재 추간판 탈출이 발견되었습니다.\n올바른 자세를 취해 주십시오.";
+            }
+
+            if (clickCount == 3)
+            {
+                ExampleImageName = "Scoliosis.PNG";
+                CommentButton.Text = "현재 척추측만증이 발견되었습니다.\n올바른 자세를 취해 주십시오.";
             }
 
             imagePath = Path.Combine(LocalPath, ExampleImageName);
@@ -144,7 +165,7 @@ namespace Vadit
                 {
                     UserPosePicBox.Load(highestNumberFileName);
                     UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                    //ExamplePosePicBox.Load(imagePath);
+                    ExamplePosePicBox.Load(imagePath);
                     ExamplePosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 else if (layout == EnumNotificationLayout.OnlyUser)
@@ -192,7 +213,7 @@ namespace Vadit
         public void Execution_UserSettingValue()
         {
             // 틀린자세 감지시 팝업 자동 종료 
-            if (_DefaultSecond == 2)
+            if (_DefaultSecond == 5)
             {
                 DefaultTimer.Stop();
                 _DefaultSecond = 0;

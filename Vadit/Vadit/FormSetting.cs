@@ -13,6 +13,7 @@ namespace Vadit
 {
     public partial class FormSetting : Form
     {
+        Data _Data;
         public FormSetting()
         {
             InitializeComponent();
@@ -60,6 +61,16 @@ namespace Vadit
 
         private void FormSetting_Load(object sender, EventArgs e)
         {
+            string LocalPath = (Path.Combine(Application.StartupPath, "GuideImage_data"));
+            
+            //이미지 이름 재설정
+            //pb1.Load(LocalPath + "/ExampleLayoutA.png");
+            pb1.SizeMode = PictureBoxSizeMode.StretchImage;
+            //pb2.Load(LocalPath + "/ExampleLayoutB copy.png");
+            pb2.SizeMode = PictureBoxSizeMode.StretchImage;
+            //pb3.Load(LocalPath + "/ExampleLayoutC copy.png");
+            pb3.SizeMode = PictureBoxSizeMode.StretchImage;
+
             for (int i = 0; i < pnNoti.Controls.Count; i++)// 카운트(0,1,2,3)마다 일치여부 검사후  
             {
 
@@ -83,6 +94,11 @@ namespace Vadit
             FormCamera Fc = new FormCamera();
             Fc.ShowDialog();
             cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
