@@ -28,7 +28,7 @@ namespace Vadit
             AppGlobal.TM = new TimerManager(AppGlobal.Timer);
 
             _timer = new Timer();
-            _timer.Interval = 5000; 
+            _timer.Interval = 7000; 
             _timer.Tick += Timer_Tick;
             _timer.Start();
 

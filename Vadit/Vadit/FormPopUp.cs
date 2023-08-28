@@ -83,6 +83,8 @@ namespace Vadit
 
             this.Size = new Size(350, 90);
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
+            LbLongTime.Font = new Font("맑은 고딕", 10, FontStyle.Regular);
+            LbLongTime.ForeColor = Color.Orange;  // 폰트 색상을 주황색으로 설정
             LbLongTime.Text = "현재 1시간 동안 앉아 있었습니다.\n잠시 의자에서 일어나 휴식을 취해 주십시오.";
 
             _LongplaySound.Play();
@@ -132,10 +134,28 @@ namespace Vadit
                 {
                     UserPosePicBox.Image = AppGlobal.BPI._img.ToBitmap();
                     LbBadPoseName.Text = AppGlobal.BPI._badPoseName;
+                    if (LbBadPoseName.Text.EndsWith(","))
+                    {
+                        LbBadPoseName.Text = LbBadPoseName.Text.Substring(0, LbBadPoseName.Text.Length - 1);
+                    }
+
+
+                    LbBadPoseName.Font = new Font("맑은 고딕", 16, FontStyle.Regular);
+                    LbBadPoseName.ForeColor = Color.Orange;  // 폰트 색상을 주황색으로 설정
                     UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                    if (LbBadPoseName.Text.Length > 6)
+                    {
+                        LbBadPoseName.Location = new Point(110, LbBadPoseName.Location.Y);
+                    }
+                    else if (LbBadPoseName.Text.Length < 6)
+                    {
+                        LbBadPoseName.Location = new Point(130, LbBadPoseName.Location.Y);
+                    }
+
                     if (AppGlobal.BPI._badPoseName == " 거북목," || AppGlobal.BPI._badPoseName == "척추 측만증, 거북목,")
                         ExamplePosePicBox.Image = Properties.Resources.KakaoTalk_20230825_102950435;
-                    else if (AppGlobal.BPI._badPoseName == "추간판 탈출," || AppGlobal.BPI._badPoseName == "척추 측만증,추간판 탈출,")
+                    else if (AppGlobal.BPI._badPoseName == "추간판 탈출," || AppGlobal.BPI._badPoseName == "척추 측만증, 추간판 탈출,")
                         ExamplePosePicBox.Image = Properties.Resources.KakaoTalk_20230825_102950435_01;
                     else if (AppGlobal.BPI._badPoseName == "척추 측만증,")
                         ExamplePosePicBox.Image = Properties.Resources.KakaoTalk_20230825_102950435_02;
@@ -144,6 +164,8 @@ namespace Vadit
                 {
                     UserPosePicBox.Image = AppGlobal.BPI._img.ToBitmap();
                     LbBadPoseName.Text = AppGlobal.BPI._badPoseName;
+                    LbBadPoseName.Font = new Font("맑은 고딕", 16, FontStyle.Regular);
+                    LbBadPoseName.ForeColor = Color.Orange;  // 폰트 색상을 주황색으로 설정
                     UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 else if (layout == EnumNotificationLayout.Text)

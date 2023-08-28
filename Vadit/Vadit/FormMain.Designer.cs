@@ -45,17 +45,20 @@
             btn_exit = new Button();
             label1 = new Label();
             panel1 = new Panel();
+            panel2 = new Panel();
+            panel3 = new Panel();
             categoryPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pn_processingMessage.SuspendLayout();
             pn_warningMessage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox_warning).BeginInit();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // btn_ProgramExplain
             // 
-            btn_ProgramExplain.BackColor = Color.FromArgb(32, 33, 36);
+            btn_ProgramExplain.BackColor = Color.Transparent;
             btn_ProgramExplain.BackgroundImageLayout = ImageLayout.None;
             btn_ProgramExplain.FlatAppearance.BorderSize = 0;
             btn_ProgramExplain.FlatStyle = FlatStyle.Flat;
@@ -76,15 +79,16 @@
             // 
             // categoryPanel
             // 
-            categoryPanel.BackColor = Color.FromArgb(32, 33, 36);
+            categoryPanel.BackColor = Color.FromArgb(42, 43, 46);
             categoryPanel.Controls.Add(pn_cursor);
             categoryPanel.Controls.Add(btn_end);
             categoryPanel.Controls.Add(btn_ProgramExplain);
             categoryPanel.Controls.Add(btn_FormSetting);
             categoryPanel.Controls.Add(btn_statisticsForm);
-            categoryPanel.Location = new Point(0, 37);
+            categoryPanel.Dock = DockStyle.Left;
+            categoryPanel.Location = new Point(0, 40);
             categoryPanel.Name = "categoryPanel";
-            categoryPanel.Size = new Size(189, 522);
+            categoryPanel.Size = new Size(196, 520);
             categoryPanel.TabIndex = 3;
             // 
             // pn_cursor
@@ -92,12 +96,12 @@
             pn_cursor.BackColor = Color.White;
             pn_cursor.Location = new Point(178, 160);
             pn_cursor.Name = "pn_cursor";
-            pn_cursor.Size = new Size(4, 10);
+            pn_cursor.Size = new Size(11, 10);
             pn_cursor.TabIndex = 6;
             // 
             // btn_end
             // 
-            btn_end.BackColor = Color.FromArgb(32, 33, 36);
+            btn_end.BackColor = Color.Transparent;
             btn_end.BackgroundImageLayout = ImageLayout.None;
             btn_end.FlatAppearance.BorderSize = 0;
             btn_end.FlatStyle = FlatStyle.Flat;
@@ -118,7 +122,7 @@
             // 
             // btn_FormSetting
             // 
-            btn_FormSetting.BackColor = Color.FromArgb(32, 33, 36);
+            btn_FormSetting.BackColor = Color.Transparent;
             btn_FormSetting.BackgroundImageLayout = ImageLayout.None;
             btn_FormSetting.FlatAppearance.BorderSize = 0;
             btn_FormSetting.FlatStyle = FlatStyle.Flat;
@@ -139,7 +143,7 @@
             // 
             // btn_statisticsForm
             // 
-            btn_statisticsForm.BackColor = Color.FromArgb(32, 33, 36);
+            btn_statisticsForm.BackColor = Color.Transparent;
             btn_statisticsForm.BackgroundImageLayout = ImageLayout.None;
             btn_statisticsForm.FlatAppearance.BorderSize = 0;
             btn_statisticsForm.FlatStyle = FlatStyle.Flat;
@@ -161,9 +165,10 @@
             // mainPanel
             // 
             mainPanel.BackColor = Color.FromArgb(49, 51, 56);
-            mainPanel.Location = new Point(208, 40);
+            mainPanel.Dock = DockStyle.Fill;
+            mainPanel.Location = new Point(3, 3);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(805, 464);
+            mainPanel.Size = new Size(813, 465);
             mainPanel.TabIndex = 4;
             // 
             // pictureBox1
@@ -179,11 +184,13 @@
             // pn_processingMessage
             // 
             pn_processingMessage.BackColor = Color.FromArgb(49, 51, 56);
+            pn_processingMessage.Controls.Add(pn_warningMessage);
             pn_processingMessage.Controls.Add(pictureBox1);
             pn_processingMessage.Controls.Add(label2);
-            pn_processingMessage.Location = new Point(208, 510);
+            pn_processingMessage.Dock = DockStyle.Bottom;
+            pn_processingMessage.Location = new Point(3, 468);
             pn_processingMessage.Name = "pn_processingMessage";
-            pn_processingMessage.Size = new Size(807, 49);
+            pn_processingMessage.Size = new Size(813, 49);
             pn_processingMessage.TabIndex = 0;
             // 
             // label2
@@ -202,9 +209,9 @@
             pn_warningMessage.BackColor = Color.FromArgb(49, 51, 56);
             pn_warningMessage.Controls.Add(pictureBox_warning);
             pn_warningMessage.Controls.Add(lb_warning);
-            pn_warningMessage.Location = new Point(208, 510);
+            pn_warningMessage.Location = new Point(0, 0);
             pn_warningMessage.Name = "pn_warningMessage";
-            pn_warningMessage.Size = new Size(807, 49);
+            pn_warningMessage.Size = new Size(814, 49);
             pn_warningMessage.TabIndex = 4;
             // 
             // pictureBox_warning
@@ -212,7 +219,7 @@
             pictureBox_warning.Image = Properties.Resources.KakaoTalk_20230824_093608718;
             pictureBox_warning.Location = new Point(279, 9);
             pictureBox_warning.Name = "pictureBox_warning";
-            pictureBox_warning.Size = new Size(32, 31);
+            pictureBox_warning.Size = new Size(39, 31);
             pictureBox_warning.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox_warning.TabIndex = 3;
             pictureBox_warning.TabStop = false;
@@ -267,22 +274,41 @@
             panel1.Size = new Size(1015, 40);
             panel1.TabIndex = 0;
             // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Black;
+            panel2.Controls.Add(panel3);
+            panel2.Controls.Add(mainPanel);
+            panel2.Controls.Add(pn_processingMessage);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(196, 40);
+            panel2.Name = "panel2";
+            panel2.Padding = new Padding(3);
+            panel2.Size = new Size(819, 520);
+            panel2.TabIndex = 5;
+            // 
+            // panel3
+            // 
+            panel3.Dock = DockStyle.Bottom;
+            panel3.Location = new Point(3, 465);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(813, 3);
+            panel3.TabIndex = 5;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(38, 38, 40);
             ClientSize = new Size(1015, 560);
-            Controls.Add(pn_warningMessage);
-            Controls.Add(pn_processingMessage);
-            Controls.Add(panel1);
-            Controls.Add(mainPanel);
+            Controls.Add(panel2);
             Controls.Add(categoryPanel);
+            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "구";
             FormClosing += FormMain_FormClosing;
             Load += FormMain_Load;
             categoryPanel.ResumeLayout(false);
@@ -294,6 +320,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox_warning).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -316,5 +343,7 @@
         private PictureBox pictureBox_warning;
         private Label lb_warning;
         private Panel pn_warningMessage;
+        private Panel panel2;
+        private Panel panel3;
     }
 }

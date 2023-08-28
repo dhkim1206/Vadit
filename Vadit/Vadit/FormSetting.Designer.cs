@@ -101,7 +101,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("함초롬돋움", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(47, 22);
+            label7.Location = new Point(47, 13);
             label7.Margin = new Padding(3);
             label7.Name = "label7";
             label7.Size = new Size(119, 19);
@@ -114,7 +114,7 @@
             pnNoti.Controls.Add(panel4);
             pnNoti.Controls.Add(panel6);
             pnNoti.Controls.Add(panel7);
-            pnNoti.Location = new Point(40, 52);
+            pnNoti.Location = new Point(40, 43);
             pnNoti.Margin = new Padding(2);
             pnNoti.Name = "pnNoti";
             pnNoti.Padding = new Padding(6);
@@ -127,11 +127,11 @@
             // 
             panel4.BackColor = Color.FromArgb(38, 38, 38);
             panel4.Controls.Add(pb1);
-            panel4.Location = new Point(16, 11);
+            panel4.Location = new Point(25, 11);
             panel4.Margin = new Padding(6);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(3);
-            panel4.Size = new Size(218, 186);
+            panel4.Size = new Size(185, 186);
             panel4.TabIndex = 2;
             // 
             // pb1
@@ -142,7 +142,7 @@
             pb1.Location = new Point(3, 3);
             pb1.Margin = new Padding(2);
             pb1.Name = "pb1";
-            pb1.Size = new Size(212, 180);
+            pb1.Size = new Size(179, 180);
             pb1.SizeMode = PictureBoxSizeMode.StretchImage;
             pb1.TabIndex = 9;
             pb1.TabStop = false;
@@ -152,11 +152,11 @@
             // 
             panel6.BackColor = Color.FromArgb(38, 38, 38);
             panel6.Controls.Add(pb2);
-            panel6.Location = new Point(260, 11);
+            panel6.Location = new Point(275, 11);
             panel6.Margin = new Padding(6);
             panel6.Name = "panel6";
             panel6.Padding = new Padding(3);
-            panel6.Size = new Size(218, 186);
+            panel6.Size = new Size(185, 186);
             panel6.TabIndex = 1;
             // 
             // pb2
@@ -167,7 +167,7 @@
             pb2.Location = new Point(3, 3);
             pb2.Margin = new Padding(2);
             pb2.Name = "pb2";
-            pb2.Size = new Size(212, 180);
+            pb2.Size = new Size(179, 180);
             pb2.SizeMode = PictureBoxSizeMode.StretchImage;
             pb2.TabIndex = 9;
             pb2.TabStop = false;
@@ -177,11 +177,11 @@
             // 
             panel7.BackColor = Color.FromArgb(38, 38, 38);
             panel7.Controls.Add(pb3);
-            panel7.Location = new Point(507, 10);
+            panel7.Location = new Point(525, 10);
             panel7.Margin = new Padding(4);
             panel7.Name = "panel7";
             panel7.Padding = new Padding(3);
-            panel7.Size = new Size(218, 186);
+            panel7.Size = new Size(185, 186);
             panel7.TabIndex = 0;
             panel7.Tag = "";
             // 
@@ -189,10 +189,10 @@
             // 
             pb3.BackColor = Color.White;
             pb3.Image = Properties.Resources.KakaoTalk_20230822_143941512_012;
-            pb3.Location = new Point(4, 4);
+            pb3.Location = new Point(0, 3);
             pb3.Margin = new Padding(0);
             pb3.Name = "pb3";
-            pb3.Size = new Size(211, 178);
+            pb3.Size = new Size(185, 186);
             pb3.SizeMode = PictureBoxSizeMode.StretchImage;
             pb3.TabIndex = 9;
             pb3.TabStop = false;
@@ -242,15 +242,15 @@
             button1.BackgroundImageLayout = ImageLayout.None;
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("맑은 고딕", 13.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
             button1.Image = Properties.Resources.free_icon_computer_worker_7870360;
             button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(587, 400);
+            button1.Location = new Point(587, 387);
             button1.Name = "button1";
             button1.Size = new Size(194, 58);
             button1.TabIndex = 1;
-            button1.Text = "바른 자세 설정";
+            button1.Text = "바른 자세 설정  ";
             button1.TextAlign = ContentAlignment.MiddleRight;
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
@@ -264,7 +264,7 @@
             panel1.Controls.Add(checkWindows);
             panel1.Controls.Add(checkAlarm);
             panel1.Controls.Add(checkPose);
-            panel1.Location = new Point(40, 277);
+            panel1.Location = new Point(40, 264);
             panel1.Name = "panel1";
             panel1.Size = new Size(741, 96);
             panel1.TabIndex = 42;
@@ -272,10 +272,10 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.BackColor = Color.FromArgb(35, 36, 40);
+            label8.BackColor = Color.Transparent;
             label8.Font = new Font("함초롬돋움", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(474, 442);
+            label8.Location = new Point(474, 429);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
             label8.RightToLeft = RightToLeft.Yes;
@@ -287,10 +287,10 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.BackColor = Color.FromArgb(35, 36, 40);
+            label9.BackColor = Color.Transparent;
             label9.Font = new Font("함초롬돋움", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(256, 443);
+            label9.Location = new Point(256, 430);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
             label9.RightToLeft = RightToLeft.Yes;
@@ -302,10 +302,10 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.BackColor = Color.FromArgb(35, 36, 40);
+            label10.BackColor = Color.Transparent;
             label10.Font = new Font("함초롬돋움", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
             label10.ForeColor = Color.White;
-            label10.Location = new Point(45, 443);
+            label10.Location = new Point(45, 430);
             label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
             label10.RightToLeft = RightToLeft.Yes;
@@ -318,7 +318,7 @@
             // 
             trackBarFrame.BackColor = Color.FromArgb(35, 36, 40);
             trackBarFrame.LargeChange = 1;
-            trackBarFrame.Location = new Point(38, 413);
+            trackBarFrame.Location = new Point(38, 400);
             trackBarFrame.Margin = new Padding(2);
             trackBarFrame.Maximum = 2;
             trackBarFrame.Name = "trackBarFrame";
@@ -330,7 +330,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("함초롬돋움", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label12.ForeColor = Color.White;
-            label12.Location = new Point(47, 387);
+            label12.Location = new Point(47, 374);
             label12.Margin = new Padding(3);
             label12.Name = "label12";
             label12.Size = new Size(171, 17);
@@ -342,7 +342,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(49, 51, 56);
-            ClientSize = new Size(814, 496);
+            ClientSize = new Size(814, 480);
             Controls.Add(label8);
             Controls.Add(label9);
             Controls.Add(label10);

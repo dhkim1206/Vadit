@@ -83,7 +83,7 @@ namespace Vadit
             {
                 Label noDataLabel = new Label();
                 noDataLabel.Text = "데이터가 없음";
-                noDataLabel.Font = new Font(FontFamily.GenericSansSerif, 16, FontStyle.Bold);
+                noDataLabel.Font = new Font("맑은 고딕", 16, FontStyle.Bold);
                 noDataLabel.ForeColor = Color.White;
                 noDataLabel.TextAlign = ContentAlignment.MiddleCenter;
                 noDataLabel.Dock = DockStyle.Fill;
@@ -131,7 +131,7 @@ namespace Vadit
             }
             string fullDateTimeText = badposeInfo.Date.ToString("yyyy-MM-dd HH:mm:ss");
 
-            using (Font font = new Font(FontFamily.GenericSansSerif, 35, FontStyle.Regular, GraphicsUnit.Pixel))
+            using (Font font = new Font("맑은 고딕", 33, FontStyle.Regular, GraphicsUnit.Pixel))
             {
                 Bitmap imageWithText = new Bitmap(pictureBox.Image);
 
@@ -139,24 +139,20 @@ namespace Vadit
                 {
                     using (Brush backgroundBrush = new SolidBrush(Color.FromArgb(32, 33, 36)))
                     {
-                        g.FillRectangle(backgroundBrush, 0, 0, 650, 60);
-                    }
-                    using (Brush backgroundBrush = new SolidBrush(Color.FromArgb(32, 33, 36)))
-                    {
-                        g.FillRectangle(backgroundBrush, 0, 445, 350, 40);
+                        g.FillRectangle(backgroundBrush, 0, 0, 650, 80);
                     }
 
-                    if (categoryText.Length >= 13) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(120, 13));
+                    if (categoryText.Length >= 13) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(120, 20));
                     else if (10 <= categoryText.Length && categoryText.Length < 12) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(135, 13));
-                    else if (categoryText.Length < 5) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(240, 13));
+                    else if (categoryText.Length < 5) g.DrawString(categoryText, font, Brushes.Yellow, new PointF(240, 20));
                     else
                     {
-                        g.DrawString(categoryText, font, Brushes.Yellow, new PointF(210, 13));
+                        g.DrawString(categoryText, font, Brushes.Yellow, new PointF(240, 20));
                     }
 
-                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(0, 445));
+                    g.DrawString(fullDateTimeText, font, Brushes.Yellow, new PointF(0, 430));
 
-                    using (Font font1 = new Font(FontFamily.GenericSansSerif, 60, FontStyle.Bold, GraphicsUnit.Pixel))
+                    using (Font font1 = new Font("맑은 고딕", 60, FontStyle.Bold, GraphicsUnit.Pixel))
                     {
                         if (_current < count + 1)
                         {

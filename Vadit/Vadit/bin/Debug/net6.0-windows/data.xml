@@ -6,6 +6,6 @@
   <AlarmSound>true</AlarmSound>
   <CamFrame>0</CamFrame>
   <poseScore>0</poseScore>
-  <SaveingPeriod>1</SaveingPeriod>
-  <NotificationLayout>Text</NotificationLayout>
+  <SaveingPeriod>0</SaveingPeriod>
+  <NotificationLayout>Standard</NotificationLayout>
 </AppConfigClass>

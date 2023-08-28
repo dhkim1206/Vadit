@@ -75,11 +75,13 @@
             // 
             LbBadPoseName.AutoSize = true;
             LbBadPoseName.Font = new Font("맑은 고딕", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            LbBadPoseName.Location = new Point(132, 26);
+            LbBadPoseName.ForeColor = Color.OrangeRed;
+            LbBadPoseName.Location = new Point(130, 26);
             LbBadPoseName.Margin = new Padding(2, 0, 2, 0);
             LbBadPoseName.Name = "LbBadPoseName";
-            LbBadPoseName.Size = new Size(0, 20);
+            LbBadPoseName.Size = new Size(69, 20);
             LbBadPoseName.TabIndex = 1;
+            LbBadPoseName.Text = "카테고리";
             // 
             // ExamplePosePanel
             // 
@@ -105,7 +107,7 @@
             // 
             // CommentPanel
             // 
-            CommentPanel.BackColor = Color.FromArgb(224, 224, 224);
+            CommentPanel.BackColor = Color.FromArgb(29, 31, 36);
             CommentPanel.Controls.Add(LbLongTime);
             CommentPanel.Controls.Add(LbBadPoseName);
             CommentPanel.Dock = DockStyle.Top;

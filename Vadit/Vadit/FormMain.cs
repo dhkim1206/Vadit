@@ -31,7 +31,7 @@ namespace Vadit
         //트레이 아이콘 초기화
         private void InitializeTrayIcon()
         {
-            
+
             pn_cursor.Hide();
             notifyIcon = new NotifyIcon();
             notifyIcon.Icon = Properties.Resources.Vadit_Icon;
@@ -69,11 +69,11 @@ namespace Vadit
         private async Task AnimatePanel(Control button, Type formType)
         {
             // 이전에 선택된 버튼이 있다면 원래 색으로 복원
-            if (selectedButton != null) selectedButton.BackColor = Color.FromArgb(32, 33, 36);
+            if (selectedButton != null) selectedButton.BackColor = Color.FromArgb(42, 43, 46);
 
-            // 현재 선택된 버튼 배경 색 설정
+            // 현재 선택된 버튼 배경 색 설정32, 33, 36
             selectedButton = button;
-            selectedButton.BackColor = Color.FromArgb(42, 43, 46); // 클릭된 배경 색
+            selectedButton.BackColor = Color.FromArgb(52, 53, 56); // 클릭된 배경 색
 
             _formManager.ChangeForm(formType);
         }
