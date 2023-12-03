@@ -117,9 +117,10 @@ namespace Vadit
             // 8초마다 실행되는 코드
             Debug.WriteLine("장시간 이용 검출" + DateTime.Now);
             FormPopUp _fp = new FormPopUp();
+
+            Thread.Sleep(360000);
             _fp.Show();
             _fp.LongPalyPopUp();
-            Thread.Sleep(3000);
             _fp.Close();
 
         }
