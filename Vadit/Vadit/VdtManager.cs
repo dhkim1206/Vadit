@@ -90,54 +90,7 @@ namespace Vadit
         private List<Point> _points;
         Data _data;
 
-        public VdtManager(ProgressChangedEventHandler OnProgressing)
-        {
-            _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
-            _points = new List<Point>(); // 랜드마크 좌표를 저장하기 위한 List 초기화
-            _data = new Data();
 
-            _bgw = new BackgroundWorker(); // 백그라운드 워커 객체 생성
-            _bgw.WorkerReportsProgress = true; // 중간 보고 할거냐, 이걸 해줘야 중간보고를 할 수 있음
-            _bgw.DoWork += new DoWorkEventHandler(OnDoWork); // 엔트리 포인트, 실행 할 함수를 매개변수로 줌
-            _bgw.ProgressChanged += new ProgressChangedEventHandler(OnProgressing); // 진행중인 진행 상활을 보고 받을거임
-            _bgw.WorkerSupportsCancellation = true;
-            // _backgroundWorker.RunWorkerAsync();
-
-        }
-        private void OnDoWork(object sender, DoWorkEventArgs e)
-        {
-            while (true)
-            {
-                if (_cap != null)
-                {
-                    //         Debug.WriteLine("무한루프 시작");
-
-                    if (_bgw.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        Debug.WriteLine("쓰레드 중단");
-                        return;
-                    }
-                    else if (_isInputCorrrctPose == true)
-                    {
-
-                   //     Debug.WriteLine("사진 입력받는중");
-                        _frame = new Mat();
-                        AnalyzeData _analyzeData = new AnalyzeData();
-                        _cap.Read(_frame);
-                        _analyzeData.Frame = _frame;
-                        _analyzeData.Result = "바른 자세를 입력하고있습니다.";
-                        _analyzeData.AnalyzedImage = _frame.ToBitmap();
-                        _bgw.ReportProgress(0, _analyzeData);
-
-                    }
-                    else
-                        ProcessFrameAndDrawSkeleton(_bgw);
-                }
-
-                Thread.Sleep(200);
-            }
-        }
         // 프레임 캡처하고 스켈레톤을 탐지하고 그리기 위한 메서드 (비동기 작업을 위해 BackgroundWorker를 매개변수로 받음)
         public void ProcessFrameAndDrawSkeleton(BackgroundWorker worker)
         {
@@ -150,10 +103,8 @@ namespace Vadit
                     _frame = new Mat();
                     _cap.Read(_frame); // 카메라에서 프레임 캡처
                     if (!_frame.IsEmpty)
-                    { //w중단점 해보고 화요일 여기서부터 해보기
-                        var img = _frame.ToImage<Bgr, byte>(); // 프레임을 Image<Bgr, byte> 형식으로 변환
-
-                        // 스켈레톤을 탐지하고 그리기 위한 메서드 호출
+                    {
+                        var img = _frame.ToImage<Bgr, byte>();
                         DrawSkeleton(img, worker);
                     }
                 }
@@ -485,9 +436,48 @@ namespace Vadit
             _poseNet?.Dispose();
             _bgw?.Dispose();
         }
+        public VdtManager(ProgressChangedEventHandler OnProgressing)
+        {
+            _poseNet = ReadPoseNet(); // OpenPose 딥러닝 모델을 로드
+            _points = new List<Point>(); // 랜드마크 좌표를 저장하기 위한 List 초기화
+            _data = new Data();
 
-        //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑바른 자세입력에 관한 코드↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+            _bgw = new BackgroundWorker(); // 백그라운드 워커 객체 생성
+            _bgw.WorkerReportsProgress = true; // 결과 값 반환 여부
+            _bgw.DoWork += new DoWorkEventHandler(OnDoWork); // 엔트리 포인트, 실행 할 함수를 매개변수로
+            _bgw.ProgressChanged += new ProgressChangedEventHandler(OnProgressing); // 진행중인 진행 상활을 반환
+            _bgw.WorkerSupportsCancellation = true;
+        }
+        private void OnDoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                if (_cap != null)
+                {
+                    if (_bgw.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        Debug.WriteLine("쓰레드 중단");
+                        return;
+                    }
+                    else if (_isInputCorrrctPose == true)
+                    {
+                        _frame = new Mat();
+                        AnalyzeData _analyzeData = new AnalyzeData();
+                        _cap.Read(_frame);
+                        _analyzeData.Frame = _frame;
+                        _analyzeData.Result = "바른 자세를 입력하고있습니다.";
+                        _analyzeData.AnalyzedImage = _frame.ToBitmap();
+                        _bgw.ReportProgress(0, _analyzeData);
 
+                    }
+                    else
+                        ProcessFrameAndDrawSkeleton(_bgw);
+                }
+
+                Thread.Sleep(200);
+            }
+        }
 
     }
 }

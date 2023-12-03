@@ -50,11 +50,23 @@ namespace Vadit
 
         }
 
+       
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FormCamera Fc = new FormCamera();
+            Fc.ShowDialog();
+            cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
+        }
+
+        private void pnNoti_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
         private void FormSetting_FormClosing(object sender, FormClosingEventArgs e)
         {
             AppConf.ConfigSet.Pose = checkPose.Checked;
             AppConf.ConfigSet.LongPlay = checkLongPlay.Checked;
-            //기능 구현후 최종 테스트 전까지는 미사용하는 코드
             AppConf.ConfigSet.WindowSameExecute = checkWindows.Checked;
             AppConf.ConfigSet.AlarmSound = checkAlarm.Checked;
             AppConf.ConfigSet.CamFrame = trackBarFrame.Value;
@@ -70,13 +82,12 @@ namespace Vadit
         private void FormSetting_Load(object sender, EventArgs e)
         {
             checkPose.Hide();
-            for (int i = 0; i < pnNoti.Controls.Count; i++)// 카운트(0,1,2,3)마다 일치여부 검사후  
+            for (int i = 0; i < pnNoti.Controls.Count; i++)
             {
 
-                if (i == Convert.ToInt32(AppConf.ConfigSet.NotificationLayout)) // 반환되는 값이 ENUM과 일치시 색상변환
+                if (i == Convert.ToInt32(AppConf.ConfigSet.NotificationLayout))
                 {
                     pnNoti.Controls[i].BackColor = Color.Gray;
-                    //label1.Text = AppConf.ConfigSet.NotificationLayout.ToString();
                 }
                 else pnNoti.Controls[i].BackColor = Color.FromArgb(38, 38, 38);
 
@@ -88,18 +99,6 @@ namespace Vadit
             checkAlarm.Checked = AppConf.ConfigSet.AlarmSound;
             trackBarFrame.Value = AppConf.ConfigSet.CamFrame;
             cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            FormCamera Fc = new FormCamera();
-            Fc.ShowDialog();
-            cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
-        }
-
-        private void pnNoti_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

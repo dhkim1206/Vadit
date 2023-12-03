@@ -39,19 +39,6 @@ namespace Vadit
             UpdateDashBoard();
         }
 
-        private void ConfigurePictureBoxClickEvent(PictureBox pictureBox)
-        {
-            pictureBox.Click += (sender, e) =>
-            {
-                if (_selectedPictureBox != null) _selectedPictureBox.BackColor = Color.Transparent;
-
-                _selectedPictureBox = (PictureBox)sender;
-                _selectedPictureBox.BackColor = Color.Red;
-
-                FormBigImage formBigImage = new FormBigImage(_selectedPictureBox.Image);
-                formBigImage.ShowDialog();
-            };
-        }
 
         private void UpdateLabels(int sum, int turtleneckSum, int scoliosisSum, int herniationsSum)
         {
@@ -234,6 +221,20 @@ namespace Vadit
             AppConf.ConfigSet.poseScore = 0;
             //Debug.WriteLine(_pictureInfoList.Count);
             UpdateDashBoard();
+        }
+
+        private void ConfigurePictureBoxClickEvent(PictureBox pictureBox)
+        {
+            pictureBox.Click += (sender, e) =>
+            {
+                if (_selectedPictureBox != null) _selectedPictureBox.BackColor = Color.Transparent;
+
+                _selectedPictureBox = (PictureBox)sender;
+                _selectedPictureBox.BackColor = Color.Red;
+
+                FormBigImage formBigImage = new FormBigImage(_selectedPictureBox.Image);
+                formBigImage.ShowDialog();
+            };
         }
     }
 }
