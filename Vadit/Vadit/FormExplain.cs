@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
 
 namespace Vadit
 {
@@ -17,5 +18,10 @@ namespace Vadit
             InitializeComponent();
         }
 
+        private void tb_sourceLink_Click(object sender, EventArgs e)
+        {
+            FormSourceInfo newFormSourceInfo = new FormSourceInfo();
+            newFormSourceInfo.ShowDialog();
+        }
     }
 }
