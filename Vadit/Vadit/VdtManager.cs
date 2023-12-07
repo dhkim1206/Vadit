@@ -36,6 +36,10 @@ namespace Vadit
         public int _dt17to18 = 0;
         int[] _indexes;
         public bool _isPointNotNull = false;
+        public void init()
+        {
+            this._isPointNotNull = false;
+        }
         public void setInfo(Image<Bgr, byte> img, List<Point> points)
         {
             this._img = img;
@@ -345,8 +349,8 @@ namespace Vadit
 
             Debug.WriteLine($"올바른 자세: {AppGlobal.CorrectPose._ratio:F3}");
             Debug.WriteLine($"현재측정: {_ratio:F3}");
-       //     Debug.WriteLine("검출된 17to18길이는 =" + dt17to18);
-        //    Debug.WriteLine("설정된 17to18길이는 =" + AppGlobal.CorrectPose._dt17to18);
+            //     Debug.WriteLine("검출된 17to18길이는 =" + dt17to18);
+            //    Debug.WriteLine("설정된 17to18길이는 =" + AppGlobal.CorrectPose._dt17to18);
 
             if (Math.Abs(_points[2].Y - _points[5].Y) > 30)
             {
@@ -363,9 +367,14 @@ namespace Vadit
                     Debug.WriteLine("******거북목 검출******");
                     conditionMet = true;
                 }
-
+                else if (dt17to18 + 8 < AppGlobal.CorrectPose._dt17to18)
+                {
+                    _analyzeData.Result += "추간판 탈출,";
+                    Debug.WriteLine("******추간판 탈출 검출******");
+                    conditionMet = true;
+                }
             }
-            if (dt17to18 + 10 < AppGlobal.CorrectPose._dt17to18)
+            else if ((_ratio > AppGlobal.CorrectPose._ratio + 0.2) && (dt17to18 + 8 < AppGlobal.CorrectPose._dt17to18))
             {
                 _analyzeData.Result += "추간판 탈출,";
                 Debug.WriteLine("******추간판 탈출 검출******");

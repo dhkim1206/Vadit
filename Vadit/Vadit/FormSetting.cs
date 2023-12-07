@@ -45,8 +45,9 @@ namespace Vadit
             if (AppGlobal.VM != null)
                 if (AppGlobal.VM._bgw.IsBusy)
                     AppGlobal.VM._bgw.CancelAsync();
-            FormCamera subForm1 = new FormCamera();
-            subForm1.ShowDialog();
+            FormCamera Fc = new FormCamera();
+            Fc.ShowDialog();
+            cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
 
         }
 
@@ -90,12 +91,6 @@ namespace Vadit
             cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            FormCamera Fc = new FormCamera();
-            Fc.ShowDialog();
-            cboPicSaving.SelectedIndex = AppConf.ConfigSet.SaveingPeriod;
-        }
 
         private void pnNoti_Paint(object sender, PaintEventArgs e)
         {

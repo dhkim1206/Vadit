@@ -36,6 +36,9 @@ namespace Vadit
         private void OnDelayTimerTick(object sender, EventArgs e)
         {
             delayTimer.Stop();
+            if (!AppGlobal.Cap.IsOpened)
+                MessageBox.Show("연결된 카메라를 찾을 수 없습니다. 카메라 연결을 확인해주세요");
+
             AppGlobal.VM = new VdtManager(OnProgressing);
             AppGlobal.VM.StartSettingCorrectPose();
         }
@@ -48,8 +51,8 @@ namespace Vadit
         }
         private async void btnResetPose_Click(object sender, EventArgs e)
         {
+            AppGlobal.CorrectPose.init();
             btnResetPose.Enabled = false;
-            Debug.WriteLine("눌림티비~");
             pnWait.Visible = true;
             await Task.Delay(300);
             pictureBox2.Image = await AppGlobal.VM.OnclikBtnResetPose();  // await 추가
@@ -70,14 +73,18 @@ namespace Vadit
         }
         private void FormCamera_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (AppGlobal.VM._bgw.IsBusy)
+            if (AppGlobal.CorrectPose._isPointNotNull)
             {
-                AppGlobal.VM._bgw.CancelAsync();
-                Thread.Sleep(1000);
-                AppGlobal.PN.Hide();
+                if (AppGlobal.VM._bgw.IsBusy)
+                {
+                    AppGlobal.VM._bgw.CancelAsync();
+                    Thread.Sleep(1000);
+                    AppGlobal.PN.Hide();
 
+                }
+                AppGlobal.isinputmode = false;
             }
-            AppGlobal.isinputmode = false;
+
         }
 
 
@@ -88,12 +95,12 @@ namespace Vadit
 
         private void FormCamera_FormClosed(object sender, FormClosedEventArgs e)
         {
+
             if (AppGlobal.CorrectPose._isPointNotNull)
             {
                 if (!AppGlobal.VM._bgw.IsBusy)
                 {
                     AppGlobal.VM._bgw.RunWorkerAsync();
-
                 }
             }
         }

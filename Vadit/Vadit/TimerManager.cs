@@ -22,8 +22,8 @@ namespace Vadit
         {
             if (!AppGlobal._TimerIsRunning)
             {
-                _timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(3600));
-                Debug.WriteLine("Timer started.");
+                _timer = new Timer(TimerCallback, null, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(20));
+                Debug.WriteLine("타이머입니다.");
                 AppGlobal._TimerIsRunning = true;
             }
         }
@@ -113,14 +113,14 @@ namespace Vadit
         }
         public void TimerCallback(object state)
         {
-
             // 8초마다 실행되는 코드
             Debug.WriteLine("장시간 이용 검출" + DateTime.Now);
             FormPopUp _fp = new FormPopUp();
-
-            Thread.Sleep(360000);
             _fp.Show();
             _fp.LongPalyPopUp();
+            Thread.Sleep(5000);
+            _fp.TakeStretching();
+            Thread.Sleep(5000);
             _fp.Close();
 
         }

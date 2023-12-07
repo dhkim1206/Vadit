@@ -91,6 +91,24 @@ namespace Vadit
             Application.DoEvents();
 
         }
+        public void TakeStretching()
+        {
+            SoundPlayer _DefaultSound = new SoundPlayer(Path.Combine(_Path, "DefaultSound.wav"));
+            SoundPlayer _LongplaySound = new SoundPlayer(Path.Combine(_Path, "LongPalySound.wav"));
+            UserPanel.Visible = false;
+            ExamplePosePanel.Visible = false;
+            CommentPanel.Visible = true;
+
+            this.Size = new Size(350, 90);
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
+            LbLongTime.Font = new Font("맑은 고딕", 10, FontStyle.Regular);
+            LbLongTime.ForeColor = Color.Orange;  // 폰트 색상을 주황색으로 설정
+            LbLongTime.Text = "PC사용 중 권장 스트레칭 주기는 30분입니다.\n잠시 의자에서 일어나 스트레칭을 해주세요";
+
+            _LongplaySound.Play();
+            Application.DoEvents();
+
+        }
         private void Timer_Tick(object sender, EventArgs e)
         {
 
