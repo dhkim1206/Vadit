@@ -1,10 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>C:\Users\parkdo\Documents\GitHub\VDT-Syndrome-Prevention-Program_Vadit\Vadit\Vadit\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Update="FormBigImage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FormCamera.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormExplain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FormMain.cs">
@@ -13,10 +19,19 @@
     <Compile Update="FormPopUp.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormProducer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormSetting.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormSourceInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

@@ -31,24 +31,23 @@
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
             btnResetPose = new Button();
-            tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
             tbtesttext = new TextBox();
             pnWait = new Panel();
             lbwait = new Label();
             label2 = new Label();
             label1 = new Label();
+            btn_exit = new Button();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
             pnWait.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
             // 
-            pictureBox1.BackColor = SystemColors.ControlDarkDark;
-            pictureBox1.Location = new Point(17, 42);
+            pictureBox1.BackColor = Color.FromArgb(32, 33, 36);
+            pictureBox1.Location = new Point(32, 90);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(358, 333);
             pictureBox1.TabIndex = 0;
@@ -56,8 +55,8 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.BackColor = SystemColors.ControlDarkDark;
-            pictureBox2.Location = new Point(401, 42);
+            pictureBox2.BackColor = Color.FromArgb(32, 33, 36);
+            pictureBox2.Location = new Point(416, 90);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(361, 333);
             pictureBox2.TabIndex = 5;
@@ -65,44 +64,25 @@
             // 
             // btnResetPose
             // 
+            btnResetPose.BackColor = Color.FromArgb(38, 38, 38);
+            btnResetPose.BackgroundImageLayout = ImageLayout.None;
+            btnResetPose.FlatAppearance.BorderSize = 0;
+            btnResetPose.FlatStyle = FlatStyle.Flat;
             btnResetPose.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            btnResetPose.Location = new Point(288, 381);
+            btnResetPose.ForeColor = Color.White;
+            btnResetPose.Location = new Point(303, 429);
             btnResetPose.Name = "btnResetPose";
             btnResetPose.Size = new Size(87, 38);
             btnResetPose.TabIndex = 3;
             btnResetPose.Text = "자세촬영";
-            btnResetPose.UseVisualStyleBackColor = true;
+            btnResetPose.UseVisualStyleBackColor = false;
             btnResetPose.Click += btnResetPose_Click;
-            // 
-            // tabControl1
-            // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Location = new Point(12, -3);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(786, 453);
-            tabControl1.TabIndex = 7;
-            // 
-            // tabPage1
-            // 
-            tabPage1.Controls.Add(tbtesttext);
-            tabPage1.Controls.Add(pnWait);
-            tabPage1.Controls.Add(label2);
-            tabPage1.Controls.Add(label1);
-            tabPage1.Controls.Add(pictureBox1);
-            tabPage1.Controls.Add(pictureBox2);
-            tabPage1.Controls.Add(btnResetPose);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(778, 425);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "바른 자세촬영";
-            tabPage1.UseVisualStyleBackColor = true;
             // 
             // tbtesttext
             // 
-            tbtesttext.Location = new Point(401, 381);
+            tbtesttext.BackColor = Color.FromArgb(49, 51, 56);
+            tbtesttext.ForeColor = Color.White;
+            tbtesttext.Location = new Point(416, 440);
             tbtesttext.Name = "tbtesttext";
             tbtesttext.Size = new Size(361, 23);
             tbtesttext.TabIndex = 9;
@@ -110,7 +90,7 @@
             // pnWait
             // 
             pnWait.Controls.Add(lbwait);
-            pnWait.Location = new Point(225, 164);
+            pnWait.Location = new Point(240, 212);
             pnWait.Name = "pnWait";
             pnWait.Size = new Size(312, 40);
             pnWait.TabIndex = 8;
@@ -120,6 +100,7 @@
             // 
             lbwait.AutoSize = true;
             lbwait.Font = new Font("맑은 고딕", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbwait.ForeColor = Color.White;
             lbwait.Location = new Point(15, 11);
             lbwait.Name = "lbwait";
             lbwait.Size = new Size(258, 17);
@@ -129,7 +110,8 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(404, 18);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(426, 65);
             label2.Name = "label2";
             label2.Size = new Size(95, 15);
             label2.TabIndex = 7;
@@ -138,30 +120,68 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(20, 18);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(42, 65);
             label1.Name = "label1";
             label1.Size = new Size(43, 15);
             label1.TabIndex = 6;
             label1.Text = "카메라";
             // 
+            // btn_exit
+            // 
+            btn_exit.BackColor = Color.FromArgb(32, 33, 36);
+            btn_exit.BackgroundImageLayout = ImageLayout.None;
+            btn_exit.FlatAppearance.BorderSize = 0;
+            btn_exit.FlatStyle = FlatStyle.Flat;
+            btn_exit.Font = new Font("Calibri", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_exit.ForeColor = SystemColors.ButtonShadow;
+            btn_exit.Location = new Point(773, 3);
+            btn_exit.Name = "btn_exit";
+            btn_exit.RightToLeft = RightToLeft.Yes;
+            btn_exit.Size = new Size(34, 28);
+            btn_exit.TabIndex = 4;
+            btn_exit.Text = "X";
+            btn_exit.UseVisualStyleBackColor = false;
+            btn_exit.Click += btn_exit_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(32, 33, 36);
+            panel1.Controls.Add(btn_exit);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(812, 40);
+            panel1.TabIndex = 10;
+            // 
             // FormCamera
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(810, 447);
-            Controls.Add(tabControl1);
+            BackColor = Color.FromArgb(49, 51, 56);
+            ClientSize = new Size(812, 490);
+            Controls.Add(panel1);
+            Controls.Add(tbtesttext);
+            Controls.Add(pnWait);
+            Controls.Add(pictureBox2);
+            Controls.Add(label2);
+            Controls.Add(btnResetPose);
+            Controls.Add(label1);
+            Controls.Add(pictureBox1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FormCamera";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormCamera";
             FormClosing += FormCamera_FormClosing;
+            FormClosed += FormCamera_FormClosed;
             Load += FormCamera_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
             pnWait.ResumeLayout(false);
             pnWait.PerformLayout();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -169,12 +189,12 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private Button btnResetPose;
-        private TabControl tabControl1;
-        private TabPage tabPage1;
         private TextBox tbtesttext;
         private Panel pnWait;
         private Label lbwait;
         private Label label2;
         private Label label1;
+        private Button btn_exit;
+        private Panel panel1;
     }
 }

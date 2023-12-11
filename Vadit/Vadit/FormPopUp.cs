@@ -1,51 +1,54 @@
 ﻿using System;
+using Emgu.CV;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Vadit.AppBase;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Vadit
 {
     public partial class FormPopUp : Form
     {
         int _DefaultSecond;
+        private Timer _timer;
+        string _Path = Path.Combine(Application.StartupPath, "sound_data");
         SoundPlayer _DefaultSound;
         SoundPlayer _LongplaySound;
-        string _Path = Path.Combine(Application.StartupPath, "sound_data");
-
         Data _Data;
         string _FileName;
+
         public FormPopUp()
         {
             InitializeComponent();
             _Data = new Data();
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
 
         }
         // 폼이 실행될때
-        private void FormPopUp_Shown(object sender, EventArgs e)//나쁜자세 알림 팝업
-        {
-            SetAudio(AppBase.AppConf.ConfigSet.AlarmSound);
+        /*        private void FormPopUp_Shown(object sender, EventArgs e)//나쁜자세 알림 팝업
+                {
+                    SetAudio(AppBase.AppConf.ConfigSet.AlarmSound);
 
-            if (true)// 안좋은 자세 감지시
-            {
-                SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
-                OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
-            }
-            else if (true) // 장시간 이용시
-            {
-                LongPalyPopUp();
-            }
-        }
-
-
-
+                    if (false)// 안좋은 자세 감지시
+                    {
+                        SetLayout(AppBase.AppConf.ConfigSet.NotificationLayout);
+                        OpenUserImage(AppBase.AppConf.ConfigSet.NotificationLayout);
+                    }
+                    if (false) // 장시간 이용시
+                    {
+                        LongPalyPopUp();
+                    }
+                }
+        */
         private void SetAudio(bool soundon)
         {
             if (soundon == true)
@@ -59,30 +62,69 @@ namespace Vadit
                 _LongplaySound = new SoundPlayer(Path.Combine(_Path, "NoneSound.wav"));
             }
         }
-        private void FormPopUp_VisibleChanged(object sender, EventArgs e)//폼이 화면에서 감지될때
-        {
-            if (!this.Visible) return;
-            DefaultTimer.Start();
-        }
+        /*        private void FormPopUp_VisibleChanged(object sender, EventArgs e)//폼이 화면에서 감지될때
+                {
+                    if (!this.Visible) return;
+                    DefaultTimer.Start();
+                }*/
         private void DefaultTimer_Tick(object sender, EventArgs e)
         {
             // 초시계
             _DefaultSecond++;
             Execution_UserSettingValue();
         }
-        private void LongPalyPopUp()
+        public void LongPalyPopUp()
         {
+            SoundPlayer _DefaultSound = new SoundPlayer(Path.Combine(_Path, "DefaultSound.wav"));
+            SoundPlayer _LongplaySound = new SoundPlayer(Path.Combine(_Path, "LongPalySound.wav"));
             UserPanel.Visible = false;
             ExamplePosePanel.Visible = false;
             CommentPanel.Visible = true;
+
             this.Size = new Size(350, 90);
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
-            CommentButton.Text = "현재 N시간 동안 앉아 있었습니다.\n잠시 의자에서 일어나 휴식을 취해 주십시오.";
+            LbLongTime.Font = new Font("맑은 고딕", 10, FontStyle.Regular);
+            LbLongTime.ForeColor = Color.Orange;  // 폰트 색상을 주황색으로 설정
+            LbLongTime.Text = "현재 1시간 동안 앉아 있었습니다.\n잠시 의자에서 일어나 휴식을 취해 주십시오.";
+
             _LongplaySound.Play();
+            Application.DoEvents();
+
         }
-        private void OpenUserImage(EnumNotificationLayout layout) 
+        public void TakeStretching()
+        {
+            SoundPlayer _DefaultSound = new SoundPlayer(Path.Combine(_Path, "DefaultSound.wav"));
+            SoundPlayer _LongplaySound = new SoundPlayer(Path.Combine(_Path, "LongPalySound.wav"));
+            UserPanel.Visible = false;
+            ExamplePosePanel.Visible = false;
+            CommentPanel.Visible = true;
+
+            this.Size = new Size(350, 90);
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 90);
+            LbLongTime.Font = new Font("맑은 고딕", 10, FontStyle.Regular);
+            LbLongTime.ForeColor = Color.Orange;  // 폰트 색상을 주황색으로 설정
+            LbLongTime.Text = "PC사용 중 권장 스트레칭 주기는 30분입니다.\n잠시 의자에서 일어나 스트레칭을 해주세요";
+
+            _LongplaySound.Play();
+            Application.DoEvents();
+
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+
+            _timer.Stop(); // 타이머 중지
+            _timer.Dispose(); // 타이머 해제
+            CloseForm();
+        }
+        public void CloseForm()
+        {
+            this.Close();
+            Close();
+        }
+        public void OpenUserImage(EnumNotificationLayout layout)
         {
             if (Directory.Exists(_Data.imageDirectory))
+
             {
                 string filenameExtension = "*.JPG"; // 파일 확장자에 따라 변경
                 string[] files = Directory.GetFiles(_Data.imageDirectory, filenameExtension);
@@ -108,23 +150,53 @@ namespace Vadit
                 // 레이아웃이 스탠다드 일시 예시 사진 출력하기
                 if (layout == EnumNotificationLayout.Standard)
                 {
-                    UserPosePicBox.Load(highestNumberFileName);
+                    UserPosePicBox.Image = AppGlobal.BPI._img.ToBitmap();
+                    LbBadPoseName.Text = AppGlobal.BPI._badPoseName;
+                    if (LbBadPoseName.Text.EndsWith(","))
+                    {
+                        LbBadPoseName.Text = LbBadPoseName.Text.Substring(0, LbBadPoseName.Text.Length - 1);
+                    }
+
+
+                    LbBadPoseName.Font = new Font("맑은 고딕", 16, FontStyle.Regular);
+                    LbBadPoseName.ForeColor = Color.Orange;  // 폰트 색상을 주황색으로 설정
                     UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                    if (LbBadPoseName.Text.Length > 6)
+                    {
+                        LbBadPoseName.Location = new Point(110, LbBadPoseName.Location.Y);
+                    }
+                    else if (LbBadPoseName.Text.Length < 6)
+                    {
+                        LbBadPoseName.Location = new Point(130, LbBadPoseName.Location.Y);
+                    }
+
+                    if (AppGlobal.BPI._badPoseName == " 거북목," || AppGlobal.BPI._badPoseName == "척추 측만증, 거북목,")
+                        ExamplePosePicBox.Image = Properties.Resources.KakaoTalk_20230825_102950435;
+                    else if (AppGlobal.BPI._badPoseName == "추간판 탈출," || AppGlobal.BPI._badPoseName == "척추 측만증, 추간판 탈출,")
+                        ExamplePosePicBox.Image = Properties.Resources.KakaoTalk_20230825_102950435_01;
+                    else if (AppGlobal.BPI._badPoseName == "척추 측만증,")
+                        ExamplePosePicBox.Image = Properties.Resources.KakaoTalk_20230825_102950435_02;
                 }
                 else if (layout == EnumNotificationLayout.OnlyUser)
                 {
-                    UserPosePicBox.Load(highestNumberFileName);
+                    UserPosePicBox.Image = AppGlobal.BPI._img.ToBitmap();
+                    LbBadPoseName.Text = AppGlobal.BPI._badPoseName;
+                    LbBadPoseName.Font = new Font("맑은 고딕", 16, FontStyle.Regular);
+                    LbBadPoseName.ForeColor = Color.Orange;  // 폰트 색상을 주황색으로 설정
                     UserPosePicBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 else if (layout == EnumNotificationLayout.Text)
                 {
-                    CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
+                    //CommentButton.Text = "현재 자세가 바르지 않습니다.\n올바른 자세를 취해 주십시오.";
                 }
             }
         }
-        private void SetLayout(EnumNotificationLayout layout) // 팝업 생성시 자동 
+        public void ShowLayout(EnumNotificationLayout layout) // 팝업 생성시 자동 
         {
-            CommentButton.FlatAppearance.BorderSize = 0;
+            SoundPlayer _DefaultSound = new SoundPlayer(Path.Combine(_Path, "DefaultSound.wav"));
+            SoundPlayer _LongplaySound = new SoundPlayer(Path.Combine(_Path, "LongPalySound.wav"));
+            //      CommentButton.FlatAppearance.BorderSize = 0;
             _DefaultSound.Play();
 
             if (layout == EnumNotificationLayout.Standard)
@@ -134,6 +206,7 @@ namespace Vadit
                 CommentPanel.Visible = true;
                 this.Size = new Size(350, 440);
                 this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 440);
+                Application.DoEvents();
             }
             else if (layout == EnumNotificationLayout.OnlyUser)
             {
@@ -141,13 +214,16 @@ namespace Vadit
                 ExamplePosePanel.Visible = false;
                 CommentPanel.Visible = true;
                 this.Size = new Size(350, 265);
-                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - 350, Screen.PrimaryScreen.WorkingArea.Height - 265);
+                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width
+                    - 350, Screen.PrimaryScreen.WorkingArea.Height - 265);
+                Application.DoEvents();
             }
             else if (layout == EnumNotificationLayout.Text)
             {
                 UserPanel.Visible = false;
                 ExamplePosePanel.Visible = false;
                 CommentPanel.Visible = true;
+                Application.DoEvents();
             }
         }
         public void Execution_UserSettingValue()

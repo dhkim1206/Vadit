@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Windows.Forms.DataVisualization.Charting;
 using Vadit;
 
+
 public class ChartManager
 {
     private DataTable _chartData;
