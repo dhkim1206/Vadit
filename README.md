@@ -1,8 +1,3 @@
-<aside>
-👟 VDT 증후군 탐지 및 예방 프로그램 **“VADIT”**
-백그라운드에서의 실시간 자세 탐지 프로세스, VDT 증후군 자세 발견 시 사용자의 자세 사진과 알림 및 안내 문구를 통해 사용자에게 경각심을 주고, 이전의 과거 데이터를 시각화 하여 볼 수 있는 데이터베이스 제공
-
-</aside>
 # Vadit
 
 ![image](https://github.com/dhkim1206/VDT-Syndrome-Prevention-Program_Vadit/assets/69470424/3911cecd-09b7-47db-93c2-e200e2840b99)
