@@ -1,5 +1,5 @@
 # Vadit
-
+### 주요 프로세스 화면
 ![image](https://github.com/dhkim1206/VDT-Syndrome-Prevention-Program_Vadit/assets/69470424/3911cecd-09b7-47db-93c2-e200e2840b99)
 
 ![image](https://github.com/dhkim1206/VDT-Syndrome-Prevention-Program_Vadit/assets/69470424/dab4ed6f-8800-4c9d-befa-5ce039c9c030)
